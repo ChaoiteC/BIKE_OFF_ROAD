@@ -1,13 +1,13 @@
 #include "zf_common_headfile.h"
 
-_OUT_Motor Motor1 = {0};//Ç°µç»ú
-_OUT_Motor Motor2 = {0};//ºóµç»ú
+_OUT_Motor Motor1 = {0};//å‰ç”µæœº
+_OUT_Motor Motor2 = {0};//åŽç”µæœº
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºÍâ»·ËÙ¶È¿ØÖÆÆ÷
- * ¹¦ÄÜ£ºPID¼ÆËãËÙ¶È»·
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šå¤–çŽ¯é€Ÿåº¦æŽ§åˆ¶å™¨
+ * åŠŸèƒ½ï¼šPIDè®¡ç®—é€Ÿåº¦çŽ¯
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 static void vel_controller(void)
 {
@@ -17,10 +17,10 @@ static void vel_controller(void)
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºÄÚ»·½Ç¶È¿ØÖÆÆ÷
- * ¹¦ÄÜ£ºPID¼ÆËã½Ç¶È»·
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šå†…çŽ¯è§’åº¦æŽ§åˆ¶å™¨
+ * åŠŸèƒ½ï¼šPIDè®¡ç®—è§’åº¦çŽ¯
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 static void angle_controller(void)
 {
@@ -30,10 +30,10 @@ static void angle_controller(void)
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºÄÚ»·½ÇËÙ¶È¿ØÖÆÆ÷
- * ¹¦ÄÜ£ºPID¼ÆËã½ÇËÙ¶È»·
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šå†…çŽ¯è§’é€Ÿåº¦æŽ§åˆ¶å™¨
+ * åŠŸèƒ½ï¼šPIDè®¡ç®—è§’é€Ÿåº¦çŽ¯
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 static void gyro_controller(void)
 {
@@ -43,10 +43,10 @@ static void gyro_controller(void)
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºÈý»·´®¼¶PID¿ØÖÆÆ÷ÔËÐÐ
- * ¹¦ÄÜ£ºPIDÔËËã
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šä¸‰çŽ¯ä¸²çº§PIDæŽ§åˆ¶å™¨è¿è¡Œ
+ * åŠŸèƒ½ï¼šPIDè¿ç®—
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 void _controller_perform(void)
 {
@@ -55,10 +55,10 @@ void _controller_perform(void)
   gyro_controller();
 }
 /**********************************************************************************************/
-/* Ãû×Ö£º¼ì²âÐ¡³µ×´Ì¬º¯Êý
- * ¹¦ÄÜ£º¼ì²âÐ¡³µÊÇ·ñµ¹ÏÂ
- * ²ÎÊý£º¶¯Á¿ÂÖÊäÈëµÄ½Ç¶ÈµÄÖµinAngleData
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šæ£€æµ‹å°è½¦çŠ¶æ€å‡½æ•°
+ * åŠŸèƒ½ï¼šæ£€æµ‹å°è½¦æ˜¯å¦å€’ä¸‹
+ * å‚æ•°ï¼šåŠ¨é‡è½®è¾“å…¥çš„è§’åº¦çš„å€¼inAngleData
+ * è¾“å‡ºï¼šæ— 
  */
 static uint8_t detectionFallDown(float inAngleData)
 {
@@ -72,42 +72,39 @@ static uint8_t detectionFallDown(float inAngleData)
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºpwmMotorOut
- * ¹¦ÄÜ£ºPWMÊä³ö
- * ²ÎÊý£º
- * Êä³ö£ºÎÞ
+/* åå­—ï¼špwmMotorOut
+ * åŠŸèƒ½ï¼šPWMè¾“å‡º
+ * å‚æ•°ï¼š
+ * è¾“å‡ºï¼šæ— 
  */
-
-/*//ÐèÐÞ¸Ä
-
-static void pwmMotorOut(uint16_t pwm1 , uint16_t pwm2 )
+static void pwmMotorOut(uint32 pwm1 , uint32 pwm2 )
 {
-  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_1, u16RangeLimit(pwm1 , 0 , 2000));
-  __HAL_TIM_SetCompare(&htim3, TIM_CHANNEL_2, u16RangeLimit(pwm2 , 0 , 2000));
+    u32RangeLimit(pwm1,0,2000);                              //é™åˆ¶pwm1çš„å ç©ºæ¯”åœ¨0-2000ä¹‹é—´
+    u32RangeLimit(pwm2,0,2000);                              //åŒä¸Š
+    pwm_set_duty(TIM3_PWM_MAP0_CH1_A6, pwm1);           //å¼€å¯TIM3çš„1ï¼Œ2é€šé“è¾“å…¥å ç©ºæ¯”çš„å€¼pwm
+    pwm_set_duty(TIM3_PWM_MAP0_CH2_A7, pwm2);
 }
 
-*/
-
 /**********************************************************************************************/
-/* Ãû×Ö£º_controller_output
- * ¹¦ÄÜ£º¿ØÖÆÆ÷Êä³ö
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼š_controller_output
+ * åŠŸèƒ½ï¼šæŽ§åˆ¶å™¨è¾“å‡º
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 
 /*
-static uint16_t N20_motor_speed;
+static uint32 N20_motor_speed;
 void _controller_output(void)
 {
   static uint8_t FalldownAndRestart = 0;
 
-  // ¼ì²âÊÇ·ñµ¹ÏÂ
+  // æ£€æµ‹æ˜¯å¦å€’ä¸‹,å¦‚æžœå€’ä¸‹å°±å°†ç”µæœºå…³é—­ï¼Œæ¸…é™¤PIDç®—æ³•æ•°æ®
   if( detectionFallDown(att.rol)==1 )
   {
     N20_motor_speed = 2000;
     FalldownAndRestart = 1;
-    DisableAuxMotor();
-    Motor1.out = 0;
+    DisableAuxMotor();                       //å…³é—­ç”µæœº
+    Motor1.out = 0;                          //æ¸…é™¤æ•°æ®
     Motor2.out = 0;
     clear_integral(&all.vel_encoder);
     clear_integral(&all.rol_angle);
@@ -120,10 +117,10 @@ void _controller_output(void)
     Motor1.out =  all.rol_gyro.out;
   }
 
-  if(Motor1.out>0)  dirAnticlockwise();
+  if(Motor1.out>0)  dirAnticlockwise();      //è¿™é‡Œçš„å‡½æ•°ç”¨æ¥æŽ§åˆ¶å°è½¦çš„å‰è¡Œæˆ–è€…åŽé€€
   else  dirClockwise();
 
-  //ÕâÀïÐèÒªÊäÈë²ÎÊýÀ´¿ØÖÆÐ¡³µµÄÔË¶¯£¬ÓÃGPSµÄ²ÎÊýÀ´¿ØÖÆÐ¡³µµÄÐÐ½ø
+  //è¿™é‡Œéœ€è¦è¾“å…¥å‚æ•°æ¥æŽ§åˆ¶å°è½¦çš„è¿åŠ¨ï¼Œç”¨GPSçš„å‚æ•°æ¥æŽ§åˆ¶å°è½¦çš„è¡Œè¿›
   TurnLeftOrRight(BluetoothParseMsg.Xrocker);
   goForwardOrBackward(BluetoothParseMsg.Yrocker);
 
@@ -132,16 +129,16 @@ void _controller_output(void)
 */
 
 
-//ÏÂÃæÒªÓÃ¿ØÖÆº¯Êý£¨¿ØÖÆµç»ú£©À´¶ÔÉÏÃæ _controller_output£¨void£©º¯Êý¾­ÐÐËã·¨²Ù×÷¡£ÈçÏÂÊÇ¾ßÌåµÄËã·¨²Ù×÷
+//ä¸‹é¢è¦ç”¨æŽ§åˆ¶å‡½æ•°ï¼ˆæŽ§åˆ¶ç”µæœºï¼‰æ¥å¯¹ä¸Šé¢ _controller_outputï¼ˆvoidï¼‰å‡½æ•°ç»è¡Œç®—æ³•æ“ä½œã€‚å¦‚ä¸‹æ˜¯å…·ä½“çš„ç®—æ³•æ“ä½œ
 
-//void goForwardOrBackward(GPS²ÎÊý)    //ÕâÀïÊÇÐ¡³µµÄÔË¶¯Ëã·¨
+//void goForwardOrBackward(GPSå‚æ•°)    //è¿™é‡Œæ˜¯å°è½¦çš„è¿åŠ¨ç®—æ³•
 
-//void CargoForward(void)             //Ð¡³µµÄÇ°½ø
+//void CargoForward(void)             //å°è½¦çš„å‰è¿›
 
-//void CarBackward(void)              //Ð¡³µµÄºóÍË
+//void CarBackward(void)              //å°è½¦çš„åŽé€€
 
-//void EnableAuxMotor(void)           //Ê¹ÄÜµç»ú
+//void EnableAuxMotor(void)           //ä½¿èƒ½ç”µæœº
 
-//void DisableAuxMotor(void)          //Ê§ÄÜµç»ú
+//void DisableAuxMotor(void)          //å¤±èƒ½ç”µæœº
 
 

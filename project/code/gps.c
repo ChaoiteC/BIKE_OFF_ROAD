@@ -70,8 +70,7 @@ int str_to_int(char *buf)
 int get_int_number(char *s)
 {
 	char buf[10];
-	unsigned char
- i;
+	unsigned char i;
 	int return_value;
 	i = get_parameter_index(1, s);
 	i = i - 1;
@@ -97,8 +96,8 @@ double str_to_double(char *buf)
 	
 	if('-' == *str)
 	{
-			negative_flag = -1;
-			str++;
+		negative_flag = -1;
+		str++;
 	}
         
 	while(*str != '\0')
@@ -156,8 +155,7 @@ float get_float_number(char *s)
 //-------------------------------------------------------------------------------------------------------------------
 double get_double_number(char *s)
 {
-  unsigned char
- i;
+  unsigned char i;
 	char buf[10];
 	double return_value;
     
@@ -177,8 +175,7 @@ double get_double_number(char *s)
 //-------------------------------------------------------------------------------------------------------------------
 unsigned char gps_gnrmc_parse(char *line, gps_info_struct *gps)
 {
-	unsigned char
- state;
+	unsigned char state;
     
   double  latitude; //经度
   double  longitude;//纬度
@@ -187,8 +184,7 @@ unsigned char gps_gnrmc_parse(char *line, gps_info_struct *gps)
 	float long_cent_tmp, long_second_tmp;
 	
 	char *buf = line;
-  unsigned char
- return_value = 0;
+  unsigned char return_value = 0;
 
 	state = buf[get_parameter_index(2, buf)];
 
@@ -232,18 +228,16 @@ unsigned char gps_gnrmc_parse(char *line, gps_info_struct *gps)
 //-------------------------------------------------------------------------------------------------------------------
 unsigned char gps_gngga_parse(char *line, gps_info_struct *gps)
 {
-	unsigned char
- state;
+	unsigned char state;
 	char *buf = line;
-  unsigned char
- return_value = 0;
+  unsigned char return_value = 0;
 
 	state = buf[get_parameter_index(2, buf)];
 
 	if (state != ',')
 	{
-			gps->satellite_used = get_int_number(&buf[get_parameter_index(7, buf)]);
-			return_value = 1;
+		gps->satellite_used = get_int_number(&buf[get_parameter_index(7, buf)]);
+		return_value = 1;
 	}
 	
 	return return_value;
@@ -320,12 +314,12 @@ void gps_data_parse(void)
 {
 	if(0 == strncmp((char *)&gps_tau1201_buffer1[3], "RMC", 3))
 	{
-			gps_gnrmc_parse((char *)gps_tau1201_buffer1, &gps_tau1201);
+		gps_gnrmc_parse((char *)gps_tau1201_buffer1, &gps_tau1201);
 	}
 	
 	else if(0 == strncmp((char *)&gps_tau1201_buffer1[3], "GGA", 3))
 	{
-			gps_gngga_parse((char *)gps_tau1201_buffer1, &gps_tau1201);
+		gps_gngga_parse((char *)gps_tau1201_buffer1, &gps_tau1201);
 	}
 }
 
@@ -339,8 +333,7 @@ void gps_data_parse(void)
 //-------------------------------------------------------------------------------------------------------------------
 void gps_uart_callback(void)
 {
-	unsigned char
- dat;
+	unsigned char dat;
 	
 	uart_query(GPS_TAU1201_UART, &dat);
 	if('$' == dat || ('$' != gps_tau1201_buffer2[0]))                           // 帧头校验
@@ -351,12 +344,12 @@ void gps_uart_callback(void)
 	
 	if('\n' == dat)
 	{
-			// 收到一个语句
-			gps_tau1201_buffer2[gps_tau1201_num] = 0;                               // 在末尾添加\0
-			gps_tau1201_num ++;
-			// 拷贝数据到 gps_tau1201_buffer1
-			memcpy(gps_tau1201_buffer1, gps_tau1201_buffer2, gps_tau1201_num);
-			gps_tau1201_flag = 1;
+		// 收到一个语句
+		gps_tau1201_buffer2[gps_tau1201_num] = 0;                               // 在末尾添加\0
+		gps_tau1201_num ++;
+		// 拷贝数据到 gps_tau1201_buffer1
+		memcpy(gps_tau1201_buffer1, gps_tau1201_buffer2, gps_tau1201_num);
+		gps_tau1201_flag = 1;
 	}
 }
 
@@ -369,71 +362,47 @@ void gps_uart_callback(void)
 //-------------------------------------------------------------------------------------------------------------------
 void gps_init(void)
 {
-	const unsigned char
- set_rate[]      = {0xF1, 0xD9, 0x06, 0x42, 0x14, 0x00, 0x00, 0x0A, 0x05, 0x00, 0x64, 0x00, 0x00, 0x00, 0x60, 0xEA, 0x00, 0x00, 0xD0, 0x07, 0x00, 0x00, 0xC8, 0x00, 0x00, 0x00, 0xB8, 0xED};
-	const unsigned char
- open_gga[]      = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x00, 0x01, 0xFB, 0x10};
-	const unsigned char
- open_rmc[]      = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x05, 0x01, 0x00, 0x1A};
+	const unsigned char set_rate[]      = {0xF1, 0xD9, 0x06, 0x42, 0x14, 0x00, 0x00, 0x0A, 0x05, 0x00, 0x64, 0x00, 0x00, 0x00, 0x60, 0xEA, 0x00, 0x00, 0xD0, 0x07, 0x00, 0x00, 0xC8, 0x00, 0x00, 0x00, 0xB8, 0xED};
+	const unsigned char open_gga[]      = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x00, 0x01, 0xFB, 0x10};
+	const unsigned char open_rmc[]      = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x05, 0x01, 0x00, 0x1A};
 	
-	const unsigned char
- close_gll[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x01, 0x00, 0xFB, 0x11};
-	const unsigned char
- close_gsa[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x02, 0x00, 0xFC, 0x13};
-	const unsigned char
- close_grs[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x03, 0x00, 0xFD, 0x15};
-	const unsigned char
- close_gsv[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x04, 0x00, 0xFE, 0x17};
-	const unsigned char
- close_vtg[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x06, 0x00, 0x00, 0x1B};
-	const unsigned char
- close_zda[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x07, 0x00, 0x01, 0x1D};
-	const unsigned char
- close_gst[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x08, 0x00, 0x02, 0x1F};
-	const unsigned char
- close_txt[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x40, 0x00, 0x3A, 0x8F};
-	const unsigned char
- close_txt_ant[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x20, 0x00, 0x1A, 0x4F};
+	const unsigned char close_gll[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x01, 0x00, 0xFB, 0x11};
+	const unsigned char close_gsa[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x02, 0x00, 0xFC, 0x13};
+	const unsigned char close_grs[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x03, 0x00, 0xFD, 0x15};
+	const unsigned char close_gsv[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x04, 0x00, 0xFE, 0x17};
+	const unsigned char close_vtg[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x06, 0x00, 0x00, 0x1B};
+	const unsigned char close_zda[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x07, 0x00, 0x01, 0x1D};
+	const unsigned char close_gst[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x08, 0x00, 0x02, 0x1F};
+	const unsigned char close_txt[]     = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x40, 0x00, 0x3A, 0x8F};
+	const unsigned char close_txt_ant[] = {0xF1, 0xD9, 0x06, 0x01, 0x03, 0x00, 0xF0, 0x20, 0x00, 0x1A, 0x4F};
 	
 	systick_delay_ms(500);//等待GPS启动后开始初始化
 	uart_init(GPS_TAU1201_UART, 115200, GPS_TAU1201_RX, GPS_TAU1201_TX);
 
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)set_rate, sizeof(set_rate));//设置GPS更新速率为10hz，如果不调用此语句则默认为1hz
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)set_rate, sizeof(set_rate));//设置GPS更新速率为10hz，如果不调用此语句则默认为1hz
 	systick_delay_ms(200);
 	
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)open_rmc, sizeof(open_rmc));//开启rmc语句
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)open_rmc, sizeof(open_rmc));//开启rmc语句
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)open_gga, sizeof(open_gga));//开启gga语句
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)open_gga, sizeof(open_gga));//开启gga语句
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_gll, sizeof(close_gll));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_gll, sizeof(close_gll));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_gsa, sizeof(close_gsa));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_gsa, sizeof(close_gsa));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_grs, sizeof(close_grs));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_grs, sizeof(close_grs));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_gsv, sizeof(close_gsv));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_gsv, sizeof(close_gsv));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_vtg, sizeof(close_vtg));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_vtg, sizeof(close_vtg));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_zda, sizeof(close_zda));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_zda, sizeof(close_zda));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_gst, sizeof(close_gst));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_gst, sizeof(close_gst));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_txt, sizeof(close_txt));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_txt, sizeof(close_txt));
 	systick_delay_ms(50);
-	uart_putbuff(GPS_TAU1201_UART, (unsigned char
- *)close_txt_ant, sizeof(close_txt_ant));
+	uart_putbuff(GPS_TAU1201_UART, (unsigned char *)close_txt_ant, sizeof(close_txt_ant));
 	systick_delay_ms(50);
 
 	uart_rx_irq(GPS_TAU1201_UART, 1);

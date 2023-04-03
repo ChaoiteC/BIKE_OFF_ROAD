@@ -1,0 +1,11 @@
+The Time: 2022/11/25 9:57:51Data: System.Collections.ListDictionaryInternal
+Message: 由于出现被放弃的 mutex，等待过程结束。
+Source: mscorlib
+StackTrace:    在 System.Threading.WaitHandle.InternalWaitOne(SafeHandle waitableSafeHandle, Int64 millisecondsTimeout, Boolean hasThreadAffinity, Boolean exitContext)
+   在 System.Threading.WaitHandle.WaitOne(Int32 millisecondsTimeout, Boolean exitContext)
+   在 System.Threading.WaitHandle.WaitOne()
+   在 SyncStream.FillBuffer(Object , EventArgs )
+   在 FIFOStream.raise_LowBuffer(Object value0, EventArgs value1)
+   在 FIFOStream.ReadLine(Int32* type)
+   在 Satrack.Main.DevThread(Object obj)
+TargetSite: Boolean InternalWaitOne(System.Runtime.InteropServices.SafeHandle, Int64, Boolean, Boolean)

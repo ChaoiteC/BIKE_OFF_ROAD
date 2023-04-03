@@ -1,0 +1,673 @@
+#include <stdio.h>
+#include <string.h>
+#include "libtcc1.c"
+#include "time.h"
+#define BUF_LEN 1
+#define LINE 15
+int p;
+
+int edt1,edt2,edt3;
+char execDir[255];
+void Trans();
+long int filesize( FILE *fp )
+{
+    long int save_pos, size_of_file;
+    save_pos = ftell( fp );
+    fseek( fp, 0L, SEEK_END );
+    size_of_file = ftell( fp );
+    fseek( fp, save_pos, SEEK_SET );
+    return( size_of_file );
+}
+
+void Upper_chars(char *buffer)
+{
+    unsigned int c;
+    for (c=0; c <= strlen(buffer)-1; c++)
+        *(buffer+c)=toupper( *(buffer+c) );
+}
+void OpenFileClick(void *sender)
+{
+    char s[200];
+    GetFileName(s,200,"*.*");
+    if(strlen(s)>0)
+        SetProperty(edt1,"text",s);
+}
+void OpenFileClick1(void *sender)
+{
+    char s[200];
+    GetFileName(s,200,"*.txt|*.txt");
+    if(strlen(s)>0)
+        SetProperty(edt2,"text",s);
+}
+void CloseClick(void *Sender)
+{
+    //ClearOutputWin();   //清除输出窗口内容
+    //HideVclWin();
+    //CloseVclWin();
+    CloseForm(p);//
+}
+
+void ViewC()
+{
+    char s[200],s1[200];
+    GetProperty(edt2,"text",s,200);
+    sprintf(s1,"notepad.exe %s",s);
+    WinExec(s1);
+}
+
+void CreateGui()
+{
+    CloseCodeWin();
+    ClearVclControls();
+    ClearOutputWin(); 
+    int GuiMode=0;
+    if((GuiMode==0)||(GuiMode==1))
+        p=GetGuiWin(GuiMode);
+    else
+        p=CreateComponentEx(0,"form","caption","安控系统辅助工具","Width",570,"height",150,"BorderIcons","[biSystemMenu]","position","poMainFormCenter","formstyle","fsstayontop", "visible",1,NULL);//创建form;borderIcons:[biSystemMenu,biMinimize,biMaximize]
+
+    int pnl =p;
+    int txt2= CreateComponentEx(pnl,"label","caption","    文件名称：","left",10,"top",40-20,"width",90,NULL);
+    edt1= CreateComponentEx(pnl,"edit", "text","c:\\boot.ini","left",105,"top",38-20,"width",145,NULL);
+    int txt3= CreateComponentEx(pnl,"label","caption","    文件名称：","left",10,"top",68-20,"width",90,NULL);
+    edt2= CreateComponentEx(pnl,"edit", "text","c:\\tmp.txt","left",105,"top",65-20,"width",145,NULL);
+
+    int btn1= CreateComponentEx(pnl,"button","caption","...","left",265,"top",36-20,"width",65,"onclick",OpenFileClick,NULL);
+    int btn2= CreateComponentEx(pnl,"button","caption","...","left",265,"top",63-20,"width",65,"onclick",OpenFileClick1,NULL);
+    int btn3= CreateComponentEx(pnl,"button","caption","测    试" ,"left",15,"top",93+28-40,"width",80,"height",160,"onclick",Trans,NULL);
+    int btn4= CreateComponentEx(pnl,"button","caption","查看文件","left",105,"top",93+28-40,"width",80,"height",160,"onclick",ViewC,NULL);
+    int btn5= CreateComponentEx(pnl,"button","caption","退    出" ,"left",195,"top",93+28-40,"width",80,"height",160,"onclick",CloseClick,NULL);
+    
+}
+void main()
+{
+    CreateGui();
+    ShowOutputWin(-1);
+    AutoSetVclWinSize();
+}
+
+
+
+int devQDZY=0; //{占用}
+int devQDCTZY=9;//{车头占用
+int devQDSB=2;// {锁闭,故障锁闭}
+int devQDKX  = 1;    // {区段空闲}
+
+int devDCDW     = 1;     //道岔定位}
+int devDCFW     = 2;     //道岔反位}
+int devDCJC     = 0;     //挤岔}
+int devDCBX     = 5;     //状态标志:道岔不显}
+int devDCDSDW   = 6;     //单锁定位:1+5}
+int devDCDSFW   = 7;     //单锁反位:2+5}
+int devDCDWSB   = 11;    //道岔定位锁闭:1+10}
+int devDCFWSB   = 12;    //反位锁闭:2+10}
+int devDCDWZY   = 13;    //道岔定位站用:1+12}
+int devDCFWZY   = 14;    //反位站用:2+12}
+int devDCDS     = 21;    //控单锁}
+int devDCQXDS   = 22;    //取消单锁}
+int devDCStop   = 25;
+double LDLength[500];
+//路段
+int ld_count = 0;
+typedef struct
+{
+    int id;
+    int strx, stry;
+    int endx, endy;
+    int qdh;
+    char ntype;
+    int nbh;
+    int state;
+    int speedlimit;
+    double ldlength;
+} LD;
+LD _ld[500];
+
+static int dc_count = 50;
+typedef struct
+{
+    //int lbldraw;      //0:不绘制标签   1：绘制标签
+    int xgy, ygy;
+    int xdw, ydw;
+    int xfw, yfw;
+    int lblX, lblY;     //标签坐标
+    int qdh;
+    int gyld,dwld,fwld;
+    int state;
+    double dclength;
+} DC;
+static DC _dc[100];
+static int qd_count = 100;
+
+#define MAXDCINQD 5    //每个区段中最多的道岔数+1                      //bhj
+#define MAXFIXEDLENNUM 17 //每个区段中道岔组合情况，=2的(MAXDCINQD-1)次方+1   //bhj
+
+typedef struct
+{
+    int state;        //0：红灯  1：路灯   2：灰灯
+    char yc;
+    int firstLd;
+    int fwdch;
+    int fwFirstLd;
+    int x0,y0,x1,y1;
+    int direction;
+    double qdlenth;
+    double fixedLen[MAXFIXEDLENNUM];//bhj
+    int dcList[MAXDCINQD];           //bhj
+} QD;
+QD _qd[200];
+//信号机
+static float PI = 3.1415926;
+static int xhj_count = 0;
+
+typedef struct
+{
+    int state;        //0：红灯  1：路灯   2：灰灯
+    int lbldraw;      //0:不绘制标签   1：绘制标签
+    int x0, y0;
+    int x1, y1;
+    int x2, y2;
+    int lblX, lblY;  //标签坐标
+    char lbl[100];   //标签
+    char is3x;
+    int xhjlinkqd;
+    char direction;
+} XHJ;
+static XHJ _xhj[200];
+
+
+int GetQdDcCount(int qdh)
+{
+    int idx=0;
+    while(_qd[qdh].dcList[idx]!=-1) idx++;
+    return idx;
+}
+
+//加载站场数据文件
+static void LoadStationData()
+{
+    int i,j;
+    int tmpint;
+    FILE *fp;
+    int speedlimit;
+    int temp1;
+    int temp2;
+    FILE *ldfp;
+
+    int ldflag;
+
+    //图形文件名
+
+    char filename[255];// = "/infoplat/akdata.dat";
+
+    sprintf(filename,"%s\\Dat\\akdata.dat",execDir);
+    printf("%s",filename);
+
+    char filename1[255];// = "/infoplat/akdata.dat";
+
+    sprintf(filename1,"%s\\Dat\\ldrecord.dat",execDir);
+    printf("%s",filename1);
+
+    if ( -1 == access(filename1,0))
+    {
+        ldflag = 0;
+
+    }
+    else
+    {
+
+        ldflag = 1;
+        ldfp = fopen(filename1,"r");
+
+    }
+    /**/
+
+    if (fp = fopen(filename, "rb"))
+    {
+        //开始读取文件
+        fread(&ld_count,sizeof(ld_count),1,fp);
+        printf("ld_count:%d",ld_count);
+        for (i=0; i<ld_count; i++)
+        {
+            _ld[i].id=i;       //路段id
+            fread(&_ld[i].qdh,sizeof(_ld[i].qdh),1,fp);
+            _ld[i].qdh--;
+            fread(&_ld[i].strx,sizeof(_ld[i].strx),1,fp);
+            fread(&_ld[i].stry,sizeof(_ld[i].stry),1,fp);
+            fread(&_ld[i].endx,sizeof(_ld[i].endx),1,fp);
+            fread(&_ld[i].endy,sizeof(_ld[i].endy),1,fp);
+            fread(&_ld[i].ntype,sizeof(_ld[i].ntype),1,fp);
+            fread(&_ld[i].nbh,sizeof(_ld[i].nbh),1,fp);
+            _ld[i].nbh--;
+            fread(&temp1,sizeof(int),1,fp);
+            fread(&temp2,sizeof(int),1,fp);
+
+            _ld[i].ldlength = temp1+(double)temp2/100;
+
+            //    fread(&_ld[i].ldlength,sizeof(_ld[i].ldlength),1,fp);
+            if ( _ld[i].ldlength < 0.1)
+            {
+                _ld[i].ldlength = 200;
+            }
+
+            _ld[i].state =  devQDKX;
+
+
+            //             //路段的设置
+            //             if (ldflag == 0)
+            //             {
+            //                 LDLength[i] = _ld[i].ldlength;
+            //
+            //             }
+            //             else
+            //             {
+            //
+            //                 fread(&_ld[i].ldlength,sizeof(_ld[i].ldlength),1,ldfp);
+            //
+            //                 LDLength[i] = _ld[i].ldlength;
+            //
+            //             }
+
+
+
+
+
+        }
+
+
+        //            for(i=0;i<285;i++)                   //模拟路段限速值
+        //             {
+        //
+        //         _ld[i].speedlimit=50;
+        //          _ld[++i].speedlimit=60;
+        //         _ld[++i].speedlimit=70;
+        //
+        //
+        //         }
+
+
+
+        //开始读取文件
+        fread(&xhj_count,sizeof(xhj_count),1,fp);
+
+        for (i=0; i<xhj_count; i++)
+        {
+            fread(&_xhj[i].x0,sizeof(_xhj[i].x0),1,fp);
+            fread(&_xhj[i].y0,sizeof(_xhj[i].y0),1,fp);
+            fread(&_xhj[i].x1,sizeof(_xhj[i].x1),1,fp);
+            fread(&_xhj[i].y1,sizeof(_xhj[i].y1),1,fp);
+            fread(&_xhj[i].x2,sizeof(_xhj[i].x2),1,fp);
+            fread(&_xhj[i].y2,sizeof(_xhj[i].y2),1,fp);
+            fread(&_xhj[i].is3x,sizeof(_xhj[i].is3x),1,fp);
+            fread(&_xhj[i].direction,sizeof(_xhj[i].direction),1,fp);
+            _xhj[i].direction--;
+            fread(&_xhj[i].xhjlinkqd,sizeof(_xhj[i].xhjlinkqd),1,fp);
+            _xhj[i].xhjlinkqd--;
+
+            //   printf("_xhj[i].direction %d xin %d 信号机关联%d\n",i,_xhj[i].direction, _xhj[i].xhjlinkqd);
+            /*_xhj[i].x0/=4;
+            _xhj[i].y0/=4;
+            _xhj[i].x1/=4;
+            _xhj[i].y1/=4;
+            _xhj[i].x2/=4;
+            _xhj[i].y2/=4;*/
+        }
+
+        //区段
+        fread(&qd_count,sizeof(qd_count),1,fp);
+        for (i=0; i<qd_count; i++)
+        {
+            fread(&_qd[i].yc,sizeof(_qd[i].yc),1,fp);
+            fread(&_qd[i].firstLd,sizeof(_qd[i].firstLd),1,fp);
+            _qd[i].firstLd--;
+            fread(&_qd[i].fwdch,sizeof(_qd[i].fwdch),1,fp);
+            _qd[i].fwdch--;
+            fread(&_qd[i].fwFirstLd,sizeof(_qd[i].fwFirstLd),1,fp);
+            _qd[i].fwFirstLd--;
+            _qd[i].state = devQDCTZY;
+        }
+        //         printf("************************************\n");
+        //     printf("qd_count %d\n",qd_count);
+        //     printf("************************************\n");
+
+        for (i = 0; i < qd_count; i++ )                  //模拟路段限速值
+        {
+
+            _ld[_qd[i].firstLd].speedlimit =  20 + (i%2)*5;
+            speedlimit =  _ld[_qd[i].firstLd].speedlimit;
+
+            for (j = 0; j < ld_count; j++)
+            {
+                if ( i == _ld[j].qdh)
+                {
+                    _ld[j].speedlimit = speedlimit;
+                }
+
+            }
+
+        }
+        //道岔
+        fread(&dc_count,sizeof(dc_count),1,fp);
+        //       printf("************************************\n");
+        //     printf("dc_count %d\n",dc_count);
+        //     printf("************************************\n");
+        for (i=0; i<dc_count; i++)
+        {
+            fread(&_dc[i].xgy,sizeof(_dc[i].xgy),1,fp);
+            fread(&_dc[i].ygy,sizeof(_dc[i].ygy),1,fp);
+            fread(&_dc[i].xdw,sizeof(_dc[i].xdw),1,fp);
+            fread(&_dc[i].ydw,sizeof(_dc[i].ydw),1,fp);
+            fread(&_dc[i].xfw,sizeof(_dc[i].xfw),1,fp);
+            fread(&_dc[i].yfw,sizeof(_dc[i].yfw),1,fp);
+            fread(&_dc[i].qdh,sizeof(_dc[i].qdh),1,fp);
+            _dc[i].qdh--;
+            fread(&_dc[i].gyld,sizeof(_dc[i].gyld),1,fp);
+            _dc[i].gyld--;
+            _ld[_dc[i].gyld].ldlength = 2;
+            fread(&_dc[i].dwld,sizeof(_dc[i].dwld),1,fp);
+            _dc[i].dwld--;
+            fread(&_dc[i].fwld,sizeof(_dc[i].fwld),1,fp);
+            _dc[i].fwld--;
+            _dc[i].state = devDCDW;
+
+            _dc[i].dclength = 5;
+
+        }
+        //          for (j=0; j<ld_count; j++)
+        //      {
+        //
+        //        printf("LD %.2f \n",_ld[j].ldlength);
+        //
+        //     }
+    }
+
+    else
+    {
+        perror("open file faile \n");
+        return -1;
+    }
+    //路段的设置
+
+    for(j=0; j<ld_count; j++)
+    {
+        if (ldflag == 0)
+        {
+            LDLength[j] = _ld[j].ldlength;
+
+        }
+        else
+        {
+
+            fread(&_ld[j].ldlength,sizeof(_ld[j].ldlength),1,ldfp);
+
+            LDLength[j] = _ld[j].ldlength;
+
+        }
+    }  /**/
+
+    fread(&i,sizeof(i),1,fp);
+    fclose(fp);
+    if(ldflag > 0)
+    {
+        //fclose(ldfp);
+    }
+
+}
+
+void FillQdDcList()
+{
+    unsigned int i,j,idx=0;
+
+    for(i=0; i<qd_count; i++)
+    {
+
+        idx=0;
+        for(j=0; j<dc_count; j++)
+        {
+            if(_dc[j].qdh==i)
+            {
+                _qd[i].dcList[idx]=j;
+                idx++;
+
+            }
+        }
+        _qd[i].dcList[idx]=-1;   //以-1作为结束标志
+    }
+
+
+}
+void PrintQdDcList()
+{
+    int idx,i;
+    unsigned char buffer[200],tmp[20];
+    if(1)
+        // if(0)
+        for(i=0; i<qd_count; i++)
+        {
+            idx=0;
+            while(_qd[i].dcList[idx]!=-1) idx++;
+            buffer[0]=0;
+            sprintf(buffer,"QD:%d num:%d DC:",i,idx);
+            idx=0;
+
+            while(_qd[i].dcList[idx]!=-1)
+            {
+                tmp[0]=0;
+                sprintf(tmp,"%d ",_qd[i].dcList[idx]);
+                strcat(buffer,tmp);
+                idx++;
+            }
+            printf("%s",buffer);
+
+        }
+}
+
+void LoadQdFixedLen()
+{
+    //qdh len dcnum dc1 dc2 dc3
+    FILE *fp;
+    unsigned char line[200];
+    int qdh,num,i,j;
+    float len;
+    unsigned char dataErr;
+    int dcstate[MAXDCINQD];
+    int lineNum=0;
+    int idx;
+
+    char filename[100];
+    filename[0]=0;
+    sprintf(filename,"%s\\Dat\\qdfixlen.txt",execDir);
+    if((fp=fopen( filename, "rb+" )) == NULL )
+    {
+        printf("file: %s open error!\r",filename);
+        return;
+    }
+    else
+        printf("LoadQdFixedLen:%s\r\n",filename);
+
+    for(i=0; i<qd_count; i++)
+        for(j=0; j<MAXFIXEDLENNUM; j++)
+            _qd[i].fixedLen[j]=0;
+
+    while(!feof(fp))
+    {
+        fgets(line,200,fp);
+
+        num=strlen(line);
+        if(num>=2)
+            if(line[num-2]=='\r')  ;
+        line[num-2]=0;
+
+        lineNum++;
+        if(strlen(line)<3) continue;
+        //printf("line %d:%s",lineNum,line);
+
+        for(i=0; i<MAXDCINQD; i++)dcstate[i]=-1;
+
+        qdh=-1;
+        num=-1;
+        len=-1;
+        sscanf(line,"%d %f %d %d %d %d %d",&qdh,&len,&num,&dcstate[0],&dcstate[1],&dcstate[2],&dcstate[3]);
+        //printf("str:%d %f %d %d %d %d %d ",qdh,len,num,dcstate[0],dcstate[1],dcstate[2],dcstate[3]);
+        if(qdh==-1)
+        {
+            printf("Line %d:section index error.\r",lineNum);
+            continue;
+        }
+        if((qdh<0)||(qdh>qd_count))
+        {
+            printf("Line %d:section index range error.\r",lineNum);
+            continue;
+        }
+        if(num==-1)
+            if(len>0) num=0;
+        if((num<0)||(num>=MAXDCINQD))
+        {
+            printf("Line %d:switch num error.\r",lineNum);
+            continue;
+        }
+        dataErr=0;
+        for(i=0; i<num; i++)
+        {
+            if(dcstate[i]==-1)
+            {
+                dataErr=1;
+                break;
+            }
+        }
+        if(dataErr)
+        {
+            printf("Line %d:switch state error.\r",lineNum);
+            continue;
+        }
+        idx=0;
+        for(i=0; i<num; i++)
+        {
+            idx<<=1;
+            if(dcstate[i]==devDCDW)
+            {
+                idx|=1;
+            }
+        }
+        if(idx<MAXFIXEDLENNUM)
+        {
+            if(num!=GetQdDcCount(qdh))
+                printf("Line %d: error switch num err.   section %d,idx %d,len %8.2f\r",lineNum,qdh,idx,len);
+            _qd[qdh].fixedLen[idx]=len;
+            if(num==0)
+                printf("Line %3d: section %3d,  idx %d,  len %8.2f\r",lineNum,qdh,idx,len);
+            else
+                printf("Line %3d: section %3d,  idx %d,  len %8.2f,\t%d switch\r",lineNum,qdh,idx,len,num);
+        }
+        else
+        {
+            printf("Line %d: more of states\r",lineNum);
+        }
+    }
+    fclose(fp);
+    printf("LoadQdFixedLen OK!\r\n");
+}
+
+
+double GetQdFixedLen(int qdIdx)
+{
+    unsigned int i,idx;
+    idx=0;
+    i=0;
+    while(_qd[qdIdx].dcList[i]!=-1)   //最后一个的下一个是-1；
+    {
+        idx<<=1;
+        if(_dc[_qd[qdIdx].dcList[i]].state==devDCDW)   //定位
+            idx|=0x01;
+        i++;
+    }
+    printf("idx:%d",idx);
+    if(idx<MAXFIXEDLENNUM)
+        return _qd[qdIdx].fixedLen[idx];
+    else
+        return _qd[qdIdx].qdlenth ;
+}
+
+
+void RecQdLen(int qdh,double len)
+{
+    FILE *dest;
+    int i;
+    time_t now;
+    char Buffer[50];
+    struct tm *timenow;
+    char filename[100];
+    time ( &now );
+    timenow=localtime ( &now );
+    sprintf ( Buffer,"%4d-%02d-%02d %02d:%02d:%02d",1900+timenow->tm_year,1+timenow->tm_mon,timenow->tm_mday,timenow->tm_hour,timenow->tm_min,timenow->tm_sec );
+    //printf(Buffer);
+    sprintf(filename,"%s\\Dat\\qdlen.txt",execDir);
+    if( (dest=fopen( filename, "a+" )) != NULL )
+    {
+        fprintf(dest,"%s %03d %0.2f ",Buffer,qdh,len);
+        i=0;
+        while(_qd[qdh].dcList[i]!=-1) i++;  //最后一个的下一个是-1；
+        fprintf(dest,"%d ",i);
+        i=0;
+        while(_qd[qdh].dcList[i]!=-1)
+        {
+
+            fprintf(dest,"%d ",_dc[_qd[qdh].dcList[i]].state);
+            i++;
+        }
+        fprintf(dest,"\r\n");
+        fclose(dest);
+    }
+}
+void Trans()
+{
+    char  argv[4][255];
+    char s[100];
+    FILE *source,*dest;
+    unsigned char buffer[100], tmp[20];
+    int c,i,idx;
+
+    double len;
+    GetProperty(edt1,"text",argv[1],200);
+    GetProperty(edt2,"text",argv[2],200);
+
+    /*
+    strcpy(Dummy,argv[2]);
+    if( (dest=fopen( Dummy, "rb+" )) != NULL )
+    {
+        fscanf(dest,"%s%s",a,b);
+        printf("[%s],[%s]",a,b);
+        a[0]=0;
+        fscanf(dest,"%s%s",a,b);
+        if(a[0]==NULL) printf("read error");
+        printf("[%s],[%s]",a,b);
+        fscanf(dest,"%s%s",a,b);
+        printf("[%s],[%s]",a,b);
+        fclose(dest);
+
+    }
+    if( (dest=fopen( Dummy, "a+" )) != NULL )
+    {
+        //fprintf(dest,"[%s],[%s]","123","abc");
+        fclose(dest);
+    }
+    */
+    GetExeDir(execDir,255);
+    LoadStationData();
+    FillQdDcList();
+    PrintQdDcList();
+
+
+    RecQdLen(11,11.23);
+    LoadQdFixedLen();
+    //_dc[15].state=devDCFW;
+    len=GetQdFixedLen(102);
+    printf("102 len:%0.2f",len);
+
+
+    printf("%s",execDir);
+    ShowMessage("测试完成!!!!!!!!!!!!  \r\r\r\r\r\r\r\r ");
+}
+
+
+

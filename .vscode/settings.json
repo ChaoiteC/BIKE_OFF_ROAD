@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "zf_device_mpu6050.h": "c",
-        "zf_driver_uart.h": "c"
+        "zf_driver_uart.h": "c",
+        "stdint.h": "c"
     }
 }

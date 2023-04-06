@@ -19,15 +19,16 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
  */
 void gps_show_oled(void){
     oled_clear();
+    oled_show_string(0,0, "GPS");
     if(!gps_tau1201.state){
-        oled_show_string(0, 0, "FAIL LOCATE");                             //定位失败
+        oled_show_string(0,2, "FAIL LOCATE");                //定位失败
         //oled_show_chinese(24, 0, 16, (const uint8 *)chinese_nodata, 4);
     }
     else{
-        oled_show_string(0, 0, "TIM>");                      //时间
-        oled_show_int(32,0,gps_tau1201.time.hour,2);
-        oled_show_int(50,0,gps_tau1201.time.minute,2);
-        oled_show_int(68,0,gps_tau1201.time.second,2);
+        oled_show_string(0, 7, "TIM>");                      //时间
+        oled_show_int(32,7,gps_tau1201.time.hour,2);
+        oled_show_int(50,7,gps_tau1201.time.minute,2);
+        oled_show_int(68,7,gps_tau1201.time.second,2);
         oled_show_string(0, 2, "N ->");
         oled_show_float(32,2,gps_tau1201.latitude,4,6);      //纬度
         oled_show_string(0, 3, "E ->");

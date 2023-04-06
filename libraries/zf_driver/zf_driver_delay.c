@@ -50,14 +50,15 @@
 //-------------------------------------------------------------------------------------------------------------------
 void system_delay (uint32 time, uint32 num)
 {
-    while(num --)
-    {
-        SysTick->CTLR = 0;
-        SysTick->CNT  = 0;
-        SysTick->CTLR = 1;          //启动系统计数器 systick（HCLK/8 时基） us
+    SysTick->SR &= ~(1 << 0);
 
-        //while((*(volatile uint32*)0xE000F004) <= time);
-        while(SysTick->CNT <= time);
-    }
+
+    SysTick->CMP = (uint64_t)time * num;
+    SysTick->CTLR |= (1 << 4);
+    SysTick->CTLR |= (1 << 5) | (1 << 0);
+
+    while((SysTick->SR & (1 << 0)) != (1 << 0));
+
+    SysTick->CTLR &= ~(1 << 0);
 }
 

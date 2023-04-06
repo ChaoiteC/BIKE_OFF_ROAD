@@ -91,12 +91,9 @@
  * @fn      I2C_DeInit
  *
  * @brief   Deinitializes the I2Cx peripheral registers to their default
- *          reset values.
- *          将I2Cx外围寄存器反初始化为其默认重置值
- *
+ *        reset values.
  *
  * @param   I2Cx - where x can be 1 or 2 to select the I2C peripheral.
- *          I2Cx -其中x可以为1或2，用于选择I2C外设
  *
  * @return  none
  */
@@ -118,10 +115,7 @@ void I2C_DeInit(I2C_TypeDef *I2Cx)
  * @fn      I2C_Init
  *
  * @brief   Initializes the I2Cx peripheral according to the specified
- *          parameters in the I2C_InitStruct.
- *          根据I2C_InitStruct中指定的参数初始化I2Cx外设。
- *
- *
+ *        parameters in the I2C_InitStruct.
  * @param   I2Cx - where x can be 1 or 2 to select the I2C peripheral.
  *          I2C_InitStruct - pointer to a I2C_InitTypeDef structure that
  *        contains the configuration information for the specified I2C peripheral.
@@ -195,10 +189,9 @@ void I2C_Init(I2C_TypeDef *I2Cx, I2C_InitTypeDef *I2C_InitStruct)
  * @fn      I2C_StructInit
  *
  * @brief   Fills each I2C_InitStruct member with its default value.
- *          将每个I2C_InitStruct成员填充其默认值。
  *
- * @param   I2C_InitStruct - pointer to an I2C_InitTypeDef structure which will be initialized.
- *          I2C_InitStruct指针到初始化的I2C_InitTypeDef结构
+ * @param   I2C_InitStruct - pointer to an I2C_InitTypeDef structure which
+ *        will be initialized.
  *
  * @return  none
  */
@@ -216,11 +209,9 @@ void I2C_StructInit(I2C_InitTypeDef *I2C_InitStruct)
  * @fn      I2C_Cmd
  *
  * @brief   Enables or disables the specified I2C peripheral.
- *          启用或禁用指定的I2C外围设备。
+ *
  * @param   I2Cx - where x can be 1 or 2 to select the I2C peripheral.
- *          I2Cx - x可以为1或2选择I2C外围
  *          NewState - ENABLE or DISABLE.
- *          启用或禁用。
  *
  * @return  none
  */
@@ -240,7 +231,6 @@ void I2C_Cmd(I2C_TypeDef *I2Cx, FunctionalState NewState)
  * @fn      I2C_DMACmd
  *
  * @brief   Enables or disables the specified I2C DMA requests.
- *          启用或禁用指定的I2C DMA请求。
  *
  * @param   I2Cx - where x can be 1 or 2 to select the I2C peripheral.
  *          NewState - ENABLE or DISABLE.
@@ -441,7 +431,6 @@ void I2C_ITConfig(I2C_TypeDef *I2Cx, uint16_t I2C_IT, FunctionalState NewState)
  * @fn      I2C_SendData
  *
  * @brief   Sends a data byte through the I2Cx peripheral.
- *          通过I2Cx外设发送一个数据字节
  *
  * @param   I2Cx - where x can be 1 or 2 to select the I2C peripheral.
  *          Data - Byte to be transmitted.

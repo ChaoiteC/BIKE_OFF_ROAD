@@ -75,6 +75,10 @@ int16 encoder_get_count(encoder_index_enum encoder_n)
         {
             return_value = -result;
         }
+		else
+		{
+			return_value = result;
+		}
     }
 
     return return_value;
@@ -131,7 +135,7 @@ void encoder_quad_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pi
     gpio_init((gpio_pin_enum)(ch1_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // 初始化引脚
     gpio_init((gpio_pin_enum)(ch2_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // 初始化引脚
 
-    encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // 将方向引脚号存入数组中
+    //encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // 将方向引脚号存入数组中
 
     switch(encoder_n)
     {

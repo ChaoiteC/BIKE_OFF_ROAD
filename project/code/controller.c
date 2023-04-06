@@ -1,7 +1,7 @@
 #include "zf_common_headfile.h"
 
-_OUT_Motor Motor1 = {0};//前电机
-_OUT_Motor Motor2 = {0};//后电机
+/*_OUT_Motor Motor1 = {0};//前电机
+_OUT_Motor Motor2 = {0};//后电机*/
 
 /**********************************************************************************************/
 /* 名字：外环速度控制器
@@ -11,9 +11,9 @@ _OUT_Motor Motor2 = {0};//后电机
  */
 static void vel_controller(void)
 {
-  all.vel_encoder.expect = 0.0f;
+  /*all.vel_encoder.expect = 0.0f;
   all.vel_encoder.feedback = encoderINFO.mainNumberValue;
-  pid_controller(&all.vel_encoder);
+  pid_controller(&all.vel_encoder);*/
 }
 
 /**********************************************************************************************/

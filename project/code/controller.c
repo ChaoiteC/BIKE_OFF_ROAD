@@ -60,7 +60,7 @@ void _controller_perform(void)
  * 参数：动量轮输入的角度的值inAngleData
  * 输出：无
  */
-static uint8_t detectionFallDown(float inAngleData)
+/*static uint8_t detectionFallDown(float inAngleData)
 {
   uint8_t detectionMark = 0;
 
@@ -69,7 +69,7 @@ static uint8_t detectionFallDown(float inAngleData)
     detectionMark = 1;
   }
   return detectionMark;
-}
+}*/
 
 /**********************************************************************************************/
 /* 名字：pwmMotorOut
@@ -77,13 +77,13 @@ static uint8_t detectionFallDown(float inAngleData)
  * 参数：
  * 输出：无
  */
-static void pwmMotorOut(uint32 pwm1 , uint32 pwm2 )
+/*static void pwmMotorOut(uint32 pwm1 , uint32 pwm2 )
 {
     u32RangeLimit(pwm1,0,2000);                              //限制pwm1的占空比在0-2000之间
     u32RangeLimit(pwm2,0,2000);                              //同上
     pwm_set_duty(TIM3_PWM_MAP0_CH1_A6, pwm1);           //开启TIM3的1，2通道输入占空比的值pwm
     pwm_set_duty(TIM3_PWM_MAP0_CH2_A7, pwm2);
-}
+}*/
 
 /**********************************************************************************************/
 /* 名字：_controller_output
@@ -147,11 +147,11 @@ void TurnLeftOrRight(float inXrocker)
     if( inXrocker == 0  )
     {
     //这里的函数还没有替换
-    // __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, (dirBASE + DIR_SIZE ) + dirADJUST );// 左转一定角度    
+    // __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, (dirBASE + DIR_SIZE ) + dirADJUST );// 左转一定角度
     }
     else if( inXrocker == 5 )
     {
-    // __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, (dirBASE - DIR_SIZE ) + dirADJUST );// 右转一定角度    
+    // __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_1, (dirBASE - DIR_SIZE ) + dirADJUST );// 右转一定角度
     }              
     else if( inXrocker == 2 )
     {
@@ -174,7 +174,7 @@ void goForwardOrBackward(float inYrcoker)
   if( inYrcoker >= 0 && inYrcoker <= 1 )                    
   {
     EnableAuxMotor();                                       //使能前后动力电机
-    CarBackward();                                          //后退    
+    CarBackward();                                          //后退
   }
   else if( inYrcoker >= 4 && inYrcoker <= 5 )
   {

@@ -321,7 +321,8 @@ void TIM6_IRQHandler(void)
     if(TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
     {
        TIM_ClearITPendingBit(TIM6, TIM_IT_Update );
-
+       extern void pit_hanlder (void);
+       pit_hanlder();
     }
 }
 
@@ -475,4 +476,13 @@ void HardFault_Handler(void)
   }
 }
 
-
+//-------------------------------------------------------------------------------------------------------------------
+// 函数简介     PIT 的中断处理函数 这个函数将在 PIT 对应的定时器中断调用 详见 isr.c
+// 参数说明     void
+// 返回参数     void
+// 使用示例     pit_hanlder();
+//-------------------------------------------------------------------------------------------------------------------
+void pit_hanlder(void){
+    mpu6050_get_acc();                                                         // 获取 MPU6050 的加速度测量数值
+    mpu6050_get_gyro();                                                        // 获取 MPU6050 的角速度测量数值
+}

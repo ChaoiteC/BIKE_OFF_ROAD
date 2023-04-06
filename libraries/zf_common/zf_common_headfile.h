@@ -39,6 +39,7 @@
 
 
 
+
 #include "stdio.h"
 #include "stdint.h"
 #include "string.h"
@@ -136,6 +137,8 @@
 #include "imath.h"
 #include "imu.h"
 #include "pid.h"
+#include "gps.h"
+#include "font_chinese.h"
 
 //===================================================用户自定义文件===================================================
 

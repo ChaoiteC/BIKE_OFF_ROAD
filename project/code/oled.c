@@ -1,7 +1,8 @@
 #include "zf_common_headfile.h"
 
+
 /* @fn oled_show_gps
- * @brief ½«GPSĞÅÏ¢ÏÔÊ¾µ½OLEDÆÁÄ»ÉÏ
+ * @brief å°†GPSä¿¡æ¯æ˜¾ç¤ºåˆ°OLEDå±å¹•ä¸Š
  * @param void
  * @return void
  */
@@ -9,28 +10,28 @@ void oled_show_gps(void){
     oled_clear();
     oled_show_string(0,0, "GPS");
     if(!gps_tau1201.state){
-        oled_show_string(0,2, "FAIL LOCATE");                //¶¨Î»Ê§°Ü
+        oled_show_string(0,2, "FAIL LOCATE");                //å®šä½å¤±è´¥
     }
     else{
-        oled_show_string(0, 7, "TIM>");                      //Ê±¼ä
+        oled_show_string(0, 7, "TIM>");                      //æ—¶é—´
         oled_show_int(32,7,gps_tau1201.time.hour,2);
         oled_show_int(50,7,gps_tau1201.time.minute,2);
         oled_show_int(68,7,gps_tau1201.time.second,2);
         oled_show_string(0, 2, "N ->");
-        oled_show_float(32,2,gps_tau1201.latitude,4,6);      //Î³¶È
+        oled_show_float(32,2,gps_tau1201.latitude,4,6);      //çº¬åº¦
         oled_show_string(0, 3, "E ->");
-        oled_show_float(32,3,gps_tau1201.longitude,4,6);     //¾­¶È
+        oled_show_float(32,3,gps_tau1201.longitude,4,6);     //ç»åº¦
         oled_show_string(0, 4, "m/s>");
-        oled_show_float(32,4,gps_tau1201.speed,4,6);         //ËÙ¶È
+        oled_show_float(32,4,gps_tau1201.speed,4,6);         //é€Ÿåº¦
         oled_show_string(0, 5, "360>");
-        oled_show_float(32,5,gps_tau1201.direction,4,6);     //·½Ïò
+        oled_show_float(32,5,gps_tau1201.direction,4,6);     //æ–¹å‘
         oled_show_string(0, 6, "STL>");
-        oled_show_int(32,6,gps_tau1201.satellite_used,2);    //ÎÀĞÇÁ¬½ÓÊıÁ¿
+        oled_show_int(32,6,gps_tau1201.satellite_used,2);    //å«æ˜Ÿè¿æ¥æ•°é‡
     }
 }
 
 /* @fn oled_show_mpu6050
- * @brief ½«MPU6050ĞÅÏ¢ÏÔÊ¾µ½OLEDÆÁÄ»ÉÏ
+ * @brief å°†MPU6050ä¿¡æ¯æ˜¾ç¤ºåˆ°OLEDå±å¹•ä¸Š
  * @param void
  * @return void
  */

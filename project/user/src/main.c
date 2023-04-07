@@ -1,41 +1,39 @@
 /*********************************************************************************************************************
-* ÏîÄ¿£º Ô½Ò°µ¥³µ±ÈÈü
-* ¶ÓÃû£º
-* Ñ§Ğ££º
-* ×÷Õß£º Èó¡¢Ì¼°×
-* ÈÕÆÚ£º 2023.3.12
+* é¡¹ç›®ï¼š è¶Šé‡å•è½¦æ¯”èµ›
+* é˜Ÿåï¼š
+* å­¦æ ¡ï¼š
+* ä½œè€…ï¼š æ¶¦ã€ç¢³ç™½
+* æ—¥æœŸï¼š 2023.3.12
 ********************************************************************************************************************/
 #include "zf_common_headfile.h"
 
 int main(void){
-    clock_init(SYSTEM_CLOCK_144M);                                              // ³õÊ¼»¯Ğ¾Æ¬Ê±ÖÓ ¹¤×÷ÆµÂÊÎª 144MHz
-    debug_init();                                                               // ³õÊ¼»¯Ä¬ÈÏ Debug UART
-    
-    //OLED³õÊ¼»¯
+    clock_init(SYSTEM_CLOCK_144M);                                              // åˆå§‹åŒ–èŠ¯ç‰‡æ—¶é’Ÿ å·¥ä½œé¢‘ç‡ä¸º 144MHz
+    debug_init();                                                               // åˆå§‹åŒ–é»˜è®¤ Debug UART
+    //OLEDåˆå§‹åŒ–
     oled_set_dir(OLED_CROSSWISE);
     oled_set_font(OLED_6X8_FONT);
     oled_init();
-    
-    //GPS³õÊ¼»¯
+    //GPSåˆå§‹åŒ–
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
-
-    //MPU6050³õÊ¼»¯
+    //MPU6050åˆå§‹åŒ–
     oled_show_string(0, 0, "MPU6050 loading...");
-    if(mpu6050_init()){//×Ô¼ìÊ§°Ü
+    if(mpu6050_init()){//è‡ªæ£€å¤±è´¥
         oled_show_string(0,7,"MPU6050 init FAIL.");
         while(1);
         //system_delay_ms(3000);
     }
-    pit_ms_init(TIM6_PIT,5);//¶¨Ê±Æ÷ÖĞ¶Ï»ñÈ¡MPU6050Êı¾İ
+    pit_ms_init(TIM6_PIT,5);//å®šæ—¶å™¨ä¸­æ–­è·å–MPU6050æ•°æ®
+    //é”®ç›˜åˆå§‹åŒ–
+    oled_show_string(0, 0, "Keyboard loading...");
+    key_init(10);
+    //åˆå§‹åŒ–å®Œæˆ
+    oled_clear();
+    menu();//è¿›å…¥ç”¨æˆ·äº’åŠ¨é¡µé¢
 
-    oled_clear();//³õÊ¼»¯Íê³É
-
-    while(1){//Ö÷Ñ­»·
-        oled_show_mpu6050();
-        system_delay_ms(1000);
-
-        if(gps_tau1201_flag){//GPSÊı¾İ´¦ÀíÍê³É
+    while(1){//å‘è½¦ä¸»å¾ªç¯
+        if(gps_tau1201_flag){//GPSæ•°æ®å¤„ç†å®Œæˆ
             gps_tau1201_flag=0;
             if (!gps_data_parse()) {
                 oled_show_gps();
@@ -44,5 +42,6 @@ int main(void){
         }
     }
 }
+
 
 

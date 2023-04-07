@@ -4,6 +4,8 @@
         "zf_driver_uart.h": "c",
         "stdint.h": "c",
         "zf_common_headfile.h": "c",
-        "pid.h": "c"
+        "pid.h": "c",
+        "zf_device_aht20.h": "c",
+        "zf_common_typedef.h": "c"
     }
 }

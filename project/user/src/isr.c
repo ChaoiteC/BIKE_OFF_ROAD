@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ����CH32V307VCT6 ��Դ�⣩��һ�����ڹٷ� SDK �ӿڵĵ�������Դ��
-* Copyright (c) 2022 SEEKFREE ��ɿƼ�
+* CH32V307VCT6 Opensourec Library 即（CH32V307VCT6 开源库）是一个基于官方 SDK 接口的第三方开源库
+* Copyright (c) 2022 SEEKFREE 逐飞科技
 *
-* ���ļ���CH32V307VCT6 ��Դ���һ����
+* 本文件是CH32V307VCT6 开源库的一部分
 *
-* CH32V307VCT6 ��Դ�� ���������
-* �����Ը���������������ᷢ���� GPL��GNU General Public License���� GNUͨ�ù�������֤��������
-* �� GPL �ĵ�3�棨�� GPL3.0������ѡ��ģ��κκ����İ汾�����·�����/���޸���
+* CH32V307VCT6 开源库 是免费软件
+* 您可以根据自由软件基金会发布的 GPL（GNU General Public License，即 GNU通用公共许可证）的条款
+* 即 GPL 的第3版（即 GPL3.0）或（您选择的）任何后来的版本，重新发布和/或修改它
 *
-* ����Դ��ķ�����ϣ�����ܷ������ã�����δ�������κεı�֤
-* ����û�������������Ի��ʺ��ض���;�ı�֤
-* ����ϸ����μ� GPL
+* 本开源库的发布是希望它能发挥作用，但并未对其作任何的保证
+* 甚至没有隐含的适销性或适合特定用途的保证
+* 更多细节请参见 GPL
 *
-* ��Ӧ�����յ�����Դ���ͬʱ�յ�һ�� GPL �ĸ���
-* ���û�У������<https://www.gnu.org/licenses/>
+* 您应该在收到本开源库的同时收到一份 GPL 的副本
+* 如果没有，请参阅<https://www.gnu.org/licenses/>
 *
-* ����ע����
-* ����Դ��ʹ�� GPL3.0 ��Դ����֤Э�� ������������Ϊ���İ汾
-* ��������Ӣ�İ��� libraries/doc �ļ����µ� GPL3_permission_statement.txt �ļ���
-* ����֤������ libraries �ļ����� �����ļ����µ� LICENSE �ļ�
-* ��ӭ��λʹ�ò����������� ���޸�����ʱ���뱣����ɿƼ��İ�Ȩ����������������
+* 额外注明：
+* 本开源库使用 GPL3.0 开源许可证协议 以上许可申明为译文版本
+* 许可申明英文版在 libraries/doc 文件夹下的 GPL3_permission_statement.txt 文件中
+* 许可证副本在 libraries 文件夹下 即该文件夹下的 LICENSE 文件
+* 欢迎各位使用并传播本程序 但修改内容时必须保留逐飞科技的版权声明（即本声明）
 *
-* �ļ�����          isr
-* ��˾����          �ɶ���ɿƼ����޹�˾
-* �汾��Ϣ          �鿴 libraries/doc �ļ����� version �ļ� �汾˵��
-* ��������          MounRiver Studio V1.8.1
-* ����ƽ̨          CH32V307VCT6
-* ��������          https://seekfree.taobao.com/
+* 文件名称          isr
+* 公司名称          成都逐飞科技有限公司
+* 版本信息          查看 libraries/doc 文件夹内 version 文件 版本说明
+* 开发环境          MounRiver Studio V1.8.1
+* 适用平台          CH32V307VCT6
+* 店铺链接          https://seekfree.taobao.com/
 *
-* �޸ļ�¼
-* ����                                      ����                             ��ע
-* 2022-09-15        ��W            first version
+* 修改记录
+* 日期                                      作者                             备注
+* 2022-09-15        大W            first version
 ********************************************************************************************************************/
 
 #include "zf_common_headfile.h"
@@ -98,9 +98,9 @@ void USART3_IRQHandler(void)
 {
     if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
     {
-#if DEBUG_UART_USE_INTERRUPT                                                    // ������� debug �����ж�
-        debug_interrupr_handler();                                              // ���� debug ���ڽ��մ������� ���ݻᱻ debug ���λ�������ȡ
-#endif                                                                          // ����޸��� DEBUG_UART_INDEX ����δ�����Ҫ�ŵ���Ӧ�Ĵ����ж�ȥ
+#if DEBUG_UART_USE_INTERRUPT                                                    // 如果开启 debug 串口中断
+        debug_interrupr_handler();                                              // 调用 debug 串口接收处理函数 数据会被 debug 环形缓冲区读取
+#endif                                                                          // 如果修改了 DEBUG_UART_INDEX 那这段代码需要放到对应的串口中断去
         USART_ClearITPendingBit(USART3, USART_IT_RXNE);
     }
 }
@@ -256,16 +256,16 @@ void EXTI15_10_IRQHandler(void)
     }
     if(SET == EXTI_GetITStatus(EXTI_Line14))
     {
-        // -----------------* DM1XA ���ź� Ԥ���жϴ������� *-----------------
+        // -----------------* DM1XA 光信号 预置中断处理函数 *-----------------
         dm1xa_light_callback();
-        // -----------------* DM1XA ���ź� Ԥ���жϴ������� *-----------------
+        // -----------------* DM1XA 光信号 预置中断处理函数 *-----------------
         EXTI_ClearITPendingBit(EXTI_Line14);
     }
     if(SET == EXTI_GetITStatus(EXTI_Line15))
     {
-        // -----------------* DM1XA ��/�����ź� Ԥ���жϴ������� *-----------------
+        // -----------------* DM1XA 声/反馈信号 预置中断处理函数 *-----------------
         dm1xa_sound_callback();
-        // -----------------* DM1XA ��/�����ź� Ԥ���жϴ������� *-----------------
+        // -----------------* DM1XA 声/反馈信号 预置中断处理函数 *-----------------
         EXTI_ClearITPendingBit(EXTI_Line15);
     }
 }
@@ -325,8 +325,8 @@ void TIM6_IRQHandler(void)
     if(TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
     {
        TIM_ClearITPendingBit(TIM6, TIM_IT_Update );
-       extern void pit_hanlder (void);
-       pit_hanlder();
+       extern void pit_hanlder_TIM6 (void);
+       pit_hanlder_TIM6();
     }
 }
 
@@ -481,12 +481,12 @@ void HardFault_Handler(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     PIT ���жϴ������� ����������� PIT ��Ӧ�Ķ�ʱ���жϵ��� ��� isr.c
-// ����˵��     void
-// ���ز���     void
-// ʹ��ʾ��     pit_hanlder();
+// 函数简介     PIT 的中断处理函数 这个函数将在 PIT 对应的定时器中断调用 详见 isr.c
+// 参数说明     void
+// 返回参数     void
+// 使用示例     pit_hanlder_TIM6();
 //-------------------------------------------------------------------------------------------------------------------
-void pit_hanlder(void){
-    mpu6050_get_acc();                                                         // ��ȡ MPU6050 �ļ��ٶȲ�����ֵ
-    mpu6050_get_gyro();                                                        // ��ȡ MPU6050 �Ľ��ٶȲ�����ֵ
+void pit_hanlder_TIM6(void){
+    mpu6050_get_acc();                                                         // 获取 MPU6050 的加速度测量数值
+    mpu6050_get_gyro();                                                        // 获取 MPU6050 的角速度测量数值
 }

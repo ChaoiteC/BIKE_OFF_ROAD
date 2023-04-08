@@ -1,9 +1,14 @@
-/* 用户互动页面。
+/* 人机交互页面。
  * 
  * 林碳白
  * 202年4月7日
  */
 #include "zf_common_headfile.h"
+
+#define KEY_UP KEY_1
+#define KEY_DOWN KEY_2
+#define KEY_RT KEY_4
+#define KEY_CF KEY_3
 
 const uint8 IDP[][16]={//防灾科技学院汉字字模
     {0x00,0xFE,0x02,0x22,0xDA,0x06,0x08,0x08,0xF8,0x89,0x8E,0x88,0x88,0x88,0x08,0x00},
@@ -39,27 +44,16 @@ uint8 point=0;
 enum PAGE
 {
     MASTER,
-    START,
-    TET,
-    CP,
+      START,
+
+      TET,
+        GPS,
+        MPU,
+        SERVO,
+      CP,
 
 } NOW_PAGE;
 
-void menu(void){//用户互动页面
-    first_page();
-    while(!gogogo){
-        oled_clear();
-        switch(now_page){
-            case MASTER:page_MASTER_show();break;
-            default: page_error();
-        }
-        key_scanner();
-        switch(now_page){
-            case MASTER:page_MASTER_ex();break;
-            default: page_error();
-        }
-    }
-}
 
 /*其实为了节约内存，你可以选择在进入未定义页面时
   直接返回主页。就算要写一个错误页面，也不用写这
@@ -67,19 +61,20 @@ void menu(void){//用户互动页面
   当你完成程序的时候，根本不会再出现这种问题。
   所以，我设计这个页面的意义到底是什么？为什么
   我要在凌晨1点钟思考这个？难道真的没有别的事情
-  需要做了吗？感觉你的人生就像是这个页面一样 失 败 不 堪。*/
+  需要做了吗？你的人生就像是这个页面一样失败而
+  充满了混乱。*/
 void page_error(void){
     oled_show_string(0,0,"ERROR:"          );
-    oled_show_string(0,1,"UNDERINED_PAGE"  );
+    oled_show_string(0,1,"UNDEFINED_PAGE"  );
     oled_show_string(0,2,"ERR_PG:"         );
     oled_show_uint( 36 , 2 , now_page , 10 );
     oled_show_string(0,3,"You're trying go");
-    oled_show_string(0,4,"to an UNDERINED ");
-    oled_show_string(0,5,"page! Dont worr-");
+    oled_show_string(0,4,"to  an UNDEFINED");
+    oled_show_string(0,5,"page. Dont worr-");
     oled_show_string(0,6,"-y,we'll back to");
     oled_show_string(0,7,"the MASTER page.");
-    system_delay_ms(1000);
-    now_page=0;
+    system_delay_ms(3000);
+    now_page=MASTER;
 }
 
 //启动页面
@@ -100,75 +95,169 @@ void first_page(void){
 }
 
 void page_MASTER_show(){
-    oled_show_string(0,0,"Bike DOS v1.0"   );
+    oled_show_string(0,0,"DOS by SIC v1.0" );
     oled_show_string(0,1,"./"              );
   //oled_show_string(0,2,""                );
     oled_show_string(0,3,"  START"         );//执行发车程序
     oled_show_string(0,4,"  test Ext.eq."  );//测试外设
-    oled_show_string(0,5,"  chk. params."  );//改变参数
+    oled_show_string(0,5,"  chk. Params."  );//改变参数
   //oled_show_string(0,6,""                );
-    oled_show_string(0,7,"A8>B12 > U>R>C>D");
+    oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
-    oled_show_string(0,3+point,"->"        );
+    oled_show_string(0,3+point,"->"        );//屏幕指针
 }
 
 void page_MASTER_ex(){
-    if(KEY_SHORT_PRESS==key_get_state(KEY_1)){//1短按
-        point--;
-        if(point<0){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+        if(--point<0){
             point=2;
         }
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_4)){//4短按
-        point++;
-        if(point>2){
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+        if(++point>2){
             point=0;
         }
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_2)){//2短按
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        point=0;
         first_page();
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_3)){//3短按
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
             case 0:now_page=START;break;
             case 1:now_page=TET;break;
             case 2:now_page=CP;break;
         }
+        point=0;
     }
 }
 
+void page_TET_show(){
+    oled_show_string(0,0,"test Ext.eq."            );
+    oled_show_string(0,1,"./TET"                   );
+  //oled_show_string(0,2,""                        );
+    oled_show_string(0,3,"  GPS_TAU1201"           );
+    oled_show_string(0,4,"  MPU6050"               );
+    oled_show_string(0,5,"  SERVO"                 );
+  //oled_show_string(0,6,""                        );
+    oled_show_string(0,7,"A8>B12 > U>R>C>D"        );
 
-/*页面显示模板
-void page_xx_show(){
-  //oled_show_string(0,0,""                );
-  //oled_show_string(0,1,""                );
-  //oled_show_string(0,2,""                );
-  //oled_show_string(0,3,""                );
-  //oled_show_string(0,4,""                );
-  //oled_show_string(0,5,""                );
-  //oled_show_string(0,6,""                );
-  //oled_show_string(0,7,""                );
-
-  //oled_show_string(0,0+point,"->"        );
+    oled_show_string(0,3+point,"->"                );
 }
-  页面操作模板
-void page_xx_ex(){
-    if(KEY_SHORT_PRESS==key_get_state(KEY_1)){//1短按
-        point--;
-        if(point<0){
-            point=;
+
+void page_TET_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+        if(--point<0){
+            point=2;
         }
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_4)){//4短按
-        point++;
-        if(point>){
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+        if(++point>2){
             point=0;
         }
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_2)){//2短按
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=MASTER;
+        point=0;
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
+        switch(point){
+            case 0:now_page=GPS;break;
+            case 1:now_page=MPU;break;
+            case 2:now_page=SERVO;break;
+        }
+        point=0;
+    }
+}
+
+void page_GPS_show(){
+    oled_show_string(0,0,"GPS_TAU1201"             );
+    oled_show_string(0,1,"./TET/GPS"               );
+    oled_show_string(0,4,"NO DATA,"                );//这两行会在有数据时被覆盖掉
+    oled_show_string(0,5,"CHK POWER."              );//这两行会在有数据时被覆盖掉
+    if(gps_tau1201_flag){//GPS数据处理完成
+        gps_tau1201_flag=0;
+        if(!gps_tau1201.state){
+            oled_show_string(0,4, "FAIL LOCATE");                //定位失败
+            oled_show_string(0,6,"State lasts <2min."      );
+            oled_show_string(0,7,"Indoor?Wiring bad?"      );
+        }
+        else{
+            oled_show_string(0, 7, "TIM>");                      //时间
+            oled_show_int(32,7,gps_tau1201.time.hour,2);
+            oled_show_int(50,7,gps_tau1201.time.minute,2);
+            oled_show_int(68,7,gps_tau1201.time.second,2);
+            oled_show_string(0, 2, "N ->");
+            oled_show_float(32,2,gps_tau1201.latitude,4,6);      //纬度
+            oled_show_string(0, 3, "E ->");
+            oled_show_float(32,3,gps_tau1201.longitude,4,6);     //经度
+            oled_show_string(0, 4, "m/s>");
+            oled_show_float(32,4,gps_tau1201.speed,4,6);         //速度
+            oled_show_string(0, 5, "360>");
+            oled_show_float(32,5,gps_tau1201.direction,4,6);     //方向
+            oled_show_string(0, 6, "STL>");
+            oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
+        }
+    }
+    
+}
+
+void page_GPS_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+        point=0;
+    }
+}
+
+void page_MPU_show(){
+    oled_show_string(0,0,"MPU6050"                 );
+    oled_show_string(0,1,"./TET/MPU"               );
+    oled_show_string(0,3,"ACC");
+    oled_show_int(0,4,mpu6050_acc_x,5);
+    oled_show_int(0,5,mpu6050_acc_y,5);
+    oled_show_int(0,6,mpu6050_acc_z,5);
+    oled_show_string(64,3,"GYRO");
+    oled_show_int(64,4,mpu6050_gyro_x,5);
+    oled_show_int(64,5,mpu6050_gyro_y,5);
+    oled_show_int(64,6,mpu6050_gyro_z,5);
+}
+
+void page_MPU_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+        point=0;
+    }
+}
+
+/*页面显示模板
+void page_xx_show(){
+  //oled_show_string(0,0,""                        );
+  //oled_show_string(0,1,""                        );
+  //oled_show_string(0,2,""                        );
+  //oled_show_string(0,3,""                        );
+  //oled_show_string(0,4,""                        );
+  //oled_show_string(0,5,""                        );
+  //oled_show_string(0,6,""                        );
+  //oled_show_string(0,7,""                        );
+
+  //oled_show_string(0,0+point,"->"                );
+}
+  页面操作模板
+void page_xx_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+        if(--point<0){
+            point=;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+        if(++point>){
+            point=0;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         
     }
-    if(KEY_SHORT_PRESS==key_get_state(KEY_3)){//3短按
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
             case 0:now_page=;break;
             case 1:now_page=;break;
@@ -177,3 +266,25 @@ void page_xx_ex(){
     }
 }
 */
+void menu(void){//人机交互页面
+    first_page();
+    while(!gogogo){
+        oled_clear();
+        switch(now_page){
+            case MASTER:page_MASTER_show();break;
+            case TET   :page_TET_show();break;
+            case GPS   :page_GPS_show();break;
+            case MPU   :page_MPU_show();break;
+            default    :page_error();
+        }
+        key_scanner();
+        system_delay_ms(50);
+        switch(now_page){
+            case MASTER:page_MASTER_ex();break;
+            case TET   :page_TET_ex();break;
+            case GPS   :page_GPS_ex();break;
+            case MPU   :page_MPU_ex();break;
+            default    :page_error();
+        }
+    }
+}

@@ -57,6 +57,7 @@ enum PAGE
       TET,
         GPS,
         MPU,
+        IMU,
         SERVO,
       CP,
 
@@ -145,8 +146,8 @@ void page_TET_show(){
   //oled_show_string(0,2,""                        );
     oled_show_string(0,3,"  GPS_TAU1201"           );
     oled_show_string(0,4,"  MPU6050"               );
-    oled_show_string(0,5,"  SERVO"                 );
-  //oled_show_string(0,6,""                        );
+    oled_show_string(0,5,"  IMU_Mahony"            );
+    oled_show_string(0,6,"  SERVO"                 );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
 
     oled_show_string(0,3+point,"->"                );
@@ -171,7 +172,8 @@ void page_TET_ex(){
         switch(point){
             case 0:now_page=GPS;break;
             case 1:now_page=MPU;break;
-            case 2:now_page=SERVO;break;
+            case 2:now_page=IMU;break;
+            case 3:now_page=SERVO;break;
         }
         point=0;
     }
@@ -233,6 +235,28 @@ void page_MPU_ex(){
     }
 }
 
+void page_IMU_show(){
+    mahony_update(mpu6050_gyro_transition(mpu6050_gyro_x),mpu6050_gyro_transition(mpu6050_gyro_y),mpu6050_gyro_transition(mpu6050_gyro_z),mpu6050_acc_transition(mpu6050_acc_x),mpu6050_acc_transition(mpu6050_acc_y),mpu6050_acc_transition(mpu6050_acc_z));
+    oled_show_string(0,0,"IMU_Mahony"              );
+    oled_show_string(0,1,"./TET/IMU"               );
+    oled_show_string(0,3,"pit>"                    );
+    oled_show_float(36,4,att.pit,2,4);
+    oled_show_string(0,5,"rol>"                    );
+    oled_show_float(36,4,att.rol,2,4);
+    oled_show_string(0,7,"yaw>"                    );
+    oled_show_float(36,4,att.yaw,2,4);
+}
+
+void page_IMU_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+    }
+}
+
+
+
+
+
 /*页面显示模板
 void page_xx_show(){
   //oled_show_string(0,0,""                        );
@@ -279,6 +303,7 @@ void menu(void){//人机交互页面
             case TET   :page_TET_show();break;
             case GPS   :page_GPS_show();break;
             case MPU   :page_MPU_show();break;
+            case IMU   :page_IMU_show();break;
             default    :page_error();
         }
         key_scanner();
@@ -288,6 +313,7 @@ void menu(void){//人机交互页面
             case TET   :page_TET_ex();break;
             case GPS   :page_GPS_ex();break;
             case MPU   :page_MPU_ex();break;
+            case IMU   :page_IMU_ex();break;
             default    :page_error();
         }
     }

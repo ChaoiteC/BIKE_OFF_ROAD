@@ -18,12 +18,11 @@ int main(void){
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
     //MPU6050初始化
-/*    oled_show_string(0, 0, "MPU6050 loading...");
+    oled_show_string(0, 0, "MPU6050 loading...");
     if(mpu6050_init()){//自检失败
-        oled_show_string(0,7,"MPU6050 init FAIL.");
-        while(1);
-        //system_delay_ms(3000);
-    }*/
+        oled_show_string(0,7,"continue aft. 3s");
+        system_delay_ms(3000);
+    }
     pit_ms_init(TIM6_PIT,5);//定时器中断获取MPU6050数据
     //键盘初始化
     oled_show_string(0, 0, "Keyboard loading...");
@@ -36,6 +35,7 @@ int main(void){
         if(gps_tau1201_flag){//这段用于GPS数据处理
             gps_tau1201_flag=0;
         }
+        mpu6050_acc_transition(mpu6050_acc_x);
     }
 }
 

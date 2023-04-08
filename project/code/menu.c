@@ -140,7 +140,7 @@ void page_TET_show(){
     oled_show_string(0,4,"  MPU6050"               );
     oled_show_string(0,5,"  SERVO"                 );
   //oled_show_string(0,6,""                        );
-    oled_show_string(0,7,"A8>B12 > U>R>C>D"        );
+    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
 
     oled_show_string(0,3+point,"->"                );
 }
@@ -173,8 +173,6 @@ void page_TET_ex(){
 void page_GPS_show(){
     oled_show_string(0,0,"GPS_TAU1201"             );
     oled_show_string(0,1,"./TET/GPS"               );
-    oled_show_string(0,4,"NO DATA,"                );//这两行会在有数据时被覆盖掉
-    oled_show_string(0,5,"CHK POWER."              );//这两行会在有数据时被覆盖掉
     if(gps_tau1201_flag){//GPS数据处理完成
         gps_tau1201_flag=0;
         if(!gps_tau1201.state){
@@ -199,7 +197,6 @@ void page_GPS_show(){
             oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
         }
     }
-    
 }
 
 void page_GPS_ex(){
@@ -212,14 +209,14 @@ void page_GPS_ex(){
 void page_MPU_show(){
     oled_show_string(0,0,"MPU6050"                 );
     oled_show_string(0,1,"./TET/MPU"               );
-    oled_show_string(0,3,"ACC");
-    oled_show_int(0,4,mpu6050_acc_x,5);
-    oled_show_int(0,5,mpu6050_acc_y,5);
-    oled_show_int(0,6,mpu6050_acc_z,5);
-    oled_show_string(64,3,"GYRO");
-    oled_show_int(64,4,mpu6050_gyro_x,5);
-    oled_show_int(64,5,mpu6050_gyro_y,5);
-    oled_show_int(64,6,mpu6050_gyro_z,5);
+    oled_show_string(0,3,"ACC(m/s)");
+    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,4);
+    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,4);
+    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,4);
+    oled_show_string(64,3,"GYRO('/s)");
+    oled_show_float(64,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,4);
+    oled_show_float(64,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,4);
+    oled_show_float(64,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,4);
 }
 
 void page_MPU_ex(){

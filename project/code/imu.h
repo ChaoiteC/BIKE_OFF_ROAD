@@ -20,8 +20,8 @@ typedef struct
 
 typedef struct
 {
-  float DCM[3][3];        //»úÌå×ø±êÏµ->µØÀí×ø±êÏµ
-  float DCM_T[3][3];      //µØÀí×ø±êÏµ->»úÌå×ø±êÏµ
+  float DCM[3][3];        //æœºä½“åæ ‡ç³»->åœ°ç†åæ ‡ç³»
+  float DCM_T[3][3];      //åœ°ç†åæ ‡ç³»->æœºä½“åæ ‡ç³»
 }_Matrix;
 
 extern _Matrix Mat;

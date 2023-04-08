@@ -1,69 +1,69 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
-* Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºŽå®˜æ–¹ SDK æŽ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
+* Copyright (c) 2022 SEEKFREE é€é£žç§‘æŠ€
 *
-* ±¾ÎÄ¼þÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
+* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
 *
-* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
-* Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
-* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
+* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
+* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åŽæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
 *
-* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
-* ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
-* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
+* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
+* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
 *
-* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
-* Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
+* å¦‚æžœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
 *
-* ¶îÍâ×¢Ã÷£º
-* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
-* Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
-* Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
-* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+* é¢å¤–æ³¨æ˜Žï¼š
+* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜Žä¸ºè¯‘æ–‡ç‰ˆæœ¬
+* è®¸å¯ç”³æ˜Žè‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
+* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
+* æ¬¢è¿Žå„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£žç§‘æŠ€çš„ç‰ˆæƒå£°æ˜Žï¼ˆå³æœ¬å£°æ˜Žï¼‰
 *
-* ÎÄ¼þÃû³Æ          zf_device_mpu6050
-* ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
-* °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
-* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
-* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
-* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+* æ–‡ä»¶åç§°          zf_device_mpu6050
+* å…¬å¸åç§°          æˆéƒ½é€é£žç§‘æŠ€æœ‰é™å…¬å¸
+* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜Ž
+* å¼€å‘çŽ¯å¢ƒ          MounRiver Studio V1.8.1
+* é€‚ç”¨å¹³å°          CH32V307VCT6
+* åº—é“ºé“¾æŽ¥          https://seekfree.taobao.com/
 *
-* ÐÞ¸Ä¼ÇÂ¼
-* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
-* 2022-09-15        ´óW            first version
+* ä¿®æ”¹è®°å½•
+* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
+* 2022-09-15        å¤§W            first version
 ********************************************************************************************************************/
 /*********************************************************************************************************************
-* ½ÓÏß¶¨Òå£º
+* æŽ¥çº¿å®šä¹‰ï¼š
 *                   ------------------------------------
-*                   Ä£¿é¹Ü½Å                                        µ¥Æ¬»ú¹Ü½Å
-*                   Èí¼þ IIC Í¨ÐÅÒý½Å¶ÔÓ¦¹ØÏµ
-*                   SCL                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_SOFT_IIC_SCL ºê¶¨Òå
-*                   SDA                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_SOFT_IIC_SDA ºê¶¨Òå
-*                   Ó²¼þ IIC Í¨ÐÅÒý½Å¶ÔÓ¦¹ØÏµ
-*                   SCL                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_IIC_SCL ºê¶¨Òå
-*                   SDA                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_IIC_SDA ºê¶¨Òå
+*                   æ¨¡å—ç®¡è„š                                        å•ç‰‡æœºç®¡è„š
+*                   è½¯ä»¶ IIC é€šä¿¡å¼•è„šå¯¹åº”å…³ç³»
+*                   SCL                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_SOFT_IIC_SCL å®å®šä¹‰
+*                   SDA                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_SOFT_IIC_SDA å®å®šä¹‰
+*                   ç¡¬ä»¶ IIC é€šä¿¡å¼•è„šå¯¹åº”å…³ç³»
+*                   SCL                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_IIC_SCL å®å®šä¹‰
+*                   SDA                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_IIC_SDA å®å®šä¹‰
 *                   ------------------------------------
 ********************************************************************************************************************/
 
 #include "zf_device_mpu6050.h"
 
-/******************************************£¨×Ô¼ºµÄ´úÂë£©***********************************************/
+/******************************************ï¼ˆè‡ªå·±çš„ä»£ç ï¼‰***********************************************/
 
-S16_XYZ  acc_raw = {0};             //¼ÓËÙ¶È¼ÆÔ­Ê¼Êý¾Ý´¢´æ
-S16_XYZ  gyro_raw = {0};            //ÍÓÂÝÒÇÔ­Ê¼Êý¾Ý´¢´æ
-SI_F_XYZ  gyro_raw_cal = {0};       //ÍÓÂÝÒÇÓÃÓÚÐ£×¼µÄÔ­Ê¼Êý¾Ý´¢´æ
+S16_XYZ  acc_raw = {0};             //åŠ é€Ÿåº¦è®¡åŽŸå§‹æ•°æ®å‚¨å­˜
+S16_XYZ  gyro_raw = {0};            //é™€èžºä»ªåŽŸå§‹æ•°æ®å‚¨å­˜
+SI_F_XYZ  gyro_raw_cal = {0};       //é™€èžºä»ªç”¨äºŽæ ¡å‡†çš„åŽŸå§‹æ•°æ®å‚¨å­˜
 SI_F_XYZ acc_raw_f = {0};
 SI_F_XYZ gyro_raw_f = {0};
 SI_F_XYZ acc_att_lpf = {0};
 SI_F_XYZ gyro_lpf = {0};
-SI_F_XYZ gyro_offset = {0,0,0} ;    //ÍÓÂÝÒÇÁãÆ«Êý¾Ý´¢´æ
+SI_F_XYZ gyro_offset = {0,0,0} ;    //é™€èžºä»ªé›¶åæ•°æ®å‚¨å­˜
 _Mpu6050_data Mpu = {0};
-_GYRO_CAL CalGyro = {0};            //ÍÓÂÝÒÇÐ£×¼Ïà¹ØÊý¾Ý´¢´æ
+_GYRO_CAL CalGyro = {0};            //é™€èžºä»ªæ ¡å‡†ç›¸å…³æ•°æ®å‚¨å­˜
 
-/******************************************£¨×Ô¼ºµÄ´úÂë£©***********************************************/
+/******************************************ï¼ˆè‡ªå·±çš„ä»£ç ï¼‰***********************************************/
 
-int16 mpu6050_gyro_x = 0, mpu6050_gyro_y = 0, mpu6050_gyro_z = 0;               // ÈýÖáÍÓÂÝÒÇÊý¾Ý      gyro (ÍÓÂÝÒÇ)
-int16 mpu6050_acc_x = 0, mpu6050_acc_y = 0, mpu6050_acc_z = 0;                  // ÈýÖá¼ÓËÙ¶È¼ÆÊý¾Ý    acc (accelerometer ¼ÓËÙ¶È¼Æ)
+int16 mpu6050_gyro_x = 0, mpu6050_gyro_y = 0, mpu6050_gyro_z = 0;               // ä¸‰è½´é™€èžºä»ªæ•°æ®      gyro (é™€èžºä»ª)
+int16 mpu6050_acc_x = 0, mpu6050_acc_y = 0, mpu6050_acc_z = 0;                  // ä¸‰è½´åŠ é€Ÿåº¦è®¡æ•°æ®    acc (accelerometer åŠ é€Ÿåº¦è®¡)
 
 #if MPU6050_USE_SOFT_IIC
 static soft_iic_info_struct mpu6050_iic_struct;
@@ -79,19 +79,19 @@ static soft_iic_info_struct mpu6050_iic_struct;
 
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     MPU6050 ×Ô¼ì
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     uint8           1-×Ô¼ìÊ§°Ü 0-×Ô¼ì³É¹¦
-// Ê¹ÓÃÊ¾Àý     if(mpu6050_self1_check())
-// ±¸×¢ÐÅÏ¢     ÄÚ²¿µ÷ÓÃ
+// å‡½æ•°ç®€ä»‹     MPU6050 è‡ªæ£€
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     uint8           1-è‡ªæ£€å¤±è´¥ 0-è‡ªæ£€æˆåŠŸ
+// ä½¿ç”¨ç¤ºä¾‹     if(mpu6050_self1_check())
+// å¤‡æ³¨ä¿¡æ¯     å†…éƒ¨è°ƒç”¨
 //-------------------------------------------------------------------------------------------------------------------
 static uint8 mpu6050_self1_check (void)
 {
     uint8 dat = 0, return_state = 0;
     uint16 timeout_count = 0;
 
-    mpu6050_write_register(MPU6050_PWR_MGMT_1, 0x00);                           // ½â³ýÐÝÃß×´Ì¬
-    mpu6050_write_register(MPU6050_SMPLRT_DIV, 0x07);                           // 125HZ²ÉÑùÂÊ
+    mpu6050_write_register(MPU6050_PWR_MGMT_1, 0x00);                           // è§£é™¤ä¼‘çœ çŠ¶æ€
+    mpu6050_write_register(MPU6050_SMPLRT_DIV, 0x07);                           // 125HZé‡‡æ ·çŽ‡
     while(0x07 != dat)
     {
         if(timeout_count ++ > MPU6050_TIMEOUT_COUNT)
@@ -106,11 +106,11 @@ static uint8 mpu6050_self1_check (void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     »ñÈ¡ MPU6050 ¼ÓËÙ¶È¼ÆÊý¾Ý
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý     mpu6050_get_acc();                                              // Ö´ÐÐ¸Ãº¯Êýºó£¬Ö±½Ó²é¿´¶ÔÓ¦µÄ±äÁ¿¼´¿É
-// ±¸×¢ÐÅÏ¢     
+// å‡½æ•°ç®€ä»‹     èŽ·å– MPU6050 åŠ é€Ÿåº¦è®¡æ•°æ®
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹     mpu6050_get_acc();                                              // æ‰§è¡Œè¯¥å‡½æ•°åŽï¼Œç›´æŽ¥æŸ¥çœ‹å¯¹åº”çš„å˜é‡å³å¯
+// å¤‡æ³¨ä¿¡æ¯     
 //-------------------------------------------------------------------------------------------------------------------
 void mpu6050_get_acc (void)
 {
@@ -123,11 +123,11 @@ void mpu6050_get_acc (void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     »ñÈ¡ MPU6050 ÍÓÂÝÒÇÊý¾Ý
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý     mpu6050_get_gyro();                                             // Ö´ÐÐ¸Ãº¯Êýºó£¬Ö±½Ó²é¿´¶ÔÓ¦µÄ±äÁ¿¼´¿É
-// ±¸×¢ÐÅÏ¢     
+// å‡½æ•°ç®€ä»‹     èŽ·å– MPU6050 é™€èžºä»ªæ•°æ®
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹     mpu6050_get_gyro();                                             // æ‰§è¡Œè¯¥å‡½æ•°åŽï¼Œç›´æŽ¥æŸ¥çœ‹å¯¹åº”çš„å˜é‡å³å¯
+// å¤‡æ³¨ä¿¡æ¯     
 //-------------------------------------------------------------------------------------------------------------------
 void mpu6050_get_gyro (void)
 {
@@ -140,53 +140,53 @@ void mpu6050_get_gyro (void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     ½« MPU6050 ¼ÓËÙ¶È¼ÆÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
-// ²ÎÊýËµÃ÷     gyro_value      ÈÎÒâÖáµÄ¼ÓËÙ¶È¼ÆÊý¾Ý
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý     float data = mpu6050_acc_transition(mpu6050_acc_x);                // µ¥Î»Îª g(m/s^2)
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     å°† MPU6050 åŠ é€Ÿåº¦è®¡æ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
+// å‚æ•°è¯´æ˜Ž     gyro_value      ä»»æ„è½´çš„åŠ é€Ÿåº¦è®¡æ•°æ®
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹     float data = mpu6050_acc_transition(mpu6050_acc_x);                // å•ä½ä¸º g(m/s^2)
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 float mpu6050_acc_transition (int16 acc_value)
 {
     float acc_data = 0;
     switch(MPU6050_ACC_SAMPLE)
     {
-        case 0x00: acc_data = (float)acc_value / 16384; break;                  // 0x00 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À2g     »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ 16384      ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        case 0x08: acc_data = (float)acc_value / 8192; break;                   // 0x08 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À4g     »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ 8192       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        case 0x10: acc_data = (float)acc_value / 4096; break;                   // 0x10 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À8g     »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ 4096       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        case 0x18: acc_data = (float)acc_value / 2048; break;                   // 0x18 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À16g    »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ 2048       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
+        case 0x00: acc_data = (float)acc_value / 16384; break;                  // 0x00 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±2g     èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥ 16384      å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        case 0x08: acc_data = (float)acc_value / 8192; break;                   // 0x08 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±4g     èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥ 8192       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        case 0x10: acc_data = (float)acc_value / 4096; break;                   // 0x10 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±8g     èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥ 4096       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        case 0x18: acc_data = (float)acc_value / 2048; break;                   // 0x18 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±16g    èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥ 2048       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
         default: break;
     }
     return acc_data;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     ½« MPU6050 ÍÓÂÝÒÇÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
-// ²ÎÊýËµÃ÷     gyro_value      ÈÎÒâÖáµÄÍÓÂÝÒÇÊý¾Ý
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý     float data = mpu6050_gyro_transition(mpu6050_gyro_x);           // µ¥Î»Îª¡ã/s
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     å°† MPU6050 é™€èžºä»ªæ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
+// å‚æ•°è¯´æ˜Ž     gyro_value      ä»»æ„è½´çš„é™€èžºä»ªæ•°æ®
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹     float data = mpu6050_gyro_transition(mpu6050_gyro_x);           // å•ä½ä¸ºÂ°/s
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 float mpu6050_gyro_transition (int16 gyro_value)
 {
     float gyro_data = 0;
     switch(MPU6050_GYR_SAMPLE)
     {
-        case 0x00: gyro_data = (float)gyro_value / 131.0f;  break;              // 0x00 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À250 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ 131           ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        case 0x08: gyro_data = (float)gyro_value / 65.5f;   break;              // 0x08 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À500 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ 65.5          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        case 0x10: gyro_data = (float)gyro_value / 32.8f;   break;              // 0x10 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À1000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ 32.8          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        case 0x18: gyro_data = (float)gyro_value / 16.4f;   break;              // 0x18 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À2000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ 16.4          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+        case 0x00: gyro_data = (float)gyro_value / 131.0f;  break;              // 0x00 é™€èžºä»ªé‡ç¨‹ä¸º:Â±250 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥ 131           å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        case 0x08: gyro_data = (float)gyro_value / 65.5f;   break;              // 0x08 é™€èžºä»ªé‡ç¨‹ä¸º:Â±500 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥ 65.5          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        case 0x10: gyro_data = (float)gyro_value / 32.8f;   break;              // 0x10 é™€èžºä»ªé‡ç¨‹ä¸º:Â±1000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥ 32.8          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        case 0x18: gyro_data = (float)gyro_value / 16.4f;   break;              // 0x18 é™€èžºä»ªé‡ç¨‹ä¸º:Â±2000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥ 16.4          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
         default: break;
     }
     return gyro_data;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     ³õÊ¼»¯ MPU6050
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     uint8           1-³õÊ¼»¯Ê§°Ü 0-³õÊ¼»¯³É¹¦
-// Ê¹ÓÃÊ¾Àý     mpu6050_init();
-// ±¸×¢ÐÅÏ¢     
+// å‡½æ•°ç®€ä»‹     åˆå§‹åŒ– MPU6050
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     uint8           1-åˆå§‹åŒ–å¤±è´¥ 0-åˆå§‹åŒ–æˆåŠŸ
+// ä½¿ç”¨ç¤ºä¾‹     mpu6050_init();
+// å¤‡æ³¨ä¿¡æ¯     
 //-------------------------------------------------------------------------------------------------------------------
 uint8 mpu6050_init (void)
 {
@@ -196,36 +196,36 @@ uint8 mpu6050_init (void)
 #else
     iic_init(MPU6050_IIC, MPU6050_DEV_ADDR, MPU6050_IIC_SPEED, MPU6050_SCL_PIN, MPU6050_SDA_PIN);
 #endif
-    system_delay_ms(100);                                                       // ÉÏµçÑÓÊ±
+    system_delay_ms(100);                                                       // ä¸Šç”µå»¶æ—¶
 
     do
     {
         if(mpu6050_self1_check())
         {
-            // Èç¹û³ÌÐòÔÚÊä³öÁË¶ÏÑÔÐÅÏ¢ ²¢ÇÒÌáÊ¾³ö´íÎ»ÖÃÔÚÕâÀï
-            // ÄÇÃ´¾ÍÊÇ MPU6050 ×Ô¼ì³ö´í²¢³¬Ê±ÍË³öÁË
-            // ¼ì²éÒ»ÏÂ½ÓÏßÓÐÃ»ÓÐÎÊÌâ Èç¹ûÃ»ÎÊÌâ¿ÉÄÜ¾ÍÊÇ»µÁË
+            // å¦‚æžœç¨‹åºåœ¨è¾“å‡ºäº†æ–­è¨€ä¿¡æ¯ å¹¶ä¸”æç¤ºå‡ºé”™ä½ç½®åœ¨è¿™é‡Œ
+            // é‚£ä¹ˆå°±æ˜¯ MPU6050 è‡ªæ£€å‡ºé”™å¹¶è¶…æ—¶é€€å‡ºäº†
+            // æ£€æŸ¥ä¸€ä¸‹æŽ¥çº¿æœ‰æ²¡æœ‰é—®é¢˜ å¦‚æžœæ²¡é—®é¢˜å¯èƒ½å°±æ˜¯åäº†
             zf_log(0, "MPU6050 self check error.");
             return_state = 1;
             break;
         }
-        mpu6050_write_register(MPU6050_PWR_MGMT_1, 0x00);                       // ½â³ýÐÝÃß×´Ì¬
-        mpu6050_write_register(MPU6050_SMPLRT_DIV, 0x07);                       // 125HZ²ÉÑùÂÊ
+        mpu6050_write_register(MPU6050_PWR_MGMT_1, 0x00);                       // è§£é™¤ä¼‘çœ çŠ¶æ€
+        mpu6050_write_register(MPU6050_SMPLRT_DIV, 0x07);                       // 125HZé‡‡æ ·çŽ‡
         mpu6050_write_register(MPU6050_CONFIG, 0x04);
 
         mpu6050_write_register(MPU6050_GYRO_CONFIG, MPU6050_GYR_SAMPLE);        // 2000
-        // GYRO_CONFIG¼Ä´æÆ÷
-        // ÉèÖÃÎª:0x00 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À250 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ131.2         ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        // ÉèÖÃÎª:0x08 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À500 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ65.6          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        // ÉèÖÃÎª:0x10 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À1000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ32.8          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-        // ÉèÖÃÎª:0x18 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À2000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ16.4          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+        // GYRO_CONFIGå¯„å­˜å™¨
+        // è®¾ç½®ä¸º:0x00 é™€èžºä»ªé‡ç¨‹ä¸º:Â±250 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥131.2         å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        // è®¾ç½®ä¸º:0x08 é™€èžºä»ªé‡ç¨‹ä¸º:Â±500 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥65.6          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        // è®¾ç½®ä¸º:0x10 é™€èžºä»ªé‡ç¨‹ä¸º:Â±1000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥32.8          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+        // è®¾ç½®ä¸º:0x18 é™€èžºä»ªé‡ç¨‹ä¸º:Â±2000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥16.4          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
 
         mpu6050_write_register(MPU6050_ACCEL_CONFIG, MPU6050_ACC_SAMPLE);       // 8g
-        // ACCEL_CONFIG¼Ä´æÆ÷
-        // ÉèÖÃÎª:0x00 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À2g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ16384      ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        // ÉèÖÃÎª:0x08 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À4g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ8192       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        // ÉèÖÃÎª:0x10 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À8g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ4096       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-        // ÉèÖÃÎª:0x18 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À16g         »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ2048       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
+        // ACCEL_CONFIGå¯„å­˜å™¨
+        // è®¾ç½®ä¸º:0x00 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±2g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥16384      å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        // è®¾ç½®ä¸º:0x08 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±4g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥8192       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        // è®¾ç½®ä¸º:0x10 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±8g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥4096       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+        // è®¾ç½®ä¸º:0x18 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±16g         èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥2048       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
 
         mpu6050_write_register(MPU6050_USER_CONTROL, 0x00);
         mpu6050_write_register(MPU6050_INT_PIN_CFG, 0x02);

@@ -320,7 +320,7 @@ void TIM5_IRQHandler(void)
     }
 }
 
-void TIM6_IRQHandler(void)
+void TIM6_IRQHandler(void)//MPU6050的中断在这里处理
 {
     if(TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
     {
@@ -486,7 +486,7 @@ void HardFault_Handler(void)
 // 返回参数     void
 // 使用示例     pit_hanlder_TIM6();
 //-------------------------------------------------------------------------------------------------------------------
-void pit_hanlder_TIM6(void){
+void pit_hanlder_TIM6(void){//MPU6050的中断处理
     mpu6050_get_acc();                                                         // 获取 MPU6050 的加速度测量数值
     mpu6050_get_gyro();                                                        // 获取 MPU6050 的角速度测量数值
 }

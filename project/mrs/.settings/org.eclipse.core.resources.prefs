@@ -2,7 +2,6 @@ eclipse.preferences.version=1
 encoding//code/chinese_font.c=UTF-8
 encoding//code/chinese_font.h=GBK
 encoding//code/controller.c=UTF-8
-encoding//code/ex_init.c=GBK
 encoding//code/ex_init.h=GBK
 encoding//code/imu_tanbai.h=GBK
 encoding//code/menu.c=UTF-8

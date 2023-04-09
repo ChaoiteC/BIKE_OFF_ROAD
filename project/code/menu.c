@@ -204,7 +204,6 @@ void page_MPU_ex(){
 }
 
 void page_IMU_show(){
-    IMU_Update();
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){

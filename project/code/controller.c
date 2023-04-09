@@ -9,12 +9,12 @@ _OUT_Motor Motor2 = {0};//后电机*/
  * 参数：无
  * 输出：无
  */
-static void vel_controller(void)
+/*static void vel_controller(void)
 {
-  /*all.vel_encoder.expect = 0.0f;
+  all.vel_encoder.expect = 0.0f;
   all.vel_encoder.feedback = encoderINFO.mainNumberValue;
-  pid_controller(&all.vel_encoder);*/
-}
+  pid_controller(&all.vel_encoder);
+}*/
 
 /**********************************************************************************************/
 /* 名字：内环角度控制器
@@ -22,12 +22,12 @@ static void vel_controller(void)
  * 参数：无
  * 输出：无
  */
-static void angle_controller(void)
+/*static void angle_controller(void)
 {
   all.rol_angle.expect = all.vel_encoder.out;
   all.rol_angle.feedback = (-att.rol)+(0);
   pid_controller(&all.rol_angle);
-}
+}*/
 
 /**********************************************************************************************/
 /* 名字：内环角速度控制器
@@ -35,12 +35,12 @@ static void angle_controller(void)
  * 参数：无
  * 输出：无
  */
-static void gyro_controller(void)
+/*static void gyro_controller(void)
 {
   all.rol_gyro.expect = all.rol_angle.out;
   all.rol_gyro.feedback = -(Mpu.deg_s.y);
   pid_controller(&all.rol_gyro);
-}
+}*/
 
 /**********************************************************************************************/
 /* 名字：三环串级PID控制器运行
@@ -48,12 +48,12 @@ static void gyro_controller(void)
  * 参数：无
  * 输出：无
  */
-void _controller_perform(void)
+/*void _controller_perform(void)
 {
   vel_controller();
   angle_controller();
   gyro_controller();
-}
+}*/
 /**********************************************************************************************/
 /* 名字：检测小车状态函数
  * 功能：检测小车是否倒下

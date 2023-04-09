@@ -136,7 +136,7 @@ void UART7_IRQHandler (void)
         USART_ClearITPendingBit(UART7, USART_IT_RXNE);
     }
 }
-void UART8_IRQHandler (void)
+void UART8_IRQHandler (void)//GPS的串口中断
 {
     if(USART_GetITStatus(UART8, USART_IT_RXNE) != RESET)
     {
@@ -327,6 +327,7 @@ void TIM6_IRQHandler(void)//MPU6050的中断在这里处理
        TIM_ClearITPendingBit(TIM6, TIM_IT_Update );
        extern void pit_hanlder_TIM6 (void);
        pit_hanlder_TIM6();
+       IMU_Update();
     }
 }
 

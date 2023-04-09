@@ -1,6 +1,6 @@
 #ifndef _IMU_H_
 #define _IMU_H_
-
+/* 
 
 typedef struct
 {
@@ -34,5 +34,5 @@ void Matrix_ready(void);
 
 
 
-
+ */
 #endif

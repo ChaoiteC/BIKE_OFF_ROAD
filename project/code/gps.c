@@ -1,13 +1,25 @@
-/*¹ØÓÚGPSµÄÈô¸Éº¯Êı by Ì¼°×*/
+/*å…³äºGPSçš„è‹¥å¹²å‡½æ•° by ç¢³ç™½*/
 
 #include "zf_common_headfile.h"
 
+#define GPS_OFFSET 10
+
 /* @fn gps_average_pointing
- * @brief »ñÈ¡Ê®´ÎGPS¾­Î³¶È²¢È¡ÆäÆ½¾ùÖµ
- * @param *average_latitude Æ½¾ùÎ³¶È
- * @param *average_longitude Æ½¾ù¾­¶È
+ * @brief è·å–GPS_OFFSETæ¬¡GPSç»çº¬åº¦å¹¶å–å…¶å¹³å‡å€¼
+ * @param *average_latitude å¹³å‡çº¬åº¦
+ * @param *average_longitude å¹³å‡ç»åº¦
  * @return void
  */
 void gps_average_pointing(int8* average_latitude,int8* average_longitude){
-    
+    double latitude_total;
+    double longitude_total;
+    int i;
+    for(i=0;i<GPS_OFFSET;i++){
+        while(!gps_tau1201_flag);//ç­‰å¾…GPSä¿¡å·
+        gps_tau1201_flag=0;
+        latitude_total+=gps_tau1201.latitude;
+        longitude_total+=gps_tau1201.longitude;
+    }
+    *average_latitude=latitude_total/GPS_OFFSET;
+    *average_longitude=longitude_total/GPS_OFFSET;
 }

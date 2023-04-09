@@ -136,13 +136,14 @@
 
 //===================================================用户自定义文件===================================================#include "controller.h"
 #include "imath.h"
-#include "imu.h"
+//#include "imu.h"
 #include "pid.h"
 #include "gps.h"
-//#include "oled.h"
-//#include "font_chinese.h"
+#include "chinese_font.h"
 #include "servo.h"
 #include "menu.h"
+#include "imu_tanbai.h"
+#include "ex_init.h"
 
 //===================================================用户自定义文件===================================================
 

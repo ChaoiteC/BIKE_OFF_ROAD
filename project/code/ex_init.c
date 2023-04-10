@@ -9,6 +9,11 @@ void ex_init(void){
     oled_set_dir(OLED_CROSSWISE);
     oled_set_font(OLED_6X8_FONT);
     oled_init();
+
+    //键盘初始化
+    oled_show_string(0, 0, "Keyboard loading...");
+    key_init(500);
+                
     //GPS初始化
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
@@ -27,9 +32,6 @@ void ex_init(void){
     system_delay_ms(1000);
     MPU6050_Init_Offset();//MPU6050去偏移
     
-    //键盘初始化
-    oled_show_string(0, 0, "Keyboard loading...");
-    key_init(500);
     //初始化完成
     oled_clear();
 }

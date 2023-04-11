@@ -207,14 +207,14 @@ void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
-        oled_show_string(0,2,"WARNING: MPU NO DATA");
+        oled_show_string(0,3,"WARNING: MPU NO DATA");
     }
-    oled_show_string(0,4,"pit>"                    );
-    oled_show_float(36,4,imu.Pitch,2,4);
-    oled_show_string(0,6,"rol>"                    );
-    oled_show_float(36,6,imu.Roll,2,4);
-    oled_show_string(0,7,"yaw>"                    );
-    oled_show_float(36,7,imu.Yaw,2,4);
+    oled_show_string(0,5,"X>rol>"                    );
+    oled_show_float(42,5,imu.Roll,2,4);
+    oled_show_string(0,6,"Y>pit>"                    );
+    oled_show_float(42,6,imu.Pitch,2,4);
+    oled_show_string(0,7,"Z>yaw>"                    );
+    oled_show_float(42,7,imu.Yaw,2,4);
 }
 
 void page_IMU_ex(){

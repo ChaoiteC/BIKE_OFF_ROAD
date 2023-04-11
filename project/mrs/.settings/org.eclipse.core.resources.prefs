@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//code/Mahony.h=GBK
 encoding//code/chinese_font.c=UTF-8
 encoding//code/chinese_font.h=GBK
 encoding//code/controller.c=UTF-8
@@ -26,6 +27,7 @@ encoding//zf_device/zf_device_oled.c=UTF-8
 encoding//zf_device/zf_device_oled.h=UTF-8
 encoding//zf_device/zf_device_tft180.c=UTF-8
 encoding//zf_device/zf_device_tft180.h=UTF-8
+encoding//zf_driver/zf_driver_gpio.h=GBK
 encoding//zf_driver/zf_driver_iic.c=UTF-8
 encoding//zf_driver/zf_driver_iic.h=UTF-8
 encoding//zf_driver/zf_driver_soft_spi.c=UTF-8

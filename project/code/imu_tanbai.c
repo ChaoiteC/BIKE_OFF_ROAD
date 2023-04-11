@@ -6,9 +6,10 @@
  */
 
 #include "zf_common_headfile.h"
+
 #include "Mahony.h"
 
-#define Buf_SIZE  5	//队列长度，越大，平滑性越高
+#define Buf_SIZE  10	//队列长度，越大，平滑性越高
 
 #define OFFSET_CONUT 100 //去偏移计数
 

@@ -4,6 +4,20 @@
 
 #define GPS_OFFSET 10
 
+/* @fn 
+ * @brief 将GPS点位存入FLASH
+ * @param 
+ * @param 
+ * @return 
+ */
+
+
+
+
+
+
+
+
 /* @fn gps_average_pointing
  * @brief 获取GPS_OFFSET次GPS经纬度并取其平均值
  * @param *average_latitude 平均纬度

@@ -9,7 +9,7 @@
 #include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  20	//队列长度，越大，平滑性越高
+#define Buf_SIZE  30	//队列长度，越大，平滑性越高
 
 #define OFFSET_CONUT 500 //去偏移计数
 

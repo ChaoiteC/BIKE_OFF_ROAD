@@ -21,7 +21,7 @@ enum PAGE
 {
     MASTER,
       START,
-
+        GET_POINT,
       TET,
         GPS,
         MPU,
@@ -31,6 +31,32 @@ enum PAGE
 
 } NOW_PAGE;
 
+void menu(void){//人机交互页面
+    first_page();
+    while(!gogogo){
+        oled_clear();
+        switch(now_page){
+            case MASTER   :page_MASTER_show();break;
+            case GET_POINT:page_GET_POINT_show();break;
+            case TET      :page_TET_show();break;
+            case GPS      :page_GPS_show();break;
+            case MPU      :page_MPU_show();break;
+            case IMU      :page_IMU_show();break;
+            default       :page_error();
+        }
+        key_scanner();
+        system_delay_ms(50);
+        switch(now_page){
+            case MASTER   :page_MASTER_ex();break;
+            case GET_POINT:page_GET_POINT();break;
+            case TET      :page_TET_ex();break;
+            case GPS      :page_GPS_ex();break;
+            case MPU      :page_MPU_ex();break;
+            case IMU      :page_IMU_ex();break;
+            default       :page_error();
+        }
+    }
+}
 
 /*其实为了节约内存，你可以选择在进入未定义页面时
   直接返回主页。就算要写一个错误页面，也不用写这
@@ -103,6 +129,44 @@ void page_MASTER_ex(){
             case 0:now_page=START;break;
             case 1:now_page=TET;break;
             case 2:now_page=CP;break;
+        }
+        point=0;
+    }
+}
+
+
+void page_GET_POINT_show(){
+    oled_show_string(0,0,"GET_POINT"               );
+    oled_show_string(0,1,"./SRT/GPT"               );
+  //oled_show_string(0,2,""                        );
+    oled_show_string(0,3,"GPS POINT?"              );
+  //oled_show_string(0,4,""                        );
+    oled_show_string(0,5,"  USE FLASH DATA"        );
+    oled_show_string(0,6,"  RECORD NEW"            );
+  //oled_show_string(0,7,""                        );
+
+    oled_show_string(0,5+point,"->"                );
+}
+
+void page_GET_POINT_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+        if(--point<0){
+            point=1;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+        if(++point>1){
+            point=0;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=MASTER;
+        point=0;
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
+        switch(point){
+            case 0:now_page=;break;
+            case 1:now_page=;break;
         }
         point=0;
     }
@@ -261,30 +325,7 @@ void page_xx_ex(){
             case 1:now_page=;break;
             case 2:now_page=;break;
         }
+        point=0;
     }
 }
 */
-void menu(void){//人机交互页面
-    first_page();
-    while(!gogogo){
-        oled_clear();
-        switch(now_page){
-            case MASTER:page_MASTER_show();break;
-            case TET   :page_TET_show();break;
-            case GPS   :page_GPS_show();break;
-            case MPU   :page_MPU_show();break;
-            case IMU   :page_IMU_show();break;
-            default    :page_error();
-        }
-        key_scanner();
-        system_delay_ms(50);
-        switch(now_page){
-            case MASTER:page_MASTER_ex();break;
-            case TET   :page_TET_ex();break;
-            case GPS   :page_GPS_ex();break;
-            case MPU   :page_MPU_ex();break;
-            case IMU   :page_IMU_ex();break;
-            default    :page_error();
-        }
-    }
-}

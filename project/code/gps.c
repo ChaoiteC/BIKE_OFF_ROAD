@@ -1,22 +1,33 @@
-/*关于GPS的若干函数 by 碳白*/
-
 #include "zf_common_headfile.h"
 
-#define GPS_OFFSET 10
+#define GPS_OFFSET 10 //GPS取平均次数 次数过多GPS可能漂移
 
-/* @fn 
+enum POINT_TYPE{//点位类型
+    FIRST,//起点
+    STR,//直道
+    UPHELL,//爬坡
+    TAR,//掉头
+    RTT,//绕柱
+    SBD,//S弯
+    FINISH//终点
+};
+
+/* @fn gps_check_flash
+ * @brief 检查FLASH中是否存有点位数据
+ * @param void
+ * @return 0 mean no, 1 mean yes
+ */
+void gps_check_flash(void){
+    
+}
+
+/* @fn gps_data_to_flash
  * @brief 将GPS点位存入FLASH
- * @param 
- * @param 
+ * @param latitude 纬度
+ * @param longitude 经度
+ * @param point_type 点位类型
  * @return 
  */
-
-
-
-
-
-
-
 
 /* @fn gps_average_pointing
  * @brief 获取GPS_OFFSET次GPS经纬度并取其平均值

@@ -15,6 +15,7 @@ void ex_init(void){
     key_init(500);
                 
     //GPS初始化
+    oled_clear();
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
     //MPU6050初始化

@@ -6,12 +6,12 @@
  */
 
 #include "zf_common_headfile.h"
-
+#include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  10	//队列长度，越大，平滑性越高
+#define Buf_SIZE  20	//队列长度，越大，平滑性越高
 
-#define OFFSET_CONUT 100 //去偏移计数
+#define OFFSET_CONUT 500 //去偏移计数
 
 IMU_Info imu;
 
@@ -77,7 +77,7 @@ void MPU6050_readGyro_Acc(int16_t *gyro,int16_t *acc)
 				
 	acc[0] = ax; //acc
 	acc[1] = ay;
-	acc[2] = az;	
+	acc[2] = az;
 }
 
 void MPU6050_Init_Offset(void)//Hello?

@@ -1,24 +1,36 @@
 #include "zf_common_headfile.h"
 
-#define GPS_OFFSET 10 //GPS取平均次数 次数过多GPS可能漂移
-
-enum POINT_TYPE{//点位类型
-    FIRST,//起点
-    STR,//直道
-    UPHELL,//爬坡
-    TAR,//掉头
-    RTT,//绕柱
-    SBD,//S弯
-    FINISH//终点
-};
-
-/* @fn gps_check_flash
- * @brief 检查FLASH中是否存有点位数据
+/* @fn gps_read_flash
+ * @brief 从FLASH中读出点位数据
  * @param void
- * @return 0 mean no, 1 mean yes
+ * @return 0 mean yes, 1 mean error
  */
-void gps_check_flash(void){
-    
+int gps_check_flash(void){
+    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
+    flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);// 将GPS首页数据从 flash 读取到缓冲区
+    point_number=flash_union_buffer[0].uint8_type;//获取点位数量
+    for(i=0,column=0;i<point_number && i!=GPS_DATA_MAX;i++){
+        gps_point[i].latitude=flash_union_buffer[1+column].int16_type;
+        gps_point[i].longitude=flash_union_buffer[2+column].int16_type;
+        gps_point[i].point_type=flash_union_buffer[3+column].uint8_type;
+        if(column==3){
+            column=0;
+            if(--page<0){//翻页
+                page=3;
+                section--;//扇区
+            }
+            flash_read_page_to_buffer(section,page);
+        }
+        else{
+            column=3;
+        }
+    }
+    if(gps_point[i-1].point_type!=FINISH){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 /* @fn gps_data_to_flash
@@ -47,4 +59,13 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
     }
     *average_latitude=latitude_total/GPS_OFFSET;
     *average_longitude=longitude_total/GPS_OFFSET;
+}
+
+/* @fn gps_get_point
+ * @brief GPS
+ * @param void
+ * @return void
+ */
+void gps_get_point(type){
+    
 }

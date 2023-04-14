@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
-* Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºŽå®˜æ–¹ SDK æŽ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
+* Copyright (c) 2022 SEEKFREE é€é£žç§‘æŠ€
 *
-* ±¾ÎÄ¼þÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
+* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
 *
-* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
-* Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
-* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
+* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
+* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åŽæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
 *
-* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
-* ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
-* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
+* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
+* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
 *
-* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
-* Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
+* å¦‚æžœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
 *
-* ¶îÍâ×¢Ã÷£º
-* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
-* Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
-* Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
-* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+* é¢å¤–æ³¨æ˜Žï¼š
+* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜Žä¸ºè¯‘æ–‡ç‰ˆæœ¬
+* è®¸å¯ç”³æ˜Žè‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
+* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
+* æ¬¢è¿Žå„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£žç§‘æŠ€çš„ç‰ˆæƒå£°æ˜Žï¼ˆå³æœ¬å£°æ˜Žï¼‰
 *
-* ÎÄ¼þÃû³Æ          zf_driver_delay
-* ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
-* °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
-* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
-* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
-* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+* æ–‡ä»¶åç§°          zf_driver_delay
+* å…¬å¸åç§°          æˆéƒ½é€é£žç§‘æŠ€æœ‰é™å…¬å¸
+* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜Ž
+* å¼€å‘çŽ¯å¢ƒ          MounRiver Studio V1.8.1
+* é€‚ç”¨å¹³å°          CH32V307VCT6
+* åº—é“ºé“¾æŽ¥          https://seekfree.taobao.com/
 *
-* ÐÞ¸Ä¼ÇÂ¼
-* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
-* 2022-09-15        ´óW            first version
+* ä¿®æ”¹è®°å½•
+* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
+* 2022-09-15        å¤§W            first version
 ********************************************************************************************************************/
 
 #ifndef _zf_driver_flash_h
@@ -40,30 +40,30 @@
 #include "ch32v30x_flash.h"
 #include "zf_common_typedef.h"
 
-#define FLASH_BASE_ADDR             (0x08000000)                // FALSHÊ×µØÖ·
+#define FLASH_BASE_ADDR             (0x08000000)                // FALSHé¦–åœ°å€
 #define FLASH_MAX_PAGE_INDEX        (3)
 #define FLASH_MAX_SECTION_INDEX     (63)
 #define FLASH_PAGE_SIZE             (0x00000400)                // 1K byte
 #define FLASH_SECTION_SIZE          (FLASH_PAGE_SIZE*4)         // 4K byte
 #define FLASH_OPERATION_TIME_OUT    0x0FFF
 
-#define FLASH_DATA_BUFFER_SIZE      (FLASH_PAGE_SIZE/sizeof(flash_data_union))  // ×Ô¶¯¼ÆËãÃ¿¸öÒ³ÄÜ¹»´æÏÂ¶àÉÙ¸öÊý¾Ý
+#define FLASH_DATA_BUFFER_SIZE      (FLASH_PAGE_SIZE/sizeof(flash_data_union))  // è‡ªåŠ¨è®¡ç®—æ¯ä¸ªé¡µèƒ½å¤Ÿå­˜ä¸‹å¤šå°‘ä¸ªæ•°æ®
 
-typedef union                                                                   // ¹Ì¶¨µÄÊý¾Ý»º³åµ¥Ôª¸ñÊ½
+typedef union                                                                   // å›ºå®šçš„æ•°æ®ç¼“å†²å•å…ƒæ ¼å¼
 {
-    float   float_type;                                                       // float  ÀàÐÍ
-    uint32  uint32_type;                                                      // uint32 ÀàÐÍ
-    int32   int32_type;                                                       // int32  ÀàÐÍ
-    uint16  uint16_type;                                                      // uint16 ÀàÐÍ
-    int16   int16_type;                                                       // int16  ÀàÐÍ
-    uint8   uint8_type;                                                       // uint8  ÀàÐÍ
-    int8    int8_type;                                                        // int8   ÀàÐÍ
-}flash_data_union;                                                              // ËùÓÐÀàÐÍÊý¾Ý¹²ÓÃÍ¬Ò»¸ö 32bit µØÖ·
+    float   float_type;                                                       // float  ç±»åž‹
+    uint32  uint32_type;                                                      // uint32 ç±»åž‹
+    int32   int32_type;                                                       // int32  ç±»åž‹
+    uint16  uint16_type;                                                      // uint16 ç±»åž‹
+    int16   int16_type;                                                       // int16  ç±»åž‹
+    uint8   uint8_type;                                                       // uint8  ç±»åž‹
+    int8    int8_type;                                                        // int8   ç±»åž‹
+}flash_data_union;                                                              // æ‰€æœ‰ç±»åž‹æ•°æ®å…±ç”¨åŒä¸€ä¸ª 32bit åœ°å€
 
 
 /*
-     ±¾¿ªÔ´¿âÊ¹ÓÃµÄÊÇ64K RAM+ 256KFLASH
-  flash²¿·Ö Ò»¹²64¸öÉÈÇø£¬Ò»¸öÉÈÇø4K¡£
+     æœ¬å¼€æºåº“ä½¿ç”¨çš„æ˜¯64K RAM+ 256KFLASH
+  flashéƒ¨åˆ† ä¸€å…±64ä¸ªæ‰‡åŒºï¼Œä¸€ä¸ªæ‰‡åŒº4Kã€‚
 */
 
 

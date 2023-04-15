@@ -84,15 +84,13 @@ void page_error(void){
     now_page=MASTER;
 }
 
-void flash_error(void){
+void gps_point_error(void){
     oled_show_string(0,0,"ERROR:"          );
-    oled_show_string(0,1,"FALSH_NO_DATA"   );
-  //oled_show_string(0,2,""                );
-    oled_show_string(0,3,"No valid GPS po-");
-    oled_show_string(0,4,"-nit data was f-");
-    oled_show_string(0,5,"-ound in FLASH ,");
-    oled_show_string(0,6,"perhaps you need");
-    oled_show_string(0,7,"to  RECORD  it .");
+    oled_show_string(0,1,"POINT_DATA_ERR"  );
+    oled_show_string(0,2,"Maybe:"          );
+    oled_show_string(0,4,"1.FLASH No data" );
+    oled_show_string(0,5,"2.Data overflow" );
+    oled_show_string(0,7,"NOW BACK TO <GP>");
 }
 
 //启动页面
@@ -189,7 +187,7 @@ void page_GET_POINT_ex(){
             }break;
             case 1:{
 
-                now_page=;
+                now_page=GET_POINT;
                 break;
             }
         }

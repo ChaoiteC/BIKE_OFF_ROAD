@@ -58,41 +58,52 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @return 0 mean yes, 1 mean error
  */
 int gps_get_point(void){
-    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
+    int i=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
     float latitude,longitude;
-    uint8 point_type;
-    for(i=0,point_type=0;i<GPS_DATA_MAX;i++){
-        oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
-        oled_show_string(0,3,"[UP]"                      );
-        oled_show_string(0,5,"[DOWN]"                    );
-        oled_show_string(0,7,"[COF]  [RVK]"              );
-        while(1){
-            switch(point_type){
-                case 1:oled_show_string(0,4,"STR---"            );break;
-                case 2:oled_show_string(0,4,"UPHELL"            );break;
-                case 3:oled_show_string(0,4,"-TAR--"            );break;
-                case 4:oled_show_string(0,4,"--RTT-"            );break;
-                case 5:oled_show_string(0,4,"---SBD"            );break;
-                case 6:oled_show_string(0,4,"FINISH"            );
+    uint8 point_type=1;
+    oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
+    oled_show_string(0,3,"[UP]"                      );
+    oled_show_string(0,5,"[DOWN]"                    );
+    oled_show_string(0,7,"[COF]  [RVK]"              );
+    while(i<GPS_DATA_MAX){
+        switch(point_type){
+            case 1:oled_show_string(0,4,"STR---"            );break;
+            case 2:oled_show_string(0,4,"UPHELL"            );break;
+            case 3:oled_show_string(0,4,"-TAR--"            );break;
+            case 4:oled_show_string(0,4,"--RTT-"            );break;
+            case 5:oled_show_string(0,4,"---SBD"            );break;
+            case 6:oled_show_string(0,4,"FINISH"            );
+        }
+        if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+            if(--point_type<1){
+                point_type=6;
             }
-            if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-                if(--point_type<1){
-                    point_type=6;
-                }
+        }
+        else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+            if(++point_type>6){
+                point_type=1;
             }
-            else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-                if(++point_type>6){
-                    point_type=1;
-                }
+        }
+        else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+            if(--i<0){
+                return 1;
             }
-            else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
-                i--;
+            else{
+                gps_line_write(i,0.0,0.0,0);
             }
-            else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-
+        }
+        else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
+            gps_average_pointing(&latitude,&longitude);
+            gps_line_write(i++,latitude,longitude,point_type);
+            if(point_type==6){
+                break;
+            }
+            else if(i>=GPS_DATA_MAX){
+                return 1;
             }
         }
     }
+    //这里将GPS数据逐个录入FLASH
 }
 
 /* @fn gps_average_pointing

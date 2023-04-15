@@ -8,6 +8,11 @@
 #ifndef MENU_H_
 #define MENU_H_
 
+#define KEY_UP KEY_1
+#define KEY_DOWN KEY_2
+#define KEY_RT KEY_4
+#define KEY_CF KEY_3
+
 void menu(void);
 
 void page_error(void);

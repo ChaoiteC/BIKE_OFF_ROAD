@@ -1,3 +1,8 @@
+/*差し出すな君のその首を
+  走り出して戻るなその道を
+  決して犯すな過ちを
+  振り返れば吸われる赤い血を*/
+
 #include "zf_common_headfile.h"
 
 /* @fn gps_read_flash
@@ -9,7 +14,7 @@ int gps_check_flash(void){
     int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
     flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);// 将GPS首页数据从 flash 读取到缓冲区
     point_number=flash_union_buffer[0].uint8_type;//获取点位数量
-    for(i=0,column=0;i<point_number && i!=GPS_DATA_MAX;i++){
+    for(i=0,column=0;i<point_number && i<GPS_DATA_MAX;i++){
         gps_point[i].latitude=flash_union_buffer[1+column].int16_type;
         gps_point[i].longitude=flash_union_buffer[2+column].int16_type;
         gps_point[i].point_type=flash_union_buffer[3+column].uint8_type;
@@ -33,13 +38,62 @@ int gps_check_flash(void){
     }
 }
 
-/* @fn gps_data_to_flash
- * @brief 将GPS点位存入FLASH
+/* @fn gps_line_write
+ * @brief 向GPS点位数组的指定行写入数据
+ * @param line 指定行
  * @param latitude 纬度
  * @param longitude 经度
  * @param point_type 点位类型
- * @return 
+ * @return void
  */
+void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
+    gps_point[line].latitude=latitude;
+    gps_point[line].longitude=longitude;
+    gps_point[line].point_type=point_type;
+}
+
+/* @fn gps_get_point
+ * @brief GPS取点的专门用户交互页面
+ * @param void
+ * @return 0 mean yes, 1 mean error
+ */
+int gps_get_point(void){
+    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
+    float latitude,longitude;
+    uint8 point_type;
+    for(i=0,point_type=0;i<GPS_DATA_MAX;i++){
+        oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
+        oled_show_string(0,3,"[UP]"                      );
+        oled_show_string(0,5,"[DOWN]"                    );
+        oled_show_string(0,7,"[COF]  [RVK]"              );
+        while(1){
+            switch(point_type){
+                case 1:oled_show_string(0,4,"STR---"            );break;
+                case 2:oled_show_string(0,4,"UPHELL"            );break;
+                case 3:oled_show_string(0,4,"-TAR--"            );break;
+                case 4:oled_show_string(0,4,"--RTT-"            );break;
+                case 5:oled_show_string(0,4,"---SBD"            );break;
+                case 6:oled_show_string(0,4,"FINISH"            );
+            }
+            if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+                if(--point_type<1){
+                    point_type=6;
+                }
+            }
+            else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+                if(++point_type>6){
+                    point_type=1;
+                }
+            }
+            else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+                i--;
+            }
+            else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
+
+            }
+        }
+    }
+}
 
 /* @fn gps_average_pointing
  * @brief 获取GPS_OFFSET次GPS经纬度并取其平均值
@@ -59,13 +113,4 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
     }
     *average_latitude=latitude_total/GPS_OFFSET;
     *average_longitude=longitude_total/GPS_OFFSET;
-}
-
-/* @fn gps_get_point
- * @brief GPS
- * @param void
- * @return void
- */
-void gps_get_point(type){
-    
 }

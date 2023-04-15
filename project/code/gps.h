@@ -22,8 +22,8 @@ enum POINT_TYPE{//点位类型
 };
 
 struct GPS_POINT{
-    int16 latitude;//纬度
-    int16 longitude;//经度
+    float latitude;//纬度
+    float longitude;//经度
     uint8 point_type;//点位类型
 }gps_point[GPS_DATA_MAX];
 

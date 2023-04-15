@@ -1,16 +1,18 @@
 /* 人机交互页面。
  *  
- * 
- *
  * 林碳白
  * 2023年4月7日
  */
+
+/*Let me forget everything, still moonlight shines on us.
+  Broken heart, I don't want you to find and take a look at.
+  So I'll sin more and destroy my thoughts, make a mess of my hand.
+  I swear on the darkest night I'll end it all.
+  And testify....*/
+
 #include "zf_common_headfile.h"
 
-#define KEY_UP KEY_1
-#define KEY_DOWN KEY_2
-#define KEY_RT KEY_4
-#define KEY_CF KEY_3
+
 
 
 
@@ -39,7 +41,7 @@ void menu(void){//人机交互页面
         oled_clear();
         switch(now_page){
             case MASTER   :page_MASTER_show();break;
-            case GET_POINT:page_GET_POINT_show();break;
+            //case GET_POINT:page_GET_POINT_show();break;
             case TET      :page_TET_show();break;
             case GPS      :page_GPS_show();break;
             case MPU      :page_MPU_show();break;
@@ -50,7 +52,7 @@ void menu(void){//人机交互页面
         system_delay_ms(50);
         switch(now_page){
             case MASTER   :page_MASTER_ex();break;
-            case GET_POINT:page_GET_POINT();break;
+            //case GET_POINT:page_GET_POINT();break;
             case TET      :page_TET_ex();break;
             case GPS      :page_GPS_ex();break;
             case MPU      :page_MPU_ex();break;
@@ -80,6 +82,17 @@ void page_error(void){
     oled_show_string(0,7,"the MASTER page.");
     system_delay_ms(3000);
     now_page=MASTER;
+}
+
+void flash_error(void){
+    oled_show_string(0,0,"ERROR:"          );
+    oled_show_string(0,1,"FALSH_NO_DATA"   );
+  //oled_show_string(0,2,""                );
+    oled_show_string(0,3,"No valid GPS po-");
+    oled_show_string(0,4,"-nit data was f-");
+    oled_show_string(0,5,"-ound in FLASH ,");
+    oled_show_string(0,6,"perhaps you need");
+    oled_show_string(0,7,"to  RECORD  it .");
 }
 
 //启动页面
@@ -167,8 +180,18 @@ void page_GET_POINT_ex(){
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
-            case 0:now_page=;break;
-            case 1:now_page=;break;
+            case 0:{
+                if(gps_check_flash()){
+                    flash_error();
+                    system_delay_ms(3000);
+                    now_page=GET_POINT;
+                }
+            }break;
+            case 1:{
+
+                now_page=;
+                break;
+            }
         }
         point=0;
     }

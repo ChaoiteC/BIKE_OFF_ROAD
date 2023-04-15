@@ -20,6 +20,3 @@ int main(void){
         mpu6050_acc_transition(mpu6050_acc_x);
     }
 }
-
-
-

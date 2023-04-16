@@ -1,54 +1,54 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
-* Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºŽå®˜æ–¹ SDK æŽ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
+* Copyright (c) 2022 SEEKFREE é€é£žç§‘æŠ€
 *
-* ±¾ÎÄ¼þÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
+* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
 *
-* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
-* Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
-* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
+* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
+* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åŽæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
 *
-* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
-* ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
-* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
+* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
+* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
 *
-* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
-* Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
+* å¦‚æžœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
 *
-* ¶îÍâ×¢Ã÷£º
-* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
-* Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
-* Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
-* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+* é¢å¤–æ³¨æ˜Žï¼š
+* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜Žä¸ºè¯‘æ–‡ç‰ˆæœ¬
+* è®¸å¯ç”³æ˜Žè‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
+* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
+* æ¬¢è¿Žå„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£žç§‘æŠ€çš„ç‰ˆæƒå£°æ˜Žï¼ˆå³æœ¬å£°æ˜Žï¼‰
 *
-* ÎÄ¼þÃû³Æ          zf_device_icm20602
-* ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
-* °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
-* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
-* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
-* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+* æ–‡ä»¶åç§°          zf_device_icm20602
+* å…¬å¸åç§°          æˆéƒ½é€é£žç§‘æŠ€æœ‰é™å…¬å¸
+* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜Ž
+* å¼€å‘çŽ¯å¢ƒ          MounRiver Studio V1.8.1
+* é€‚ç”¨å¹³å°          CH32V307VCT6
+* åº—é“ºé“¾æŽ¥          https://seekfree.taobao.com/
 *
-* ÐÞ¸Ä¼ÇÂ¼
-* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
-* 2022-09-15        ´óW            first version
+* ä¿®æ”¹è®°å½•
+* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
+* 2022-09-15        å¤§W            first version
 ********************************************************************************************************************/
 /*********************************************************************************************************************
-* ½ÓÏß¶¨Òå:
+* æŽ¥çº¿å®šä¹‰:
 *                   ------------------------------------
-*                   Ä£¿é¹Ü½Å                                        µ¥Æ¬»ú¹Ü½Å
-*                   //------------------Ó²¼þ SPI Òý½Å------------------//
-*                   SCL/SPC             ²é¿´ zf_device_icm20602.h ÖÐ ICM20602_SPC_PIN ºê¶¨Òå
-*                   SDA/DSI             ²é¿´ zf_device_icm20602.h ÖÐ ICM20602_SDI_PIN ºê¶¨Òå
-*                   SA0/SDO             ²é¿´ zf_device_icm20602.h ÖÐ ICM20602_SDO_PIN ºê¶¨Òå
-*                   CS                  ²é¿´ zf_device_icm20602.h ÖÐ IPS114_CS_PIN ºê¶¨Òå
-*                   //------------------Ó²¼þ SPI Òý½Å------------------//
-*                   //------------------Èí¼þ IIC Òý½Å------------------//
-*                   SCL/SPC             ²é¿´ zf_device_icm20602.h ÖÐ ICM20602_SCL_PIN ºê¶¨Òå
-*                   SDA/DSI             ²é¿´ zf_device_icm20602.h ÖÐ ICM20602_SDA_PIN ºê¶¨Òå
-*                   //------------------Èí¼þ IIC Òý½Å------------------//
-*                   µçÔ´Òý½Å
-*                   VCC                 3.3VµçÔ´
-*                   GND                 µçÔ´µØ
+*                   æ¨¡å—ç®¡è„š                                        å•ç‰‡æœºç®¡è„š
+*                   //------------------ç¡¬ä»¶ SPI å¼•è„š------------------//
+*                   SCL/SPC             æŸ¥çœ‹ zf_device_icm20602.h ä¸­ ICM20602_SPC_PIN å®å®šä¹‰
+*                   SDA/DSI             æŸ¥çœ‹ zf_device_icm20602.h ä¸­ ICM20602_SDI_PIN å®å®šä¹‰
+*                   SA0/SDO             æŸ¥çœ‹ zf_device_icm20602.h ä¸­ ICM20602_SDO_PIN å®å®šä¹‰
+*                   CS                  æŸ¥çœ‹ zf_device_icm20602.h ä¸­ IPS114_CS_PIN å®å®šä¹‰
+*                   //------------------ç¡¬ä»¶ SPI å¼•è„š------------------//
+*                   //------------------è½¯ä»¶ IIC å¼•è„š------------------//
+*                   SCL/SPC             æŸ¥çœ‹ zf_device_icm20602.h ä¸­ ICM20602_SCL_PIN å®å®šä¹‰
+*                   SDA/DSI             æŸ¥çœ‹ zf_device_icm20602.h ä¸­ ICM20602_SDA_PIN å®å®šä¹‰
+*                   //------------------è½¯ä»¶ IIC å¼•è„š------------------//
+*                   ç”µæºå¼•è„š
+*                   VCC                 3.3Vç”µæº
+*                   GND                 ç”µæºåœ°
 *                   ------------------------------------
 ********************************************************************************************************************/
 
@@ -58,29 +58,29 @@
 #include "zf_common_typedef.h"
 
 
-#define ICM20602_USE_SOFT_IIC       0                                           // Ä¬ÈÏÊ¹ÓÃÓ²¼þ SPI ·½Ê½Çý¶¯
-#if ICM20602_USE_SOFT_IIC                                                       // ÕâÁ½¶Î ÑÕÉ«Õý³£µÄ²ÅÊÇÕýÈ·µÄ ÑÕÉ«»ÒµÄ¾ÍÊÇÃ»ÓÐÓÃµÄ
-//====================================================Èí¼þ IIC Çý¶¯====================================================
-#define ICM20602_SOFT_IIC_DELAY     100                                         // Èí¼þ IIC µÄÊ±ÖÓÑÓÊ±ÖÜÆÚ ÊýÖµÔ½Ð¡ IIC Í¨ÐÅËÙÂÊÔ½¿ì
-#define ICM20602_SCL_PIN            B3                                          // Èí¼þ IIC SCL Òý½Å Á¬½Ó MPU6050 µÄ SCL Òý½Å
-#define ICM20602_SDA_PIN            B5                                          // Èí¼þ IIC SDA Òý½Å Á¬½Ó MPU6050 µÄ SDA Òý½Å
-//====================================================Èí¼þ IIC Çý¶¯====================================================
+#define ICM20602_USE_SOFT_IIC       0                                           // é»˜è®¤ä½¿ç”¨ç¡¬ä»¶ SPI æ–¹å¼é©±åŠ¨
+#if ICM20602_USE_SOFT_IIC                                                       // è¿™ä¸¤æ®µ é¢œè‰²æ­£å¸¸çš„æ‰æ˜¯æ­£ç¡®çš„ é¢œè‰²ç°çš„å°±æ˜¯æ²¡æœ‰ç”¨çš„
+//====================================================è½¯ä»¶ IIC é©±åŠ¨====================================================
+#define ICM20602_SOFT_IIC_DELAY     100                                         // è½¯ä»¶ IIC çš„æ—¶é’Ÿå»¶æ—¶å‘¨æœŸ æ•°å€¼è¶Šå° IIC é€šä¿¡é€ŸçŽ‡è¶Šå¿«
+#define ICM20602_SCL_PIN            B3                                          // è½¯ä»¶ IIC SCL å¼•è„š è¿žæŽ¥ MPU6050 çš„ SCL å¼•è„š
+#define ICM20602_SDA_PIN            B5                                          // è½¯ä»¶ IIC SDA å¼•è„š è¿žæŽ¥ MPU6050 çš„ SDA å¼•è„š
+//====================================================è½¯ä»¶ IIC é©±åŠ¨====================================================
 #else
-//====================================================Ó²¼þ SPI Çý¶¯====================================================
-#define ICM20602_SPI_SPEED          (10*1000*1000)                              // Ó²¼þ SPI ËÙÂÊ
-#define ICM20602_SPI                SPI_3                                       // Ó²¼þ SPI ºÅ
-#define ICM20602_SPC_PIN            SPI3_MAP0_SCK_B3                            // Ó²¼þ SPI SCK Òý½Å
-#define ICM20602_SDI_PIN            SPI3_MAP0_MOSI_B5                           // Ó²¼þ SPI MOSI Òý½Å
-#define ICM20602_SDO_PIN            SPI3_MAP0_MISO_B4                           // Ó²¼þ SPI MISO Òý½Å
-//====================================================Ó²¼þ SPI Çý¶¯====================================================
+//====================================================ç¡¬ä»¶ SPI é©±åŠ¨====================================================
+#define ICM20602_SPI_SPEED          (10*1000*1000)                              // ç¡¬ä»¶ SPI é€ŸçŽ‡
+#define ICM20602_SPI                SPI_3                                       // ç¡¬ä»¶ SPI å·
+#define ICM20602_SPC_PIN            SPI3_MAP0_SCK_B3                            // ç¡¬ä»¶ SPI SCK å¼•è„š
+#define ICM20602_SDI_PIN            SPI3_MAP0_MOSI_B5                           // ç¡¬ä»¶ SPI MOSI å¼•è„š
+#define ICM20602_SDO_PIN            SPI3_MAP0_MISO_B4                           // ç¡¬ä»¶ SPI MISO å¼•è„š
+//====================================================ç¡¬ä»¶ SPI é©±åŠ¨====================================================
 #endif
-#define ICM20602_CS_PIN             C10                                          // CS Æ¬Ñ¡Òý½Å
+#define ICM20602_CS_PIN             C10                                          // CS ç‰‡é€‰å¼•è„š
 #define ICM20602_CS(x)              (x? (gpio_high(ICM20602_CS_PIN)): (gpio_low(ICM20602_CS_PIN)))
 
-#define ICM20602_TIMEOUT_COUNT      0x00FF                                      // ICM20602 ³¬Ê±¼ÆÊý
+#define ICM20602_TIMEOUT_COUNT      0x00FF                                      // ICM20602 è¶…æ—¶è®¡æ•°
 
-//================================================¶¨Òå ICM20602 ÄÚ²¿µØÖ·================================================
-#define ICM20602_DEV_ADDR           0x69                                        // SA0½ÓµØ£º0x68 SA0ÉÏÀ­£º0x69 Ä£¿éÄ¬ÈÏÉÏÀ­
+//================================================å®šä¹‰ ICM20602 å†…éƒ¨åœ°å€================================================
+#define ICM20602_DEV_ADDR           0x69                                        // SA0æŽ¥åœ°ï¼š0x68 SA0ä¸Šæ‹‰ï¼š0x69 æ¨¡å—é»˜è®¤ä¸Šæ‹‰
 #define ICM20602_SPI_W              0x00
 #define ICM20602_SPI_R              0x80
 
@@ -149,26 +149,26 @@
 #define ICM20602_YA_OFFSET_L        0x7B
 #define ICM20602_ZA_OFFSET_H        0x7D
 #define ICM20602_ZA_OFFSET_L        0x7E
-#define ICM20602_ACC_SAMPLE         (0x10)                                      // ¼ÓËÙ¶È¼ÆÁ¿³Ì
-// ÉèÖÃÎª:0x00 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À2g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ16384      ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-// ÉèÖÃÎª:0x08 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À4g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ8192       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-// ÉèÖÃÎª:0x10 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À8g          »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ4096       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
-// ÉèÖÃÎª:0x18 ¼ÓËÙ¶È¼ÆÁ¿³ÌÎª:¡À16g         »ñÈ¡µ½µÄ¼ÓËÙ¶È¼ÆÊý¾Ý ³ýÒÔ2048       ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»£ºg(m/s^2)
+#define ICM20602_ACC_SAMPLE         (0x10)                                      // åŠ é€Ÿåº¦è®¡é‡ç¨‹
+// è®¾ç½®ä¸º:0x00 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±2g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥16384      å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+// è®¾ç½®ä¸º:0x08 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±4g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥8192       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+// è®¾ç½®ä¸º:0x10 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±8g          èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥4096       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
+// è®¾ç½®ä¸º:0x18 åŠ é€Ÿåº¦è®¡é‡ç¨‹ä¸º:Â±16g         èŽ·å–åˆ°çš„åŠ é€Ÿåº¦è®¡æ•°æ® é™¤ä»¥2048       å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ï¼šg(m/s^2)
 
-#define ICM20602_GYR_SAMPLE         (0x18)                                      // ÍÓÂÝÒÇÁ¿³Ì
-// ÉèÖÃÎª:0x00 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À250 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ131           ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-// ÉèÖÃÎª:0x08 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À500 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ65.5          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-// ÉèÖÃÎª:0x10 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À1000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ32.8          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-// ÉèÖÃÎª:0x18 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À2000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ16.4          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
-//================================================¶¨Òå ICM20602 ÄÚ²¿µØÖ·================================================
+#define ICM20602_GYR_SAMPLE         (0x18)                                      // é™€èžºä»ªé‡ç¨‹
+// è®¾ç½®ä¸º:0x00 é™€èžºä»ªé‡ç¨‹ä¸º:Â±250 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥131           å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+// è®¾ç½®ä¸º:0x08 é™€èžºä»ªé‡ç¨‹ä¸º:Â±500 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥65.5          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+// è®¾ç½®ä¸º:0x10 é™€èžºä»ªé‡ç¨‹ä¸º:Â±1000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥32.8          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+// è®¾ç½®ä¸º:0x18 é™€èžºä»ªé‡ç¨‹ä¸º:Â±2000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥16.4          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+//================================================å®šä¹‰ ICM20602 å†…éƒ¨åœ°å€================================================
 
-extern int16 icm20602_gyro_x, icm20602_gyro_y, icm20602_gyro_z;                 // ÈýÖáÍÓÂÝÒÇÊý¾Ý
-extern int16 icm20602_acc_x, icm20602_acc_y, icm20602_acc_z;                    // ÈýÖá¼ÓËÙ¶È¼ÆÊý¾Ý
+extern int16 icm20602_gyro_x, icm20602_gyro_y, icm20602_gyro_z;                 // ä¸‰è½´é™€èžºä»ªæ•°æ®
+extern int16 icm20602_acc_x, icm20602_acc_y, icm20602_acc_z;                    // ä¸‰è½´åŠ é€Ÿåº¦è®¡æ•°æ®
 
 void    icm20602_get_acc            (void);
 void    icm20602_get_gyro           (void);
-float   icm20602_acc_transition     (int16 acc_value);                          // ½« ICM20602 ¼ÓËÙ¶È¼ÆÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
-float   icm20602_gyro_transition    (int16 gyro_value);                         // ½« ICM20602 ÍÓÂÝÒÇÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
+float   icm20602_acc_transition     (int16 acc_value);                          // å°† ICM20602 åŠ é€Ÿåº¦è®¡æ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
+float   icm20602_gyro_transition    (int16 gyro_value);                         // å°† ICM20602 é™€èžºä»ªæ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
 uint8   icm20602_init               (void);
 
 #endif

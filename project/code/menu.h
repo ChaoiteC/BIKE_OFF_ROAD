@@ -23,8 +23,8 @@ void page_TET_show();
 void page_TET_ex();
 void page_GPS_show();
 void page_GPS_ex();
-void page_MPU_show();
-void page_MPU_ex();
+void page_ICM_show();
+void page_ICM_ex();
 void page_IMU_show();
 void page_IMU_ex();
 

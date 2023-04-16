@@ -1,9 +1,3 @@
-/* 人机交互页面。
- *  
- * 林碳白
- * 2023年4月7日
- */
-
 /*Let me forget everything, still moonlight shines on us.
   Broken heart, I don't want you to find and take a look at.
   So I'll sin more and destroy my thoughts, make a mess of my hand.
@@ -28,7 +22,7 @@ enum PAGE
         GET_POINT,
       TET,
         GPS,
-        MPU,
+        ICM,
         IMU,
         SERVO,
       CP,
@@ -44,7 +38,7 @@ void menu(void){//人机交互页面
             //case GET_POINT:page_GET_POINT_show();break;
             case TET      :page_TET_show();break;
             case GPS      :page_GPS_show();break;
-            case MPU      :page_MPU_show();break;
+            case ICM      :page_ICM_show();break;
             case IMU      :page_IMU_show();break;
             default       :page_error();
         }
@@ -55,7 +49,7 @@ void menu(void){//人机交互页面
             //case GET_POINT:page_GET_POINT();break;
             case TET      :page_TET_ex();break;
             case GPS      :page_GPS_ex();break;
-            case MPU      :page_MPU_ex();break;
+            case ICM      :page_ICM_ex();break;
             case IMU      :page_IMU_ex();break;
             default       :page_error();
         }
@@ -200,7 +194,7 @@ void page_TET_show(){
     oled_show_string(0,1,"./TET"                   );
   //oled_show_string(0,2,""                        );
     oled_show_string(0,3,"  GPS_TAU1201"           );
-    oled_show_string(0,4,"  MPU6050"               );
+    oled_show_string(0,4,"  ICM20602"              );
     oled_show_string(0,5,"  IMU_Mahony"            );
     oled_show_string(0,6,"  SERVO"                 );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
@@ -226,7 +220,7 @@ void page_TET_ex(){
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
             case 0:now_page=GPS;break;
-            case 1:now_page=MPU;break;
+            case 1:now_page=ICM;break;
             case 2:now_page=IMU;break;
             case 3:now_page=SERVO;break;
         }
@@ -270,20 +264,20 @@ void page_GPS_ex(){
     }
 }
 
-void page_MPU_show(){
-    oled_show_string(0,0,"MPU6050"                 );
-    oled_show_string(0,1,"./TET/MPU"               );
+void page_ICM_show(){
+    oled_show_string(0,0,"ICM20602"                );
+    oled_show_string(0,1,"./TET/ICM"               );
     oled_show_string(0,3,"ACC(m/s^2)");
-    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,4);
-    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,4);
-    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,4);
+    oled_show_float(0,4,icm20602_acc_transition(icm20602_acc_x),2,4);
+    oled_show_float(0,5,icm20602_acc_transition(icm20602_acc_y),2,4);
+    oled_show_float(0,6,icm20602_acc_transition(icm20602_acc_z),2,4);
     oled_show_string(64,3,"GYRO('/s)");
-    oled_show_float(64,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,4);
-    oled_show_float(64,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,4);
-    oled_show_float(64,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,4);
+    oled_show_float(64,4,icm20602_gyro_transition(icm20602_gyro_x),2,4);
+    oled_show_float(64,5,icm20602_gyro_transition(icm20602_gyro_y),2,4);
+    oled_show_float(64,6,icm20602_gyro_transition(icm20602_gyro_z),2,4);
 }
 
-void page_MPU_ex(){
+void page_ICM_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
         point=0;
@@ -293,8 +287,8 @@ void page_MPU_ex(){
 void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
-    if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
-        oled_show_string(0,3,"WARNING: MPU NO DATA");
+    if(icm20602_acc_x==icm20602_acc_y && icm20602_acc_y==icm20602_acc_z){
+        oled_show_string(0,3,"WARNING: ICM NO DATA");
     }
     oled_show_string(0,5,"X>rol>"                    );
     oled_show_float(42,5,imu.Roll,2,6);

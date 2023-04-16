@@ -74,6 +74,8 @@ int gps_get_point(void){
             case 5:oled_show_string(0,4,"---SBD"            );break;
             case 6:oled_show_string(0,4,"FINISH"            );
         }
+        key_scanner();
+        system_delay_ms(50);
         if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
             if(--point_type<1){
                 point_type=6;

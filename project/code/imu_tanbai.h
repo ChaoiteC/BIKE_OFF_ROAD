@@ -20,12 +20,8 @@ typedef struct IMU
 } IMU_Info;
 
 
-void MPU6050_Init_Offset(void);//HEllo?
+void ICM20602_Init_Offset(void);//HEllo?
 void IMU_Update(void);
-
-float rt_roll(void);
-float rt_pitch(void);
-float rt_yaw(void);
 
 extern IMU_Info imu;
 

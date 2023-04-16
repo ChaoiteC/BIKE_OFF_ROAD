@@ -5,8 +5,8 @@
 
 extern const uint8 IDP[][16];
 extern const uint8 BOR[][16];
-extern const uint8 MPU_offset1[][16];
-extern const uint8 MPU_offset2[][16];
+extern const uint8 ICM_offset1[][16];
+extern const uint8 ICM_offset2[][16];
 extern const uint8 POINT_TYPE[][16];
 
 #endif /* CHINESE_FONT_H_ */

@@ -17,6 +17,5 @@ int main(void){
         if(gps_tau1201_flag){//这段用于GPS数据处理
             gps_tau1201_flag=0;
         }
-        mpu6050_acc_transition(mpu6050_acc_x);
     }
 }

@@ -1,7 +1,7 @@
-/*差し出すな君のその首を
-  走り出して戻るなその道を
-  決して犯すな過ちを
-  振り返れば吸われる赤い血を*/
+/*看到了吗？那些星星，经历过数十亿年的光阴。
+  早在人类诞生之前就一直闪烁着光芒，在人类灭亡之后，它们仍会继续绽放。
+  人的生命连星星的一瞬都不及。这是自古以来人类就明白的事情。
+  然而，认识到星星的永恒和人世的一瞬的是人，不是星星。*/
 
 #include "zf_common_headfile.h"
 
@@ -75,12 +75,12 @@ int gps_get_point(void){
     oled_show_string(0,7,"[COF]  [RVK]"              );
     while(i<GPS_DATA_MAX){
         switch(point_type){
-            case 1:oled_show_string(0,4,"STR---"            );break;
-            case 2:oled_show_string(0,4,"UPHELL"            );break;
-            case 3:oled_show_string(0,4,"-TAR--"            );break;
-            case 4:oled_show_string(0,4,"--RTT-"            );break;
-            case 5:oled_show_string(0,4,"---SBD"            );break;
-            case 6:oled_show_string(0,4,"FINISH"            );
+            case 1:oled_show_string(36,4,"STR---"            );break;
+            case 2:oled_show_string(36,4,"UPHELL"            );break;
+            case 3:oled_show_string(36,4,"-TAR--"            );break;
+            case 4:oled_show_string(36,4,"--RTT-"            );break;
+            case 5:oled_show_string(36,4,"---SBD"            );break;
+            case 6:oled_show_string(36,4,"FINISH"            );
         }
         key_scanner();
         system_delay_ms(50);
@@ -134,4 +134,5 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
     }
     *average_latitude=latitude_total/GPS_OFFSET;
     *average_longitude=longitude_total/GPS_OFFSET;
+    
 }

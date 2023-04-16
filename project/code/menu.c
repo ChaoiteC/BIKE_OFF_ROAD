@@ -100,7 +100,7 @@ void first_page(void){
     oled_clear();
     oled_show_chinese(0, 0, 16, (const uint8 *)BOR,8);
     oled_show_string(0,4,"      -AUTHOR-"          );
-    oled_show_string(0,6," Feng Wei,  Qiu Rui,"    );
+    oled_show_string(0,6," Feng Wei,  Qiu Run,"    );
     oled_show_string(0,7,"   Qin GuangQuan."       );
     system_delay_ms(500);
 }

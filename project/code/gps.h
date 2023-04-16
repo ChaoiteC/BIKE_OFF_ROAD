@@ -21,12 +21,10 @@ enum POINT_TYPE{//点位类型
     FINISH//终点
 };
 
-struct GPS_POINT{
-    float latitude;//纬度
-    float longitude;//经度
-    uint8 point_type;//点位类型
-}gps_point[GPS_DATA_MAX];
+
 
 int gps_check_flash(void);
+int gps_get_point();
+void gps_average_pointing();
 
 #endif /* GPS_H_ */

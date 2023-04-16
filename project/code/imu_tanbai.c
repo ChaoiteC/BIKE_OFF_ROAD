@@ -50,13 +50,13 @@ void ICM20602_readGyro_Acc(int16_t *gyro,int16_t *acc)
 	static int16_t ax,ay,az;
 	
 	//将原始数据入队
-	ICM20602_NewVal(&ICM20602_FIFO[0][0],icm20602_acc_x);
-	ICM20602_NewVal(&ICM20602_FIFO[1][0],icm20602_acc_y);
-	ICM20602_NewVal(&ICM20602_FIFO[2][0],icm20602_acc_z);
+	ICM20602_NewVal(&ICM20602_FIFO[0][0],mpu6050_acc_x);
+	ICM20602_NewVal(&ICM20602_FIFO[1][0],mpu6050_acc_y);
+	ICM20602_NewVal(&ICM20602_FIFO[2][0],mpu6050_acc_z);
 
-	ICM20602_NewVal(&ICM20602_FIFO[3][0],icm20602_gyro_x);
-	ICM20602_NewVal(&ICM20602_FIFO[4][0],icm20602_gyro_y);
-	ICM20602_NewVal(&ICM20602_FIFO[5][0],icm20602_gyro_z);
+	ICM20602_NewVal(&ICM20602_FIFO[3][0],mpu6050_gyro_x);
+	ICM20602_NewVal(&ICM20602_FIFO[4][0],mpu6050_gyro_y);
+	ICM20602_NewVal(&ICM20602_FIFO[5][0],mpu6050_gyro_z);
 	
 	//更新FIFO入口指针
 	Wr_Index = (Wr_Index + 1) % Buf_SIZE;	
@@ -125,7 +125,7 @@ static void Get_IMU_Values(float *values)
 	
 	for(int i=0;i<3;i++)
 	{
-		values[i]=(icm20602_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
+		values[i]=(mpu6050_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
 		values[3+i]=(float) acc[i];
 	}
 	

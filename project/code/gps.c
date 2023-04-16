@@ -5,11 +5,18 @@
 
 #include "zf_common_headfile.h"
 
+struct GPS_POINT{
+    float latitude;//纬度
+    float longitude;//经度
+    uint8 point_type;//点位类型
+}gps_point[GPS_DATA_MAX];
+
 /* @fn gps_read_flash
  * @brief 从FLASH中读出点位数据
  * @param void
  * @return 0 mean yes, 1 mean error
  */
+
 int gps_check_flash(void){
     int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
     flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);// 将GPS首页数据从 flash 读取到缓冲区
@@ -61,6 +68,7 @@ int gps_get_point(void){
     int i=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
     float latitude,longitude;
     uint8 point_type=1;
+    oled_clear();
     oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
     oled_show_string(0,3,"[UP]"                      );
     oled_show_string(0,5,"[DOWN]"                    );

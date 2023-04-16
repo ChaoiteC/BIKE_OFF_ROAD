@@ -24,8 +24,8 @@ void ex_init(void){
     gps_init();
     //ICM20602初始化
     oled_show_string(0, 0, "ICM20602 loading...");
-    if(icm20602_init()){//自检失败
-        while(1);//死循环，不能继续程序
+    if(mpu6050_init()){//自检失败
+        system_delay_ms(1000);
     }
     pit_ms_init(TIM6_PIT,5);//定时器中断获取ICM20602数据
     

@@ -35,7 +35,7 @@ void menu(void){//人机交互页面
         oled_clear();
         switch(now_page){
             case MASTER   :page_MASTER_show();break;
-            //case GET_POINT:page_GET_POINT_show();break;
+            case GET_POINT:page_GET_POINT_show();break;
             case TET      :page_TET_show();break;
             case GPS      :page_GPS_show();break;
             case ICM      :page_ICM_show();break;
@@ -46,7 +46,7 @@ void menu(void){//人机交互页面
         system_delay_ms(50);
         switch(now_page){
             case MASTER   :page_MASTER_ex();break;
-            //case GET_POINT:page_GET_POINT();break;
+            case GET_POINT:page_GET_POINT_ex();break;
             case TET      :page_TET_ex();break;
             case GPS      :page_GPS_ex();break;
             case ICM      :page_ICM_ex();break;
@@ -65,6 +65,7 @@ void menu(void){//人机交互页面
   需要做了吗？你的人生就像是这个页面一样失败而
   充满了混乱。*/
 void page_error(void){
+    oled_clear();
     oled_show_string(0,0,"ERROR:"          );
     oled_show_string(0,1,"UNDEFINED_PAGE"  );
     oled_show_string(0,2,"ERR_PG:"         );
@@ -79,6 +80,7 @@ void page_error(void){
 }
 
 void gps_point_error(void){
+    oled_clear();
     oled_show_string(0,0,"ERROR:"          );
     oled_show_string(0,1,"POINT_DATA_ERR"  );
     oled_show_string(0,2,"Maybe:"          );
@@ -94,13 +96,13 @@ void first_page(void){
     oled_show_string(0,4,"BIKE_OFF_ROAD"           );
     oled_show_string(0,6,"(C) IDP.408SIC 2023,"    );
     oled_show_string(0,7,"All Rights Reserved."    );
-    system_delay_ms(1500);
+    system_delay_ms(500);
     oled_clear();
     oled_show_chinese(0, 0, 16, (const uint8 *)BOR,8);
     oled_show_string(0,4,"      -AUTHOR-"          );
     oled_show_string(0,6," Feng Wei,  Qiu Rui,"    );
     oled_show_string(0,7,"   Qin GuangQuan."       );
-    system_delay_ms(1500);
+    system_delay_ms(500);
 }
 
 void page_MASTER_show(){
@@ -133,7 +135,7 @@ void page_MASTER_ex(){
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
-            case 0:now_page=START;break;
+            case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
             case 2:now_page=CP;break;
         }
@@ -174,13 +176,13 @@ void page_GET_POINT_ex(){
         switch(point){
             case 0:{
                 if(gps_check_flash()){
-                    flash_error();
+                    gps_point_error();
                     system_delay_ms(3000);
                     now_page=GET_POINT;
                 }
             }break;
             case 1:{
-
+                gps_get_point();
                 now_page=GET_POINT;
                 break;
             }
@@ -268,13 +270,13 @@ void page_ICM_show(){
     oled_show_string(0,0,"ICM20602"                );
     oled_show_string(0,1,"./TET/ICM"               );
     oled_show_string(0,3,"ACC(m/s^2)");
-    oled_show_float(0,4,icm20602_acc_transition(icm20602_acc_x),2,4);
-    oled_show_float(0,5,icm20602_acc_transition(icm20602_acc_y),2,4);
-    oled_show_float(0,6,icm20602_acc_transition(icm20602_acc_z),2,4);
+    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,4);
+    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,4);
+    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,4);
     oled_show_string(64,3,"GYRO('/s)");
-    oled_show_float(64,4,icm20602_gyro_transition(icm20602_gyro_x),2,4);
-    oled_show_float(64,5,icm20602_gyro_transition(icm20602_gyro_y),2,4);
-    oled_show_float(64,6,icm20602_gyro_transition(icm20602_gyro_z),2,4);
+    oled_show_float(64,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,4);
+    oled_show_float(64,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,4);
+    oled_show_float(64,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,4);
 }
 
 void page_ICM_ex(){
@@ -287,7 +289,7 @@ void page_ICM_ex(){
 void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
-    if(icm20602_acc_x==icm20602_acc_y && icm20602_acc_y==icm20602_acc_z){
+    if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
         oled_show_string(0,3,"WARNING: ICM NO DATA");
     }
     oled_show_string(0,5,"X>rol>"                    );

@@ -19,6 +19,8 @@ void page_error(void);
 void first_page(void);
 void page_MASTER_show();
 void page_MASTER_ex();
+void page_GET_POINT_show();
+void page_GET_POINT_ex();
 void page_TET_show();
 void page_TET_ex();
 void page_GPS_show();

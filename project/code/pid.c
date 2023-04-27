@@ -4,55 +4,55 @@ _ALL_PID all;
 
 const float  controller_parameter[3][5] =
 {
-  /* 0.kp 1.ki 2.kd 3.»ý·ÖÏÞ·ù 4.pidÊä³öÏÞ·ùÖµ */
-  /*µ÷ÊÔ²ÎÊý*/
-#if   0    /* 24V²ÎÊý1 */
-    {7.2 , 0.0,  0,  550 , 2000 },                           //rol_angle  £¨ÄÚ»·½Ç¶È»·£©
-    {0.065, 0.00001,  0.065,  500 , 2000 },                  //vel_encoder£¨Íâ»·ËÙ¶È»·£©
-    {24.5 ,  0.0,  0,  500 , 2000 },                         //gyro       £¨ÄÚ»·½ÇËÙ¶È»·£©
-#elif 0   /* 24V²ÎÊý2 */
+  /* 0.kp 1.ki 2.kd 3.ç§¯åˆ†é™å¹… 4.pidè¾“å‡ºé™å¹…å€¼ */
+  /*è°ƒè¯•å‚æ•°*/
+#if   0    /* 24Vå‚æ•°1 */
+    {7.2 , 0.0,  0,  550 , 2000 },                           //rol_angle  ï¼ˆå†…çŽ¯è§’åº¦çŽ¯ï¼‰
+    {0.065, 0.00001,  0.065,  500 , 2000 },                  //vel_encoderï¼ˆå¤–çŽ¯é€Ÿåº¦çŽ¯ï¼‰
+    {24.5 ,  0.0,  0,  500 , 2000 },                         //gyro       ï¼ˆå†…çŽ¯è§’é€Ÿåº¦çŽ¯ï¼‰
+#elif 0   /* 24Vå‚æ•°2 */
     {7.2 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.072 , 0.00015,  0.00,  500 , 2000 },                  //vel_encoder
     {27.5 ,  0.0,  0,  500 , 2000 },                         //gyro
 
-#elif 0   /* 20V²ÎÊý1 */
+#elif 0   /* 20Vå‚æ•°1 */
     {7.5 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.075 , 0.0002,  0.00,  500 , 2000 },                   //vel_encoder
     {30.6 ,  0.0,  0,  500 , 2000 },                         //gyro
-#elif 0 /* 20V²ÎÊý2 */
+#elif 0 /* 20Vå‚æ•°2 */
     {7.5 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.070 , 0.0001,  0.05,  500 , 2000 },                   //vel_encoder
     {29.6 ,  0.0,  0,  500 , 2000 },                         //gyro
-#elif 0 /* 20V²ÎÊý3 */
+#elif 0 /* 20Vå‚æ•°3 */
     {8.8 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.068 , 0.00005,  0.055,  500 , 2000 },                 //vel_encoder
-    {26.5 ,  0.0,  0,  500 , 2000 },                         //gyro         ¡¤
-#elif 1 /* 20V²ÎÊý4 */
+    {26.5 ,  0.0,  0,  500 , 2000 },                         //gyro         Â·
+#elif 1 /* 20Vå‚æ•°4 */
     {7.5 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.068 , 0.00005,  0.055,  500 , 2000 },                 //vel_encoder
     {26.5 ,  0.0,  0,  500 , 2000 },                         //gyro
-#elif 0 /* 20V²ÎÊý5 */
+#elif 0 /* 20Vå‚æ•°5 */
     {8.5 , 0.0,  0,  550 , 2000 },                           //rol_angle
     {0.065 , 0.00002,  0.050,  500 , 2000 },                 //vel_encoder
     {25.5 ,  0.0,  0,  500 , 2000 },                         //gyro
-#elif 0 /* 20V²ÎÊý6 */
+#elif 0 /* 20Vå‚æ•°6 */
     {8.9 , 0.001,  0,  550 , 2000 },                           //rol_angle
-    {0.055 , 0.00002,  0.035,  500 , 2000 },                 //vel_encoder  ¡¤
+    {0.055 , 0.00002,  0.035,  500 , 2000 },                 //vel_encoder  Â·
     {25.5 ,  0.0,  0,  500 , 2000 },                         //gyro
 
-#elif 0 /* 12V²ÎÊý */
-    {7.2, 0.0,  0,  500 , 2000 },                           //rol_angle     ¡¤
-    {0.08, 0.0,  0.0004,  550 , 2000 },                     //vel_encoder¡¤
+#elif 0 /* 12Vå‚æ•° */
+    {7.2, 0.0,  0,  500 , 2000 },                           //rol_angle     Â·
+    {0.08, 0.0,  0.0004,  550 , 2000 },                     //vel_encoderÂ·
     {55.5,  0.0,  0,  550 , 2000 },                         //gyro
 #endif
 };
 
 
-/* Ãû×Ö£ºPID²ÎÊý³õÊ¼»¯
- * ¹¦ÄÜ£ºPID²ÎÊý³õÊ¼»¯ÅäÖÃ
- * ²ÎÊý£º½á¹¹ÌåÖ¸Õë_PID
- * ²ÎÊý£ºPID¸÷¸ö²ÎÊýÖµ
- * ·µ»ØÖµ£ºÎÞ
+/* åå­—ï¼šPIDå‚æ•°åˆå§‹åŒ–
+ * åŠŸèƒ½ï¼šPIDå‚æ•°åˆå§‹åŒ–é…ç½®
+ * å‚æ•°ï¼šç»“æž„ä½“æŒ‡é’ˆ_PID
+ * å‚æ•°ï¼šPIDå„ä¸ªå‚æ•°å€¼
+ * è¿”å›žå€¼ï¼šæ— 
  */
 void pid_init(_PID *controller,uint8_t label)
 {
@@ -63,10 +63,10 @@ void pid_init(_PID *controller,uint8_t label)
     controller->out_max         = controller_parameter[label][4];
 }
 
-/* Ãû×Ö£º¸÷»·PID²ÎÊý³õÊ¼»¯
- * ¹¦ÄÜ£º¸÷»·PID²ÎÊý³õÊ¼»¯ÅäÖÃ
- * ²ÎÊý£ºÎÞ
- * ·µ»ØÖµ£ºÎÞ
+/* åå­—ï¼šå„çŽ¯PIDå‚æ•°åˆå§‹åŒ–
+ * åŠŸèƒ½ï¼šå„çŽ¯PIDå‚æ•°åˆå§‹åŒ–é…ç½®
+ * å‚æ•°ï¼šæ— 
+ * è¿”å›žå€¼ï¼šæ— 
  */
 void all_pid_init(void)
 {
@@ -75,34 +75,81 @@ void all_pid_init(void)
     pid_init(&all.rol_gyro,2);
 }
 
-/* Ãû×Ö£ºPID¿ØÖÆÆ÷
- * ¹¦ÄÜ£ºÍ¨¹ýPID¼ÆËãµÃµ½Êä³öÖµ
- * ²ÎÊý£º½á¹¹ÌåÖ¸Õë _PID
- * ·µ»ØÖµ£ºPIDÊä³öÖµ
+/* åå­—ï¼šPIDæŽ§åˆ¶å™¨
+ * åŠŸèƒ½ï¼šé€šè¿‡PIDè®¡ç®—å¾—åˆ°è¾“å‡ºå€¼
+ * å‚æ•°ï¼šç»“æž„ä½“æŒ‡é’ˆ _PID
+ * è¿”å›žå€¼ï¼šPIDè¾“å‡ºå€¼
  */
 float pid_controller(_PID *controller)
 {
-    controller->err_last = controller->err;                                          //±£ÁôÉÏ´ÎÆ«²î
-    controller->err = controller->expect - controller->feedback;                     //Æ«²î¼ÆËã
-    controller->integral += controller->ki * controller->err;                        //»ý·Ö
-    //»ý·ÖÏÞ·ù
+    controller->err_last = controller->err;                                          //ä¿ç•™ä¸Šæ¬¡åå·®
+    controller->err = controller->expect - controller->feedback;                     //åå·®è®¡ç®—
+    controller->integral += controller->ki * controller->err;                        //ç§¯åˆ†
+    //ç§¯åˆ†é™å¹…
     if(controller->integral >  controller->integral_max)     controller->integral =  controller->integral_max;
     if(controller->integral < -controller->integral_max)     controller->integral = -controller->integral_max;
-    //pidÔËËã
+    //pidè¿ç®—
     controller->out =  controller->kp*controller->err + controller->integral + controller->kd*(controller->err-controller->err_last);
 
-    //Êä³öÏÞ·ù
+    //è¾“å‡ºé™å¹…
     if(controller->out >  controller->out_max)   controller->out =  controller->out_max;
     if(controller->out < -controller->out_max)   controller->out = -controller->out_max;
     return controller->out;
 }
 
-/* Ãû×Ö£ºÇå³ýPID¿ØÖÆÆ÷Ïî»ý·ÖÏî
- * ¹¦ÄÜ£ºÇå³ýPID¿ØÖÆÆ÷»ý·ÖÏî
- * ²ÎÊý£º½á¹¹ÌåÖ¸Õë _PID
- * ·µ»ØÖµ£ºÎÞ
+/* åå­—ï¼šæ¸…é™¤PIDæŽ§åˆ¶å™¨é¡¹ç§¯åˆ†é¡¹
+ * åŠŸèƒ½ï¼šæ¸…é™¤PIDæŽ§åˆ¶å™¨ç§¯åˆ†é¡¹
+ * å‚æ•°ï¼šç»“æž„ä½“æŒ‡é’ˆ _PID
+ * è¿”å›žå€¼ï¼šæ— 
  */
 void clear_integral(_PID *controller)
 {
     controller->integral = 0.0f;
+}
+/********************************************************************************************************/
+
+
+PID MOTOR_SUM;
+
+
+/**********************************************************************************************/
+/* åå­—ï¼šPID_Init
+ * åŠŸèƒ½ï¼šç”¨äºŽåˆå§‹åŒ–pidå‚æ•°çš„å‡½æ•°
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
+ */
+void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
+{
+    pid->kp=p;
+    pid->ki=i;
+    pid->kd=d;
+    pid->maxIntegral=maxI;
+    pid->maxOutput=maxOut;
+}
+
+/**********************************************************************************************/
+/* åå­—ï¼šPID_Calc
+ * åŠŸèƒ½ï¼šè¿›è¡Œä¸€æ¬¡pidè®¡ç®—
+ * å‚æ•°ï¼š(pidç»“æž„ä½“,ç›®æ ‡å€¼,åé¦ˆå€¼)ï¼Œè®¡ç®—ç»“æžœæ”¾åœ¨pidç»“æž„ä½“çš„outputæˆå‘˜ä¸­
+ * è¾“å‡ºï¼šæ— 
+ */
+void PID_Calc(PID *pid,float reference,float feedback)
+{
+    //æ›´æ–°æ•°æ®
+    pid->lastError=pid->error;//å°†æ—§errorå­˜èµ·æ¥
+    pid->error=reference-feedback;//è®¡ç®—æ–°error
+    //è®¡ç®—å¾®åˆ†
+    float dout=(pid->error-pid->lastError)*pid->kd;
+    //è®¡ç®—æ¯”ä¾‹
+    float pout=pid->error*pid->kp;
+    //è®¡ç®—ç§¯åˆ†
+    pid->integral+=pid->error*pid->ki;
+    //ç§¯åˆ†é™å¹…
+    if(pid->integral > pid->maxIntegral) pid->integral=pid->maxIntegral;
+    else if(pid->integral < -pid->maxIntegral) pid->integral=-pid->maxIntegral;
+    //è®¡ç®—è¾“å‡º
+    pid->output=pout+dout+pid->integral;
+    //è¾“å‡ºé™å¹…
+    if(pid->output > pid->maxOutput) pid->output=pid->maxOutput;
+    else if(pid->output < -pid->maxOutput) pid->output=-pid->maxOutput;
 }

@@ -45,6 +45,27 @@ int gps_check_flash(void){
     }
 }
 
+/* @fn gps_display_point_type
+ * @brief 显示GPS点类型选择页面
+ * @param point_type 当前选择的GPS点类型
+ * @return void
+ */
+void gps_display_point_type(uint8_t point_type) {
+    oled_clear();
+    oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
+    oled_show_string(0,3,"[UP]"                      );
+    oled_show_string(0,5,"[DOWN]"                    );
+    oled_show_string(0,7,"[COF]  [RVK]"              );
+    switch(point_type){
+        case 1:oled_show_string(36,4,"STR---"            );break;
+        case 2:oled_show_string(36,4,"UPHELL"            );break;
+        case 3:oled_show_string(36,4,"-TAR--"            );break;
+        case 4:oled_show_string(36,4,"--RTT-"            );break;
+        case 5:oled_show_string(36,4,"---SBD"            );break;
+        case 6:oled_show_string(36,4,"FINISH"            );
+    }
+}
+
 /* @fn gps_line_write
  * @brief 向GPS点位数组的指定行写入数据
  * @param line 指定行
@@ -63,25 +84,14 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @brief GPS取点的专门用户交互页面
  * @param void
  * @return 0 mean yes, 1 mean error
+ * @notice 我超写得那么紧密耦合鬼看得懂
  */
 int gps_get_point(void){
-    int i=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
+    int i=0,j=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
     float latitude,longitude;
     uint8 point_type=1;
-    oled_clear();
-    oled_show_chinese(0, 0, 16,(const uint8 *)POINT_TYPE,5);
-    oled_show_string(0,3,"[UP]"                      );
-    oled_show_string(0,5,"[DOWN]"                    );
-    oled_show_string(0,7,"[COF]  [RVK]"              );
     while(i<GPS_DATA_MAX){
-        switch(point_type){
-            case 1:oled_show_string(36,4,"STR---"            );break;
-            case 2:oled_show_string(36,4,"UPHELL"            );break;
-            case 3:oled_show_string(36,4,"-TAR--"            );break;
-            case 4:oled_show_string(36,4,"--RTT-"            );break;
-            case 5:oled_show_string(36,4,"---SBD"            );break;
-            case 6:oled_show_string(36,4,"FINISH"            );
-        }
+        gps_display_point_type(point_type);
         key_scanner();
         system_delay_ms(50);
         if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
@@ -105,7 +115,7 @@ int gps_get_point(void){
         else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
             gps_average_pointing(&latitude,&longitude);
             gps_line_write(i++,latitude,longitude,point_type);
-            if(point_type==6){
+            if(point_type==FINISH){
                 break;
             }
             else if(i>=GPS_DATA_MAX){
@@ -114,6 +124,27 @@ int gps_get_point(void){
         }
     }
     //这里将GPS数据逐个录入FLASH
+    flash_buffer_clear();
+    flash_erase_sector(section,page);
+    for(j=0;j<i;j++){
+        flash_union_buffer[1+column].int16_type=gps_point[j].latitude;
+        flash_union_buffer[2+column].int16_type=gps_point[j].longitude;
+        flash_union_buffer[3+column].uint8_type=gps_point[j].point_type;
+        if(column==0){
+            column=3;
+        }
+        else{
+            column=0;
+            while(flash_write_page_from_buffer(section,page));
+            if(--page<0){
+                section--;
+            }
+            flash_erase_sector(section,page);
+            flash_buffer_clear();
+        }
+        
+    }
+    return 0;
 }
 
 /* @fn gps_average_pointing
@@ -123,12 +154,25 @@ int gps_get_point(void){
  * @return void
  */
 void gps_average_pointing(int8* average_latitude,int8* average_longitude){
-    double latitude_total;
-    double longitude_total;
+    double latitude_total=0;
+    double longitude_total=0;
     int i;
+    oled_clear();
+    oled_show_string(0,0,"GPS GET POINT NOW");
     for(i=0;i<GPS_OFFSET;i++){
+        oled_show_int(0,1,i,2);
         while(!gps_tau1201_flag);//等待GPS信号
         gps_tau1201_flag=0;
+        while(!gps_tau1201.state){
+            oled_show_string(0,3,"GPS FAIL LOCATE");                //定位失败
+        }
+        oled_show_string(0,3, "               ");
+        oled_show_string(0, 5, "N ->");
+        oled_show_float(32,5,gps_tau1201.latitude,4,6);      //纬度
+        oled_show_string(0, 6, "E ->");
+        oled_show_float(32,6,gps_tau1201.longitude,4,6);     //经度
+        oled_show_string(0, 7, "STL>");
+        oled_show_int(32,7,gps_tau1201.satellite_used,2);    //卫星连接数量
         latitude_total+=gps_tau1201.latitude;
         longitude_total+=gps_tau1201.longitude;
     }

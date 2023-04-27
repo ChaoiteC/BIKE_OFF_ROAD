@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºå®˜æ–¹ SDK æ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
-* Copyright (c) 2022 SEEKFREE é€é£ç§‘æŠ€
+* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈı·½¿ªÔ´¿â
+* Copyright (c) 2022 SEEKFREE Öğ·É¿Æ¼¼
 *
-* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
+* ±¾ÎÄ¼şÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
 *
-* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
-* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
-* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
+* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼ş
+* Äú¿ÉÒÔ¸ù¾İ×ÔÓÉÈí¼ş»ù½ğ»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ğí¿ÉÖ¤£©µÄÌõ¿î
+* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØĞÂ·¢²¼ºÍ/»òĞŞ¸ÄËü
 *
-* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
-* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
-* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
+* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
+* ÉõÖÁÃ»ÓĞÒşº¬µÄÊÊÏúĞÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
+* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
 *
-* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
-* å¦‚æœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
+* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·İ GPL µÄ¸±±¾
+* Èç¹ûÃ»ÓĞ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
 *
-* é¢å¤–æ³¨æ˜ï¼š
-* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜ä¸ºè¯‘æ–‡ç‰ˆæœ¬
-* è®¸å¯ç”³æ˜è‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
-* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
-* æ¬¢è¿å„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£ç§‘æŠ€çš„ç‰ˆæƒå£°æ˜ï¼ˆå³æœ¬å£°æ˜ï¼‰
+* ¶îÍâ×¢Ã÷£º
+* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ğí¿ÉÖ¤Ğ­Òé ÒÔÉÏĞí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
+* Ğí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼ş¼ĞÏÂµÄ GPL3_permission_statement.txt ÎÄ¼şÖĞ
+* Ğí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼ş¼ĞÏÂ ¼´¸ÃÎÄ¼ş¼ĞÏÂµÄ LICENSE ÎÄ¼ş
+* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌĞò µ«ĞŞ¸ÄÄÚÈİÊ±±ØĞë±£ÁôÖğ·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
 *
-* æ–‡ä»¶åç§°          zf_driver_pit
-* å…¬å¸åç§°          æˆéƒ½é€é£ç§‘æŠ€æœ‰é™å…¬å¸
-* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜
-* å¼€å‘ç¯å¢ƒ          MounRiver Studio V1.8.1
-* é€‚ç”¨å¹³å°          CH32V307VCT6
-* åº—é“ºé“¾æ¥          https://seekfree.taobao.com/
+* ÎÄ¼şÃû³Æ          zf_driver_pit
+* ¹«Ë¾Ãû³Æ          ³É¶¼Öğ·É¿Æ¼¼ÓĞÏŞ¹«Ë¾
+* °æ±¾ĞÅÏ¢          ²é¿´ libraries/doc ÎÄ¼ş¼ĞÄÚ version ÎÄ¼ş °æ±¾ËµÃ÷
+* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
+* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
+* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
 *
-* ä¿®æ”¹è®°å½•
-* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
-* 2022-09-15        å¤§W            first version
+* ĞŞ¸Ä¼ÇÂ¼
+* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
+* 2022-09-15        ´óW            first version
 ********************************************************************************************************************/
 
 
@@ -43,10 +43,10 @@
 #include "zf_driver_pit.h"
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹      PIT ä¸­æ–­ä½¿èƒ½
-// å‚æ•°è¯´æ˜     pit_n           PIT å¤–è®¾æ¨¡å—å·
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     pit_enable(TIM1_PIT);
+// º¯Êı¼ò½é      PIT ÖĞ¶ÏÊ¹ÄÜ
+// ²ÎÊıËµÃ÷     pit_n           PIT ÍâÉèÄ£¿éºÅ
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     pit_enable(TIM1_PIT);
 //-------------------------------------------------------------------------------------------------------------------
 void pit_enable (pit_index_enum pit_n)
 {
@@ -63,14 +63,14 @@ void pit_enable (pit_index_enum pit_n)
         TIM9_UP_IRQn,
         TIM10_UP_IRQn
     };
-    interrupt_enable(irq_index[pit_n]);                                // ä½¿èƒ½ä¸­æ–­
+    interrupt_enable(irq_index[pit_n]);                                // Ê¹ÄÜÖĞ¶Ï
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹      PIT ä¸­æ–­ç¦æ­¢
-// å‚æ•°è¯´æ˜     pit_n           PIT å¤–è®¾æ¨¡å—å·
-// è¿”å›å‚æ•°     void
-// ä½¿ç”¨ç¤ºä¾‹     pit_disable(TIM1_PIT);
+// º¯Êı¼ò½é      PIT ÖĞ¶Ï½ûÖ¹
+// ²ÎÊıËµÃ÷     pit_n           PIT ÍâÉèÄ£¿éºÅ
+// ·µ»Ø²ÎÊı     void
+// Ê¹ÓÃÊ¾Àı     pit_disable(TIM1_PIT);
 //-------------------------------------------------------------------------------------------------------------------
 void pit_disable (pit_index_enum pit_n)
 {
@@ -88,32 +88,32 @@ void pit_disable (pit_index_enum pit_n)
         TIM10_UP_IRQn
     };
 
-    interrupt_disable(irq_index[pit_n]);                                // å¤±èƒ½ä¸­æ–­
+    interrupt_disable(irq_index[pit_n]);                                // Ê§ÄÜÖĞ¶Ï
 
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// å‡½æ•°ç®€ä»‹     å®šæ—¶å™¨å‘¨æœŸä¸­æ–­
-// å‚æ•°è¯´æ˜     timer_ch      å®šæ—¶å™¨é€šé“
-// å‚æ•°è¯´æ˜     us          å®šæ—¶å‘¨æœŸ(1-65535)
-// è¿”å›å‚æ•°     void
-// å¤‡æ³¨ä¿¡æ¯           pit_init(TIMER_1, 5); ä½¿ç”¨å®šæ—¶å™¨1ä½œä¸º5msä¸€æ¬¡çš„å‘¨æœŸä¸­æ–­
+// º¯Êı¼ò½é     ¶¨Ê±Æ÷ÖÜÆÚÖĞ¶Ï
+// ²ÎÊıËµÃ÷     timer_ch      ¶¨Ê±Æ÷Í¨µÀ
+// ²ÎÊıËµÃ÷     us          ¶¨Ê±ÖÜÆÚ(1-65535)
+// ·µ»Ø²ÎÊı     void
+// ±¸×¢ĞÅÏ¢           pit_init(TIMER_1, 5); Ê¹ÓÃ¶¨Ê±Æ÷1×÷Îª5msÒ»´ÎµÄÖÜÆÚÖĞ¶Ï
 //-------------------------------------------------------------------------------------------------------------------
 void pit_init (pit_index_enum pit_n, uint32 period)
 {
 
-    // å¦‚æœç¨‹åºåœ¨è¾“å‡ºäº†æ–­è¨€ä¿¡æ¯ å¹¶ä¸”æç¤ºå‡ºé”™ä½ç½®åœ¨è¿™é‡Œ
-    // å°±å»æŸ¥çœ‹ä½ åœ¨ä»€ä¹ˆåœ°æ–¹è°ƒç”¨è¿™ä¸ªå‡½æ•° æ£€æŸ¥ä½ çš„ä¼ å…¥å‚æ•°
-    // è¿™é‡Œæ˜¯æ£€æŸ¥æ˜¯å¦æœ‰é‡å¤ä½¿ç”¨å®šæ—¶å™¨
-    // æ¯”å¦‚åˆå§‹åŒ–äº† TIM1_PWM ç„¶ååˆåˆå§‹åŒ–æˆ TIM1_PIT è¿™ç§ç”¨æ³•æ˜¯ä¸å…è®¸çš„
+    // Èç¹û³ÌĞòÔÚÊä³öÁË¶ÏÑÔĞÅÏ¢ ²¢ÇÒÌáÊ¾³ö´íÎ»ÖÃÔÚÕâÀï
+    // ¾ÍÈ¥²é¿´ÄãÔÚÊ²Ã´µØ·½µ÷ÓÃÕâ¸öº¯Êı ¼ì²éÄãµÄ´«Èë²ÎÊı
+    // ÕâÀïÊÇ¼ì²éÊÇ·ñÓĞÖØ¸´Ê¹ÓÃ¶¨Ê±Æ÷
+    // ±ÈÈç³õÊ¼»¯ÁË TIM1_PWM È»ºóÓÖ³õÊ¼»¯³É TIM1_PIT ÕâÖÖÓÃ·¨ÊÇ²»ÔÊĞíµÄ
     zf_assert(timer_funciton_check((timer_index_enum)pit_n, TIMER_FUNCTION_TIMER));
-    // å¦‚æœæ˜¯è¿™ä¸€è¡ŒæŠ¥é”™ é‚£æˆ‘å°±å¾—é—®é—®ä½ ä¸ºä»€ä¹ˆå‘¨æœŸå†™çš„æ˜¯ 0
+    // Èç¹ûÊÇÕâÒ»ĞĞ±¨´í ÄÇÎÒ¾ÍµÃÎÊÎÊÄãÎªÊ²Ã´ÖÜÆÚĞ´µÄÊÇ 0
     zf_assert(period!=0);
 
-    uint16 freq_div = (period >> 15);                                           // è®¡ç®—é¢„åˆ†é¢‘
-    uint16 period_temp = (period / (freq_div+1));                               // è®¡ç®—è‡ªåŠ¨é‡è£…è½½å€¼
+    uint16 freq_div = (period >> 15);                                           // ¼ÆËãÔ¤·ÖÆµ
+    uint16 period_temp = (period / (freq_div+1));                               // ¼ÆËã×Ô¶¯ÖØ×°ÔØÖµ
 
-    timer_clock_enable(pit_n);                                                  // ä½¿èƒ½æ—¶é’Ÿ
+    timer_clock_enable(pit_n);                                                  // Ê¹ÄÜÊ±ÖÓ
 
 
     TIM_TypeDef *tim_index = TIM1;
@@ -134,12 +134,12 @@ void pit_init (pit_index_enum pit_n, uint32 period)
 
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure = {0};
     TIM_TimeBaseStructure.TIM_Period = period_temp;
-    TIM_TimeBaseStructure.TIM_Prescaler = freq_div;                             // åˆ†é¢‘å€¼
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;                     // è®¾ç½®æ—¶é’Ÿåˆ†å‰²:TDTS = Tck_tim
-    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;                 // TIMå‘ä¸Šè®¡æ•°æ¨¡å¼
-    TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                            // é‡å¤è®¡æ•°å™¨è®¾ç½®ä¸º0
-    TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                        // æ ¹æ®æŒ‡å®šçš„å‚æ•°åˆå§‹åŒ–TIMxçš„æ—¶é—´åŸºæ•°å•ä½
-    TIM_ITConfig(tim_index,TIM_IT_Update,ENABLE );                              // ä½¿èƒ½æŒ‡å®šçš„TIMä¸­æ–­,å…è®¸æ›´æ–°ä¸­æ–­
+    TIM_TimeBaseStructure.TIM_Prescaler = freq_div;                             // ·ÖÆµÖµ
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;                     // ÉèÖÃÊ±ÖÓ·Ö¸î:TDTS = Tck_tim
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;                 // TIMÏòÉÏ¼ÆÊıÄ£Ê½
+    TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                            // ÖØ¸´¼ÆÊıÆ÷ÉèÖÃÎª0
+    TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                        // ¸ù¾İÖ¸¶¨µÄ²ÎÊı³õÊ¼»¯TIMxµÄÊ±¼ä»ùÊıµ¥Î»
+    TIM_ITConfig(tim_index,TIM_IT_Update,ENABLE );                              // Ê¹ÄÜÖ¸¶¨µÄTIMÖĞ¶Ï,ÔÊĞí¸üĞÂÖĞ¶Ï
     TIM_ClearITPendingBit(tim_index, TIM_IT_Update);
 
     const uint32  irq_index[10] =
@@ -156,8 +156,8 @@ void pit_init (pit_index_enum pit_n, uint32 period)
         TIM10_UP_IRQn
     };
 
-    interrupt_set_priority((IRQn_Type)irq_index[(uint8)pit_n], 0x03);           // è®¾ç½®ä¸­æ–­ä¼˜å…ˆçº§
-    interrupt_enable((IRQn_Type)irq_index[pit_n]);                              // ä½¿èƒ½ä¸­æ–­
+    interrupt_set_priority((IRQn_Type)irq_index[(uint8)pit_n], 0x03);           // ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶
+    interrupt_enable((IRQn_Type)irq_index[pit_n]);                              // Ê¹ÄÜÖĞ¶Ï
 
-    TIM_Cmd(tim_index, ENABLE);                                                 // ä½¿èƒ½å®šæ—¶å™¨
+    TIM_Cmd(tim_index, ENABLE);                                                 // Ê¹ÄÜ¶¨Ê±Æ÷
 }

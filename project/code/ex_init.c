@@ -17,7 +17,13 @@ void ex_init(void){
     //键盘初始化
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(500);
-                
+
+    //FLASH初始化
+    oled_clear();
+    oled_show_string(0, 0, "FLASH checking...");
+    if(!flash_check (63,3)){//FLASH无数据则初始化
+        
+    }
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");

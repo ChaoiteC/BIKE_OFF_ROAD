@@ -37,7 +37,6 @@
 #include "zf_driver_timer.h"
 #include "zf_driver_encoder.h"
 
-_ENCODER_INFO encoderINFO = { 0 } ;//定义一个编码器值结构体来储存编码器的值
 
 static volatile uint8 encoder_dir_pin[10] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                             0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -260,37 +259,3 @@ void encoder_dir_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pin
     }
 }
 
-/******************************************（自己的代码）***********************************************/
-
-/* 名字：EncoderManage
- * 功能：编码器值处理，将原本反转由大到小的正数数据变为从0开始减小的负数的数据
- * 参数：*ecdData 编码数据指针变量
- * 返回：无
- */
-static void EncoderManage(int *ecdData)
-{
-  //编码器方向时，转换为正向时对应的负数
-  if(*ecdData > FULL_ENCODER * 0.5f)
-    *ecdData = *ecdData - FULL_ENCODER ;
-}
-
-
-/* 名字：readEncoderValue
- * 功能：读取编码器转速值
- * 参数：无
- * 返回：无
- */
-uint8_t readEncoderValue(void)
-{
-  encoderINFO.directionValue =  //（这里填入编码器的转动方向的值）;             //读取编码器转动方向
-  encoderINFO.mainNumberValue = encoder_get_count(TIM2_ENCOEDER);        //读取编码器值
-  //这里要清除编码器定时器的值（使用函数）
-  /***********（填入函数）************/
-  encoder_clear_count(TIM2_ENCOEDER);
-  /***********（填入函数）************/
-  EncoderManage(&encoderINFO.mainNumberValue) ;
-
-  return 0;
-}
-
-/******************************************（自己的代码）***********************************************/

@@ -1,47 +1,47 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºŽå®˜æ–¹ SDK æŽ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
-* Copyright (c) 2022 SEEKFREE é€é£žç§‘æŠ€
+* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
+* Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
 *
-* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
+* ±¾ÎÄ¼þÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
 *
-* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
-* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
-* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åŽæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
+* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
+* Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
+* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
 *
-* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
-* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
-* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
+* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
+* ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
+* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
 *
-* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
-* å¦‚æžœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
+* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
+* Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
 *
-* é¢å¤–æ³¨æ˜Žï¼š
-* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜Žä¸ºè¯‘æ–‡ç‰ˆæœ¬
-* è®¸å¯ç”³æ˜Žè‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
-* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
-* æ¬¢è¿Žå„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£žç§‘æŠ€çš„ç‰ˆæƒå£°æ˜Žï¼ˆå³æœ¬å£°æ˜Žï¼‰
+* ¶îÍâ×¢Ã÷£º
+* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
+* Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
+* Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
+* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
 *
-* æ–‡ä»¶åç§°          zf_device_mpu6050
-* å…¬å¸åç§°          æˆéƒ½é€é£žç§‘æŠ€æœ‰é™å…¬å¸
-* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜Ž
-* å¼€å‘çŽ¯å¢ƒ          MounRiver Studio V1.8.1
-* é€‚ç”¨å¹³å°          CH32V307VCT6
-* åº—é“ºé“¾æŽ¥          https://seekfree.taobao.com/
+* ÎÄ¼þÃû³Æ          zf_device_mpu6050
+* ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
+* °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
+* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
+* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
+* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
 *
-* ä¿®æ”¹è®°å½•
-* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
-* 2022-09-15        å¤§W            first version
+* ÐÞ¸Ä¼ÇÂ¼
+* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
+* 2022-09-15        ´óW            first version
 ********************************************************************************************************************/
 /*********************************************************************************************************************
-* æŽ¥çº¿å®šä¹‰ï¼š
+* ½ÓÏß¶¨Òå£º
 *                   ------------------------------------
-*                   æ¨¡å—ç®¡è„š                                        å•ç‰‡æœºç®¡è„š
-*                   è½¯ä»¶ IIC é€šä¿¡å¼•è„šå¯¹åº”å…³ç³»
-*                   SCL                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_SOFT_IIC_SCL å®å®šä¹‰
-*                   SDA                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_SOFT_IIC_SDA å®å®šä¹‰
-*                   ç¡¬ä»¶ IIC é€šä¿¡å¼•è„šå¯¹åº”å…³ç³»
-*                   SCL                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_IIC_SCL å®å®šä¹‰
-*                   SDA                 æŸ¥çœ‹ zf_device_mpu6050.h ä¸­ MPU6050_IIC_SDA å®å®šä¹‰
+*                   Ä£¿é¹Ü½Å                                        µ¥Æ¬»ú¹Ü½Å
+*                   Èí¼þ IIC Í¨ÐÅÒý½Å¶ÔÓ¦¹ØÏµ
+*                   SCL                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_SOFT_IIC_SCL ºê¶¨Òå
+*                   SDA                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_SOFT_IIC_SDA ºê¶¨Òå
+*                   Ó²¼þ IIC Í¨ÐÅÒý½Å¶ÔÓ¦¹ØÏµ
+*                   SCL                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_IIC_SCL ºê¶¨Òå
+*                   SDA                 ²é¿´ zf_device_mpu6050.h ÖÐ MPU6050_IIC_SDA ºê¶¨Òå
 *                   ------------------------------------
 ********************************************************************************************************************/
 
@@ -55,35 +55,32 @@
 
 #include "zf_driver_soft_iic.h"
 
-#include "zf_device_gps_tau1201.h"
-
-
-#define MPU6050_USE_SOFT_IIC        (1)                                         // é»˜è®¤ä½¿ç”¨è½¯ä»¶ IIC æ–¹å¼é©±åŠ¨ å»ºè®®ä½¿ç”¨è½¯ä»¶ IIC æ–¹å¼
-#if MPU6050_USE_SOFT_IIC                                                        // è¿™ä¸¤æ®µ é¢œè‰²æ­£å¸¸çš„æ‰æ˜¯æ­£ç¡®çš„ é¢œè‰²ç°çš„å°±æ˜¯æ²¡æœ‰ç”¨çš„
-//====================================================è½¯ä»¶ IIC é©±åŠ¨====================================================
-#define MPU6050_SOFT_IIC_DELAY      (10 )                                       // è½¯ä»¶ IIC çš„æ—¶é’Ÿå»¶æ—¶å‘¨æœŸ æ•°å€¼è¶Šå° IIC é€šä¿¡é€ŸçŽ‡è¶Šå¿«
-#define MPU6050_SCL_PIN             (B3 )                                       // è½¯ä»¶ IIC SCL å¼•è„š è¿žæŽ¥ MPU6050 çš„ SCL å¼•è„š
-#define MPU6050_SDA_PIN             (B5 )                                       // è½¯ä»¶ IIC SDA å¼•è„š è¿žæŽ¥ MPU6050 çš„ SDA å¼•è„š
-//====================================================è½¯ä»¶ IIC é©±åŠ¨====================================================
+#define MPU6050_USE_SOFT_IIC        (1)                                         // Ä¬ÈÏÊ¹ÓÃÈí¼þ IIC ·½Ê½Çý¶¯ ½¨ÒéÊ¹ÓÃÈí¼þ IIC ·½Ê½
+#if MPU6050_USE_SOFT_IIC                                                        // ÕâÁ½¶Î ÑÕÉ«Õý³£µÄ²ÅÊÇÕýÈ·µÄ ÑÕÉ«»ÒµÄ¾ÍÊÇÃ»ÓÐÓÃµÄ
+//====================================================Èí¼þ IIC Çý¶¯====================================================
+#define MPU6050_SOFT_IIC_DELAY      (10 )                                       // Èí¼þ IIC µÄÊ±ÖÓÑÓÊ±ÖÜÆÚ ÊýÖµÔ½Ð¡ IIC Í¨ÐÅËÙÂÊÔ½¿ì
+#define MPU6050_SCL_PIN             (B3 )                                       // Èí¼þ IIC SCL Òý½Å Á¬½Ó MPU6050 µÄ SCL Òý½Å
+#define MPU6050_SDA_PIN             (B5 )                                       // Èí¼þ IIC SDA Òý½Å Á¬½Ó MPU6050 µÄ SDA Òý½Å
+//====================================================Èí¼þ IIC Çý¶¯====================================================
 #else
-//====================================================ç¡¬ä»¶ IIC é©±åŠ¨====================================================
-#define MPU6050_IIC_SPEED           (400000    )                               // ç¡¬ä»¶ IIC é€šä¿¡é€ŸçŽ‡ æœ€é«˜ 400KHz ä¸å»ºè®®ä½ŽäºŽ 40KHz
-#define MPU6050_IIC                 (æš‚ä¸æ”¯æŒ       )                               // ç¡¬ä»¶ IIC SCL å¼•è„š è¿žæŽ¥ MPU6050 çš„ SCL å¼•è„š
-#define MPU6050_SCL_PIN             (æš‚ä¸æ”¯æŒ       )                               // ç¡¬ä»¶ IIC SCL å¼•è„š è¿žæŽ¥ MPU6050 çš„ SCL å¼•è„š
-#define MPU6050_SDA_PIN             (æš‚ä¸æ”¯æŒ       )                               // ç¡¬ä»¶ IIC SDA å¼•è„š è¿žæŽ¥ MPU6050 çš„ SDA å¼•è„š
-//====================================================ç¡¬ä»¶ IIC é©±åŠ¨====================================================
+//====================================================Ó²¼þ IIC Çý¶¯====================================================
+#define MPU6050_IIC_SPEED           (400000    )                               // Ó²¼þ IIC Í¨ÐÅËÙÂÊ ×î¸ß 400KHz ²»½¨ÒéµÍÓÚ 40KHz
+#define MPU6050_IIC                 (ÔÝ²»Ö§³Ö       )                               // Ó²¼þ IIC SCL Òý½Å Á¬½Ó MPU6050 µÄ SCL Òý½Å
+#define MPU6050_SCL_PIN             (ÔÝ²»Ö§³Ö       )                               // Ó²¼þ IIC SCL Òý½Å Á¬½Ó MPU6050 µÄ SCL Òý½Å
+#define MPU6050_SDA_PIN             (ÔÝ²»Ö§³Ö       )                               // Ó²¼þ IIC SDA Òý½Å Á¬½Ó MPU6050 µÄ SDA Òý½Å
+//====================================================Ó²¼þ IIC Çý¶¯====================================================
 #endif
 
-#define MPU6050_TIMEOUT_COUNT       (0x00FF)                                    // MPU6050 è¶…æ—¶è®¡æ•°
+#define MPU6050_TIMEOUT_COUNT       (0x00FF)                                    // MPU6050 ³¬Ê±¼ÆÊý
 
-//================================================å®šä¹‰ MPU6050 å†…éƒ¨åœ°å€================================================
-#define MPU6050_DEV_ADDR            (0xD0>>1)                                   // IICå†™å…¥æ—¶çš„åœ°å€å­—èŠ‚æ•°æ®ï¼Œ+1ä¸ºè¯»å–
+//================================================¶¨Òå MPU6050 ÄÚ²¿µØÖ·================================================
+#define MPU6050_DEV_ADDR            (0xD0>>1)                                   // IICÐ´ÈëÊ±µÄµØÖ·×Ö½ÚÊý¾Ý£¬+1Îª¶ÁÈ¡
 
-#define MPU6050_SMPLRT_DIV          (0x19)                                      // é™€èžºä»ªé‡‡æ ·çŽ‡ï¼Œå…¸åž‹å€¼ï¼š0x07(125Hz)
-#define MPU6050_CONFIG              (0x1A)                                      // ä½Žé€šæ»¤æ³¢é¢‘çŽ‡ï¼Œå…¸åž‹å€¼ï¼š0x06(5Hz)
-#define MPU6050_GYRO_CONFIG         (0x1B)                                      // é™€èžºä»ªè‡ªæ£€åŠæµ‹é‡èŒƒå›´ï¼Œå…¸åž‹å€¼ï¼š0x18(ä¸è‡ªæ£€ï¼Œ2000deg/s)
-#define MPU6050_ACCEL_CONFIG        (0x1C)                                      // åŠ é€Ÿè®¡è‡ªæ£€ã€æµ‹é‡èŒƒå›´åŠé«˜é€šæ»¤æ³¢é¢‘çŽ‡ï¼Œå…¸åž‹å€¼ï¼š0x01(ä¸è‡ªæ£€ï¼Œ2Gï¼Œ5Hz)
-#define MPU6050_INT_PIN_CFG         (0x37)                                      // è®¾ç½®6050è¾…åŠ©I2Cä¸ºç›´é€šæ¨¡å¼å¯„å­˜å™¨
+#define MPU6050_SMPLRT_DIV          (0x19)                                      // ÍÓÂÝÒÇ²ÉÑùÂÊ£¬µäÐÍÖµ£º0x07(125Hz)
+#define MPU6050_CONFIG              (0x1A)                                      // µÍÍ¨ÂË²¨ÆµÂÊ£¬µäÐÍÖµ£º0x06(5Hz)
+#define MPU6050_GYRO_CONFIG         (0x1B)                                      // ÍÓÂÝÒÇ×Ô¼ì¼°²âÁ¿·¶Î§£¬µäÐÍÖµ£º0x18(²»×Ô¼ì£¬2000deg/s)
+#define MPU6050_ACCEL_CONFIG        (0x1C)                                      // ¼ÓËÙ¼Æ×Ô¼ì¡¢²âÁ¿·¶Î§¼°¸ßÍ¨ÂË²¨ÆµÂÊ£¬µäÐÍÖµ£º0x01(²»×Ô¼ì£¬2G£¬5Hz)
+#define MPU6050_INT_PIN_CFG         (0x37)                                      // ÉèÖÃ6050¸¨ÖúI2CÎªÖ±Í¨Ä£Ê½¼Ä´æÆ÷
 #define MPU6050_ACCEL_XOUT_H        (0x3B)
 #define MPU6050_ACCEL_XOUT_L        (0x3C)
 #define MPU6050_ACCEL_YOUT_H        (0x3D)
@@ -96,101 +93,31 @@
 #define MPU6050_GYRO_YOUT_L         (0x46)
 #define MPU6050_GYRO_ZOUT_H         (0x47)
 #define MPU6050_GYRO_ZOUT_L         (0x48)
-#define MPU6050_USER_CONTROL        (0x6A)                                      // å…³é—­6050å¯¹è¾…åŠ©I2Cè®¾å¤‡çš„æŽ§åˆ¶
-#define MPU6050_PWR_MGMT_1          (0x6B)                                      // ç”µæºç®¡ç†ï¼Œå…¸åž‹å€¼ï¼š0x00(æ­£å¸¸å¯ç”¨)
-#define MPU6050_WHO_AM_I            (0x75)                                      // IICåœ°å€å¯„å­˜å™¨(é»˜è®¤æ•°å€¼0x68ï¼Œåªè¯»)
+#define MPU6050_USER_CONTROL        (0x6A)                                      // ¹Ø±Õ6050¶Ô¸¨ÖúI2CÉè±¸µÄ¿ØÖÆ
+#define MPU6050_PWR_MGMT_1          (0x6B)                                      // µçÔ´¹ÜÀí£¬µäÐÍÖµ£º0x00(Õý³£ÆôÓÃ)
+#define MPU6050_WHO_AM_I            (0x75)                                      // IICµØÖ·¼Ä´æÆ÷(Ä¬ÈÏÊýÖµ0x68£¬Ö»¶Á)
 
-#define MPU6050_ACC_SAMPLE          (0x10)                                      // åŠ é€Ÿåº¦è®¡é‡ç¨‹
-// è®¾ç½®ä¸º:0x00 é™€èžºä»ªé‡ç¨‹ä¸º:Â±250 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥131.2         å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x08 é™€èžºä»ªé‡ç¨‹ä¸º:Â±500 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥65.6          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x10 é™€èžºä»ªé‡ç¨‹ä¸º:Â±1000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥32.8          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x18 é™€èžºä»ªé‡ç¨‹ä¸º:Â±2000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥16.4          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+#define MPU6050_ACC_SAMPLE          (0x10)                                      // ¼ÓËÙ¶È¼ÆÁ¿³Ì
+// ÉèÖÃÎª:0x00 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À250 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ131.2         ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x08 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À500 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ65.6          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x10 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À1000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ32.8          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x18 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À2000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ16.4          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
 
-#define MPU6050_GYR_SAMPLE          (0x18)                                      // é™€èžºä»ªé‡ç¨‹
-// è®¾ç½®ä¸º:0x00 é™€èžºä»ªé‡ç¨‹ä¸º:Â±250 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥131.2         å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x08 é™€èžºä»ªé‡ç¨‹ä¸º:Â±500 dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥65.6          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x10 é™€èžºä»ªé‡ç¨‹ä¸º:Â±1000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥32.8          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
-// è®¾ç½®ä¸º:0x18 é™€èžºä»ªé‡ç¨‹ä¸º:Â±2000dps     èŽ·å–åˆ°çš„é™€èžºä»ªæ•°æ®é™¤ä»¥16.4          å¯ä»¥è½¬åŒ–ä¸ºå¸¦ç‰©ç†å•ä½çš„æ•°æ®ï¼Œå•ä½ä¸ºï¼šÂ°/s
+#define MPU6050_GYR_SAMPLE          (0x18)                                      // ÍÓÂÝÒÇÁ¿³Ì
+// ÉèÖÃÎª:0x00 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À250 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ131.2         ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x08 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À500 dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ65.6          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x10 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À1000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ32.8          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
+// ÉèÖÃÎª:0x18 ÍÓÂÝÒÇÁ¿³ÌÎª:¡À2000dps     »ñÈ¡µ½µÄÍÓÂÝÒÇÊý¾Ý³ýÒÔ16.4          ¿ÉÒÔ×ª»¯Îª´øÎïÀíµ¥Î»µÄÊý¾Ý£¬µ¥Î»Îª£º¡ã/s
 
-//================================================å®šä¹‰ MPU6050 å†…éƒ¨åœ°å€================================================
+//================================================¶¨Òå MPU6050 ÄÚ²¿µØÖ·================================================
 
-extern int16 mpu6050_gyro_x, mpu6050_gyro_y, mpu6050_gyro_z;                    // ä¸‰è½´é™€èžºä»ªæ•°æ®      gyro (é™€èžºä»ª)
-extern int16 mpu6050_acc_x, mpu6050_acc_y, mpu6050_acc_z;                       // ä¸‰è½´åŠ é€Ÿåº¦è®¡æ•°æ®    acc (accelerometer åŠ é€Ÿåº¦è®¡)
-
-/******************************************ï¼ˆè‡ªå·±çš„ä»£ç ï¼‰***********************************************/
-
-#define gyro_raw_to_deg_s       0.0609756097561f
-#define acc_raw_to_g            0.000244140625f
-#define deg_to_rad              (PI / 180.0f)
-#define rad_to_angle            (180.0f / PI)
-#define gyro_raw_to_radian_s    (gyro_raw_to_deg_s * deg_to_rad)
-#define accmax_1g      4096
-#define gravity_mss    9.80665f
-#define acc_to_1g      gravity_mss / accmax_1g
-#define one_g_to_acc   accmax_1g / gravity_mss
-
-typedef struct
-{
-    signed short x;
-    signed short y;
-    signed short z;
-}S16_XYZ;
-
-typedef struct
-{
-    uint16_t x;
-    uint16_t y;
-    uint16_t z;
-}U16_XYZ;
-
-typedef struct
-{
-    signed int x;
-    signed int y;
-    signed int z;
-}S32_XYZ;
-
-typedef struct
-{
-    float x;
-    float y;
-    float z;
-}SI_F_XYZ;
-
-typedef struct
-{
-  SI_F_XYZ deg_s;
-  SI_F_XYZ rad_s;
-  SI_F_XYZ acc_g;
-
-  float att_acc_factor;
-  float fix_acc_factor;
-}_Mpu6050_data;
-
-extern _Mpu6050_data Mpu;
-
-
-typedef struct
-{
-  uint16_t cnt;
-  uint16_t i;
-
-  uint8_t  flag;
-  uint8_t  success;
-  uint8_t  start_flag;
-  float    flash_finish_flag;
-  uint32_t sum;
-  SI_F_XYZ None;
-  SI_F_XYZ offset;
-  SI_F_XYZ OffsetFlashRead;
-  SI_F_XYZ OffsetFlashWrite;
-}_GYRO_CAL;
-/******************************************ï¼ˆè‡ªå·±çš„ä»£ç ï¼‰***********************************************/
+extern int16 mpu6050_gyro_x, mpu6050_gyro_y, mpu6050_gyro_z;                    // ÈýÖáÍÓÂÝÒÇÊý¾Ý      gyro (ÍÓÂÝÒÇ)
+extern int16 mpu6050_acc_x, mpu6050_acc_y, mpu6050_acc_z;                       // ÈýÖá¼ÓËÙ¶È¼ÆÊý¾Ý    acc (accelerometer ¼ÓËÙ¶È¼Æ)
 
 void    mpu6050_get_acc             (void);
 void    mpu6050_get_gyro            (void);
-float   mpu6050_acc_transition      (int16 acc_value);                          // å°† MPU6050 åŠ é€Ÿåº¦è®¡æ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
-float   mpu6050_gyro_transition     (int16 gyro_value);                         // å°† MPU6050 é™€èžºä»ªæ•°æ®è½¬æ¢ä¸ºå®žé™…ç‰©ç†æ•°æ®
+float   mpu6050_acc_transition      (int16 acc_value);                          // ½« MPU6050 ¼ÓËÙ¶È¼ÆÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
+float   mpu6050_gyro_transition     (int16 gyro_value);                         // ½« MPU6050 ÍÓÂÝÒÇÊý¾Ý×ª»»ÎªÊµ¼ÊÎïÀíÊý¾Ý
 uint8   mpu6050_init                (void);
 
 #endif

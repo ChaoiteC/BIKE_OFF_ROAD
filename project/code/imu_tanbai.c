@@ -10,7 +10,7 @@
 #include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  30	//队列长度，越大，平滑性越高
+#define Buf_SIZE  10	//队列长度，越大，平滑性越高
 
 #define OFFSET_CONUT 500 //去偏移计数
 
@@ -50,6 +50,9 @@ void ICM20602_readGyro_Acc(int16_t *gyro,int16_t *acc)
 	static int16_t ax,ay,az;
 	
 	//将原始数据入队
+	if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
+	    return;
+	}
 	ICM20602_NewVal(&ICM20602_FIFO[0][0],mpu6050_acc_x);
 	ICM20602_NewVal(&ICM20602_FIFO[1][0],mpu6050_acc_y);
 	ICM20602_NewVal(&ICM20602_FIFO[2][0],mpu6050_acc_z);
@@ -101,14 +104,21 @@ void ICM20602_Init_Offset(void)//Hello?
  	for(i=0;i<OFFSET_CONUT;i++){
 		system_delay_ms(10);
 		ICM20602_readGyro_Acc(temp,temp2);
-		tempgx += temp[0];
-		tempgy += temp[1];
-		tempgz += temp[2];
-		
-		tempax += temp2[0];
-		tempay += temp2[1];
-		tempaz += temp2[2];
-		
+		oled_show_int(0,2,i,3);
+		if(temp[0]==temp[1] && temp[1]==temp[2]){
+			i--;
+			oled_show_string(0,3,"WARNING: ICM NO DATA");
+		}
+		else{
+			//oled_show_string(0,3,"                    ");
+			tempgx += temp[0];
+			tempgy += temp[1];
+			tempgz += temp[2];
+			
+			tempax += temp2[0];
+			tempay += temp2[1];
+			tempaz += temp2[2];
+		}
 	}
 	
 	Pitch_offset = tempgy/OFFSET_CONUT;

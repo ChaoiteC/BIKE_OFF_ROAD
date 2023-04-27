@@ -26,6 +26,7 @@ enum PAGE
         IMU,
         SERVO,
       CP,
+        TEST,
 
 } NOW_PAGE;
 
@@ -40,6 +41,7 @@ void menu(void){//人机交互页面
             case GPS      :page_GPS_show();break;
             case ICM      :page_ICM_show();break;
             case IMU      :page_IMU_show();break;
+            case TEST     :page_TEST_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -51,6 +53,7 @@ void menu(void){//人机交互页面
             case GPS      :page_GPS_ex();break;
             case ICM      :page_ICM_ex();break;
             case IMU      :page_IMU_ex();break;
+            case TEST     :page_TEST_ex();break;
             default       :page_error();
         }
     }
@@ -182,8 +185,14 @@ void page_GET_POINT_ex(){
                 }
             }break;
             case 1:{
-                gps_get_point();
-                now_page=GET_POINT;
+                if(gps_get_point()){
+                    gps_point_error();
+                    system_delay_ms(3000);
+                    now_page=GET_POINT;
+                }
+                else{
+                    
+                }
                 break;
             }
         }
@@ -306,7 +315,43 @@ void page_IMU_ex(){
     }
 }
 
+void page_TEST_show(){
+    flash_read_page_to_buffer (63,3);
+  //oled_show_string(0,0,""                        );
+  //oled_show_string(0,1,""                        );
+  //oled_show_string(0,2,""                        );
+  //oled_show_string(0,3,""                        );
+  //oled_show_string(0,4,""                        );
+  //oled_show_string(0,5,""                        );
+  //oled_show_string(0,6,""                        );
+  //oled_show_string(0,7,""                        );
 
+  //oled_show_string(0,0+point,"->"                );
+}
+
+void page_TEST_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+        if(--point<0){
+            point=;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+        if(++point>){
+            point=0;
+        }
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        
+    }
+    else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
+        switch(point){
+            case 0:now_page=;break;
+            case 1:now_page=;break;
+            case 2:now_page=;break;
+        }
+        point=0;
+    }
+}
 
 
 
@@ -323,7 +368,7 @@ void page_xx_show(){
 
   //oled_show_string(0,0+point,"->"                );
 }
-  页面操作模板
+  //页面操作模板
 void page_xx_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(--point<0){

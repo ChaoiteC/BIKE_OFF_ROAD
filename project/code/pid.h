@@ -4,7 +4,7 @@
 #include "stdint.h"
 
 
-//PID²ÎÊı
+//PIDå‚æ•°
 typedef struct
 {
     float err;
@@ -22,14 +22,24 @@ typedef struct
 
 typedef struct
 {
-    //×ËÌ¬Íâ»·£¨½Ç¶È»·£©
+    //å§¿æ€å¤–ç¯ï¼ˆè§’åº¦ç¯ï¼‰
     _PID rol_angle;
-    //±àÂëÆ÷ËÙ¶È»·
-    _PID vel_encoder;//±àÂëÆ÷PID£¨ËÙ¶È»·£©
-    _PID rol_gyro;//ÍÓÂİÒÇPID£¨½ÇËÙ¶È»·£©
+    //ç¼–ç å™¨é€Ÿåº¦ç¯
+    _PID vel_encoder;//ç¼–ç å™¨PIDï¼ˆé€Ÿåº¦ç¯ï¼‰
+    _PID rol_gyro;//é™€èºä»ªPIDï¼ˆè§’é€Ÿåº¦ç¯ï¼‰
 }_ALL_PID;
 
+typedef struct
+{
+    float kp,ki,kd;//ä¸‰ä¸ªç³»æ•°
+    float error,lastError;//è¯¯å·®ã€ä¸Šæ¬¡è¯¯å·®
+    float integral,maxIntegral;//ç§¯åˆ†ã€ç§¯åˆ†é™å¹…
+    float output,maxOutput;//è¾“å‡ºã€è¾“å‡ºé™å¹…
+}PID;
+
 extern _ALL_PID all;
+extern  PID MOTOR_SUM;
+
 
 
 float pid_controller(_PID *controller);

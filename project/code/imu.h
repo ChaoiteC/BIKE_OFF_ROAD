@@ -19,8 +19,7 @@ typedef struct IMU
 
 } IMU_Info;
 
-
-void ICM20602_Init_Offset(void);//HEllo?
+void IMU963RA_Init_Offset(void);//IMU963RA初始化去偏移
 void IMU_Update(void);
 
 extern IMU_Info imu;

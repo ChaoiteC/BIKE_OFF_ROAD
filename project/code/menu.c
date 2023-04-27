@@ -22,7 +22,7 @@ enum PAGE
         GET_POINT,
       TET,
         GPS,
-        ICM,
+        AGM,
         IMU,
         SERVO,
       CP,
@@ -39,7 +39,7 @@ void menu(void){//人机交互页面
             case GET_POINT:page_GET_POINT_show();break;
             case TET      :page_TET_show();break;
             case GPS      :page_GPS_show();break;
-            case ICM      :page_ICM_show();break;
+            case AGM      :page_AGM_show();break;
             case IMU      :page_IMU_show();break;
             //case TEST     :page_TEST_show();break;
             default       :page_error();
@@ -51,7 +51,7 @@ void menu(void){//人机交互页面
             case GET_POINT:page_GET_POINT_ex();break;
             case TET      :page_TET_ex();break;
             case GPS      :page_GPS_ex();break;
-            case ICM      :page_ICM_ex();break;
+            case AGM      :page_AGM_ex();break;
             case IMU      :page_IMU_ex();break;
             //case TEST     :page_TEST_ex();break;
             default       :page_error();
@@ -205,7 +205,7 @@ void page_TET_show(){
     oled_show_string(0,1,"./TET"                   );
   //oled_show_string(0,2,""                        );
     oled_show_string(0,3,"  GPS_TAU1201"           );
-    oled_show_string(0,4,"  ICM20602"              );
+    oled_show_string(0,4,"  IMU963RA"              );
     oled_show_string(0,5,"  IMU_Mahony"            );
     oled_show_string(0,6,"  SERVO"                 );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
@@ -231,7 +231,7 @@ void page_TET_ex(){
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
             case 0:now_page=GPS;break;
-            case 1:now_page=ICM;break;
+            case 1:now_page=AGM;break;
             case 2:now_page=IMU;break;
             case 3:now_page=SERVO;break;
         }
@@ -275,20 +275,26 @@ void page_GPS_ex(){
     }
 }
 
-void page_ICM_show(){
-    oled_show_string(0,0,"ICM20602"                );
-    oled_show_string(0,1,"./TET/ICM"               );
-    oled_show_string(0,3,"ACC(m/s^2)");
-    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,4);
-    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,4);
-    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,4);
-    oled_show_string(64,3,"GYRO('/s)");
-    oled_show_float(64,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,4);
-    oled_show_float(64,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,4);
-    oled_show_float(64,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,4);
+void page_AGM_show(){
+    oled_show_string(0,0,"IMU963RA"                );
+    oled_show_string(0,1,"./TET/AGM"               );
+    oled_show_string(0,3,"A");
+    oled_show_float(0,4,imu963ra_acc_transition(imu963ra_acc_x),2,2);
+    oled_show_float(0,5,imu963ra_acc_transition(imu963ra_acc_y),2,2);
+    oled_show_float(0,6,imu963ra_acc_transition(imu963ra_acc_z),2,2);
+
+    oled_show_string(30,3,"G");
+    oled_show_float(30,4,imu963ra_gyro_transition(imu963ra_gyro_x),2,2);
+    oled_show_float(30,5,imu963ra_gyro_transition(imu963ra_gyro_y),2,2);
+    oled_show_float(30,6,imu963ra_gyro_transition(imu963ra_gyro_z),2,2);
+
+    oled_show_string(60,3,"M");
+    oled_show_float(60,4,imu963ra_mag_transition(imu963ra_mag_x),2,2);
+    oled_show_float(60,5,imu963ra_mag_transition(imu963ra_mag_y),2,2);
+    oled_show_float(60,6,imu963ra_mag_transition(imu963ra_mag_z),2,2);
 }
 
-void page_ICM_ex(){
+void page_AGM_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
         point=0;
@@ -298,8 +304,8 @@ void page_ICM_ex(){
 void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
-    if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
-        oled_show_string(0,3,"WARNING: ICM NO DATA");
+    if(imu963ra_acc_x==imu963ra_acc_y && imu963ra_acc_y==imu963ra_acc_z){
+        oled_show_string(0,3,"WARNING: IMU NO DATA");
     }
     oled_show_string(0,5,"X>rol>"                    );
     oled_show_float(42,5,imu.Roll,2,6);

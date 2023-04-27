@@ -320,7 +320,7 @@ void TIM5_IRQHandler(void)
     }
 }
 
-void TIM6_IRQHandler(void)//ICM20602的中断在这里处理
+void TIM6_IRQHandler(void)//IMU963RA的中断在这里处理
 {
     if(TIM_GetITStatus(TIM6, TIM_IT_Update) != RESET)
     {
@@ -487,7 +487,8 @@ void HardFault_Handler(void)
 // 返回参数     void
 // 使用示例     pit_hanlder_TIM6();
 //-------------------------------------------------------------------------------------------------------------------
-void pit_hanlder_TIM6(void){//ICM20602的中断处理
-    mpu6050_get_acc();                                                         // 获取 ICM20602 的加速度测量数值
-    mpu6050_get_gyro();                                                        // 获取 ICM20602 的角速度测量数值
+void pit_hanlder_TIM6(void){//IMU963RA的中断处理
+    imu963ra_get_acc();                                                         // 获取 IMU963RA 的加速度测量数值
+    imu963ra_get_gyro();                                                        // 获取 IMU963RA 的角速度测量数值
+    imu963ra_get_mag();
 }

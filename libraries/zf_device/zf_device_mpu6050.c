@@ -47,21 +47,6 @@
 
 #include "zf_device_mpu6050.h"
 
-/******************************************（自己的代码）***********************************************/
-
-S16_XYZ  acc_raw = {0};             //加速度计原始数据储存
-S16_XYZ  gyro_raw = {0};            //陀螺仪原始数据储存
-SI_F_XYZ  gyro_raw_cal = {0};       //陀螺仪用于校准的原始数据储存
-SI_F_XYZ acc_raw_f = {0};
-SI_F_XYZ gyro_raw_f = {0};
-SI_F_XYZ acc_att_lpf = {0};
-SI_F_XYZ gyro_lpf = {0};
-SI_F_XYZ gyro_offset = {0,0,0} ;    //陀螺仪零偏数据储存
-_Mpu6050_data Mpu = {0};
-_GYRO_CAL CalGyro = {0};            //陀螺仪校准相关数据储存
-
-/******************************************（自己的代码）***********************************************/
-
 int16 mpu6050_gyro_x = 0, mpu6050_gyro_y = 0, mpu6050_gyro_z = 0;               // 三轴陀螺仪数据      gyro (陀螺仪)
 int16 mpu6050_acc_x = 0, mpu6050_acc_y = 0, mpu6050_acc_z = 0;                  // 三轴加速度计数据    acc (accelerometer 加速度计)
 

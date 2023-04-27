@@ -41,7 +41,7 @@ void menu(void){//人机交互页面
             case GPS      :page_GPS_show();break;
             case ICM      :page_ICM_show();break;
             case IMU      :page_IMU_show();break;
-            case TEST     :page_TEST_show();break;
+            //case TEST     :page_TEST_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -53,7 +53,7 @@ void menu(void){//人机交互页面
             case GPS      :page_GPS_ex();break;
             case ICM      :page_ICM_ex();break;
             case IMU      :page_IMU_ex();break;
-            case TEST     :page_TEST_ex();break;
+            //case TEST     :page_TEST_ex();break;
             default       :page_error();
         }
     }
@@ -314,7 +314,7 @@ void page_IMU_ex(){
         now_page=TET;
     }
 }
-
+/*
 void page_TEST_show(){
     flash_read_page_to_buffer (63,3);
   //oled_show_string(0,0,""                        );
@@ -352,7 +352,7 @@ void page_TEST_ex(){
         point=0;
     }
 }
-
+*/
 
 
 /*页面显示模板

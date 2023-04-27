@@ -141,7 +141,7 @@
 #include "chinese_font.h"
 #include "servo.h"
 #include "menu.h"
-#include "imu_tanbai.h"
+#include "imu.h"
 #include "ex_init.h"
 #include "motor.h"
 #include "encoder_text.h"

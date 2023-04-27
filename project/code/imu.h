@@ -1,5 +1,5 @@
-#ifndef _IMU_TANBAI_H_
-#define _IMU_TANBAI_H_
+#ifndef _IMU_H_
+#define _IMU_H_
 
 #include "stdint.h"
 
@@ -25,4 +25,4 @@ void IMU_Update(void);
 
 extern IMU_Info imu;
 
-#endif /* IMU_TANBAI_H_ */
+#endif /* IMU_H_ */

@@ -45,5 +45,8 @@ extern  PID MOTOR_SUM;
 float pid_controller(_PID *controller);
 void all_pid_init(void);
 void clear_integral(_PID *controller);
+void  PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut);
+void  PID_Calc(PID *pid,float reference,float feedback);
+
 
 #endif

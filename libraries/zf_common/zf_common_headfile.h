@@ -145,6 +145,7 @@
 #include "imu_tanbai.h"
 #include "ex_init.h"
 #include "motor.h"
+#include "encoder_text.h"
 //===================================================�û��Զ����ļ�===================================================
 
 #endif

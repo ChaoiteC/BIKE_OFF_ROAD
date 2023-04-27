@@ -21,7 +21,9 @@ void ex_init(void){
     //FLASH初始化
     oled_clear();
     oled_show_string(0, 0, "FLASH checking...");
-    if(!flash_check (63,3)){//FLASH无数据则初始化
+    if(!flash_check (63,3)){//FLASH无数据则格式化
+        oled_clear();
+        oled_show_string(0, 0, "FLASH formatting...");
         
     }
     //GPS初始化

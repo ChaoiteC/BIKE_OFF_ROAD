@@ -1,19 +1,19 @@
 /*
  * encoder_text.h
  *
- *  Created on: 2023��4��6��
+ *  Created on: 2023年4月6日
  *      Author: 86152
  */
 
 #ifndef ENCODER_TEXT_H_
 #define ENCODER_TEXT_H_
 
-#define PIT_CH_Encoder                          (TIM3_PIT )                     // ʹ�õ������жϱ�� ����޸� ��Ҫͬ����Ӧ�޸������жϱ���� isr.c �еĵ���
-#define PIT_PRIORITY_Encoder                    (TIM3_IRQn)                     // ��Ӧ�����жϵ��жϱ��
+#define PIT_CH_Encoder                          (TIM3_PIT )                     // 使用的周期中断编号 如果修改 需要同步对应修改周期中断编号与 isr.c 中的调用
+#define PIT_PRIORITY_Encoder                    (TIM3_IRQn)                     // 对应周期中断的中断编号
 
-#define ENCODER_QUADDEC                 (TIM1_ENCOEDER)                         // ������������Ӧʹ�õı������ӿ� ����ʹ��QTIMER1��ENCOEDER1
-#define ENCODER_QUADDEC_A               (TIM1_ENCOEDER_MAP3_CH1_E9)             // A ���Ӧ������
-#define ENCODER_QUADDEC_B               (TIM1_ENCOEDER_MAP3_CH2_E11)            // B ���Ӧ������
+#define ENCODER_QUADDEC                 (TIM1_ENCOEDER)                         // 正交编码器对应使用的编码器接口 这里使用QTIMER1的ENCOEDER1
+#define ENCODER_QUADDEC_A               (TIM1_ENCOEDER_MAP3_CH1_E9)             // A 相对应的引脚
+#define ENCODER_QUADDEC_B               (TIM1_ENCOEDER_MAP3_CH2_E11)            // B 相对应的引脚
 
 typedef struct
 {

@@ -1,7 +1,7 @@
 /*
  * encoder_text.c
  *
- *  Created on: 2023Äê4ÔÂ6ÈÕ
+ *  Created on: 2023å¹´4æœˆ6æ—¥
  *      Author: 86152
  */
 #include "zf_common_headfile.h"
@@ -9,25 +9,25 @@
 kalman_param Encoder_kal;
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºEncoder_text_init
- * ¹¦ÄÜ£º±àÂëÆ÷³õÊ¼»¯£¬Í¬Ê±´ò¿ªÖĞ¶Ï
- * ²ÎÊı£ºÎŞ
- * Êä³ö£ºÎŞ
+/* åå­—ï¼šEncoder_text_init
+ * åŠŸèƒ½ï¼šç¼–ç å™¨åˆå§‹åŒ–ï¼ŒåŒæ—¶æ‰“å¼€ä¸­æ–­
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 void Encoder_text_init()
 {
 
     Encoder_kal_init_son(&Encoder_kal);
-    encoder_quad_init(ENCODER_QUADDEC, ENCODER_QUADDEC_A, ENCODER_QUADDEC_B);   // ³õÊ¼»¯±àÂëÆ÷Ä£¿éÓëÒı½Å Õı½»½âÂë±àÂëÆ÷Ä£Ê½
+    encoder_quad_init(ENCODER_QUADDEC, ENCODER_QUADDEC_A, ENCODER_QUADDEC_B);   // åˆå§‹åŒ–ç¼–ç å™¨æ¨¡å—ä¸å¼•è„š æ­£äº¤è§£ç ç¼–ç å™¨æ¨¡å¼
     pit_ms_init(PIT_CH_Encoder, 100);
     interrupt_set_priority(PIT_PRIORITY_Encoder, 0);
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºEncoder_kal_init_son
- * ¹¦ÄÜ£º¶Ô¿¨¶ûÂüÂË²¨Êı¾İ¾­ĞĞ³õÊ¼»¯
- * ²ÎÊı£ºkalman_paramĞÍµÄ½á¹¹ÌåÖ¸Õë
- * Êä³ö£ºÎŞ
+/* åå­—ï¼šEncoder_kal_init_son
+ * åŠŸèƒ½ï¼šå¯¹å¡å°”æ›¼æ»¤æ³¢æ•°æ®ç»è¡Œåˆå§‹åŒ–
+ * å‚æ•°ï¼škalman_paramå‹çš„ç»“æ„ä½“æŒ‡é’ˆ
+ * è¾“å‡ºï¼šæ— 
  */
 void Encoder_kal_init_son(kalman_param *Encoder_kal)
 {
@@ -42,20 +42,20 @@ void Encoder_kal_init_son(kalman_param *Encoder_kal)
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºkalman_filter
- * ¹¦ÄÜ£º¶Ô¿¨¶ûÂüÂË²¨Êı¾İ¾­ĞĞÔËËã
- * ²ÎÊı£ºkalman_paramĞÍµÄ½á¹¹ÌåÖ¸Õë£¬ÊäÈëÖµ£¨±àÂëÆ÷Öµ£©
- * Êä³ö£ºÂË²¨ÔËËã½á¹û£¨ÕûĞÎ£©
+/* åå­—ï¼škalman_filter
+ * åŠŸèƒ½ï¼šå¯¹å¡å°”æ›¼æ»¤æ³¢æ•°æ®ç»è¡Œè¿ç®—
+ * å‚æ•°ï¼škalman_paramå‹çš„ç»“æ„ä½“æŒ‡é’ˆï¼Œè¾“å…¥å€¼ï¼ˆç¼–ç å™¨å€¼ï¼‰
+ * è¾“å‡ºï¼šæ»¤æ³¢è¿ç®—ç»“æœï¼ˆæ•´å½¢ï¼‰
  */
 int kalman_filter(kalman_param *Encoder_kal, int input)
 {
 
      Encoder_kal->Now_P = Encoder_kal->LastP + Encoder_kal->Q;
-     //¿¨¶ûÂüÔöÒæ·½³Ì²î
+     //å¡å°”æ›¼å¢ç›Šæ–¹ç¨‹å·®
      Encoder_kal->Kg = Encoder_kal->Now_P / (Encoder_kal->Now_P + Encoder_kal->R);
-     //¸üĞÂ×îÓÅÖµ·½³Ì
+     //æ›´æ–°æœ€ä¼˜å€¼æ–¹ç¨‹
      Encoder_kal->out = Encoder_kal->out + Encoder_kal->Kg * (input-Encoder_kal->out);
-     //¸üĞÂĞ­·½²î·½³Ì
+     //æ›´æ–°åæ–¹å·®æ–¹ç¨‹
      Encoder_kal->LastP = (1-Encoder_kal->Kg) * Encoder_kal->Now_P;
 
      return Encoder_kal->out;

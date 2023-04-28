@@ -1,19 +1,19 @@
 /*
  * motor.h
  *
- *  Created on: 2023Äê4ÔÂ9ÈÕ
+ *  Created on: 2023å¹´4æœˆ9æ—¥
  *      Author: 86152
  */
 
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
-#define  MOTOR_IO           A0                            //ÓĞË¢µç»úIO¿Ú £¨Êä³ö·½Ïò£©
-#define  MOTOR_PWM          TIM5_PWM_MAP0_CH2_A1          //ÓĞË¢µç»úPWM £¨Êä³öËÙ¶È£©
+#define  MOTOR_IO           A0                            //æœ‰åˆ·ç”µæœºIOå£ ï¼ˆè¾“å‡ºæ–¹å‘ï¼‰
+#define  MOTOR_PWM          TIM5_PWM_MAP0_CH2_A1          //æœ‰åˆ·ç”µæœºPWM ï¼ˆè¾“å‡ºé€Ÿåº¦ï¼‰
 
-#define  MAX_Speed          (50)                          //×î´óµÄËÙ¶ÈÖµ  £¨ÓÃÀ´ÏŞ·ù£©
+#define  MAX_Speed          (50)                          //æœ€å¤§çš„é€Ÿåº¦å€¼  ï¼ˆç”¨æ¥é™å¹…ï¼‰
 
-#define  MOTOR_FREQ         17000                         //µç»úÆµÂÊ
+#define  MOTOR_FREQ         17000                         //ç”µæœºé¢‘ç‡
 
 
 void MOTOR_Init();

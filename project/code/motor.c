@@ -1,17 +1,17 @@
 /*
  * motor.c
  *
- *  Created on: 2023Äê4ÔÂ9ÈÕ
+ *  Created on: 2023å¹´4æœˆ9æ—¥
  *      Author: 86152
  */
 #include "zf_common_headfile.h"
-/*µç»ú±Õ»·Êý¾Ý´æ´¢½á¹¹Ìå*/
+/*ç”µæœºé—­çŽ¯æ•°æ®å­˜å‚¨ç»“æž„ä½“*/
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºMOTOR_Init
- * ¹¦ÄÜ£º¶æ»ú³õÊ¼»¯
- * ²ÎÊý£ºÎÞ
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šMOTOR_Init
+ * åŠŸèƒ½ï¼šèˆµæœºåˆå§‹åŒ–
+ * å‚æ•°ï¼šæ— 
+ * è¾“å‡ºï¼šæ— 
  */
 void MOTOR_Init()
 {
@@ -20,33 +20,33 @@ void MOTOR_Init()
 }
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºMOTOR_Speed
- * ¹¦ÄÜ£º¶æ»úËÙ¶ÈÊäÈë
- * ²ÎÊý£ºSpeed
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šMOTOR_Speed
+ * åŠŸèƒ½ï¼šèˆµæœºé€Ÿåº¦è¾“å…¥
+ * å‚æ•°ï¼šSpeed
+ * è¾“å‡ºï¼šæ— 
  */
 void MOTOR_Speed(int16 Duty)
 {
     if(Duty>=0)
     {
-        //ÕýÏò×ª¶¯
-        gpio_set_level(MOTOR_IO, GPIO_LOW);                                          // DIRÊä³ö¸ßµçÆ½
+        //æ­£å‘è½¬åŠ¨
+        gpio_set_level(MOTOR_IO, GPIO_LOW);                                          // DIRè¾“å‡ºé«˜ç”µå¹³
         pwm_set_duty(MOTOR_PWM, Duty);
     }
     else
     {
-        //·´Ïò×ª¶¯
-        gpio_set_level(MOTOR_IO, GPIO_HIGH);                                         // DIRÊä³öµÍµçÆ½
+        //åå‘è½¬åŠ¨
+        gpio_set_level(MOTOR_IO, GPIO_HIGH);                                         // DIRè¾“å‡ºä½Žç”µå¹³
         pwm_set_duty(MOTOR_PWM, -Duty);
     }
 }
 
 
 /**********************************************************************************************/
-/* Ãû×Ö£ºMOTOR_PID
- * ¹¦ÄÜ£º¶Ôµç»ú½øÐÐPID¿ØÖÆ
- * ²ÎÊý£ºSpeed
- * Êä³ö£ºÎÞ
+/* åå­—ï¼šMOTOR_PID
+ * åŠŸèƒ½ï¼šå¯¹ç”µæœºè¿›è¡ŒPIDæŽ§åˆ¶
+ * å‚æ•°ï¼šSpeed
+ * è¾“å‡ºï¼šæ— 
  */
 /*void MOTOR_PID()
 {

@@ -84,7 +84,8 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @brief GPS取点的专门用户交互页面
  * @param void
  * @return 0 mean yes, 1 mean error
- * @notice 我超写得那么紧密耦合鬼看得懂
+ * @notice 我超写那么紧密耦合鬼看得懂
+ *         已经看不懂力（悲）
  */
 int gps_get_point(void){
     int i=0,j=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;

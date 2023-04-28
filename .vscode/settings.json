@@ -8,6 +8,7 @@
         "zf_device_aht20.h": "c",
         "zf_common_typedef.h": "c",
         "imu_tanbai.h": "c",
-        "zf_device_gps_tau1201.h": "c"
+        "zf_device_gps_tau1201.h": "c",
+        "math.h": "c"
     }
 }

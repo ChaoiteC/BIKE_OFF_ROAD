@@ -6,7 +6,7 @@
   鳴り止まなくてなにが悪い
   青春でなにが悪い*/
 
-//写完了一段时间才发现，这个文件没有包含任何头文件？
+#include "zf_common_headfile.h"
 
 void ex_init(void){
     //OLED初始化

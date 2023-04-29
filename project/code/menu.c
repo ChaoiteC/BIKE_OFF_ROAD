@@ -118,11 +118,9 @@ void first_page(void){
 void page_MASTER_show(){
     oled_show_string(0,0,"DOS by SIC v1.0" );
     oled_show_string(0,1,"./"              );
-  //oled_show_string(0,2,""                );
     oled_show_string(0,3,"  START"         );//执行发车程序
     oled_show_string(0,4,"  test Ext.eq."  );//测试外设
     oled_show_string(0,5,"  chk. Params."  );//改变参数
-  //oled_show_string(0,6,""                );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
     oled_show_string(0,3+select,"->"        );//屏幕指针
@@ -155,12 +153,9 @@ void page_MASTER_ex(){
 void page_GET_POINT_show(){
     oled_show_string(0,0,"GET_POINT"               );
     oled_show_string(0,1,"./SRT/GPT"               );
-  //oled_show_string(0,2,""                        );
     oled_show_string(0,3,"GPS POINT?"              );
-  //oled_show_string(0,4,""                        );
     oled_show_string(0,5,"  USE FLASH DATA"        );
     oled_show_string(0,6,"  RECORD NEW"            );
-  //oled_show_string(0,7,""                        );
 
     oled_show_string(0,5+select,"->"                );
 }
@@ -206,7 +201,6 @@ void page_GET_POINT_ex(){
 void page_TET_show(){
     oled_show_string(0,0,"test Ext.eq."            );
     oled_show_string(0,1,"./TET"                   );
-  //oled_show_string(0,2,""                        );
     oled_show_string(0,3,"  GPS_TAU1201"           );
     oled_show_string(0,4,"  IMU963RA"              );
     oled_show_string(0,5,"  IMU_Mahony"            );
@@ -339,15 +333,11 @@ void page_FLS_show(){
     flash_read_page_to_buffer (63,3);
     oled_show_string(0,0,"FLASH TEST"              );
     oled_show_string(0,1,"./CP/FLS"                );
-    oled_show_float(12,3,flash_union_buffer[0].float_type,2,1);
-    oled_show_float(12,4,flash_union_buffer[1].float_type,2,1);
-    oled_show_float(12,5,flash_union_buffer[2].float_type,2,1);
-    oled_show_float(12,6,flash_union_buffer[3].float_type,2,1);
-    oled_show_float(64,3,flash_union_buffer[4].float_type,2,1);
-    oled_show_float(64,4,flash_union_buffer[5].float_type,2,1);
-    oled_show_float(64,5,flash_union_buffer[6].float_type,2,1);
-    oled_show_float(64,6,flash_union_buffer[7].float_type,2,1);
-
+    for (int i=0;i<8;i++) {
+        int x=(i<4)?12:64;
+        int y=3+(i%4);
+        oled_show_float(x,y,flash_union_buffer[i].float_type,2,1);
+    }
     if(edit){
         oled_show_string(0,7,"-    [+/-/DF/RT]");
         if(select<=3){

@@ -13,8 +13,8 @@
 uint8 now_page=0;//当前页面
 uint8 gogogo=0;//1=正式发车
 
-int8 point=0;
-uint8 choose=0;
+int8 select=0;
+uint8 edit=0;
 uint8 last_page=0;
 
 enum PAGE{
@@ -35,8 +35,8 @@ void menu(void){//人机交互页面
     while(!gogogo){
         oled_clear();
         if(last_page!=now_page){
-            point=0;
-            choose=0;
+            select=0;
+            edit=0;
         }
         last_page=now_page;
         switch(now_page){
@@ -125,25 +125,25 @@ void page_MASTER_show(){
   //oled_show_string(0,6,""                );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
-    oled_show_string(0,3+point,"->"        );//屏幕指针
+    oled_show_string(0,3+select,"->"        );//屏幕指针
 }
 
 void page_MASTER_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--point<0){
-            point=2;
+        if(--select<0){
+            select=2;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++point>2){
-            point=0;
+        if(++select>2){
+            select=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         first_page();
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(point){
+        switch(select){
             case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
             case 2:now_page=FLS;break;
@@ -162,25 +162,25 @@ void page_GET_POINT_show(){
     oled_show_string(0,6,"  RECORD NEW"            );
   //oled_show_string(0,7,""                        );
 
-    oled_show_string(0,5+point,"->"                );
+    oled_show_string(0,5+select,"->"                );
 }
 
 void page_GET_POINT_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--point<0){
-            point=1;
+        if(--select<0){
+            select=1;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++point>1){
-            point=0;
+        if(++select>1){
+            select=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=MASTER;
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(point){
+        switch(select){
             case 0:{
                 if(gps_check_flash()){
                     gps_point_error();
@@ -213,25 +213,25 @@ void page_TET_show(){
     oled_show_string(0,6,"  BLUETOOTH"             );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
 
-    oled_show_string(0,3+point,"->"                );
+    oled_show_string(0,3+select,"->"                );
 }
 
 void page_TET_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--point<0){
-            point=3;
+        if(--select<0){
+            select=3;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++point>3){
-            point=0;
+        if(++select>3){
+            select=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=MASTER;
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(point){
+        switch(select){
             case 0:now_page=GPS;break;
             case 1:now_page=AGM;break;
             case 2:now_page=IMU;break;
@@ -348,58 +348,58 @@ void page_FLS_show(){
     oled_show_float(64,5,flash_union_buffer[6].float_type,2,1);
     oled_show_float(64,6,flash_union_buffer[7].float_type,2,1);
 
-    if(choose){
+    if(edit){
         oled_show_string(0,7,"-    [+/-/DF/RT]");
-        if(point<=3){
-            oled_show_string(0,3+point,">>"     );
+        if(select<=3){
+            oled_show_string(0,3+select,">>"     );
         }
         else{
-            oled_show_string(0,point-1,">>"     );
+            oled_show_string(0,select-1,">>"     );
         }
     }
     else{
         oled_show_string(0,7,"-[UP/DOWN/CF/RT]");
-        if(point<=3){
-            oled_show_string(0,3+point,"->"     );
+        if(select<=3){
+            oled_show_string(0,3+select,"->"     );
         }
         else{
-            oled_show_string(0,point-1,"->"     );
+            oled_show_string(0,select-1,"->"     );
         }
     }
 }
 
 void page_FLS_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(choose){
-            flash_union_buffer[point].float_type+=0.1;
+        if(edit){
+            flash_union_buffer[select].float_type+=0.1;
         }
         else{
-            if(--point<0){
-                point=7;
+            if(--select<0){
+                select=7;
             }
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(choose){
-            flash_union_buffer[point].float_type-=0.1;
+        if(edit){
+            flash_union_buffer[select].float_type-=0.1;
         }
         else{
-            if(++point>7){
-                point=0;
+            if(++select>7){
+                select=0;
             }
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
-        if(choose){
-            choose=!choose;
+        if(edit){
+            edit=!edit;
         }
         else{
             now_page=MASTER;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        if(!choose){
-            choose=!choose;
+        if(!edit){
+            edit=!edit;
         }
     }
     flash_write_page_from_buffer(63,3);

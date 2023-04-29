@@ -13,7 +13,7 @@
 uint8 now_page=0;//当前页面
 uint8 gogogo=0;//1=正式发车
 
-uint8 point=0;
+int8 point=0;
 
 enum PAGE
 {

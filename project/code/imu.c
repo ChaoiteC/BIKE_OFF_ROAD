@@ -51,7 +51,7 @@ void IMU963RA_readGyro_Acc(int16_t *gyro,int16_t *acc,int16_t *mag)
 	static int16_t mx,my,mz;
 	
 	//将原始数据入队
-	if(imu963ra_acc_x==imu963ra_acc_y && imu963ra_acc_y==imu963ra_acc_z){
+	if(imu963ra_acc_x==imu963ra_acc_y){
 	    return;
 	}
 	IMU963RA_NewVal(&IMU963RA_FIFO[0][0],imu963ra_acc_x);
@@ -99,7 +99,7 @@ void IMU963RA_readGyro_Acc(int16_t *gyro,int16_t *acc,int16_t *mag)
 
 void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
 {
-	unsigned int i;
+	int i;
 	int16_t temp[3],temp2[3],temp3[3];
 	int32_t	tempgx=0,tempgy=0,tempgz=0;
 	int32_t tempax=0,tempay=0,tempaz=0;
@@ -119,7 +119,7 @@ void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
 		system_delay_ms(10);
 		IMU963RA_readGyro_Acc(temp,temp2,temp3);
 		oled_show_int(0,2,i,3);
-		if(temp[0]==temp[1] && temp[1]==temp[2]){
+		if(temp[0]==temp[1]){
 			i--;
 			oled_show_string(0,3,"WARNING: IMU NO DATA");
 		}

@@ -22,5 +22,9 @@ void page_AGM_show();
 void page_AGM_ex();
 void page_IMU_show();
 void page_IMU_ex();
+void page_BLE_show();
+void page_BLE_ex();
+void page_FLS_show();
+void page_FLS_ex();
 
 #endif /* MENU_H_ */

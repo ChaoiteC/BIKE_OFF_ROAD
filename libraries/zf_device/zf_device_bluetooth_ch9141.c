@@ -1,48 +1,48 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈý·½¿ªÔ´¿â
-* Copyright (c) 2022 SEEKFREE Öð·É¿Æ¼¼
+* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºŽå®˜æ–¹ SDK æŽ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
+* Copyright (c) 2022 SEEKFREE é€é£žç§‘æŠ€
 *
-* ±¾ÎÄ¼þÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
+* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
 *
-* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼þ
-* Äú¿ÉÒÔ¸ù¾Ý×ÔÓÉÈí¼þ»ù½ð»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ðí¿ÉÖ¤£©µÄÌõ¿î
-* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØÐÂ·¢²¼ºÍ/»òÐÞ¸ÄËü
+* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
+* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
+* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åŽæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
 *
-* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
-* ÉõÖÁÃ»ÓÐÒþº¬µÄÊÊÏúÐÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
-* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
+* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
+* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
 *
-* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·Ý GPL µÄ¸±±¾
-* Èç¹ûÃ»ÓÐ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
+* å¦‚æžœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
 *
-* ¶îÍâ×¢Ã÷£º
-* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ðí¿ÉÖ¤Ð­Òé ÒÔÉÏÐí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
-* Ðí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼þ¼ÐÏÂµÄ GPL3_permission_statement.txt ÎÄ¼þÖÐ
-* Ðí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼þ¼ÐÏÂ ¼´¸ÃÎÄ¼þ¼ÐÏÂµÄ LICENSE ÎÄ¼þ
-* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌÐò µ«ÐÞ¸ÄÄÚÈÝÊ±±ØÐë±£ÁôÖð·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+* é¢å¤–æ³¨æ˜Žï¼š
+* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜Žä¸ºè¯‘æ–‡ç‰ˆæœ¬
+* è®¸å¯ç”³æ˜Žè‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
+* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
+* æ¬¢è¿Žå„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£žç§‘æŠ€çš„ç‰ˆæƒå£°æ˜Žï¼ˆå³æœ¬å£°æ˜Žï¼‰
 *
-* ÎÄ¼þÃû³Æ          zf_device_bluetooth_ch9141
-* ¹«Ë¾Ãû³Æ          ³É¶¼Öð·É¿Æ¼¼ÓÐÏÞ¹«Ë¾
-* °æ±¾ÐÅÏ¢          ²é¿´ libraries/doc ÎÄ¼þ¼ÐÄÚ version ÎÄ¼þ °æ±¾ËµÃ÷
-* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
-* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
-* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+* æ–‡ä»¶åç§°          zf_device_bluetooth_ch9141
+* å…¬å¸åç§°          æˆéƒ½é€é£žç§‘æŠ€æœ‰é™å…¬å¸
+* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜Ž
+* å¼€å‘çŽ¯å¢ƒ          MounRiver Studio V1.8.1
+* é€‚ç”¨å¹³å°          CH32V307VCT6
+* åº—é“ºé“¾æŽ¥          https://seekfree.taobao.com/
 *
-* ÐÞ¸Ä¼ÇÂ¼
-* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
-* 2022-01-10        ´óW            ¶Ô»»CH1ºÍCH2µÄÒý½ÅºÅ
-* 2022-03-16        ´óW            É¾³ýÅä¶Ô²Ù×÷£¬¿ÉÒÔÊ¹ÓÃÅä¶ÔÉÏÎ»»ú½øÐÐÅä¶Ô
-* 2022-09-15        ´óW            first version
+* ä¿®æ”¹è®°å½•
+* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
+* 2022-01-10        å¤§W            å¯¹æ¢CH1å’ŒCH2çš„å¼•è„šå·
+* 2022-03-16        å¤§W            åˆ é™¤é…å¯¹æ“ä½œï¼Œå¯ä»¥ä½¿ç”¨é…å¯¹ä¸Šä½æœºè¿›è¡Œé…å¯¹
+* 2022-09-15        å¤§W            first version
 ********************************************************************************************************************/
 /*********************************************************************************************************************
-* ½ÓÏß¶¨Òå:
+* æŽ¥çº¿å®šä¹‰:
 *                   ------------------------------------
-*                   Ä£¿é¹Ü½Å                  µ¥Æ¬»ú¹Ü½Å
-*                   TX          ²é¿´ zf_device_bluetooth_ch9141.h ÖÐ BLUETOOTH_CH9141_TX_PIN ºê¶¨Òå
-*                   RX          ²é¿´ zf_device_bluetooth_ch9141.h ÖÐ BLUETOOTH_CH9141_RX_PIN ºê¶¨Òå
-*                   RTS         ²é¿´ zf_device_bluetooth_ch9141.h ÖÐ BLUETOOTH_CH9141_RTS_PIN ºê¶¨Òå
-*                   VCC         3.3VµçÔ´
-*                   GND         µçÔ´µØ
+*                   æ¨¡å—ç®¡è„š                  å•ç‰‡æœºç®¡è„š
+*                   TX          æŸ¥çœ‹ zf_device_bluetooth_ch9141.h ä¸­ BLUETOOTH_CH9141_TX_PIN å®å®šä¹‰
+*                   RX          æŸ¥çœ‹ zf_device_bluetooth_ch9141.h ä¸­ BLUETOOTH_CH9141_RX_PIN å®å®šä¹‰
+*                   RTS         æŸ¥çœ‹ zf_device_bluetooth_ch9141.h ä¸­ BLUETOOTH_CH9141_RTS_PIN å®å®šä¹‰
+*                   VCC         3.3Vç”µæº
+*                   GND         ç”µæºåœ°
 *                   ------------------------------------
 ********************************************************************************************************************/
 
@@ -59,16 +59,16 @@
 #include "zf_device_bluetooth_ch9141.h"
 
 static  fifo_struct     bluetooth_ch9141_fifo;
-static  uint8           bluetooth_ch9141_buffer[BLUETOOTH_CH9141_BUFFER_SIZE];  // Êý¾Ý´æ·ÅÊý×é
+static  uint8           bluetooth_ch9141_buffer[BLUETOOTH_CH9141_BUFFER_SIZE];  // æ•°æ®å­˜æ”¾æ•°ç»„
 
 static  uint8           bluetooth_ch9141_data;
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍÊý¾Ý
-// ²ÎÊýËµÃ÷     data            8bit Êý¾Ý
-// ·µ»Ø²ÎÊý     uint32          Ê£Óà·¢ËÍ³¤¶È
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_send_byte(0x5A);
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— å‘é€æ•°æ®
+// å‚æ•°è¯´æ˜Ž     data            8bit æ•°æ®
+// è¿”å›žå‚æ•°     uint32          å‰©ä½™å‘é€é•¿åº¦
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_send_byte(0x5A);
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 uint32 bluetooth_ch9141_send_byte (const uint8 data)
 {
@@ -77,7 +77,7 @@ uint32 bluetooth_ch9141_send_byte (const uint8 data)
     {
         if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))
         {
-            uart_write_byte(BLUETOOTH_CH9141_INDEX, data);                      // ·¢ËÍÊý¾Ý
+            uart_write_byte(BLUETOOTH_CH9141_INDEX, data);                      // å‘é€æ•°æ®
             break;
         }
         time_count --;
@@ -87,12 +87,12 @@ uint32 bluetooth_ch9141_send_byte (const uint8 data)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍº¯Êý
-// ²ÎÊýËµÃ÷     buff             ÐèÒª·¢ËÍµÄÊý¾ÝµØÖ·
-// ·µ»Ø²ÎÊý     len              ·¢ËÍ³¤¶È
-// Ê¹ÓÃÊ¾Àý     uint32           Ê£ÓàÎ´·¢ËÍµÄ×Ö½ÚÊý
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_send_buff(buff, 16);
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— å‘é€å‡½æ•°
+// å‚æ•°è¯´æ˜Ž     buff             éœ€è¦å‘é€çš„æ•°æ®åœ°å€
+// è¿”å›žå‚æ•°     len              å‘é€é•¿åº¦
+// ä½¿ç”¨ç¤ºä¾‹     uint32           å‰©ä½™æœªå‘é€çš„å­—èŠ‚æ•°
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_send_buff(buff, 16);
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 uint32 bluetooth_ch9141_send_buff (const uint8 *buff, uint32 len)
 {
@@ -100,27 +100,27 @@ uint32 bluetooth_ch9141_send_buff (const uint8 *buff, uint32 len)
     uint16 time_count = 0;
     while(0 != len)
     {
-        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // Èç¹ûRTSÎªµÍµçÆ½ Ôò¼ÌÐø·¢ËÍÊý¾Ý
+        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // å¦‚æžœRTSä¸ºä½Žç”µå¹³ åˆ™ç»§ç»­å‘é€æ•°æ®
         {
-            if(30 <= len)                                                       // Êý¾Ý·Ö 30byte Ã¿°ü·¢ËÍ
+            if(30 <= len)                                                       // æ•°æ®åˆ† 30byte æ¯åŒ…å‘é€
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, buff, 30);            // ·¢ËÍÊý¾Ý
-                buff += 30;                                                     // µØÖ·Æ«ÒÆ
-                len -= 30;                                                      // ÊýÁ¿
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, buff, 30);            // å‘é€æ•°æ®
+                buff += 30;                                                     // åœ°å€åç§»
+                len -= 30;                                                      // æ•°é‡
                 time_count = 0;
             }
-            else                                                                // ²»×ã 30byte µÄÊý¾ÝÒ»´ÎÐÔ·¢ËÍÍê±Ï
+            else                                                                // ä¸è¶³ 30byte çš„æ•°æ®ä¸€æ¬¡æ€§å‘é€å®Œæ¯•
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, buff, len);           // ·¢ËÍÊý¾Ý
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, buff, len);           // å‘é€æ•°æ®
                 len = 0;
                 break;
             }
         }
-        else                                                                    // Èç¹ûRTSÎª¸ßµçÆ½ ÔòÄ£¿éÃ¦
+        else                                                                    // å¦‚æžœRTSä¸ºé«˜ç”µå¹³ åˆ™æ¨¡å—å¿™
         {
-            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // ³¬³öÁË×î´óµÈ´ýÊ±¼ä
+            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // è¶…å‡ºäº†æœ€å¤§ç­‰å¾…æ—¶é—´
             {
-                break;                                                          // ÍË³ö·¢ËÍ
+                break;                                                          // é€€å‡ºå‘é€
             }
             system_delay_ms(1);
         }
@@ -129,11 +129,11 @@ uint32 bluetooth_ch9141_send_buff (const uint8 *buff, uint32 len)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍ×Ö·û´®
-// ²ÎÊýËµÃ÷     *str            Òª·¢ËÍµÄ×Ö·û´®µØÖ·
-// ·µ»Ø²ÎÊý     uint32          Ê£Óà·¢ËÍ³¤¶È
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_send_string("Trust yourself.");
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— å‘é€å­—ç¬¦ä¸²
+// å‚æ•°è¯´æ˜Ž     *str            è¦å‘é€çš„å­—ç¬¦ä¸²åœ°å€
+// è¿”å›žå‚æ•°     uint32          å‰©ä½™å‘é€é•¿åº¦
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_send_string("Trust yourself.");
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 uint32 bluetooth_ch9141_send_string (const char *str)
 {
@@ -142,27 +142,27 @@ uint32 bluetooth_ch9141_send_string (const char *str)
     uint32 len = strlen(str);
     while(0 != len)
     {
-        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // Èç¹ûRTSÎªµÍµçÆ½ Ôò¼ÌÐø·¢ËÍÊý¾Ý
+        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // å¦‚æžœRTSä¸ºä½Žç”µå¹³ åˆ™ç»§ç»­å‘é€æ•°æ®
         {
-            if(30 <= len)                                                       // Êý¾Ý·Ö 30byte Ã¿°ü·¢ËÍ
+            if(30 <= len)                                                       // æ•°æ®åˆ† 30byte æ¯åŒ…å‘é€
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, (const uint8 *)str, 30);   // ·¢ËÍÊý¾Ý
-                str += 30;                                                      // µØÖ·Æ«ÒÆ
-                len -= 30;                                                      // ÊýÁ¿
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, (const uint8 *)str, 30);   // å‘é€æ•°æ®
+                str += 30;                                                      // åœ°å€åç§»
+                len -= 30;                                                      // æ•°é‡
                 time_count = 0;
             }
-            else                                                                // ²»×ã 30byte µÄÊý¾ÝÒ»´ÎÐÔ·¢ËÍÍê±Ï
+            else                                                                // ä¸è¶³ 30byte çš„æ•°æ®ä¸€æ¬¡æ€§å‘é€å®Œæ¯•
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, (const uint8 *)str, len);// ·¢ËÍÊý¾Ý
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, (const uint8 *)str, len);// å‘é€æ•°æ®
                 len = 0;
                 break;
             }
         }
-        else                                                                    // Èç¹ûRTSÎª¸ßµçÆ½ ÔòÄ£¿éÃ¦
+        else                                                                    // å¦‚æžœRTSä¸ºé«˜ç”µå¹³ åˆ™æ¨¡å—å¿™
         {
-            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // ³¬³öÁË×î´óµÈ´ýÊ±¼ä
+            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // è¶…å‡ºäº†æœ€å¤§ç­‰å¾…æ—¶é—´
             {
-                break;                                                          // ÍË³ö·¢ËÍ
+                break;                                                          // é€€å‡ºå‘é€
             }
             system_delay_ms(1);
         }
@@ -171,12 +171,12 @@ uint32 bluetooth_ch9141_send_string (const char *str)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ·¢ËÍÉãÏñÍ·Í¼ÏñÖÁÉÏÎ»»ú²é¿´Í¼Ïñ
-// ²ÎÊýËµÃ÷     *image_addr     ÐèÒª·¢ËÍµÄÍ¼ÏñµØÖ·
-// ²ÎÊýËµÃ÷     image_size      Í¼ÏñµÄ´óÐ¡
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_send_image(&mt9v03x_image[0][0], MT9V03X_IMAGE_SIZE);
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— å‘é€æ‘„åƒå¤´å›¾åƒè‡³ä¸Šä½æœºæŸ¥çœ‹å›¾åƒ
+// å‚æ•°è¯´æ˜Ž     *image_addr     éœ€è¦å‘é€çš„å›¾åƒåœ°å€
+// å‚æ•°è¯´æ˜Ž     image_size      å›¾åƒçš„å¤§å°
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_send_image(&mt9v03x_image[0][0], MT9V03X_IMAGE_SIZE);
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 void bluetooth_ch9141_send_image (const uint8 *image_addr, uint32 image_size)
 {
@@ -189,28 +189,28 @@ void bluetooth_ch9141_send_image (const uint8 *image_addr, uint32 image_size)
 
     while(0 != image_size)
     {
-        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // Èç¹ûRTSÎªµÍµçÆ½ Ôò¼ÌÐø·¢ËÍÊý¾Ý
+        if(!gpio_get_level(BLUETOOTH_CH9141_RTS_PIN))                           // å¦‚æžœRTSä¸ºä½Žç”µå¹³ åˆ™ç»§ç»­å‘é€æ•°æ®
         {
 //            system_delay_ms(5);
-            if(30 <= image_size)                                                // Êý¾Ý·Ö 30byte Ã¿°ü·¢ËÍ
+            if(30 <= image_size)                                                // æ•°æ®åˆ† 30byte æ¯åŒ…å‘é€
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, image_addr, 30);      // ·¢ËÍÊý¾Ý
-                image_addr += 30;                                               // µØÖ·Æ«ÒÆ
-                image_size -= 30;                                               // ÊýÁ¿
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, image_addr, 30);      // å‘é€æ•°æ®
+                image_addr += 30;                                               // åœ°å€åç§»
+                image_size -= 30;                                               // æ•°é‡
                 time_count = 0;
             }
-            else                                                                // ²»×ã 30byte µÄÊý¾ÝÒ»´ÎÐÔ·¢ËÍÍê±Ï
+            else                                                                // ä¸è¶³ 30byte çš„æ•°æ®ä¸€æ¬¡æ€§å‘é€å®Œæ¯•
             {
-                uart_write_buffer(BLUETOOTH_CH9141_INDEX, image_addr, image_size);// ·¢ËÍÊý¾Ý
+                uart_write_buffer(BLUETOOTH_CH9141_INDEX, image_addr, image_size);// å‘é€æ•°æ®
                 image_size = 0;
                 break;
             }
         }
-        else                                                                    // Èç¹ûRTSÎª¸ßµçÆ½ ÔòÄ£¿éÃ¦
+        else                                                                    // å¦‚æžœRTSä¸ºé«˜ç”µå¹³ åˆ™æ¨¡å—å¿™
         {
-            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // ³¬³öÁË×î´óµÈ´ýÊ±¼ä
+            if(BLUETOOTH_CH9141_TIMEOUT_COUNT <= (++ time_count))               // è¶…å‡ºäº†æœ€å¤§ç­‰å¾…æ—¶é—´
             {
-                break;                                                          // ÍË³ö·¢ËÍ
+                break;                                                          // é€€å‡ºå‘é€
             }
             system_delay_ms(1);
         }
@@ -218,12 +218,12 @@ void bluetooth_ch9141_send_image (const uint8 *image_addr, uint32 image_size)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ¶ÁÈ¡º¯Êý
-// ²ÎÊýËµÃ÷     buff            ´æ´¢µÄÊý¾ÝµØÖ·
-// ²ÎÊýËµÃ÷     len             ³¤¶È
-// ·µ»Ø²ÎÊý     uint32          Êµ¼Ê¶ÁÈ¡×Ö½ÚÊý
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_read_buff(buff, 16);
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— è¯»å–å‡½æ•°
+// å‚æ•°è¯´æ˜Ž     buff            å­˜å‚¨çš„æ•°æ®åœ°å€
+// å‚æ•°è¯´æ˜Ž     len             é•¿åº¦
+// è¿”å›žå‚æ•°     uint32          å®žé™…è¯»å–å­—èŠ‚æ•°
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_read_buff(buff, 16);
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 uint32 bluetooth_ch9141_read_buff (uint8 *buff, uint32 len)
 {
@@ -234,26 +234,26 @@ uint32 bluetooth_ch9141_read_buff (uint8 *buff, uint32 len)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ´®¿ÚÖÐ¶Ï»Øµ÷º¯Êý
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     void
-// Ê¹ÓÃÊ¾Àý
-// ±¸×¢ÐÅÏ¢     ¸Ãº¯ÊýÔÚ ISR ÎÄ¼þµÄ´®¿ÚÖÐ¶Ï³ÌÐò±»µ÷ÓÃ
-//              ÓÉ´®¿ÚÖÐ¶Ï·þÎñº¯Êýµ÷ÓÃ wireless_module_uart_handler() º¯Êý
-//              ÔÙÓÉ wireless_module_uart_handler() º¯Êýµ÷ÓÃ±¾º¯Êý
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— ä¸²å£ä¸­æ–­å›žè°ƒå‡½æ•°
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     void
+// ä½¿ç”¨ç¤ºä¾‹
+// å¤‡æ³¨ä¿¡æ¯     è¯¥å‡½æ•°åœ¨ ISR æ–‡ä»¶çš„ä¸²å£ä¸­æ–­ç¨‹åºè¢«è°ƒç”¨
+//              ç”±ä¸²å£ä¸­æ–­æœåŠ¡å‡½æ•°è°ƒç”¨ wireless_module_uart_handler() å‡½æ•°
+//              å†ç”± wireless_module_uart_handler() å‡½æ•°è°ƒç”¨æœ¬å‡½æ•°
 //-------------------------------------------------------------------------------------------------------------------
 void bluetooth_ch9141_uart_callback (void)
 {
-    uart_query_byte(BLUETOOTH_CH9141_INDEX, &bluetooth_ch9141_data);            // ¶ÁÈ¡´®¿ÚÊý¾Ý
-    fifo_write_buffer(&bluetooth_ch9141_fifo, &bluetooth_ch9141_data, 1);       // ´æÈë FIFO
+    uart_query_byte(BLUETOOTH_CH9141_INDEX, &bluetooth_ch9141_data);            // è¯»å–ä¸²å£æ•°æ®
+    fifo_write_buffer(&bluetooth_ch9141_fifo, &bluetooth_ch9141_data, 1);       // å­˜å…¥ FIFO
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êý¼ò½é     À¶ÑÀ×ª´®¿ÚÄ£¿é ³õÊ¼»¯
-// ²ÎÊýËµÃ÷     void
-// ·µ»Ø²ÎÊý     uint8           ³õÊ¼»¯×´Ì¬ 0-³É¹¦ 1-Ê§°Ü
-// Ê¹ÓÃÊ¾Àý     bluetooth_ch9141_init();
-// ±¸×¢ÐÅÏ¢
+// å‡½æ•°ç®€ä»‹     è“ç‰™è½¬ä¸²å£æ¨¡å— åˆå§‹åŒ–
+// å‚æ•°è¯´æ˜Ž     void
+// è¿”å›žå‚æ•°     uint8           åˆå§‹åŒ–çŠ¶æ€ 0-æˆåŠŸ 1-å¤±è´¥
+// ä½¿ç”¨ç¤ºä¾‹     bluetooth_ch9141_init();
+// å¤‡æ³¨ä¿¡æ¯
 //-------------------------------------------------------------------------------------------------------------------
 uint8 bluetooth_ch9141_init (void)
 {
@@ -261,8 +261,8 @@ uint8 bluetooth_ch9141_init (void)
     set_wireless_type(BLUETOOTH_CH9141, bluetooth_ch9141_uart_callback);
 
     fifo_init(&bluetooth_ch9141_fifo, FIFO_DATA_8BIT, bluetooth_ch9141_buffer, BLUETOOTH_CH9141_BUFFER_SIZE);
-    // ±¾º¯ÊýÊ¹ÓÃµÄ²¨ÌØÂÊÎª115200 ÎªÀ¶ÑÀ×ª´®¿ÚÄ£¿éµÄÄ¬ÈÏ²¨ÌØÂÊ ÈçÐèÆäËû²¨ÌØÂÊÇëÊ¹ÓÃÉÏÎ»»úÐÞ¸ÄÄ£¿é²ÎÊý
-    gpio_init(BLUETOOTH_CH9141_RTS_PIN, GPI, 1, GPI_PULL_UP);                   // ³õÊ¼»¯Á÷¿ØÒý½Å
+    // æœ¬å‡½æ•°ä½¿ç”¨çš„æ³¢ç‰¹çŽ‡ä¸º115200 ä¸ºè“ç‰™è½¬ä¸²å£æ¨¡å—çš„é»˜è®¤æ³¢ç‰¹çŽ‡ å¦‚éœ€å…¶ä»–æ³¢ç‰¹çŽ‡è¯·ä½¿ç”¨ä¸Šä½æœºä¿®æ”¹æ¨¡å—å‚æ•°
+    gpio_init(BLUETOOTH_CH9141_RTS_PIN, GPI, 1, GPI_PULL_UP);                   // åˆå§‹åŒ–æµæŽ§å¼•è„š
     uart_init(BLUETOOTH_CH9141_INDEX, BLUETOOTH_CH9141_BUAD_RATE, BLUETOOTH_CH9141_RX_PIN, BLUETOOTH_CH9141_TX_PIN);
     uart_rx_interrupt(BLUETOOTH_CH9141_INDEX, 1);
 

@@ -93,7 +93,7 @@ for(int j=0; j<6; j++) {
 P_k_M[i][j] += GQG_T[i][j];
 }
 }
-    //*****************Correction*****************************
+    *****************Correction*****************************
 float Varince_x_gps = 0.01;
 float Varince_y_gps = 0.01;
 float Variance_Acc = 0.001;

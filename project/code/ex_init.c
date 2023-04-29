@@ -23,8 +23,9 @@ void ex_init(void){
     if(!flash_check (63,3)){//FLASH无数据则格式化
         oled_clear();
         oled_show_string(0, 0, "FLASH formatting...");
-        
+        flash_init();
     }
+
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");
@@ -42,7 +43,13 @@ void ex_init(void){
     oled_show_string(0, 7, "IMU963RA loading...");
     system_delay_ms(1000);
     IMU963RA_Init_Offset();//IMU963RA去偏移
-    
+
+    //蓝牙初始化
+    oled_clear();
+    oled_show_string(0, 0, "Bluetooth checking...");
+    bluetooth_ch9141_init();
+    bluetooth_ch9141_send_string("Bluetooth OK.\r\n");
+
     //初始化完成
     oled_clear();
 }

@@ -39,11 +39,11 @@ void MahonyAHRSupdate(float gx, float gy, float gz, float ax, float ay, float az
 	float halfex, halfey, halfez;
 	float qa, qb, qc;
 
-	/*if ((mx == 0.0f) && (my == 0.0f) && (mz == 0.0f))
+	if ((mx == my))//磁度计强干扰时六轴解算
 	{
 		MahonyAHRSupdateIMU(gx, gy, gz, ax, ay, az);
 		return;
-	}*///显然，我们有磁度计。
+	}
 
 	// 只在加速器测量有效时计算反馈（避免加速器归一化中的NaN）
 	if (!((ax == 0.0f) && (ay == 0.0f) && (az == 0.0f)))

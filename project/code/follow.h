@@ -5,9 +5,9 @@
  *      Author: Chaoi
  */
 
-#ifndef THREAD_H_
-#define THREAD_H_
+#ifndef FOLLOW_H_
+#define FOLLOW_H_
 
 
 
-#endif /* THREAD_H_ */
+#endif /* FOLLOW_H_ */

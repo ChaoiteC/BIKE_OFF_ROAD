@@ -53,3 +53,13 @@ void ex_init(void){
     //初始化完成
     oled_clear();
 }
+
+void flash_init(void){
+    int i;
+    flash_erase_sector(63,3);
+    for(i=0;i<8;i++){
+        flash_buffer_clear();
+        flash_union_buffer[i].float_type=(float)i;
+    }
+    flash_write_page_from_buffer(63,3);
+}

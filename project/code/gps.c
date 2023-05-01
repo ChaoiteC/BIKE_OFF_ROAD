@@ -85,7 +85,6 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @param void
  * @return 0 mean yes, 1 mean error
  * @notice 我超写那么紧密耦合鬼看得懂
- *         已经看不懂力（悲）
  */
 int gps_get_point(void){
     int i=0,j=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
@@ -128,9 +127,9 @@ int gps_get_point(void){
     flash_buffer_clear();
     flash_erase_sector(section,page);
     for(j=0;j<i;j++){
-        flash_union_buffer[1+column].int16_type=gps_point[j].latitude;
-        flash_union_buffer[2+column].int16_type=gps_point[j].longitude;
-        flash_union_buffer[3+column].uint8_type=gps_point[j].point_type;
+        flash_union_buffer[0+column].float_type=gps_point[j].latitude;
+        flash_union_buffer[1+column].float_type=gps_point[j].longitude;
+        flash_union_buffer[2+column].uint8_type=gps_point[j].point_type;
         if(column==0){
             column=3;
         }
@@ -138,6 +137,7 @@ int gps_get_point(void){
             column=0;
             while(flash_write_page_from_buffer(section,page));
             if(--page<0){
+                page=3;
                 section--;
             }
             flash_erase_sector(section,page);

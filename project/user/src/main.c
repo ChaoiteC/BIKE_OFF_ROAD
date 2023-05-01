@@ -12,10 +12,17 @@ int main(void){
     debug_init();                                                               // 初始化默认 Debug UART
     ex_init();
     menu();//进入人机交互页面
-
+    wait_to_strat();
+    
     while(1){//发车主循环
+
         if(gps_tau1201_flag){//这段用于GPS数据处理
             gps_tau1201_flag=0;
         }
     }
+}
+
+void wait_to_start(){
+    oled_clear();
+    
 }

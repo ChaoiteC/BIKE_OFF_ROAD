@@ -6,10 +6,6 @@
 
 #include "zf_common_headfile.h"
 
-
-
-
-
 uint8 now_page=0;//当前页面
 uint8 gogogo=0;//1=正式发车
 
@@ -182,6 +178,9 @@ void page_GET_POINT_ex(){
                     system_delay_ms(3000);
                     now_page=GET_POINT;
                 }
+                else{
+                    gogogo=1;
+                }
             }break;
             case 1:{
                 if(gps_get_point()){
@@ -190,7 +189,7 @@ void page_GET_POINT_ex(){
                     now_page=GET_POINT;
                 }
                 else{
-                    
+                    gogogo=1;
                 }
                 break;
             }

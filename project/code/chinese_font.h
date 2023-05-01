@@ -8,5 +8,6 @@ extern const uint8 BOR[][16];
 extern const uint8 IMU_offset1[][16];
 extern const uint8 IMU_offset2[][16];
 extern const uint8 POINT_TYPE[][16];
+extern const uint8 GOGOGO[][16];
 
 #endif /* CHINESE_FONT_H_ */

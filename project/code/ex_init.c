@@ -44,7 +44,7 @@ void ex_init(void){
     system_delay_ms(1000);
     IMU963RA_Init_Offset();//IMU963RA去偏移*/
 
-    //蓝牙初始化
+    //蓝牙初始化A
     oled_clear();
     oled_show_string(0, 0, "Bluetooth checking...");
     bluetooth_ch9141_init();

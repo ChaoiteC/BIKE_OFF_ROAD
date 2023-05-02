@@ -18,7 +18,7 @@ int main(void){
     
     while(1){//发车主循环
 
-        if(gps_tau1201_flag){//这段用于GPS数据处理
+        if(gps_tau1201_flag){// 这段用于GPS数据处理
             gps_tau1201_flag=0;
         }
     }

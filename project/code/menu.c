@@ -9,7 +9,7 @@
 uint8 now_page=0;//当前页面
 uint8 gogogo=0;//1=正式发车
 
-int8 select=0;
+int8 point=0;
 uint8 edit=0;
 uint8 last_page=0;
 
@@ -31,7 +31,7 @@ void menu(void){//人机交互页面
     while(!gogogo){
         oled_clear();
         if(last_page!=now_page){
-            select=0;
+            point=0;
             edit=0;
         }
         last_page=now_page;
@@ -119,25 +119,25 @@ void page_MASTER_show(){
     oled_show_string(0,5,"  chk. Params."  );//改变参数
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
-    oled_show_string(0,3+select,"->"        );//屏幕指针
+    oled_show_string(0,3+point,"->"        );//屏幕指针
 }
 
 void page_MASTER_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--select<0){
-            select=2;
+        if(--point<0){
+            point=2;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++select>2){
-            select=0;
+        if(++point>2){
+            point=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         first_page();
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(select){
+        switch(point){
             case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
             case 2:now_page=FLS;break;
@@ -153,25 +153,25 @@ void page_GET_POINT_show(){
     oled_show_string(0,5,"  USE FLASH DATA"        );
     oled_show_string(0,6,"  RECORD NEW"            );
 
-    oled_show_string(0,5+select,"->"                );
+    oled_show_string(0,5+point,"->"                );
 }
 
 void page_GET_POINT_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--select<0){
-            select=1;
+        if(--point<0){
+            point=1;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++select>1){
-            select=0;
+        if(++point>1){
+            point=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=MASTER;
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(select){
+        switch(point){
             case 0:{
                 if(gps_check_flash()){
                     gps_point_error();
@@ -206,25 +206,25 @@ void page_TET_show(){
     oled_show_string(0,6,"  BLUETOOTH"             );
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
 
-    oled_show_string(0,3+select,"->"                );
+    oled_show_string(0,3+point,"->"                );
 }
 
 void page_TET_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-        if(--select<0){
-            select=3;
+        if(--point<0){
+            point=3;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++select>3){
-            select=0;
+        if(++point>3){
+            point=0;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=MASTER;
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        switch(select){
+        switch(point){
             case 0:now_page=GPS;break;
             case 1:now_page=AGM;break;
             case 2:now_page=IMU;break;
@@ -339,20 +339,20 @@ void page_FLS_show(){
     }
     if(edit){
         oled_show_string(0,7,"-    [+/-/DF/RT]");
-        if(select<=3){
-            oled_show_string(0,3+select,">>"     );
+        if(point<=3){
+            oled_show_string(0,3+point,">>"     );
         }
         else{
-            oled_show_string(0,select-1,">>"     );
+            oled_show_string(0,point-1,">>"     );
         }
     }
     else{
         oled_show_string(0,7,"-[UP/DOWN/CF/RT]");
-        if(select<=3){
-            oled_show_string(0,3+select,"->"     );
+        if(point<=3){
+            oled_show_string(0,3+point,"->"     );
         }
         else{
-            oled_show_string(0,select-1,"->"     );
+            oled_show_string(0,point-1,"->"     );
         }
     }
 }
@@ -360,21 +360,23 @@ void page_FLS_show(){
 void page_FLS_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
-            flash_union_buffer[select].float_type+=0.1;
+            flash_union_buffer[point].float_type+=0.1;
+            flash_write_page_from_buffer(63,3);
         }
         else{
-            if(--select<0){
-                select=7;
+            if(--point<0){
+                point=7;
             }
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
         if(edit){
-            flash_union_buffer[select].float_type-=0.1;
+            flash_union_buffer[point].float_type-=0.1;
+            flash_write_page_from_buffer(63,3);
         }
         else{
-            if(++select>7){
-                select=0;
+            if(++point>7){
+                point=0;
             }
         }
     }
@@ -391,7 +393,7 @@ void page_FLS_ex(){
             edit=!edit;
         }
     }
-    flash_write_page_from_buffer(63,3);
+
 }
 
 

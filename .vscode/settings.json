@@ -12,6 +12,7 @@
         "math.h": "c",
         "cmath": "c",
         "limits": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "zf_common_interrupt.h": "c"
     }
 }

@@ -205,10 +205,15 @@ void page_GET_POINT_ex(){
 void page_TET_show(){
     oled_show_string(0,0,"test Ext.eq."            );
     oled_show_string(0,1,"./TET"                   );
-    oled_show_string(0,3,"  GPS_TAU1201"           );
-    oled_show_string(0,4,"  IMU963RA"              );
-    oled_show_string(0,5,"  IMU_Mahony"            );
-    oled_show_string(0,6,"  BLUETOOTH"             );
+    if(point<=3){
+        oled_show_string(0,3,"  GPS_TAU1201"           );
+        oled_show_string(0,4,"  IMU963RA"              );
+        oled_show_string(0,5,"  IMU_Mahony"            );
+        oled_show_string(0,6,"  BLUETOOTH"             );
+    }
+    else{
+        oled_show_string(0,3,"  SREVO"           );
+    }
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
 
     oled_show_string(0,3+point,"->"                );

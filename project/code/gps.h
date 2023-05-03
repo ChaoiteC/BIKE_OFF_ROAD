@@ -9,11 +9,13 @@
 
 #define GPS_DATA_MAX  20 //GPS点位记录的最大量
 
-struct GPS_POINT{
+typedef struct{
     float latitude;//纬度
     float longitude;//经度
     uint8 point_type;//点位类型
-}gps_point[GPS_DATA_MAX];
+}GPS_POINT;
+
+extern GPS_POINT gps_point[GPS_DATA_MAX];
 
 int gps_check_flash(void);
 int gps_get_point();

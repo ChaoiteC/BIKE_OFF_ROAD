@@ -13,4 +13,25 @@
 
 #include "zf_common_headfile.h"
 
+void ready_start(){
 
+}
+
+void gps_follow(){
+        if(gps_tau1201_flag){//这段用于GPS数据处理
+        gps_tau1201_flag=0;
+        if(!gps_tau1201.state){
+            //定位失败
+        }
+        else{
+        }
+    }
+}
+
+/*void MPU_thread_entry(){
+    if((roll >= 30) || (roll <= -30) || (pitch >= 30) || (pitch <= -30))
+    {
+        Motor_Control(0);
+        pwm_disable(Servo_PWM_TIM);
+    }
+}*/

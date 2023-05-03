@@ -324,7 +324,7 @@ void page_BLE_show(){
     oled_show_string(0,0,"BLUETOOTH"               );
     oled_show_string(0,1,"./TET/BLE"               );
     oled_show_string(0,3,"TX TEXT:"                );
-    oled_show_string(0,4,data_buffer               );
+    oled_show_string(0,4,(const char *)data_buffer );
 }
 
 void page_BLE_ex(){
@@ -346,7 +346,7 @@ void page_FLS_show(){
         oled_show_float(x,y,flash_union_buffer[i].float_type,2,1);
     }
     if(edit){
-        oled_show_string(0,7,"-    [+/-/DF/RT]");
+        oled_show_string(0,7,"-    [+/-/CF/RT]");
         if(point<=3){
             oled_show_string(0,3+point,">>"     );
         }
@@ -369,8 +369,6 @@ void page_FLS_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
             flash_union_buffer[point].float_type+=0.1;
-            flash_write_page_from_buffer(63,3);
-            flash_change=1;
         }
         else{
             if(--point<0){
@@ -381,8 +379,6 @@ void page_FLS_ex(){
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
         if(edit){
             flash_union_buffer[point].float_type-=0.1;
-            flash_write_page_from_buffer(63,3);
-            flash_change=1;
         }
         else{
             if(++point>7){
@@ -399,7 +395,11 @@ void page_FLS_ex(){
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
-        if(!edit){
+        if(edit){
+            flash_write_page_from_buffer(63,3);
+            flash_change=1;
+        }
+        else{
             edit=!edit;
         }
     }

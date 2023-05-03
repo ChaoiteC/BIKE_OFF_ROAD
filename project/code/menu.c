@@ -346,21 +346,21 @@ void page_FLS_show(){
         oled_show_float(x,y,flash_union_buffer[i].float_type,2,1);
     }
     if(edit){
-        oled_show_string(0,7,"-    [+/-/CF/RT]");
-        if(point<=3){
+        oled_show_string(0,7,"     [+/-/CF/RT]");
+        if(point<3){
             oled_show_string(0,3+point,">>"     );
         }
         else{
-            oled_show_string(52,point-1,">>"     );
+            oled_show_string(52,point,">>"     );
         }
     }
     else{
         oled_show_string(0,7,"-[UP/DOWN/CF/RT]");
-        if(point<=3){
+        if(point<3){
             oled_show_string(0,3+point,"->"     );
         }
         else{
-            oled_show_string(52,point-1,"->"     );
+            oled_show_string(52,point,"->"     );
         }
     }
 }
@@ -372,7 +372,7 @@ void page_FLS_ex(){
         }
         else{
             if(--point<0){
-                point=7;
+                point=5;
             }
         }
     }
@@ -381,7 +381,7 @@ void page_FLS_ex(){
             flash_union_buffer[point].float_type-=0.1;
         }
         else{
-            if(++point>7){
+            if(++point>5){
                 point=0;
             }
         }
@@ -389,6 +389,7 @@ void page_FLS_ex(){
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         if(edit){
             edit=!edit;
+            flash_change=1;
         }
         else{
             now_page=MASTER;
@@ -396,8 +397,10 @@ void page_FLS_ex(){
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         if(edit){
+            oled_show_string(0,7,"SIT AND RELAX...");
             flash_write_page_from_buffer(63,3);
             flash_change=1;
+            edit=!edit;
         }
         else{
             edit=!edit;

@@ -16,9 +16,9 @@
 
 IMU_Info imu;
 
-int16_t  IMU963RA_FIFO[9][Buf_SIZE];	//9个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据 6-8 磁度计数据	
+int16_t  ICM20602_FIFO[6][Buf_SIZE];	//6个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据	
 
-int16_t lastAx,lastAy,lastAz,lastGx,lastGy,lastGz,lastMx,lastMy,lastMz;
+int16_t lastAx,lastAy,lastAz,lastGx,lastGy,lastGz;
 
 static uint8_t Wr_Index = 0;	//当前FIFO的写入下标
 
@@ -27,12 +27,12 @@ static float Roll_offset;
 static float Yaw_offset;
 
 //将val入队
-static void IMU963RA_NewVal(int16_t* buf,int16_t val) {
+static void ICM20602_NewVal(int16_t* buf,int16_t val) {
   	buf[Wr_Index] = val;
 }
 
 //计算FIFO中的平均值
-static int16_t IMU963RA_GetAvg(int16_t* buf)
+static int16_t ICM20602_GetAvg(int16_t* buf)
 {
   	int i;
 	int32_t	sum = 0;
@@ -42,37 +42,32 @@ static int16_t IMU963RA_GetAvg(int16_t* buf)
 	return (int16_t)sum;
 }
 
-//读取经过滤波的陀螺仪、加速度、磁度计数据
-void IMU963RA_readGyro_Acc(int16_t *gyro,int16_t *acc,int16_t *mag)
+//读取经过滤波的陀螺仪、加速度数据
+void ICM20602_readGyro_Acc(int16_t *gyro,int16_t *acc)
 {
-	//static short buf[9];	//缓存原始数据：0-2：加速度计数据；3-5：陀螺仪数据 6-8 磁度计数据
+	//static short buf[9];	//缓存原始数据：0-2：加速度计数据；3-5：陀螺仪数据
 	static int16_t gx,gy,gz;
 	static int16_t ax,ay,az;
-	static int16_t mx,my,mz;
 	
 	//将原始数据入队
-	if(imu963ra_acc_x==imu963ra_acc_y){
+	if(icm20602_acc_x==icm20602_acc_y){
 	    return;
 	}
-	IMU963RA_NewVal(&IMU963RA_FIFO[0][0],imu963ra_acc_x);
-	IMU963RA_NewVal(&IMU963RA_FIFO[1][0],imu963ra_acc_y);
-	IMU963RA_NewVal(&IMU963RA_FIFO[2][0],imu963ra_acc_z);
+	ICM20602_NewVal(&ICM20602_FIFO[0][0],icm20602_acc_x);
+	ICM20602_NewVal(&ICM20602_FIFO[1][0],icm20602_acc_y);
+	ICM20602_NewVal(&ICM20602_FIFO[2][0],icm20602_acc_z);
 
-	IMU963RA_NewVal(&IMU963RA_FIFO[3][0],imu963ra_gyro_x);
-	IMU963RA_NewVal(&IMU963RA_FIFO[4][0],imu963ra_gyro_y);
-	IMU963RA_NewVal(&IMU963RA_FIFO[5][0],imu963ra_gyro_z);
-
-	IMU963RA_NewVal(&IMU963RA_FIFO[6][0],imu963ra_mag_x);
-	IMU963RA_NewVal(&IMU963RA_FIFO[7][0],imu963ra_mag_y);
-	IMU963RA_NewVal(&IMU963RA_FIFO[8][0],imu963ra_mag_z);
+	ICM20602_NewVal(&ICM20602_FIFO[3][0],icm20602_gyro_x);
+	ICM20602_NewVal(&ICM20602_FIFO[4][0],icm20602_gyro_y);
+	ICM20602_NewVal(&ICM20602_FIFO[5][0],icm20602_gyro_z);
 	
 	//更新FIFO入口指针
 	Wr_Index = (Wr_Index + 1) % Buf_SIZE;	
 
 	//计算队列平均值
-	gx =  IMU963RA_GetAvg(&IMU963RA_FIFO[4][0]);
-	gy =  IMU963RA_GetAvg(&IMU963RA_FIFO[5][0]);
-	gz =  IMU963RA_GetAvg(&IMU963RA_FIFO[6][0]);
+	gx =  ICM20602_GetAvg(&ICM20602_FIFO[4][0]);
+	gy =  ICM20602_GetAvg(&ICM20602_FIFO[5][0]);
+	gz =  ICM20602_GetAvg(&ICM20602_FIFO[6][0]);
 	
 	//陀螺仪数据要减去偏移量
 	gyro[0] = gx - Roll_offset;	//gyro
@@ -80,30 +75,21 @@ void IMU963RA_readGyro_Acc(int16_t *gyro,int16_t *acc,int16_t *mag)
 	gyro[2] = gz - Yaw_offset;
 		
 
-	ax = 	IMU963RA_GetAvg(&IMU963RA_FIFO[0][0]);
-	ay = 	IMU963RA_GetAvg(&IMU963RA_FIFO[1][0]);
-	az = 	IMU963RA_GetAvg(&IMU963RA_FIFO[2][0]);
+	ax = 	ICM20602_GetAvg(&ICM20602_FIFO[0][0]);
+	ay = 	ICM20602_GetAvg(&ICM20602_FIFO[1][0]);
+	az = 	ICM20602_GetAvg(&ICM20602_FIFO[2][0]);
 				
 	acc[0] = ax; //acc
 	acc[1] = ay;
 	acc[2] = az;
-
-	mx = 	IMU963RA_GetAvg(&IMU963RA_FIFO[6][0]);
-	my = 	IMU963RA_GetAvg(&IMU963RA_FIFO[7][0]);
-	mz = 	IMU963RA_GetAvg(&IMU963RA_FIFO[8][0]);
-
-	mag[0] = mx; //mag
-	mag[1] = my;
-	mag[2] = mz;
 }
 
-void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
+void ICM20602_Init_Offset(void)//ICM20602初始化去偏移
 {
 	int i;
-	int16_t temp[3],temp2[3],temp3[3];
+	int16_t temp[3],temp2[3];
 	int32_t	tempgx=0,tempgy=0,tempgz=0;
 	int32_t tempax=0,tempay=0,tempaz=0;
-	int32_t tempmx=0,tempmy=0,tempmz=0;
 	Pitch_offset = 0;
 	Roll_offset = 0;
 	Yaw_offset = 0;
@@ -111,13 +97,13 @@ void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
 	//等待ICM准备就绪
 	for(i=0;i<100;i++){
   		system_delay_ms(5);
-		IMU963RA_readGyro_Acc(temp,temp2,temp3);
+		ICM20602_readGyro_Acc(temp,temp2);
 	}
 	
 	//计算imu数据的平均值作为偏移量
  	for(i=0;i<OFFSET_CONUT;i++){
 		system_delay_ms(10);
-		IMU963RA_readGyro_Acc(temp,temp2,temp3);
+		ICM20602_readGyro_Acc(temp,temp2);
 		oled_show_int(0,2,i,3);
 		if(temp[0]==temp[1]){
 			i--;
@@ -132,10 +118,6 @@ void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
 			tempax += temp2[0];
 			tempay += temp2[1];
 			tempaz += temp2[2];
-
-			tempmx += temp3[0];
-			tempmy += temp3[1];
-			tempmz += temp3[2];
 		}
 	}
 	
@@ -147,15 +129,14 @@ void IMU963RA_Init_Offset(void)//IMU963RA初始化去偏移
 
 static void Get_IMU_Values(float *values)
 {
-	int16_t gyro[3],acc[3],mag[3];
+	int16_t gyro[3],acc[3];
 	
-	IMU963RA_readGyro_Acc(&gyro[0],&acc[0],&mag[0]);
+	ICM20602_readGyro_Acc(&gyro[0],&acc[0]);
 	
 	for(int i=0;i<3;i++)
 	{
-		values[i]=(imu963ra_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
+		values[i]=(icm20602_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
 		values[3+i]=(float) acc[i];
-		values[6+i]=(float) mag[i];
 	}
 	
 }
@@ -177,11 +158,11 @@ float safe_asin(float v)
 void IMU_Update(void)
 {
 	static float q[4];
-	float Values[9];	
+	float Values[6];	
 	Get_IMU_Values(Values);	
 	
 	//将角度改为弧度，用Mahony计算imu
-	MahonyAHRSupdate(Values[0] * PI/180, Values[1] * PI/180, Values[2] * PI/180,Values[3], Values[4], Values[5],Values[6], Values[7], Values[8]);		
+	MahonyAHRSupdateIMU(Values[0] * PI/180, Values[1] * PI/180, Values[2] * PI/180,Values[3], Values[4], Values[5]);		
 	
 	//保存四元数（Quaternion）。
 	q[0] = q0;

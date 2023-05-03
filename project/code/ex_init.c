@@ -31,19 +31,19 @@ void ex_init(void){
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
     
-    //IMU963RA初始化
-    oled_show_string(0, 0, "IMU963RA loading...");
-    if(imu963ra_init()){//自检失败
+    //ICM20602初始化
+    oled_show_string(0, 0, "ICM20602 loading...");
+    if(icm20602_init()){//自检失败
         system_delay_ms(1000);
     }
     else{
-        pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
+        pit_ms_init(TIM6_PIT,5);//定时器中断获取ICM20602A数据
         oled_clear();
-        oled_show_chinese(0, 0, 16,(const uint8 *)IMU_offset1,5);
-        oled_show_chinese(0, 4, 16,(const uint8 *)IMU_offset2,4);
-        oled_show_string(0, 7, "IMU963RA loading...");
+        oled_show_chinese(0, 0, 16,(const uint8 *)ICM_offset1,5);
+        oled_show_chinese(0, 4, 16,(const uint8 *)ICM_offset2,4);
+        oled_show_string(0, 7, "ICM20602 loading...");
         system_delay_ms(1000);
-        IMU963RA_Init_Offset();//IMU963RA去偏移
+        ICM20602_Init_Offset();//ICM20602去偏移
     }
 
     //蓝牙初始化

@@ -9,10 +9,10 @@
 
 #include "zf_common_headfile.h"
 
-uint8 now_page=0;//当前页面
-uint8 gogogo=0;//1=正式发车
+uint8 now_page=0;                               //当前页面
+uint8 gogogo=0;                                 //1=正式发车
 
-int8 point=0;
+int8 point=0;                                   //指示器
 uint8 edit=0;
 uint8 last_page=0;
 uint8 flash_change=1;//为什么FLASH读写需要那么久(′へ`、 )
@@ -28,6 +28,7 @@ enum PAGE{
         BLE,
     //CP,
         FLS,
+    //ENCODER
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
@@ -49,6 +50,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_show();break;
             case BLE      :page_BLE_show();break;
             case FLS      :page_FLS_show();break;
+            //case ENCODER      :page_ENCODER_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -62,6 +64,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_ex();break;
             case BLE      :page_BLE_ex();break;
             case FLS      :page_FLS_ex();break;
+            //case ENCODER      :page_ENCODER_ex();break;
             default       :page_error();
         }
     }
@@ -406,7 +409,16 @@ void page_FLS_ex(){
 
 }
 
+/*void page_encoder_show(){
+    oled_show_string(0, 0, "Encoder");
+    oled_show_float (0,1,encoder_data_quaddec,4,4);
+}*/
 
+/*void page_encoder_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+    }
+}*/
 
 /*//页面显示模板
 void page_xx_show(){

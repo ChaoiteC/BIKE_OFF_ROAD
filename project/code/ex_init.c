@@ -52,6 +52,10 @@ void ex_init(void){
 
     //初始化完成
     oled_clear();
+    Servo_Init(servo_motor_duty);
+    Encoder_text_init();                                                        //编码器初始化，打开中段
+    MOTOR_Init();
+
 }
 
 void flash_init(void){

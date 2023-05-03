@@ -24,6 +24,10 @@ void page_IMU_show();
 void page_IMU_ex();
 void page_BLE_show();
 void page_BLE_ex();
+void page_SEV_show();
+void page_SEV_ex();
+void page_ECD_show();
+void page_ECD_ex();
 void page_FLS_show();
 void page_FLS_ex();
 

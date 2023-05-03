@@ -26,9 +26,10 @@ enum PAGE{
         AGM,
         IMU,
         BLE,
+        SEV,
+        ECD,
     //CP,
         FLS,
-    //ENCODER
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
@@ -49,8 +50,9 @@ void menu(void){//人机交互页面
             case AGM      :page_AGM_show();break;
             case IMU      :page_IMU_show();break;
             case BLE      :page_BLE_show();break;
+            case SEV      :page_SEV_show();break;
+            case ECD      :page_ECD_show();break;
             case FLS      :page_FLS_show();break;
-            //case ENCODER      :page_ENCODER_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -63,8 +65,9 @@ void menu(void){//人机交互页面
             case AGM      :page_AGM_ex();break;
             case IMU      :page_IMU_ex();break;
             case BLE      :page_BLE_ex();break;
+            case SEV      :page_SEV_ex();break;
+            case ECD      :page_ECD_ex();break;
             case FLS      :page_FLS_ex();break;
-            //case ENCODER      :page_ENCODER_ex();break;
             default       :page_error();
         }
     }
@@ -215,21 +218,27 @@ void page_TET_show(){
         oled_show_string(0,6,"  BLUETOOTH"             );
     }
     else{
-        oled_show_string(0,3,"  SREVO"           );
+        oled_show_string(0,3,"  SERVO"                 );
+        oled_show_string(0,4,"  ENCODER"               );
     }
-    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
-
-    oled_show_string(0,3+point,"->"                );
+    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"            );
+    if(point<=3){
+        oled_show_string(0,3+point,"->"                );
+    }
+    else{
+        oled_show_string(0,point-1,"->"                );
+    }
+    
 }
 
 void page_TET_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(--point<0){
-            point=3;
+            point=5;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++point>3){
+        if(++point>5){
             point=0;
         }
     }
@@ -242,6 +251,8 @@ void page_TET_ex(){
             case 1:now_page=AGM;break;
             case 2:now_page=IMU;break;
             case 3:now_page=BLE;break;
+            case 4:now_page=SEV;break;
+            case 5:now_page=ECD;break;
         }
     }
 }
@@ -417,16 +428,37 @@ void page_FLS_ex(){
 
 }
 
-/*void page_encoder_show(){
-    oled_show_string(0, 0, "Encoder");
-    oled_show_float (0,1,encoder_data_quaddec,4,4);
-}*/
+void page_SEV_show(){
+    oled_show_string(0,0,"SERVO"                   );
+    oled_show_string(0,1,"./TET/SEV"               );
+  //oled_show_string(0,2,""                        );
+  //oled_show_string(0,3,""                        );
+  //oled_show_string(0,4,""                        );
+  //oled_show_string(0,5,""                        );
+  //oled_show_string(0,6,""                        );
+  //oled_show_string(0,7,""                        );
 
-/*void page_encoder_ex(){
+  //oled_show_string(0,0+point,"->"                );
+}
+
+void page_SEV_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
     }
-}*/
+}
+
+
+void page_ECD_show(){
+    oled_show_string(0, 0, "ENCODER");
+    oled_show_string(0,1,"./TET/ECD"                );
+    oled_show_float (0,3,encoder_data_quaddec,4,4);
+}
+
+void page_ECD_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+    }
+}
 
 /*//页面显示模板
 void page_xx_show(){

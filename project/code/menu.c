@@ -1,6 +1,9 @@
-/*Let me forget everything, still moonlight shines on us.
-  Broken heart, I don't want you to find and take a look at.
-  So I'll sin more and destroy my thoughts, make a mess of my hand.
+/*Let me forget everything,
+  still moonlight shines on us.
+  Broken heart, 
+  I don't want you to find and take a look at.
+  So I'll sin more and destroy my thoughts, 
+  make a mess of my hand.
   I swear on the darkest night I'll end it all.
   And testify....*/
 
@@ -12,6 +15,7 @@ uint8 gogogo=0;//1=正式发车
 int8 point=0;
 uint8 edit=0;
 uint8 last_page=0;
+uint8 flash_change=1;//为什么FLASH读写需要那么久(′へ`、 )
 
 enum PAGE{
     MASTER,
@@ -33,6 +37,7 @@ void menu(void){//人机交互页面
         if(last_page!=now_page){
             point=0;
             edit=0;
+            flash_change=1;
         }
         last_page=now_page;
         switch(now_page){
@@ -329,12 +334,15 @@ void page_BLE_ex(){
 }
 
 void page_FLS_show(){
-    flash_read_page_to_buffer (63,3);
+    if(flash_change==1){
+        flash_read_page_to_buffer(63,3);
+        flash_change=0;
+    }
     oled_show_string(0,0,"FLASH TEST"              );
     oled_show_string(0,1,"./CP/FLS"                );
-    for (int i=0;i<8;i++) {
-        int x=(i<4)?12:64;
-        int y=3+(i%4);
+    for (int i=0;i<6;i++) {
+        int x=(i<3)?12:64;
+        int y=3+(i%3);
         oled_show_float(x,y,flash_union_buffer[i].float_type,2,1);
     }
     if(edit){
@@ -343,7 +351,7 @@ void page_FLS_show(){
             oled_show_string(0,3+point,">>"     );
         }
         else{
-            oled_show_string(0,point-1,">>"     );
+            oled_show_string(52,point-1,">>"     );
         }
     }
     else{
@@ -352,7 +360,7 @@ void page_FLS_show(){
             oled_show_string(0,3+point,"->"     );
         }
         else{
-            oled_show_string(0,point-1,"->"     );
+            oled_show_string(52,point-1,"->"     );
         }
     }
 }
@@ -362,6 +370,7 @@ void page_FLS_ex(){
         if(edit){
             flash_union_buffer[point].float_type+=0.1;
             flash_write_page_from_buffer(63,3);
+            flash_change=1;
         }
         else{
             if(--point<0){
@@ -373,6 +382,7 @@ void page_FLS_ex(){
         if(edit){
             flash_union_buffer[point].float_type-=0.1;
             flash_write_page_from_buffer(63,3);
+            flash_change=1;
         }
         else{
             if(++point>7){
@@ -398,7 +408,7 @@ void page_FLS_ex(){
 
 
 
-/*页面显示模板
+/*//页面显示模板
 void page_xx_show(){
   //oled_show_string(0,0,""                        );
   //oled_show_string(0,1,""                        );

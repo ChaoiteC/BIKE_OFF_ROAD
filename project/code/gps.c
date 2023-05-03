@@ -5,11 +5,17 @@
 
 #include "zf_common_headfile.h"
 
-struct GPS_POINT{
-    float latitude;//纬度
-    float longitude;//经度
-    uint8 point_type;//点位类型
-}gps_point[GPS_DATA_MAX];
+
+
+enum POINT_TYPE{//点位类型
+    FIRST,//起点
+    STR,//直道
+    UPHELL,//爬坡
+    TAR,//掉头
+    RTT,//绕柱
+    SBD,//S弯
+    FINISH//终点
+};
 
 /* @fn gps_read_flash
  * @brief 从FLASH中读出点位数据

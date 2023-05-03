@@ -7,7 +7,6 @@
 ********************************************************************************************************************/
 #include "zf_common_headfile.h"
 
-void wait_to_start();
 
 int main(void){
     clock_init(SYSTEM_CLOCK_144M);                                              // 初始化芯片时钟 工作频率为 144MHz
@@ -23,8 +22,3 @@ int main(void){
         }
     }
 }
-
-/*void wait_to_start(){
-    oled_clear();
-    
-}*/

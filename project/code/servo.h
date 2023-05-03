@@ -23,5 +23,8 @@ void Servo_Leftmove(float *servo_motor_duty);
 void Servo_Rightmove(float *servo_motor_duty);
 void Servo_Text(float *servo_motor_duty,float *servo_motor_dir);
 
+extern float servo_motor_dir;
+extern float servo_motor_duty;
+
 
 #endif

@@ -35,5 +35,5 @@ int kalman_filter(kalman_param *Encoder_kal, int input);
 
 extern kalman_param Encoder_kal;
 
-
+extern float encoder_data_quaddec;
 #endif /* ENCODER_TEXT_H_ */

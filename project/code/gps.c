@@ -17,6 +17,8 @@ enum POINT_TYPE{//点位类型
     FINISH//终点
 };
 
+GPS_POINT gps_point[GPS_DATA_MAX];
+
 /* @fn gps_read_flash
  * @brief 从FLASH中读出点位数据
  * @param void

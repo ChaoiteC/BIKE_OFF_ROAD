@@ -5,7 +5,7 @@
 
 #include "zf_common_headfile.h"
 
-typedef struct//µç»úÊä³ö
+typedef struct//ç”µæœºè¾“å‡º
 {
   int out;
 }_OUT_Motor;

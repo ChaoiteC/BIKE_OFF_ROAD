@@ -489,8 +489,8 @@ void HardFault_Handler(void)
 // 返回参数     void
 // 使用示例     pit_hanlder_TIM6();
 //-------------------------------------------------------------------------------------------------------------------
-void pit_hanlder_TIM6(void){//ICM20602的中断处理
-    icm20602_get_acc();                                                         // 获取 ICM20602 的加速度测量数值
-    icm20602_get_gyro();                                                        // 获取 ICM20602 的角速度测量数值
+void pit_hanlder_TIM6(void){//MPU6050的中断处理
+    mpu6050_get_acc();                                                         // 获取 MPU6050 的加速度测量数值
+    mpu6050_get_gyro();                                                        // 获取 MPU6050 的角速度测量数值
     IMU_Update();
 }

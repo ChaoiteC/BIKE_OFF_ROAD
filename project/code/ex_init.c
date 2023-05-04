@@ -31,20 +31,36 @@ void ex_init(void){
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
     
-    //ICM20602初始化
-    oled_show_string(0, 0, "ICM20602 loading...");
-    if(icm20602_init()){//自检失败
+    //MPU6050初始化
+    oled_show_string(0, 0, "MPU6050 loading...");
+    if(mpu6050_init()){//自检失败
         system_delay_ms(1000);
     }
     else{
-        pit_ms_init(TIM6_PIT,5);//定时器中断获取ICM20602A数据
+        pit_ms_init(TIM6_PIT,5);//定时器中断获取MPU6050数据
         oled_clear();
-        oled_show_chinese(0, 0, 16,(const uint8 *)ICM_offset1,5);
-        oled_show_chinese(0, 4, 16,(const uint8 *)ICM_offset2,4);
-        oled_show_string(0, 7, "ICM20602 loading...");
+        oled_show_chinese(0, 0, 16,(const uint8 *)MPU_offset1,5);
+        oled_show_chinese(0, 4, 16,(const uint8 *)MPU_offset2,4);
+        oled_show_string(0, 7, "MPU6050 loading...");
         system_delay_ms(1000);
-        ICM20602_Init_Offset();//ICM20602去偏移
+        MPU6050_Init_Offset();//MPU6050去偏移
     }
+
+    //舵机初始化
+    oled_clear();
+    oled_show_string(0, 0, "Servo loading...");
+    Servo_Init(servo_motor_duty);
+    
+
+    //编码器初始化
+    oled_clear();
+    oled_show_string(0, 0, "Encoder loading...");
+    Encoder_text_init();                                                        //编码器初始化，打开中段
+
+    //电机初始化
+    oled_clear();
+    oled_show_string(0, 0, "MOTOR loading...");
+    MOTOR_Init();
 
     //蓝牙初始化
     oled_clear();
@@ -54,9 +70,14 @@ void ex_init(void){
 
     //初始化完成
     oled_clear();
+<<<<<<< HEAD
     Servo_Init(servo_motor_duty);
     Encoder_text_init();                                                        //编码器初始化，打开中段
     MOTOR_Init();
+=======
+    
+
+>>>>>>> 820164fcfc51bebb4f3934eee8b928a48b15b20d
 }
 
 void flash_init(void){

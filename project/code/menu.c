@@ -296,14 +296,14 @@ void page_MPU_show(){
     oled_show_string(0,0,"MPU6050"                );
     oled_show_string(0,1,"./TET/MPU"               );
     oled_show_string(0,3,"A");
-    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,2);
-    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,2);
-    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,2);
+    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,6);
+    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,6);
+    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,6);
 
-    oled_show_string(30,3,"G");
-    oled_show_float(30,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,2);
-    oled_show_float(30,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,2);
-    oled_show_float(30,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,2);
+    oled_show_string(64,3,"G");
+    oled_show_float(64,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,6);
+    oled_show_float(64,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,6);
+    oled_show_float(64,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,6);
 }
 
 void page_MPU_ex(){

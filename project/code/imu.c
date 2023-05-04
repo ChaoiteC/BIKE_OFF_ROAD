@@ -10,7 +10,7 @@
 #include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  10	//队列长度，越大，平滑性越高
+#define Buf_SIZE  25	//队列长度，越大，平滑性越高
 
 #define OFFSET_CONUT 500 //去偏移计数
 
@@ -105,7 +105,7 @@ void MPU6050_Init_Offset(void)//MPU6050初始化去偏移
 		system_delay_ms(10);
 		MPU6050_readGyro_Acc(temp,temp2);
 		oled_show_int(0,2,i,3);
-		if(temp[0]==temp[1]){
+		if(temp2[0]==temp2[1]){
 			i--;
 			oled_show_string(0,3,"WARNING: IMU NO DATA");
 		}

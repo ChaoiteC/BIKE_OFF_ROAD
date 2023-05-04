@@ -130,7 +130,7 @@ void page_MASTER_show(){
     oled_show_string(0,5,"  chk. Params."  );//改变参数
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
-    oled_show_string(0,3+point,"->"        );//屏幕指针
+    oled_show_string(0,3+point,"->"        );//选项箭头
 }
 
 void page_MASTER_ex(){

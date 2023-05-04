@@ -16,7 +16,7 @@
 
 IMU_Info imu;
 
-int16_t  ICM20602_FIFO[6][Buf_SIZE];	//6个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据	
+int16_t  MPU6050_FIFO[6][Buf_SIZE];	//6个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据	
 
 int16_t lastAx,lastAy,lastAz,lastGx,lastGy,lastGz;
 
@@ -27,12 +27,12 @@ static float Roll_offset;
 static float Yaw_offset;
 
 //将val入队
-static void ICM20602_NewVal(int16_t* buf,int16_t val) {
+static void MPU6050_NewVal(int16_t* buf,int16_t val) {
   	buf[Wr_Index] = val;
 }
 
 //计算FIFO中的平均值
-static int16_t ICM20602_GetAvg(int16_t* buf)
+static int16_t MPU6050_GetAvg(int16_t* buf)
 {
   	int i;
 	int32_t	sum = 0;
@@ -43,31 +43,31 @@ static int16_t ICM20602_GetAvg(int16_t* buf)
 }
 
 //读取经过滤波的陀螺仪、加速度数据
-void ICM20602_readGyro_Acc(int16_t *gyro,int16_t *acc)
+void MPU6050_readGyro_Acc(int16_t *gyro,int16_t *acc)
 {
 	//static short buf[9];	//缓存原始数据：0-2：加速度计数据；3-5：陀螺仪数据
 	static int16_t gx,gy,gz;
 	static int16_t ax,ay,az;
 	
 	//将原始数据入队
-	if(icm20602_acc_x==icm20602_acc_y){
+	if(mpu6050_acc_x==mpu6050_acc_y){
 	    return;
 	}
-	ICM20602_NewVal(&ICM20602_FIFO[0][0],icm20602_acc_x);
-	ICM20602_NewVal(&ICM20602_FIFO[1][0],icm20602_acc_y);
-	ICM20602_NewVal(&ICM20602_FIFO[2][0],icm20602_acc_z);
+	MPU6050_NewVal(&MPU6050_FIFO[0][0],mpu6050_acc_x);
+	MPU6050_NewVal(&MPU6050_FIFO[1][0],mpu6050_acc_y);
+	MPU6050_NewVal(&MPU6050_FIFO[2][0],mpu6050_acc_z);
 
-	ICM20602_NewVal(&ICM20602_FIFO[3][0],icm20602_gyro_x);
-	ICM20602_NewVal(&ICM20602_FIFO[4][0],icm20602_gyro_y);
-	ICM20602_NewVal(&ICM20602_FIFO[5][0],icm20602_gyro_z);
+	MPU6050_NewVal(&MPU6050_FIFO[3][0],mpu6050_gyro_x);
+	MPU6050_NewVal(&MPU6050_FIFO[4][0],mpu6050_gyro_y);
+	MPU6050_NewVal(&MPU6050_FIFO[5][0],mpu6050_gyro_z);
 	
 	//更新FIFO入口指针
 	Wr_Index = (Wr_Index + 1) % Buf_SIZE;	
 
 	//计算队列平均值
-	gx =  ICM20602_GetAvg(&ICM20602_FIFO[4][0]);
-	gy =  ICM20602_GetAvg(&ICM20602_FIFO[5][0]);
-	gz =  ICM20602_GetAvg(&ICM20602_FIFO[6][0]);
+	gx =  MPU6050_GetAvg(&MPU6050_FIFO[4][0]);
+	gy =  MPU6050_GetAvg(&MPU6050_FIFO[5][0]);
+	gz =  MPU6050_GetAvg(&MPU6050_FIFO[6][0]);
 	
 	//陀螺仪数据要减去偏移量
 	gyro[0] = gx - Roll_offset;	//gyro
@@ -75,16 +75,16 @@ void ICM20602_readGyro_Acc(int16_t *gyro,int16_t *acc)
 	gyro[2] = gz - Yaw_offset;
 		
 
-	ax = 	ICM20602_GetAvg(&ICM20602_FIFO[0][0]);
-	ay = 	ICM20602_GetAvg(&ICM20602_FIFO[1][0]);
-	az = 	ICM20602_GetAvg(&ICM20602_FIFO[2][0]);
+	ax = 	MPU6050_GetAvg(&MPU6050_FIFO[0][0]);
+	ay = 	MPU6050_GetAvg(&MPU6050_FIFO[1][0]);
+	az = 	MPU6050_GetAvg(&MPU6050_FIFO[2][0]);
 				
 	acc[0] = ax; //acc
 	acc[1] = ay;
 	acc[2] = az;
 }
 
-void ICM20602_Init_Offset(void)//ICM20602初始化去偏移
+void MPU6050_Init_Offset(void)//MPU6050初始化去偏移
 {
 	int i;
 	int16_t temp[3],temp2[3];
@@ -97,13 +97,13 @@ void ICM20602_Init_Offset(void)//ICM20602初始化去偏移
 	//等待ICM准备就绪
 	for(i=0;i<100;i++){
   		system_delay_ms(5);
-		ICM20602_readGyro_Acc(temp,temp2);
+		MPU6050_readGyro_Acc(temp,temp2);
 	}
 	
 	//计算imu数据的平均值作为偏移量
  	for(i=0;i<OFFSET_CONUT;i++){
 		system_delay_ms(10);
-		ICM20602_readGyro_Acc(temp,temp2);
+		MPU6050_readGyro_Acc(temp,temp2);
 		oled_show_int(0,2,i,3);
 		if(temp[0]==temp[1]){
 			i--;
@@ -131,11 +131,11 @@ static void Get_IMU_Values(float *values)
 {
 	int16_t gyro[3],acc[3];
 	
-	ICM20602_readGyro_Acc(&gyro[0],&acc[0]);
+	MPU6050_readGyro_Acc(&gyro[0],&acc[0]);
 	
 	for(int i=0;i<3;i++)
 	{
-		values[i]=(icm20602_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
+		values[i]=(mpu6050_gyro_transition (gyro[i]));	//这里我们改用逐飞的转换函数
 		values[3+i]=(float) acc[i];
 	}
 	

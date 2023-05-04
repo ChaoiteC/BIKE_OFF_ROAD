@@ -23,7 +23,7 @@ enum PAGE{
         GET_POINT,
       TET,
         GPS,
-        ICM,
+        MPU,
         IMU,
         BLE,
         SEV,
@@ -47,7 +47,7 @@ void menu(void){//人机交互页面
             case GET_POINT:page_GET_POINT_show();break;
             case TET      :page_TET_show();break;
             case GPS      :page_GPS_show();break;
-            case ICM      :page_ICM_show();break;
+            case MPU      :page_MPU_show();break;
             case IMU      :page_IMU_show();break;
             case BLE      :page_BLE_show();break;
             case SEV      :page_SEV_show();break;
@@ -62,7 +62,7 @@ void menu(void){//人机交互页面
             case GET_POINT:page_GET_POINT_ex();break;
             case TET      :page_TET_ex();break;
             case GPS      :page_GPS_ex();break;
-            case ICM      :page_ICM_ex();break;
+            case MPU      :page_MPU_ex();break;
             case IMU      :page_IMU_ex();break;
             case BLE      :page_BLE_ex();break;
             case SEV      :page_SEV_ex();break;
@@ -213,7 +213,7 @@ void page_TET_show(){
     oled_show_string(0,1,"./TET"                   );
     if(point<=3){
         oled_show_string(0,3,"  GPS_TAU1201"           );
-        oled_show_string(0,4,"  ICM20602"              );
+        oled_show_string(0,4,"  MPU6050"               );
         oled_show_string(0,5,"  IMU_Mahony"            );
         oled_show_string(0,6,"  BLUETOOTH"             );
     }
@@ -248,7 +248,7 @@ void page_TET_ex(){
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
             case 0:now_page=GPS;break;
-            case 1:now_page=ICM;break;
+            case 1:now_page=MPU;break;
             case 2:now_page=IMU;break;
             case 3:now_page=BLE;break;
             case 4:now_page=SEV;break;
@@ -292,21 +292,21 @@ void page_GPS_ex(){
     }
 }
 
-void page_ICM_show(){
-    oled_show_string(0,0,"ICM20602"                );
-    oled_show_string(0,1,"./TET/ICM"               );
+void page_MPU_show(){
+    oled_show_string(0,0,"MPU6050"                );
+    oled_show_string(0,1,"./TET/MPU"               );
     oled_show_string(0,3,"A");
-    oled_show_float(0,4,icm20602_acc_transition(icm20602_acc_x),2,2);
-    oled_show_float(0,5,icm20602_acc_transition(icm20602_acc_y),2,2);
-    oled_show_float(0,6,icm20602_acc_transition(icm20602_acc_z),2,2);
+    oled_show_float(0,4,mpu6050_acc_transition(mpu6050_acc_x),2,2);
+    oled_show_float(0,5,mpu6050_acc_transition(mpu6050_acc_y),2,2);
+    oled_show_float(0,6,mpu6050_acc_transition(mpu6050_acc_z),2,2);
 
     oled_show_string(30,3,"G");
-    oled_show_float(30,4,icm20602_gyro_transition(icm20602_gyro_x),2,2);
-    oled_show_float(30,5,icm20602_gyro_transition(icm20602_gyro_y),2,2);
-    oled_show_float(30,6,icm20602_gyro_transition(icm20602_gyro_z),2,2);
+    oled_show_float(30,4,mpu6050_gyro_transition(mpu6050_gyro_x),2,2);
+    oled_show_float(30,5,mpu6050_gyro_transition(mpu6050_gyro_y),2,2);
+    oled_show_float(30,6,mpu6050_gyro_transition(mpu6050_gyro_z),2,2);
 }
 
-void page_ICM_ex(){
+void page_MPU_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
     }
@@ -315,8 +315,8 @@ void page_ICM_ex(){
 void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
-    if(icm20602_acc_x==icm20602_acc_y && icm20602_acc_y==icm20602_acc_z){
-        oled_show_string(0,3,"WARNING: IMU NO DATA");
+    if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
+        oled_show_string(0,3,"WARNING: MPU NO DATA");
     }
     oled_show_string(0,5,"X>rol>"                    );
     oled_show_float(42,5,imu.Roll,2,6);

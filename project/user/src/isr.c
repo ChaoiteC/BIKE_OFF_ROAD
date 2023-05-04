@@ -290,12 +290,15 @@ void TIM2_IRQHandler(void)
     }
 }
 
-void TIM3_IRQHandler(void)
+void TIM3_IRQHandler(void)//打开中断三，对编码器经行运行
 {
     if(TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
        TIM_ClearITPendingBit(TIM3, TIM_IT_Update );
 
+       extern void pit_handler_TIM3 (void);
+
+       pit_handler_TIM3 ();
 
     }
 }

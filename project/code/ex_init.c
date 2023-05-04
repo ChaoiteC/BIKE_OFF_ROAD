@@ -57,7 +57,6 @@ void ex_init(void){
     Servo_Init(servo_motor_duty);
     Encoder_text_init();                                                        //编码器初始化，打开中段
     MOTOR_Init();
-
 }
 
 void flash_init(void){

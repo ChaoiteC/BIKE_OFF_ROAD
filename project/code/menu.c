@@ -28,7 +28,7 @@ enum PAGE{
         BLE,
     //CP,
         FLS,
-    //ENCODER
+    ENCODER
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
@@ -50,7 +50,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_show();break;
             case BLE      :page_BLE_show();break;
             case FLS      :page_FLS_show();break;
-            //case ENCODER      :page_ENCODER_show();break;
+            case ENCODER  :page_ENCODER_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -64,7 +64,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_ex();break;
             case BLE      :page_BLE_ex();break;
             case FLS      :page_FLS_ex();break;
-            //case ENCODER      :page_ENCODER_ex();break;
+            case ENCODER  :page_ENCODER_ex();break;
             default       :page_error();
         }
     }
@@ -205,26 +205,41 @@ void page_GET_POINT_ex(){
     }
 }
 
+#define Num_TET 5
 void page_TET_show(){
+    char Page_TET[Num_TET][15]={
+            "--GPS_TAU1201",
+            "--IMU963RA",
+            "--IMU_Mahony",
+            "--BLUETOOTH",
+            "--ENCODER"
+    };
+    int n=0;
+    int pt=point;
     oled_show_string(0,0,"test Ext.eq."            );
     oled_show_string(0,1,"./TET"                   );
-    oled_show_string(0,3,"  GPS_TAU1201"           );
-    oled_show_string(0,4,"  IMU963RA"              );
-    oled_show_string(0,5,"  IMU_Mahony"            );
-    oled_show_string(0,6,"  BLUETOOTH"             );
-    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
+    if (point>Num_TET-2) {
+        n=point-Num_TET+2;
 
-    oled_show_string(0,3+point,"->"                );
+    }
+        for(int i=0;i<4;i++)
+        {
+            oled_show_string(0,(uint16)i+3,Page_TET[n]);
+            n++;
+        };
+    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"        );
+    if(pt>3){pt=3;}
+    oled_show_string(0,pt+3,"->"                );
 }
 
 void page_TET_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(--point<0){
-            point=3;
+            point=Num_TET-1;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-        if(++point>3){
+        if(++point>Num_TET-1){
             point=0;
         }
     }
@@ -237,6 +252,7 @@ void page_TET_ex(){
             case 1:now_page=AGM;break;
             case 2:now_page=IMU;break;
             case 3:now_page=BLE;break;
+            case 4:now_page=ENCODER;break;
         }
     }
 }
@@ -412,16 +428,16 @@ void page_FLS_ex(){
 
 }
 
-/*void page_encoder_show(){
+void page_ENCODER_show(){
     oled_show_string(0, 0, "Encoder");
     oled_show_float (0,1,encoder_data_quaddec,4,4);
-}*/
+}
 
-/*void page_encoder_ex(){
+void page_ENCODER_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
     }
-}*/
+}
 
 /*//页面显示模板
 void page_xx_show(){

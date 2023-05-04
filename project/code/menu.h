@@ -26,5 +26,7 @@ void page_BLE_show();
 void page_BLE_ex();
 void page_FLS_show();
 void page_FLS_ex();
+void page_ENCODER_show();
+void page_ENCODER_ex();
 
 #endif /* MENU_H_ */

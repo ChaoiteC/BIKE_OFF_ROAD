@@ -70,14 +70,6 @@ void ex_init(void){
 
     //初始化完成
     oled_clear();
-<<<<<<< HEAD
-    Servo_Init(servo_motor_duty);
-    Encoder_text_init();                                                        //编码器初始化，打开中段
-    MOTOR_Init();
-=======
-    
-
->>>>>>> 820164fcfc51bebb4f3934eee8b928a48b15b20d
 }
 
 void flash_init(void){

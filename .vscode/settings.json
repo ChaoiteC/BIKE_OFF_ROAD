@@ -13,6 +13,9 @@
         "cmath": "c",
         "limits": "c",
         "*.tcc": "c",
-        "zf_common_interrupt.h": "c"
+        "zf_common_interrupt.h": "c",
+        "gps.h": "c",
+        "zf_driver_encoder.h": "c",
+        "zf_driver_dvp.h": "c"
     }
 }

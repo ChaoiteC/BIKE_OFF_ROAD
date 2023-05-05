@@ -48,9 +48,10 @@ void MOTOR_Speed(int16 Duty)
  * 参数：Speed
  * 输出：无
  */
-/*void MOTOR_PID()
+void MOTOR_PID()
 {
+    PID_expect(&MOTOR_SUM , 2000);
     PID_Init(&MOTOR_SUM , 5 , 3 , 4 , 800 , 2300);
     PID_Calc(&MOTOR_SUM , 2000 ,encoder_data_quaddec);
     MOTOR_Speed((int16)MOTOR_SUM.output);
-}*/
+}

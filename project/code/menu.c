@@ -432,7 +432,6 @@ void page_SEV_show(){
   //oled_show_string(0,5,""                        );
   //oled_show_string(0,6,""                        );
   //oled_show_string(0,7,""                        );
-
   //oled_show_string(0,0+point,"->"                );
 }
 

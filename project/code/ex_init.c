@@ -70,6 +70,9 @@ void ex_init(void){
 
     //初始化完成
     oled_clear();
+    //电机调试
+    MOTOR_PID();
+
 }
 
 void flash_init(void){

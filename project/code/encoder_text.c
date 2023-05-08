@@ -20,7 +20,7 @@ void Encoder_text_init()
 
     Encoder_kal_init_son(&Encoder_kal);
     encoder_quad_init(ENCODER_QUADDEC, ENCODER_QUADDEC_A, ENCODER_QUADDEC_B);   // 初始化编码器模块与引脚 正交解码编码器模式
-    pit_ms_init(PIT_CH_Encoder, 100);
+    pit_ms_init(PIT_CH_Encoder, 10);
     interrupt_set_priority(PIT_PRIORITY_Encoder, 0);
 }
 

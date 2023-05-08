@@ -33,6 +33,7 @@ encoding//zf_device/zf_device_ips200.c=UTF-8
 encoding//zf_device/zf_device_ips200.h=UTF-8
 encoding//zf_device/zf_device_key.c=UTF-8
 encoding//zf_device/zf_device_key.h=UTF-8
+encoding//zf_device/zf_device_mpu6050.c=UTF-8
 encoding//zf_device/zf_device_oled.c=UTF-8
 encoding//zf_device/zf_device_oled.h=UTF-8
 encoding//zf_device/zf_device_tft180.c=UTF-8

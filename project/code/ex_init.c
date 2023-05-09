@@ -34,7 +34,7 @@ void ex_init(void){
     //MPU6050初始化
     oled_show_string(0, 0, "MPU6050 loading...");
     if(mpu6050_init()){//自检失败
-        system_delay_ms(1000);
+        system_delay_ms(3000);
     }
     else{
         pit_ms_init(TIM6_PIT,5);//定时器中断获取MPU6050数据
@@ -55,7 +55,7 @@ void ex_init(void){
     //编码器初始化
     oled_clear();
     oled_show_string(0, 0, "Encoder loading...");
-    Encoder_text_init();                                                        //编码器初始化，打开中段
+    Encoder_text_init();//编码器初始化，打开中断
 
     //电机初始化
     oled_clear();

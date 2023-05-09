@@ -10,7 +10,7 @@
 #include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  25	//队列长度，越大，平滑性越高
+#define Buf_SIZE  10   	//队列长度，越大，平滑性越高
 
 #define OFFSET_CONUT 500 //去偏移计数
 
@@ -183,4 +183,3 @@ void IMU_Update(void)
 	imu.Pitch = -safe_asin(2.0f*(q[0]*q[2] - q[1]*q[3]))* 180/PI;
 	imu.Yaw = -atan2(2 * q1 * q2 + 2 * q0 * q3, -2 * q2*q2 - 2 * q3 * q3 + 1)* 180/PI; // yaw
 }
-

@@ -319,11 +319,11 @@ void page_IMU_show(){
         oled_show_string(0,3,"WARNING: MPU NO DATA");
     }
     oled_show_string(0,5,"X>rol>"                    );
-    oled_show_float(42,5,imu.Roll,2,6);
+    oled_show_int(42,5,(int)imu.Roll,2);
     oled_show_string(0,6,"Y>pit>"                    );
-    oled_show_float(42,6,imu.Pitch,2,6);
-    oled_show_string(0,7,"Z>yaw>"                    );
-    oled_show_float(42,7,imu.Yaw,2,6);
+    oled_show_int(42,6,(int)imu.Pitch,2);
+    //oled_show_string(0,7,"Z>yaw>"                    );
+    //oled_show_float(42,7,imu.Yaw,2,6);
 }
 
 void page_IMU_ex(){

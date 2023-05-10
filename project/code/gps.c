@@ -27,11 +27,13 @@ GPS_POINT gps_point[GPS_DATA_MAX];
 
 int gps_check_flash(void){
     int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
-    flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);// 将GPS首页数据从 flash 读取到缓冲区
+    flash_buffer_clear();
+    flash_read_page_to_buffer(63,3);// 将GPS首页数据从 flash 读取到缓冲区
     point_number=flash_union_buffer[0].uint8_type;//获取点位数量
+    flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);
     for(i=0,column=0;i<point_number && i<GPS_DATA_MAX;i++){
-        gps_point[i].latitude=flash_union_buffer[1+column].int16_type;
-        gps_point[i].longitude=flash_union_buffer[2+column].int16_type;
+        gps_point[i].latitude=flash_union_buffer[1+column].float_type;
+        gps_point[i].longitude=flash_union_buffer[2+column].float_type;
         gps_point[i].point_type=flash_union_buffer[3+column].uint8_type;
         if(column==3){
             column=0;
@@ -39,6 +41,7 @@ int gps_check_flash(void){
                 page=3;
                 section--;//扇区
             }
+            flash_buffer_clear();
             flash_read_page_to_buffer(section,page);
         }
         else{
@@ -151,8 +154,10 @@ int gps_get_point(void){
             flash_erase_sector(section,page);
             flash_buffer_clear();
         }
-        
     }
+    flash_read_page_to_buffer(63,3);
+    flash_union_buffer[0].uint8_type=i;
+    flash_write_page_from_buffer(63,3);
     return 0;
 }
 
@@ -191,4 +196,8 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
     }
     *average_latitude=latitude_total/GPS_OFFSET;
     *average_longitude=longitude_total/GPS_OFFSET;
+}
+
+void gps_show_point(void){
+
 }

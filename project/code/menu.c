@@ -183,7 +183,7 @@ void page_GET_POINT_ex(){
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
         switch(point){
-            case 0:{
+            case 0:{//使用既有点位
                 if(gps_check_flash()){
                     gps_point_error();
                     system_delay_ms(3000);
@@ -193,7 +193,7 @@ void page_GET_POINT_ex(){
                     gogogo=1;
                 }
             }break;
-            case 1:{
+            case 1:{//重新录入点位
                 if(gps_get_point()){
                     gps_point_error();
                     system_delay_ms(3000);
@@ -347,6 +347,37 @@ void page_BLE_ex(){
     }
 }
 
+void page_SEV_show(){
+    oled_show_string(0,0,"SERVO"                   );
+    oled_show_string(0,1,"./TET/SEV"               );
+  //oled_show_string(0,2,""                        );
+  //oled_show_string(0,3,""                        );
+  //oled_show_string(0,4,""                        );
+  //oled_show_string(0,5,""                        );
+  //oled_show_string(0,6,""                        );
+  //oled_show_string(0,7,""                        );
+  //oled_show_string(0,0+point,"->"                );
+}
+
+void page_SEV_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+    }
+}
+
+
+void page_ECD_show(){
+    oled_show_string(0, 0, "ENCODER");
+    oled_show_string(0,1,"./TET/ECD"                );
+    oled_show_float (0,3,encoder_data_quaddec,4,4);
+}
+
+void page_ECD_ex(){
+    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+        now_page=TET;
+    }
+}
+
 void page_FLS_show(){
     if(flash_change==1){
         flash_read_page_to_buffer(63,3);
@@ -421,37 +452,6 @@ void page_FLS_ex(){
         }
     }
 
-}
-
-void page_SEV_show(){
-    oled_show_string(0,0,"SERVO"                   );
-    oled_show_string(0,1,"./TET/SEV"               );
-  //oled_show_string(0,2,""                        );
-  //oled_show_string(0,3,""                        );
-  //oled_show_string(0,4,""                        );
-  //oled_show_string(0,5,""                        );
-  //oled_show_string(0,6,""                        );
-  //oled_show_string(0,7,""                        );
-  //oled_show_string(0,0+point,"->"                );
-}
-
-void page_SEV_ex(){
-    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
-        now_page=TET;
-    }
-}
-
-
-void page_ECD_show(){
-    oled_show_string(0, 0, "ENCODER");
-    oled_show_string(0,1,"./TET/ECD"                );
-    oled_show_float (0,3,encoder_data_quaddec,4,4);
-}
-
-void page_ECD_ex(){
-    if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
-        now_page=TET;
-    }
 }
 
 /*//页面显示模板

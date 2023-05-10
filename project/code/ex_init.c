@@ -68,20 +68,21 @@ void ex_init(void){
     bluetooth_ch9141_init();
     bluetooth_ch9141_send_string("Bluetooth OK.\r\n");
 
-    //初始化完成
-    oled_clear();
     //电机调试
     MOTOR_PID();
 
+    //初始化完成
+    oled_clear();
 }
 
 void flash_init(void){
     int i;
     flash_erase_sector(63,3);
     flash_buffer_clear();
-    for(i=0;i<6;i++){
+    for(i=1;i<6;i++){
 
         flash_union_buffer[i].float_type=(float)i;
     }
+    flash_union_buffer[0].uint8_type=0;
     flash_write_page_from_buffer(63,3);
 }

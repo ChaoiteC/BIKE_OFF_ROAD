@@ -5,7 +5,7 @@
 
 #define GPS_OFFSET 10 //GPS取平均次数 次数过多GPS可能漂移
 #define GPS_DATA_SECTION_START_INDEX 63 //GPS点位数据开始记录的扇区，倒数，前面是其他数据
-#define GPS_DATA_PAGE_START_INDEX     3 //GPS点位数据开始记录的页数，倒数，前面是其他数据
+#define GPS_DATA_PAGE_START_INDEX     2 //GPS点位数据开始记录的页数，倒数，前面是其他数据
 
 #define GPS_DATA_MAX  20 //GPS点位记录的最大量
 

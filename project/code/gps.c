@@ -199,5 +199,23 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
 }
 
 void gps_show_point(void){
-
+    int i,j;
+    flash_read_page_to_buffer(63,3);
+    j=flash_union_buffer[0].uint8_type;
+    for(i=0;i<j;i++){
+        oled_show_uint(0,0,i,2);
+        oled_show_string(0, 4, "N ->");
+        oled_show_float(32,4,gps_point[i].latitude,4,6);      //纬度
+        oled_show_string(0, 5, "E ->");
+        oled_show_float(32,5,gps_point[i].longitude,4,6);
+        oled_show_string(0, 6, "TP->");
+        switch(gps_point[i].point_type){
+            case 1:oled_show_string(36,6,"STR---"            );break;
+            case 2:oled_show_string(36,6,"UPHELL"            );break;
+            case 3:oled_show_string(36,6,"-TAR--"            );break;
+            case 4:oled_show_string(36,6,"--RTT-"            );break;
+            case 5:oled_show_string(36,6,"---SBD"            );break;
+            case 6:oled_show_string(36,6,"FINISH"            );
+        }
+    }
 }

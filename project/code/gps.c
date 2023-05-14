@@ -1,7 +1,8 @@
-/*看到了吗？那些星星，经历过数十亿年的光阴。
-  早在人类诞生之前就一直闪烁着光芒，在人类灭亡之后，它们仍会继续绽放。
-  人的生命连星星的一瞬都不及。这是自古以来人类就明白的事情。
-  然而，认识到星星的永恒和人世的一瞬的是人，不是星星。*/
+/*大都会　空に向かって　
+  伸びていくビルに夕焼け
+  駆け出せ　目を開け
+  影　引き連れてゆけ
+  ひとりじゃない*/
 
 #include "zf_common_headfile.h"
 
@@ -28,7 +29,7 @@ GPS_POINT gps_point[GPS_DATA_MAX];
 int gps_check_flash(void){
     int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
     flash_buffer_clear();
-    flash_read_page_to_buffer(63,3);// 将GPS首页数据从 flash 读取到缓冲区
+    flash_read_page_to_buffer(63,3);// 将GPS点位数量从 flash 读取到缓冲区
     point_number=flash_union_buffer[0].uint8_type;//获取点位数量
     flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);
     for(i=0,column=0;i<point_number && i<GPS_DATA_MAX;i++){
@@ -217,5 +218,6 @@ void gps_show_point(void){
             case 5:oled_show_string(36,6,"---SBD"            );break;
             case 6:oled_show_string(36,6,"FINISH"            );
         }
+        system_delay_ms(100);
     }
 }

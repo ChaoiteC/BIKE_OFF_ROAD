@@ -201,13 +201,13 @@ void uart_init(uart_index_enum uart_n, uint32 baud, uart_pin_enum tx_pin, uart_p
            break;
 
         case UART3_MAP1_TX_C10:
-            AFIO->PCFR1 &= ~(0x03<<3);
-            AFIO->PCFR1 |=  (0x01<<3);
+            AFIO->PCFR1 &= ~(0x03<<4);
+            AFIO->PCFR1 |=  (0x01<<4);
            break;
 
         case UART3_MAP2_TX_D8:
-            AFIO->PCFR1 &= ~(0x03<<3);
-            AFIO->PCFR1 |=  (0x03<<3);
+            AFIO->PCFR1 &= ~(0x03<<4);
+            AFIO->PCFR1 |=  (0x03<<4);
            break;
 
         case UART4_MAP1_TX_B0:

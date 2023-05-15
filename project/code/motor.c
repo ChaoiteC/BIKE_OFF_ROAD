@@ -17,6 +17,8 @@ void MOTOR_Init()
 {
     gpio_init (MOTOR_IO, GPO, 1, GPO_PUSH_PULL);
     pwm_init(MOTOR_PWM, MOTOR_FREQ, 0);
+    PID_expect(&MOTOR_SUM , 100);
+    PID_Init(&MOTOR_SUM , 10 , 1 , 5 , 800 , 5000);
 }
 
 /**********************************************************************************************/
@@ -50,8 +52,8 @@ void MOTOR_Speed(int16 Duty)
  */
 void MOTOR_PID()
 {
-    PID_expect(&MOTOR_SUM , 2000);
-    PID_Init(&MOTOR_SUM , 5 , 3 , 4 , 800 , 2300);
-    PID_Calc(&MOTOR_SUM , 2000 ,encoder_data_quaddec);
+    PID_Calc(&MOTOR_SUM ,encoder_data_quaddec);
     MOTOR_Speed((int16)MOTOR_SUM.output);
 }
+
+

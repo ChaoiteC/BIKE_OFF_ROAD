@@ -35,10 +35,11 @@ typedef struct
     float error,lastError;//误差、上次误差
     float integral,maxIntegral;//积分、积分限幅
     float output,maxOutput;//输出、输出限幅
-    float expect;//偏差
+    float expect;//期望
 }PID;
 
 extern _ALL_PID all;
+extern _PID motor;
 extern  PID MOTOR_SUM;
 
 
@@ -47,7 +48,7 @@ float pid_controller(_PID *controller);
 void  all_pid_init(void);
 void  clear_integral(_PID *controller);
 void  PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut);
-void  PID_Calc(PID *pid,float reference,float feedback);
+void  PID_Calc(PID *pid,float feedback);
 void  PID_expect(PID *pid,float e);
 
 #endif

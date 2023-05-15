@@ -8,7 +8,7 @@
 
 kalman_param Encoder_kal;
 
-float encoder_data_quaddec=1;
+float encoder_data_quaddec;
 /**********************************************************************************************/
 /* 名字：Encoder_text_init
  * 功能：编码器初始化，同时打开中断
@@ -67,5 +67,6 @@ void pit_handler_TIM3 (void)
     encoder_data_quaddec = encoder_get_count(ENCODER_QUADDEC);                  // 获取编码器计数
     encoder_data_quaddec = kalman_filter(&Encoder_kal, encoder_data_quaddec);   // 对编码器经行滤波处理
     encoder_clear_count(ENCODER_QUADDEC);
+    MOTOR_PID();
     system_delay_ms(5);
 }

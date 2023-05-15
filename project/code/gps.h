@@ -11,6 +11,15 @@
 
 extern int gps_point_number;
 
+enum POINT_TYPE{//点位类型
+    FIRST,//起点
+    STR,//直道
+    UPHELL,//爬坡
+    TAR,//掉头
+    RTT,//绕柱
+    SBD,//S弯
+    FINISH//终点
+};
 typedef struct{
     float latitude;//纬度
     float longitude;//经度

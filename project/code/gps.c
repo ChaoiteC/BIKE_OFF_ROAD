@@ -8,15 +8,6 @@
 
 int gps_point_number=0;//GPS点位数量
 
-enum POINT_TYPE{//点位类型
-    FIRST,//起点
-    STR,//直道
-    UPHELL,//爬坡
-    TAR,//掉头
-    RTT,//绕柱
-    SBD,//S弯
-    FINISH//终点
-};
 
 GPS_POINT gps_point[GPS_DATA_MAX];
 

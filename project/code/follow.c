@@ -13,7 +13,42 @@
 
 #include "zf_common_headfile.h"
 
+#define FLASH_PAGE_NUMBER 1 //FLASH页数
+
+/* @fn ready_start
+ * @brief 开车前的最后准备
+ * @param void
+ * @return void
+ */
 void ready_start(){
+    //将参数从FLASH全部重新读出
+    int i,sector,page;
+    oled_clear();
+    oled_show_string(0,0, "Reading FLASH...");
+    for(i=0,sector=63,page=3;i<FLASH_PAGE_NUMBER;i++){
+        oled_show_int(0,0,i,2);
+        flash_buffer_clear();
+        flash_read_page_to_buffer(sector,page);// 将GPS点位数量从 flash 读取到缓冲区
+        switch(i){
+            case 1:{
+                gps_point_number=flash_union_buffer[0].uint8_type;//获取点位数量
+            }
+        }
+        if(--page<0){//翻页
+            page=3;
+            sector--;
+        }
+    }
+    //确认GPS状态
+    oled_clear();
+    oled_show_string(0,0, "Checking GPS...");
+    while(1){
+        if(gps_tau1201_flag){//GPS数据处理完成
+            gps_tau1201_flag=0;
+            while(gps_show_if());
+        }
+    }
+    //动量轮启动
 
 }
 
@@ -28,10 +63,9 @@ void gps_follow(){
     }
 }
 
-/*void MPU_thread_entry(){
-    if((roll >= 30) || (roll <= -30) || (pitch >= 30) || (pitch <= -30))
-    {
-        Motor_Control(0);
-        pwm_disable(Servo_PWM_TIM);
+void MPU_follow(){
+    if((imu.Roll >= 30) || (imu.Roll <= -30) || (imu.Pitch >= 30) || (imu.Pitch <= -30)){//翻车
+        //Motor_Control(0);
+        //pwm_disable(Servo_PWM_TIM);
     }
-}*/
+}

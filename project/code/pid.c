@@ -153,8 +153,10 @@ void PID_Calc(PID *pid,float feedback)
     pid->error=pid->expect-feedback;//计算新error
     //计算微分
     float dout=(pid->error-pid->lastError)*pid->kd;
+    oled_show_float (64,3,dout,4,4);
     //计算比例
     float pout=pid->error*pid->kp;
+    oled_show_float (64,3,pout,4,4);
     //计算积分
     pid->integral+=pid->error*pid->ki;
     //积分限幅

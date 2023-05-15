@@ -9,6 +9,17 @@
 
 #define GPS_DATA_MAX  20 //GPS点位记录的最大量
 
+extern int gps_point_number;
+
+enum POINT_TYPE{//点位类型
+    FIRST,//起点
+    STR,//直道
+    UPHELL,//爬坡
+    TAR,//掉头
+    RTT,//绕柱
+    SBD,//S弯
+    FINISH//终点
+};
 typedef struct{
     float latitude;//纬度
     float longitude;//经度
@@ -20,5 +31,6 @@ extern GPS_POINT gps_point[GPS_DATA_MAX];
 int gps_check_flash(void);
 int gps_get_point();
 void gps_average_pointing();
+int gps_show_if();
 
 #endif /* GPS_H_ */

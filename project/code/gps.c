@@ -6,17 +6,8 @@
 
 #include "zf_common_headfile.h"
 
+int gps_point_number=0;//GPS点位数量
 
-
-enum POINT_TYPE{//点位类型
-    FIRST,//起点
-    STR,//直道
-    UPHELL,//爬坡
-    TAR,//掉头
-    RTT,//绕柱
-    SBD,//S弯
-    FINISH//终点
-};
 
 GPS_POINT gps_point[GPS_DATA_MAX];
 
@@ -27,12 +18,12 @@ GPS_POINT gps_point[GPS_DATA_MAX];
  */
 
 int gps_check_flash(void){
-    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX,point_number;
+    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
     flash_buffer_clear();
     flash_read_page_to_buffer(63,3);// 将GPS点位数量从 flash 读取到缓冲区
-    point_number=flash_union_buffer[0].uint8_type;//获取点位数量
+    gps_point_number=flash_union_buffer[0].uint8_type;//获取点位数量
     flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);
-    for(i=0,column=0;i<point_number && i<GPS_DATA_MAX;i++){
+    for(i=0,column=0;i<gps_point_number && i<GPS_DATA_MAX;i++){
         gps_point[i].latitude=flash_union_buffer[1+column].float_type;
         gps_point[i].longitude=flash_union_buffer[2+column].float_type;
         gps_point[i].point_type=flash_union_buffer[3+column].uint8_type;
@@ -219,5 +210,36 @@ void gps_show_point(void){
             case 6:oled_show_string(36,6,"FINISH"            );
         }
         system_delay_ms(100);
+    }
+}
+
+/* @fn gps_show_if
+ * @brief 显示GPS接收的信息
+ * @param void
+ * @return 1=ERROR 0=OK
+ */
+int gps_show_if(void){
+    if(!gps_tau1201.state){
+        oled_show_string(0,4, "FAIL LOCATE");                //定位失败
+        oled_show_string(0,6,"State lasts <2min."      );
+        oled_show_string(0,7,"Indoor?Wiring bad?"      );
+        return 1;
+    }
+    else{
+        oled_show_string(0, 7, "TIM>");                      //时间
+        oled_show_int(32,7,gps_tau1201.time.hour,2);
+        oled_show_int(50,7,gps_tau1201.time.minute,2);
+        oled_show_int(68,7,gps_tau1201.time.second,2);
+        oled_show_string(0, 2, "N ->");
+        oled_show_float(32,2,gps_tau1201.latitude,4,6);      //纬度
+        oled_show_string(0, 3, "E ->");
+        oled_show_float(32,3,gps_tau1201.longitude,4,6);     //经度
+        oled_show_string(0, 4, "m/s>");
+        oled_show_float(32,4,gps_tau1201.speed,4,6);         //速度
+        oled_show_string(0, 5, "360>");
+        oled_show_float(32,5,gps_tau1201.direction,4,6);     //方向
+        oled_show_string(0, 6, "STL>");
+        oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
+        return 0;
     }
 }

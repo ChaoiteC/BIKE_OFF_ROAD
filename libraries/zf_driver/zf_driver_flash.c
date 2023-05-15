@@ -61,7 +61,9 @@ uint8 flash_check (uint32 sector_num, uint32 page_num)
     uint32 flash_addr = ((FLASH_BASE_ADDR+FLASH_SECTION_SIZE*sector_num+FLASH_PAGE_SIZE*page_num));     // 提取当前 Flash 地址
 
     uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+
+    clock_reset();                                  // 复位时钟
+    clock_set_freq(SYSTEM_CLOCK_120M);          // 设置系统频率为120Mhz
 
     for(temp_loop = 0; temp_loop < FLASH_PAGE_SIZE; temp_loop+=4)                                       // 循环读取 Flash 的值
     {
@@ -72,6 +74,7 @@ uint8 flash_check (uint32 sector_num, uint32 page_num)
         }
     }
 
+    clock_reset();                                  // 复位时钟
     clock_set_freq(system_clock);       // 设置回原来的系统频率
     interrupt_global_enable(primask);
 
@@ -98,7 +101,8 @@ uint8 flash_erase_sector (uint32 sector_num, uint32 page_num)
     uint32 flash_addr = ((FLASH_BASE_ADDR+FLASH_SECTION_SIZE*sector_num+FLASH_PAGE_SIZE*page_num));     // 提取当前 Flash 地址
 
     uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+    clock_reset();                      // 复位时钟
+    clock_set_freq(SYSTEM_CLOCK_120M);          // 设置系统频率为120Mhz
 
     FLASH_Unlock();                                                                                     // 解锁 Flash
     FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_PGERR | FLASH_FLAG_WRPRTERR);                           // 清除操作标志
@@ -110,6 +114,7 @@ uint8 flash_erase_sector (uint32 sector_num, uint32 page_num)
         return_state = 1;
     }
 
+    clock_reset();                      // 复位时钟
     clock_set_freq(system_clock);       // 设置回原来的系统频率
     interrupt_global_enable(primask);
     return return_state;
@@ -136,7 +141,8 @@ void flash_read_page (uint32 sector_num, uint32 page_num, uint32 *buf, uint16 le
     flash_addr = ((FLASH_BASE_ADDR+FLASH_SECTION_SIZE*sector_num+FLASH_PAGE_SIZE*page_num));            // 提取当前 Flash 地址
 
     uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+    clock_reset();                      // 复位时钟
+    clock_set_freq(SYSTEM_CLOCK_120M);          // 设置系统频率为120Mhz
 
 
     for(temp_loop = 0; temp_loop < len; temp_loop++)                                                    // 根据指定长度读取
@@ -144,6 +150,7 @@ void flash_read_page (uint32 sector_num, uint32 page_num, uint32 *buf, uint16 le
         *buf++ = *(__IO uint32*)(flash_addr+temp_loop*4);                                               // 循环读取 Flash 的值
     }
                                                                                        // 锁定 Flash
+    clock_reset();                      // 复位时钟
     clock_set_freq(system_clock);       // 设置回原来的系统频率
     interrupt_global_enable(primask);
 }
@@ -174,7 +181,8 @@ uint8 flash_write_page (uint32 sector_num, uint32 page_num, const uint32 *buf, u
     }
 
     uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+    clock_reset();                      // 复位时钟
+    clock_set_freq(SYSTEM_CLOCK_120M);          // 设置系统频率为120Mhz
     FLASH_Unlock();                                                                                     // 解锁 Flash
     while(len--)                                                                                        // 根据长度
     {
@@ -187,6 +195,7 @@ uint8 flash_write_page (uint32 sector_num, uint32 page_num, const uint32 *buf, u
         flash_addr += 4;                                                                                // 地址自增
     }
     FLASH_Lock();                                                                                       // 锁定 Flash
+    clock_reset();                      // 复位时钟
     clock_set_freq(system_clock);       // 设置回原来的系统频率
     interrupt_global_enable(primask);
 
@@ -209,16 +218,14 @@ void flash_read_page_to_buffer (uint32 sector_num, uint32 page_num)
     uint16 temp_loop;
     uint32 flash_addr = ((FLASH_BASE_ADDR + FLASH_SECTION_SIZE*sector_num + FLASH_PAGE_SIZE*page_num)); // 提取当前 Flash 地址
 
-    uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+
 
     for(temp_loop = 0; temp_loop < FLASH_DATA_BUFFER_SIZE; temp_loop++)                                 // 根据指定长度读取
     {
         flash_union_buffer[temp_loop].uint32_type = *(__IO uint32*)(flash_addr+temp_loop*4);            // 循环读取 Flash 的值
     }
 
-    clock_set_freq(system_clock);       // 设置回原来的系统频率
-    interrupt_global_enable(primask);
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -244,7 +251,8 @@ uint8 flash_write_page_from_buffer (uint32 sector_num, uint32 page_num)
         flash_erase_sector(sector_num, page_num);                                                       // 擦除这一页
 
     uint32 primask = interrupt_global_disable();
-    clock_set_freq(120000000);          // 设置系统频率为120Mhz
+    clock_reset();                      // 复位时钟
+    clock_set_freq(SYSTEM_CLOCK_120M);          // 设置系统频率为120Mhz
 
     FLASH_Unlock();                                                                                     // 解锁 Flash
     while(len < FLASH_DATA_BUFFER_SIZE)                                                                 // 根据长度
@@ -261,6 +269,7 @@ uint8 flash_write_page_from_buffer (uint32 sector_num, uint32 page_num)
     }
     FLASH_Lock();                                                                                       // 锁定 Flash
 
+    clock_reset();                      // 复位时钟
     clock_set_freq(system_clock);       // 设置回原来的系统频率
     interrupt_global_enable(primask);
 

@@ -18,7 +18,7 @@ void MOTOR_Init()
     gpio_init (MOTOR_IO, GPO, 1, GPO_PUSH_PULL);
     pwm_init(MOTOR_PWM, MOTOR_FREQ, 0);
     PID_expect(&MOTOR1_SUM,0);
-    PID_Init(&MOTOR1_SUM,0.5,0,0,800,5000);
+    PID_Init(&MOTOR1_SUM,1,0,5,800,5000);
 }
 
 /**********************************************************************************************/

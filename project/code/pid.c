@@ -202,6 +202,9 @@ void PID_Vanquisher(){
             return;
         }
     }
+    if(!flash_check(sector,page)){
+        
+    }
     flash_read_page_to_buffer(sector,page);
     PID_E->kp=flash_union_buffer[0].float_type;
     PID_E->ki=flash_union_buffer[1].float_type;

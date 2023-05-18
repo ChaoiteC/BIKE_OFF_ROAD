@@ -29,7 +29,7 @@ enum PAGE{
         SEV,
         ECD,
     //CP,
-        FLS,
+        PID,
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
@@ -52,7 +52,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_show();break;
             case SEV      :page_SEV_show();break;
             case ECD      :page_ECD_show();break;
-            case FLS      :page_FLS_show();break;
+            case PID      :page_PID_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -67,7 +67,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_ex();break;
             case SEV      :page_SEV_ex();break;
             case ECD      :page_ECD_ex();break;
-            case FLS      :page_FLS_ex();break;
+            case PID      :page_PID_ex();break;
             default       :page_error();
         }
     }
@@ -151,7 +151,7 @@ void page_MASTER_ex(){
         switch(point){
             case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
-            case 2:now_page=FLS;break;
+            case 2:now_page=PID;break;
         }
     }
 }
@@ -365,13 +365,13 @@ void page_ECD_ex(){
     }
 }
 
-void page_FLS_show(){
+void page_PID_show(){
     if(flash_change==1){
         flash_read_page_to_buffer(63,3);
         flash_change=0;
     }
     oled_show_string(0,0,"FLASH TEST"              );
-    oled_show_string(0,1,"./CP/FLS"                );
+    oled_show_string(0,1,"./CP/PID"                );
     for (int i=0;i<6;i++) {
         int x=(i<3)?12:64;
         int y=3+(i%3);
@@ -397,7 +397,7 @@ void page_FLS_show(){
     }
 }
 
-void page_FLS_ex(){
+void page_PID_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
             flash_union_buffer[point].float_type+=0.1;

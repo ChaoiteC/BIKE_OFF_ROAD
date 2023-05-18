@@ -351,9 +351,9 @@ void page_ECD_show(){
     oled_show_string(0,1,"./TET/ECD"                );
     oled_show_float (0,3,encoder_data_quaddec,4,4);
     oled_show_string(0,4, "PID_OUTPUT");
-    oled_show_float (0,5,MOTOR_SUM.output,4,4);
-    oled_show_float (0,6,MOTOR_SUM.integral,4,4);
-    oled_show_float (0,7,MOTOR_SUM.expect,4,4);
+    oled_show_float (0,5,MOTOR1_SUM.output,4,4);
+    oled_show_float (0,6,MOTOR1_SUM.integral,4,4);
+    oled_show_float (0,7,MOTOR1_SUM.expect,4,4);
 
 
 

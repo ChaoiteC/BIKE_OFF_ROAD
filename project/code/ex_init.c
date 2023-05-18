@@ -17,15 +17,6 @@ void ex_init(void){
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(500);
 
-    //FLASH初始化
-    oled_clear();
-    oled_show_string(0, 0, "FLASH checking...");
-    if(!flash_check(63,3)){//FLASH无数据则格式化
-        oled_clear();
-        oled_show_string(0, 0, "FLASH formatting...");
-        flash_init();
-    }
-
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");
@@ -72,16 +63,4 @@ void ex_init(void){
     //MOTOR_Speed(40 * (PWM_DUTY_MAX / 100));
     //初始化完成
     oled_clear();
-}
-
-void flash_init(void){
-    int i;
-    flash_erase_sector(63,3);
-    flash_buffer_clear();
-    for(i=1;i<6;i++){
-
-        flash_union_buffer[i].float_type=(float)i;
-    }
-    flash_union_buffer[0].uint8_type=0;
-    flash_write_page_from_buffer(63,3);
 }

@@ -84,7 +84,7 @@ void mpu_follow(){
 void bluetooth_follow(){
     uint8 data_buffer[32];
     if(bluetooth_ch9141_read_buff(data_buffer,32)){
-        if(!strcmp(data_buffer,"stop")){
+        if(!strcmp((const char *)data_buffer,"stop")){
             stop_bike=3;
         }
     }

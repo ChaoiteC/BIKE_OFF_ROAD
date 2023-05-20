@@ -17,7 +17,7 @@ void ex_init(void){
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(500);
 
-    //FLASH初始化
+    /*//FLASH初始化
     oled_clear();
     oled_show_string(0, 0, "FLASH checking...");
     if(!flash_check(63,3)){//FLASH无数据则格式化
@@ -44,7 +44,7 @@ void ex_init(void){
         oled_show_string(0, 7, "MPU6050 loading...");
         system_delay_ms(1000);
         MPU6050_Init_Offset();//MPU6050去偏移
-    }
+    }*/
 
     //舵机初始化
     oled_clear();
@@ -69,7 +69,6 @@ void ex_init(void){
     bluetooth_ch9141_send_string("Bluetooth OK.\r\n");
 
     //电机调试
-    //MOTOR_Speed(40 * (PWM_DUTY_MAX / 100));
     //初始化完成
     oled_clear();
 }

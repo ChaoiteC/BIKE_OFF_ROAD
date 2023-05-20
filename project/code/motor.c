@@ -17,8 +17,8 @@ void MOTOR_Init()
 {
     gpio_init (MOTOR_IO, GPO, 1, GPO_PUSH_PULL);
     pwm_init(MOTOR_PWM, MOTOR_FREQ, 0);
-    PID_expect(&MOTOR_SUM , 100);
-    PID_Init(&MOTOR_SUM , 10 , 1 , 5 , 800 , 5000);
+    PID_expect(&MOTOR_SUM , 5000);
+    PID_Init(&MOTOR_SUM , 1 , 0 , 5 , 800 , 5000);
 }
 
 /**********************************************************************************************/
@@ -32,13 +32,13 @@ void MOTOR_Speed(int16 Duty)
     if(Duty>=0)
     {
         //正向转动
-        gpio_set_level(MOTOR_IO, GPIO_LOW);                                          // DIR输出高电平
+        gpio_set_level(MOTOR_IO, GPIO_HIGH);                                          // DIR输出高电平
         pwm_set_duty(MOTOR_PWM, Duty);
     }
     else
     {
         //反向转动
-        gpio_set_level(MOTOR_IO, GPIO_HIGH);                                         // DIR输出低电平
+        gpio_set_level(MOTOR_IO, GPIO_LOW);                                         // DIR输出低电平
         pwm_set_duty(MOTOR_PWM, -Duty);
     }
 }

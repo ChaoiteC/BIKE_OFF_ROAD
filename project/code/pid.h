@@ -29,7 +29,7 @@ typedef struct
     _PID rol_gyro;//陀螺仪PID（角速度环）
 }_ALL_PID;
 
-typedef struct
+typedef struct PID
 {
     float kp,ki,kd;//三个系数
     float error,lastError;//误差、上次误差
@@ -40,7 +40,7 @@ typedef struct
 
 extern _ALL_PID all;
 extern _PID motor;
-extern  PID MOTOR_SUM;
+extern  PID MOTOR1_SUM;
 
 
 

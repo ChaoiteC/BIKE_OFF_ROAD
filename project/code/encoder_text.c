@@ -8,7 +8,7 @@
 
 kalman_param Encoder_kal;
 
-float encoder_data_quaddec;
+float encoder_data_quaddec;//编码器的值
 /**********************************************************************************************/
 /* 名字：Encoder_text_init
  * 功能：编码器初始化，同时打开中断

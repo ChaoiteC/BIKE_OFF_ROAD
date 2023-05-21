@@ -17,6 +17,7 @@ void ex_init(void){
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(500);
 
+
     /*//FLASH初始化
     oled_clear();
     oled_show_string(0, 0, "FLASH checking...");
@@ -25,6 +26,7 @@ void ex_init(void){
         oled_show_string(0, 0, "FLASH formatting...");
         flash_init();
     }
+
 
     //GPS初始化
     oled_clear();
@@ -71,16 +73,4 @@ void ex_init(void){
     //电机调试
     //初始化完成
     oled_clear();
-}
-
-void flash_init(void){
-    int i;
-    flash_erase_sector(63,3);
-    flash_buffer_clear();
-    for(i=1;i<6;i++){
-
-        flash_union_buffer[i].float_type=(float)i;
-    }
-    flash_union_buffer[0].uint8_type=0;
-    flash_write_page_from_buffer(63,3);
 }

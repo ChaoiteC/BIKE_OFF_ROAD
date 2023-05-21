@@ -16,6 +16,8 @@
 #define FLASH_PAGE_NUMBER 1 //FLASH页数
 #define EXPECTED_DISTANCE_THRESHOLD 1.0 //GPS到点判定距离（单位：米）
 
+uint8 stop_bike=0;//停车！ 1=终点 2=翻车 3=遥控
+
 uint8 current_gps_point=0;//当前GPS正在前往的点位
 
 /* @fn ready_start
@@ -66,16 +68,39 @@ void gps_follow(){
             distance=get_two_points_distance (gps_tau1201.latitude,gps_tau1201.longitude,gps_point[current_gps_point].latitude,gps_point[current_gps_point].longitude);
             if(distance<=EXPECTED_DISTANCE_THRESHOLD){//到点
                 if(gps_point[current_gps_point++].point_type==FINISH){//进入下一点位，如果已达终点
-                    MOTOR_Speed(0);
+                    stop_bike=1;
                 }
             }
         }
     }
 }
 
-void MPU_follow(){
+void mpu_follow(){
     if((imu.Roll >= 30) || (imu.Roll <= -30) || (imu.Pitch >= 30) || (imu.Pitch <= -30)){//翻车
-        MOTOR_Speed(0);
-        //pwm_disable(Servo_PWM_TIM);
+        stop_bike=2;
+    }
+}
+
+void bluetooth_follow(){
+    uint8 data_buffer[32];
+    if(bluetooth_ch9141_read_buff(data_buffer,32)){
+        if(!strcmp((const char *)data_buffer,"stop")){
+            stop_bike=3;
+        }
+    }
+}
+
+void stop_follow(){//停车处理
+    if(stop_bike){
+        oled_clear();
+        oled_show_chinese(0, 0, 16,(const uint8 *)STOP,2);
+        switch(stop_bike){
+            case 1:oled_show_string(0,0, "!FINISH!");break;
+            case 2:oled_show_string(0,0, "OVERTURN");break;
+            case 3:oled_show_string(0,0, "BLET RC.");break;
+        }
+        while(1){
+            MOTOR_Speed(0);
+        }
     }
 }

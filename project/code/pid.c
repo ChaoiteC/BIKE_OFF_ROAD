@@ -1,4 +1,4 @@
-#include "pid.h"
+#include "zf_common_headfile.h"
 
 _ALL_PID all;
 
@@ -110,7 +110,8 @@ void clear_integral(_PID *controller)
 /********************************************************************************************************/
 
 
-PID MOTOR_SUM={0};
+
+PID MOTOR1_SUM;
 
 
 /**********************************************************************************************/
@@ -131,7 +132,7 @@ void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
 
 /**********************************************************************************************/
 /* 名字：PID_expect
- * 功能：对PID经行设置期望
+ * 功能：设置PID期望
  * 参数：无
  * 输出：无
  */
@@ -169,4 +170,49 @@ void PID_Calc(PID *pid,float feedback)
         pid->output=pid->maxOutput;
     else if(pid->output < -pid->maxOutput)
         pid->output=-pid->maxOutput;
+}
+/* @fn PID_Vanquisher
+ * @brief 强大、健壮的“PID征服者”堂堂登场！你掌控PID参数的最有力工具！
+ * @param void
+ * @return void
+ */
+void PID_Vanquisher(){
+    oled_clear();
+    oled_show_string(0,0,"PID!*Vanquisher*!"       );
+    oled_show_string(0,1,"Power by ChaoiteC"       );
+    oled_show_string(0,4,"[UP]MOTOR 1"             );
+    oled_show_string(0,5,"[DN]MOTOR 2"             );
+    oled_show_string(0,7,"[RT]RE-TURN"             );
+    PID* PID_E;
+    uint8 sector,page;
+    while(1){
+        if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
+            PID_E=&MOTOR1_SUM;
+            //从FLASH读出PID参数
+            sector=63;
+            page=3;
+            break;
+        }
+        else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
+            //PID_E=&MOTOR2_SUM;
+            sector=63;
+            page=2;
+            //break;
+        }
+        else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
+            return;
+        }
+    }
+    if(!flash_check(sector,page)){
+        
+    }
+    flash_read_page_to_buffer(sector,page);
+    PID_E->kp=flash_union_buffer[0].float_type;
+    PID_E->ki=flash_union_buffer[1].float_type;
+    PID_E->kd=flash_union_buffer[2].float_type;
+    PID_E->maxIntegral=flash_union_buffer[3].float_type;
+    PID_E->maxOutput=flash_union_buffer[4].float_type;
+    oled_clear();
+
+    
 }

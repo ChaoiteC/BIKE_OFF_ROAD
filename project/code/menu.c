@@ -29,7 +29,7 @@ enum PAGE{
         SEV,
         ECD,
     //CP,
-        PID,
+        PID_SUM,
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
@@ -52,7 +52,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_show();break;
             case SEV      :page_SEV_show();break;
             case ECD      :page_ECD_show();break;
-            case PID      :page_PID_show();break;
+            case PID_SUM      :page_PID_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -67,7 +67,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_ex();break;
             case SEV      :page_SEV_ex();break;
             case ECD      :page_ECD_ex();break;
-            case PID      :page_PID_ex();break;
+            case PID_SUM  :page_PID_ex();break;
             default       :page_error();
         }
     }
@@ -151,7 +151,7 @@ void page_MASTER_ex(){
         switch(point){
             case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
-            case 2:now_page=PID;break;
+            case 2:now_page=PID_SUM;break;
         }
     }
 }

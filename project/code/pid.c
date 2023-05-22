@@ -1,7 +1,5 @@
 #include "zf_common_headfile.h"
 
-_ALL_PID all;
-
 const float  controller_parameter[3][5] =
 {
   /* 0.kp 1.ki 2.kd 3.积分限幅 4.pid输出限幅值 */
@@ -47,71 +45,8 @@ const float  controller_parameter[3][5] =
 #endif
 };
 
-_PID motor;
-
-/* 名字：PID参数初始化
- * 功能：PID参数初始化配置
- * 参数：结构体指针_PID
- * 参数：PID各个参数值
- * 返回值：无
- */
-void pid_init(_PID *controller,uint8_t label)
-{
-    controller->kp              = controller_parameter[label][0];
-    controller->ki              = controller_parameter[label][1];
-    controller->kd              = controller_parameter[label][2];
-    controller->integral_max    = controller_parameter[label][3];
-    controller->out_max         = controller_parameter[label][4];
-}
-
-/* 名字：各环PID参数初始化
- * 功能：各环PID参数初始化配置
- * 参数：无
- * 返回值：无
- */
-void all_pid_init(void)
-{
-    pid_init(&all.rol_angle,0);
-    pid_init(&all.vel_encoder,1);
-    pid_init(&all.rol_gyro,2);
-}
-
-/* 名字：PID控制器
- * 功能：通过PID计算得到输出值
- * 参数：结构体指针 _PID
- * 返回值：PID输出值
- */
-float pid_controller(_PID *controller)
-{
-    controller->err_last = controller->err;                                          //保留上次偏差
-    controller->err = controller->expect - controller->feedback;                     //偏差计算
-    controller->integral += controller->ki * controller->err;                        //积分
-    //积分限幅
-    if(controller->integral >  controller->integral_max)     controller->integral =  controller->integral_max;
-    if(controller->integral < -controller->integral_max)     controller->integral = -controller->integral_max;
-    //pid运算
-    controller->out =  controller->kp*controller->err + controller->integral + controller->kd*(controller->err-controller->err_last);
-
-    //输出限幅
-    if(controller->out >  controller->out_max)   controller->out =  controller->out_max;
-    if(controller->out < -controller->out_max)   controller->out = -controller->out_max;
-    return controller->out;
-}
-
-/* 名字：清除PID控制器项积分项
- * 功能：清除PID控制器积分项
- * 参数：结构体指针 _PID
- * 返回值：无
- */
-void clear_integral(_PID *controller)
-{
-    controller->integral = 0.0f;
-}
-/********************************************************************************************************/
-
-
-
-PID MOTOR1_SUM;
+PID MOTOR1_SUM;//后轮
+PID MOTOR2_SUM;//动量轮
 
 
 /**********************************************************************************************/
@@ -213,6 +148,18 @@ void PID_Vanquisher(){
     PID_E->maxIntegral=flash_union_buffer[3].float_type;
     PID_E->maxOutput=flash_union_buffer[4].float_type;
     oled_clear();
-
-    
 }
+
+void clear_integral(PID *pid)
+{
+    pid->integral = 0.0f;
+}
+
+/*
+ void all_pid_init(void)
+{
+    pid_init(&all.rol_angle,0);
+    pid_init(&all.vel_encoder,1);
+    pid_init(&all.rol_gyro,2);
+}
+*/

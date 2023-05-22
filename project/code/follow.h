@@ -9,7 +9,7 @@ void mpu_follow();
 void bluetooth_follow();
 void stop_follow();
 
-extern uint8 stop_bike;
+extern uint8 stop_flag;
 
 
 #endif /* FOLLOW_H_ */

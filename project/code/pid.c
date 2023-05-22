@@ -129,16 +129,16 @@ void PID_Vanquisher(){
             break;
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            //PID_E=&MOTOR2_SUM;
+            /*PID_E=&MOTOR2_SUM;
             sector=63;
             page=2;
-            //break;
+            break;*/
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
             return;
         }
     }
-    if(!flash_check(sector,page)){
+    if(!flash_check(sector,page)){//缺省
         
     }
     flash_read_page_to_buffer(sector,page);

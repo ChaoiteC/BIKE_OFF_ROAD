@@ -46,7 +46,10 @@ const float  controller_parameter[3][5] =
 };
 
 PID MOTOR1_SUM;//后轮
-PID MOTOR2_SUM;//动量轮
+/*动量轮PID
+ALL_PID MOTOR2_SUM;
+ */
+
 
 
 /**********************************************************************************************/

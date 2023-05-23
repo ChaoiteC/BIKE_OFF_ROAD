@@ -11,9 +11,8 @@ _OUT_Motor Motor2 = {0};//后电机*/
  */
 /*static void vel_controller(void)
 {
-  all.vel_encoder.expect = 0.0f;
-  all.vel_encoder.feedback = encoderINFO.mainNumberValue;
-  pid_controller(&all.vel_encoder);
+  PID_expect(&MOTOR2_SUM.vel_encoder,0.0f);
+  PID_Calc(&MOTOR2_SUM.vel_encoder,encoder_data_quaddec);
 }*/
 
 /**********************************************************************************************/
@@ -24,9 +23,8 @@ _OUT_Motor Motor2 = {0};//后电机*/
  */
 /*static void angle_controller(void)
 {
-  all.rol_angle.expect = all.vel_encoder.out;
-  all.rol_angle.feedback = (-att.rol)+(0);
-  pid_controller(&all.rol_angle);
+  PID_expect(&MOTOR2_SUM.rol_angle,MOTOR2_SUM.rol_angle.output);
+  PID_Calc(&MOTOR2_SUM.rol_angle,imu.Roll);
 }*/
 
 /**********************************************************************************************/
@@ -37,6 +35,9 @@ _OUT_Motor Motor2 = {0};//后电机*/
  */
 /*static void gyro_controller(void)
 {
+  PID_expect(&MOTOR2_SUM.rol_gyro,MOTOR2_SUM.rol_angle.output);
+  PID_Calc(&MOTOR2_SUM.rol_gyro,imu.Roll);
+
   all.rol_gyro.expect = all.rol_angle.out;
   all.rol_gyro.feedback = -(Mpu.deg_s.y);
   pid_controller(&all.rol_gyro);

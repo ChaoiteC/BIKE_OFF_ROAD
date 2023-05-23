@@ -18,9 +18,9 @@ void bike_init(void){
     key_init(500);
 
 
-    //FLASH初始化，读出PID参数
+    //PID初始化
     oled_clear();
-    oled_show_string(0, 0, "FLASH loading...");
+    oled_show_string(0, 0, "PID loading...");
     flash_read_page_to_buffer(63,3);
     MOTOR1_SUM.kp=flash_union_buffer[0].float_type;
     MOTOR1_SUM.ki=flash_union_buffer[1].float_type;

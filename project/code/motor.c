@@ -19,10 +19,10 @@ void MOTOR_Init()
     pwm_init(MOTOR_PWM, MOTOR_FREQ, 0);
 
     PID_expect(&MOTOR1_SUM,0);
-    PID_Init(&MOTOR1_SUM,1,0,5,800,5000);
+    PID_init(&MOTOR1_SUM,1,0,5,800,5000);
 
     PID_expect(&MOTOR2_SUM,0);
-    PID_Init(&MOTOR2_SUM,1,0,5,800,5000);
+    PID_init(&MOTOR2_SUM,1,0,5,800,5000);
 
 }
 

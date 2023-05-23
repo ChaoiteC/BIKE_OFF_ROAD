@@ -48,32 +48,25 @@ const float  controller_parameter[3][5] =
 PID MOTOR1_SUM;//后轮
 PID MOTOR2_SUM;//动量轮
 
-
-/**********************************************************************************************/
-/* 名字：PID_Init
- * 功能：用于初始化pid参数的函数
- * 参数：无
- * 输出：无
+/* @fn PID_setup
+ * @brief 初始化PID参数并设置期望值
+ * @param pid - PID结构体指针
+ *        p   - 比例系数
+ *        i   - 积分系数
+ *        d   - 微分系数
+ *        maxI - 积分限幅值
+ *        maxOut - 输出限幅值
+ *        e   - 期望值
+ * @return 无
  */
-void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
+void PID_setup(PID *pid, float p, float i, float d, float maxI, float maxOut, float e)
 {
-
-    pid->kp=p;
-    pid->ki=i;
-    pid->kd=d;
-    pid->maxIntegral=maxI;
-    pid->maxOutput=maxOut;
-}
-
-/**********************************************************************************************/
-/* 名字：PID_expect
- * 功能：设置PID期望
- * 参数：无
- * 输出：无
- */
-void PID_expect(PID *pid,float e)
-{
-    pid->expect=e;
+    pid->kp = p;
+    pid->ki = i;
+    pid->kd = d;
+    pid->maxIntegral = maxI;
+    pid->maxOutput = maxOut;
+    pid->expect = e;
 }
 
 /**********************************************************************************************/

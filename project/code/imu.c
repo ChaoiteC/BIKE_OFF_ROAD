@@ -10,9 +10,9 @@
 #include "math.h"
 #include "Mahony.h"
 
-#define Buf_SIZE  10   	//队列长度，越大，平滑性越高
+#define Buf_SIZE  20   	//队列长度，越大，平滑性越高
 
-#define OFFSET_CONUT 500 //去偏移计数
+#define OFFSET_CONUT 250 //去偏移计数
 
 IMU_Info imu;
 

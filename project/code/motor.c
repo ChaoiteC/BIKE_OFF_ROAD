@@ -19,7 +19,11 @@ void MOTOR_Init()
     pwm_init(MOTOR1_PWM, MOTOR_FREQ, 0);
 
     PID_expect(&MOTOR1_SUM,0);
-    PID_Init(&MOTOR1_SUM,1,0,5,800,5000);
+    PID_init(&MOTOR1_SUM,1,0,5,800,5000);
+
+    PID_expect(&MOTOR2_SUM,0);
+    PID_init(&MOTOR2_SUM,1,0,5,800,5000);
+
 }
 
 /**********************************************************************************************/
@@ -48,13 +52,16 @@ void MOTOR_Speed(int16 Duty)
 /**********************************************************************************************/
 /* 名字：MOTOR_PID
  * 功能：对电机进行PID控制
- * 参数：Speed
+ * 参数：无
  * 输出：无
  */
 void MOTOR_PID()
 {
     PID_Calc(&MOTOR1_SUM ,encoder_data_quaddec);
-    MOTOR_Speed((int16)MOTOR1_SUM.output);
+    if(!stop_flag){
+        MOTOR_Speed((int16)MOTOR1_SUM.output);
+    }
+    else{
+        MOTOR_Speed(0);
+    }
 }
-
-

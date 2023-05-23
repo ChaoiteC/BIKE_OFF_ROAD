@@ -51,32 +51,25 @@ ALL_PID MOTOR2_SUM;
  */
 
 
-
-/**********************************************************************************************/
-/* 名字：PID_Init
- * 功能：用于初始化pid参数的函数
- * 参数：无
- * 输出：无
+/* @fn PID_setup
+ * @brief 初始化PID参数并设置期望值
+ * @param pid - PID结构体指针
+ *        p   - 比例系数
+ *        i   - 积分系数
+ *        d   - 微分系数
+ *        maxI - 积分限幅值
+ *        maxOut - 输出限幅值
+ *        e   - 期望值
+ * @return 无
  */
-void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
+void PID_setup(PID *pid, float p, float i, float d, float maxI, float maxOut, float e)
 {
-
-    pid->kp=p;
-    pid->ki=i;
-    pid->kd=d;
-    pid->maxIntegral=maxI;
-    pid->maxOutput=maxOut;
-}
-
-/**********************************************************************************************/
-/* 名字：PID_expect
- * 功能：设置PID期望
- * 参数：无
- * 输出：无
- */
-void PID_expect(PID *pid,float e)
-{
-    pid->expect=e;
+    pid->kp = p;
+    pid->ki = i;
+    pid->kd = d;
+    pid->maxIntegral = maxI;
+    pid->maxOutput = maxOut;
+    pid->expect = e;
 }
 
 /**********************************************************************************************/
@@ -132,24 +125,15 @@ void PID_Vanquisher(){
             break;
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            //PID_E=&MOTOR2_SUM;
+            /*PID_E=&MOTOR2_SUM;
             sector=63;
             page=2;
-            //break;
+            break;*/
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
             return;
         }
     }
-    if(!flash_check(sector,page)){
-        
-    }
-    flash_read_page_to_buffer(sector,page);
-    PID_E->kp=flash_union_buffer[0].float_type;
-    PID_E->ki=flash_union_buffer[1].float_type;
-    PID_E->kd=flash_union_buffer[2].float_type;
-    PID_E->maxIntegral=flash_union_buffer[3].float_type;
-    PID_E->maxOutput=flash_union_buffer[4].float_type;
     oled_clear();
 }
 

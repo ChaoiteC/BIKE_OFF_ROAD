@@ -142,9 +142,10 @@
 #include "servo.h"
 #include "menu.h"
 #include "imu.h"
-#include "ex_init.h"
+#include "bike_init.h"
 #include "motor.h"
 #include "encoder_text.h"
+#include "follow.h"
 //===================================================�û��Զ����ļ�===================================================
 
 #endif

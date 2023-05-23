@@ -22,17 +22,9 @@ void bike_init(void){
     oled_clear();
     oled_show_string(0, 0, "PID loading...");
     flash_read_page_to_buffer(63,3);
-    MOTOR1_SUM.kp=flash_union_buffer[0].float_type;
-    MOTOR1_SUM.ki=flash_union_buffer[1].float_type;
-    MOTOR1_SUM.kd=flash_union_buffer[2].float_type;
-    MOTOR1_SUM.maxIntegral=flash_union_buffer[3].float_type;
-    MOTOR1_SUM.maxOutput=flash_union_buffer[4].float_type;
+    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
     flash_read_page_to_buffer(63,2);
-    MOTOR2_SUM.kp=flash_union_buffer[0].float_type;
-    MOTOR2_SUM.ki=flash_union_buffer[1].float_type;
-    MOTOR2_SUM.kd=flash_union_buffer[2].float_type;
-    MOTOR2_SUM.maxIntegral=flash_union_buffer[3].float_type;
-    MOTOR2_SUM.maxOutput=flash_union_buffer[4].float_type;
+    PID_init(&MOTOR2_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
 
 
     //GPS初始化

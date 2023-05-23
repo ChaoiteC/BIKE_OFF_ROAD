@@ -14,7 +14,7 @@ typedef struct PID
 
 /*
 //动量轮三环pid
-  typedef struct
+typedef struct
 {
     //姿态外环
     PID rol_angle;
@@ -26,6 +26,7 @@ typedef struct PID
 
 extern  PID MOTOR1_SUM;
 extern  PID MOTOR2_SUM;
+//extern  ALL_PID all;
 
 void  PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut);
 void  PID_Calc(PID *pid,float feedback);

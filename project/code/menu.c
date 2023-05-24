@@ -302,8 +302,12 @@ void page_IMU_show(){
     oled_show_int(42,5,(int)imu.Roll,2);
     oled_show_string(0,6,"Y>pit>"                    );
     oled_show_int(42,6,(int)imu.Pitch,2);
-    //oled_show_string(0,7,"Z>yaw>"                    );
-    //oled_show_float(42,7,imu.Yaw,2,6);
+    oled_show_string(0,7,"Z>yaw>"                    );
+    oled_show_int(42,7,(int)imu.Yaw,2);
+
+    oled_show_int(72,5,(int)FCOF.Roll,2);
+    oled_show_int(72,6,(int)FCOF.Pitch,2);
+    oled_show_int(72,7,(int)FCOF.Yaw,2);
 }
 
 void page_IMU_ex(){

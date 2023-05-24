@@ -7,6 +7,7 @@ encoding//code/encoder_text.c=UTF-8
 encoding//code/encoder_text.h=UTF-8
 encoding//code/imu.c=UTF-8
 encoding//code/imu.h=UTF-8
+encoding//code/imu_FCOF.h=UTF-8
 encoding//code/menu.c=UTF-8
 encoding//code/menu.h=UTF-8
 encoding//code/motor.c=UTF-8

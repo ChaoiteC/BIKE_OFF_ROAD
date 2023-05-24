@@ -58,7 +58,7 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  */
 
 int gps_check_flash(void){
-    int i,section=GPS_DATA_SECTION_INDEX,page=GPS_DATA_PAGE_INDEX;
+    int i;
     flash_buffer_clear();
     flash_read_page_to_buffer(GPS_DATA_SECTION_INDEX,GPS_DATA_PAGE_INDEX);
     for(i=0;i<gps_point_number;i++){

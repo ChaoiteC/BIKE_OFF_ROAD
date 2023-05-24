@@ -28,8 +28,8 @@ extern  PID MOTOR1_SUM;
 extern  PID MOTOR2_SUM;
 //extern  ALL_PID all;
 
-void  PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut);
-void  PID_Calc(PID *pid,float feedback);
+void  PID_init(PID *pid,float p,float i,float d,float maxI,float maxOut);
+void  PID_calc(PID *pid,float feedback);
 void  PID_expect(PID *pid,float e);
 
 #endif

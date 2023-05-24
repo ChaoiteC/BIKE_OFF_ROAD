@@ -58,7 +58,7 @@ ALL_PID MOTOR2_SUM;
  * 参数：无
  * 输出：无
  */
-void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
+void PID_init(PID *pid,float p,float i,float d,float maxI,float maxOut)
 {
 
     pid->kp=p;
@@ -85,7 +85,7 @@ void PID_expect(PID *pid,float e)
  * 参数：(pid结构体,反馈值)，计算结果放在pid结构体的output成员中
  * 输出：无
  */
-void PID_Calc(PID *pid,float feedback)
+void PID_calc(PID *pid,float feedback)
 {
     //更新数据
     pid->lastError=pid->error;//将旧error存起来

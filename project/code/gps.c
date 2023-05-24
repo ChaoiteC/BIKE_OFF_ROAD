@@ -11,6 +11,46 @@ int gps_point_number=0;//GPS点位数量
 
 GPS_POINT gps_point[GPS_DATA_MAX];
 
+/* @fn point_flash_input
+ * @brief 向FLASH中写入点位数据
+ * @param gps_data
+ * @param flash_number
+ * @return void
+ * notice FLASH数据需要另行I/O
+ */
+void point_flash_input(GPS_POINT* gps_data,uint8 flash_number){
+    flash_union_buffer[0+3*flash_number].float_type=gps_data->latitude;
+    flash_union_buffer[1+3*flash_number].float_type=gps_data->longitude;
+    flash_union_buffer[2+3*flash_number].uint8_type=gps_data->point_type;
+}
+
+/* @fn point_flash_output
+ * @brief 从FLASH中读出点位数据
+ * @param gps_data
+ * @param flash_number
+ * @return void
+ * notice FLASH数据需要另行I/O
+ */
+void point_flash_output(GPS_POINT* gps_data,uint8 flash_number){
+    gps_data->latitude=flash_union_buffer[0+3*flash_number].float_type;
+    gps_data->longitude=flash_union_buffer[1+3*flash_number].float_type;
+    gps_data->point_type=flash_union_buffer[2+3*flash_number].uint8_type;
+}
+
+/* @fn gps_line_write
+ * @brief 向GPS点位数组的指定行写入数据
+ * @param line 指定行
+ * @param latitude 纬度
+ * @param longitude 经度
+ * @param point_type 点位类型
+ * @return void
+ */
+void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
+    gps_point[line].latitude=latitude;
+    gps_point[line].longitude=longitude;
+    gps_point[line].point_type=point_type;
+}
+
 /* @fn gps_read_flash
  * @brief 从FLASH中读出点位数据
  * @param void
@@ -18,34 +58,16 @@ GPS_POINT gps_point[GPS_DATA_MAX];
  */
 
 int gps_check_flash(void){
-    int i,column,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
+    int i,section=GPS_DATA_SECTION_INDEX,page=GPS_DATA_PAGE_INDEX;
     flash_buffer_clear();
-    flash_read_page_to_buffer(63,3);// 将GPS点位数量从 flash 读取到缓冲区
-    gps_point_number=flash_union_buffer[0].uint8_type;//获取点位数量
-    flash_read_page_to_buffer(GPS_DATA_SECTION_START_INDEX,GPS_DATA_PAGE_START_INDEX);
-    for(i=0,column=0;i<gps_point_number && i<GPS_DATA_MAX;i++){
-        gps_point[i].latitude=flash_union_buffer[1+column].float_type;
-        gps_point[i].longitude=flash_union_buffer[2+column].float_type;
-        gps_point[i].point_type=flash_union_buffer[3+column].uint8_type;
-        if(column==3){
-            column=0;
-            if(--page<0){//翻页
-                page=3;
-                section--;//扇区
-            }
-            flash_buffer_clear();
-            flash_read_page_to_buffer(section,page);
-        }
-        else{
-            column=3;
+    flash_read_page_to_buffer(GPS_DATA_SECTION_INDEX,GPS_DATA_PAGE_INDEX);
+    for(i=0;i<gps_point_number;i++){
+        point_flash_output(&gps_point[i],i);
+        if(gps_point[i].point_type==FINISH){
+            return 0;
         }
     }
-    if(gps_point[i-1].point_type!=FINISH){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return 1;
 }
 
 /* @fn gps_display_point_type
@@ -69,19 +91,7 @@ void gps_display_point_type(uint8_t point_type) {
     }
 }
 
-/* @fn gps_line_write
- * @brief 向GPS点位数组的指定行写入数据
- * @param line 指定行
- * @param latitude 纬度
- * @param longitude 经度
- * @param point_type 点位类型
- * @return void
- */
-void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
-    gps_point[line].latitude=latitude;
-    gps_point[line].longitude=longitude;
-    gps_point[line].point_type=point_type;
-}
+
 
 /* @fn gps_get_point
  * @brief GPS取点的专门用户交互页面
@@ -90,7 +100,7 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @notice 我超写那么紧密耦合鬼看得懂
  */
 int gps_get_point(void){
-    int i=0,j=0,column=0,section=GPS_DATA_SECTION_START_INDEX,page=GPS_DATA_PAGE_START_INDEX;
+    int i=0,section=GPS_DATA_SECTION_INDEX,page=GPS_DATA_PAGE_INDEX;
     float latitude,longitude;
     uint8 point_type=1;
     while(i<GPS_DATA_MAX){
@@ -129,27 +139,10 @@ int gps_get_point(void){
     //这里将GPS数据逐个录入FLASH
     flash_buffer_clear();
     flash_erase_sector(section,page);
-    for(j=0;j<i;j++){
-        flash_union_buffer[0+column].float_type=gps_point[j].latitude;
-        flash_union_buffer[1+column].float_type=gps_point[j].longitude;
-        flash_union_buffer[2+column].uint8_type=gps_point[j].point_type;
-        if(column==0){
-            column=3;
-        }
-        else{
-            column=0;
-            while(flash_write_page_from_buffer(section,page));
-            if(--page<0){
-                page=3;
-                section--;
-            }
-            flash_erase_sector(section,page);
-            flash_buffer_clear();
-        }
+    for(;i<0;i--){
+        point_flash_input(&gps_point[i],i);
     }
-    flash_read_page_to_buffer(63,3);
-    flash_union_buffer[0].uint8_type=i;
-    flash_write_page_from_buffer(63,3);
+    flash_write_page_from_buffer(section,page);
     return 0;
 }
 
@@ -190,11 +183,15 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
     *average_longitude=longitude_total/GPS_OFFSET;
 }
 
+/* @fn gps_show_point
+ * @brief 在显示屏上显示GPS数组数据
+ * @param void
+ * @return void
+ */
 void gps_show_point(void){
-    int i,j;
-    flash_read_page_to_buffer(63,3);
-    j=flash_union_buffer[0].uint8_type;
-    for(i=0;i<j;i++){
+    int i;
+    flash_read_page_to_buffer(GPS_DATA_SECTION_INDEX,GPS_DATA_PAGE_INDEX);
+    for(i=0;i<GPS_DATA_MAX;i++){
         oled_show_uint(0,0,i,2);
         oled_show_string(0, 4, "N ->");
         oled_show_float(32,4,gps_point[i].latitude,4,6);      //纬度
@@ -210,6 +207,9 @@ void gps_show_point(void){
             case 6:oled_show_string(36,6,"FINISH"            );
         }
         system_delay_ms(100);
+        if(gps_point[i].point_type==FINISH){
+            return;
+        }
     }
 }
 

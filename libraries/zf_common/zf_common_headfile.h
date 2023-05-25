@@ -142,6 +142,7 @@
 #include "servo.h"
 #include "menu.h"
 #include "imu.h"
+#include "imu_FCOF.h"
 #include "bike_init.h"
 #include "motor.h"
 #include "encoder_text.h"

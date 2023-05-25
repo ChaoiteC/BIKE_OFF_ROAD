@@ -8,6 +8,7 @@
   And testify....*/
 
 #include "zf_common_headfile.h"
+#define PID_NUMBER 3
 
 uint8 now_page=0;                               //当前页面
 uint8 gogogo=0;                                 //1=正式发车
@@ -127,7 +128,7 @@ void page_MASTER_show(){
     oled_show_string(0,1,"./"              );
     oled_show_string(0,3,"  START"         );//执行发车程序
     oled_show_string(0,4,"  test Ext.eq."  );//测试外设
-    oled_show_string(0,5,"  chk. Params."  );//改变参数
+    oled_show_string(0,5,"  change  PID "  );//改变参数
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]");
 
     oled_show_string(0,3+point,"->"        );//屏幕指针
@@ -298,12 +299,16 @@ void page_IMU_show(){
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
         oled_show_string(0,3,"WARNING: MPU NO DATA");
     }
+    oled_show_string(42,3,"MHY  FCOF"                );
     oled_show_string(0,5,"X>rol>"                    );
     oled_show_int(42,5,(int)imu.Roll,2);
+    oled_show_int(72,5,(int)FCOF_info.Roll,2);
     oled_show_string(0,6,"Y>pit>"                    );
     oled_show_int(42,6,(int)imu.Pitch,2);
-    //oled_show_string(0,7,"Z>yaw>"                    );
-    //oled_show_float(42,7,imu.Yaw,2,6);
+    oled_show_int(72,6,(int)FCOF_info.Pitch,2);
+    oled_show_string(0,7,"Z>yaw>"                    );
+    oled_show_int(42,7,(int)imu.Yaw,2);
+    oled_show_int(72,7,(int)FCOF_info.Yaw,2);
 }
 
 void page_IMU_ex(){
@@ -365,55 +370,54 @@ void page_ECD_ex(){
     }
 }
 
+
 void page_PID_show(){
-    if(flash_change==1){
+    if(flash_change){
         flash_read_page_to_buffer(63,3);
         flash_change=0;
     }
-    oled_show_string(0,0,"FLASH TEST"              );
+    int8 i;
+    oled_show_string(0,0,"PID CHANGE"              );
     oled_show_string(0,1,"./CP/PID"                );
-    for (int i=0;i<6;i++) {
-        int x=(i<3)?12:64;
-        int y=3+(i%3);
-        oled_show_float(x,y,flash_union_buffer[i].float_type,2,1);
+    for(i=0;i<5 || i<PID_NUMBER;i++){
+        oled_show_float(98,i+2,flash_union_buffer[point+i].float_type,2,2);
+        switch(point+i){
+            case 0:oled_show_string(0,i+2,"M1.P");break;
+            case 1:oled_show_string(0,i+2,"M1.I");break;
+            case 2:oled_show_string(0,i+2,"M1.D");break;
+            case 3:oled_show_string(0,i+2,"M1.MI");break;
+            case 4:oled_show_string(0,i+2,"M1.MO");break;
+        }
     }
+
+
     if(edit){
         oled_show_string(0,7,"     [+/-/CF/RT]");
-        if(point<3){
-            oled_show_string(0,3+point,">>"     );
-        }
-        else{
-            oled_show_string(52,point,">>"     );
-        }
+        oled_show_string(86,2,">>"     );
     }
     else{
         oled_show_string(0,7,"-[UP/DOWN/CF/RT]");
-        if(point<3){
-            oled_show_string(0,3+point,"->"     );
-        }
-        else{
-            oled_show_string(52,point,"->"     );
-        }
+        oled_show_string(86,2,"->"     );
     }
 }
 
 void page_PID_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
-            flash_union_buffer[point].float_type+=0.1;
+            flash_union_buffer[point].float_type+=0.01;
         }
         else{
             if(--point<0){
-                point=5;
+                point=PID_NUMBER;
             }
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
         if(edit){
-            flash_union_buffer[point].float_type-=0.1;
+            flash_union_buffer[point].float_type-=0.01;
         }
         else{
-            if(++point>5){
+            if(++point>PID_NUMBER){
                 point=0;
             }
         }
@@ -433,6 +437,7 @@ void page_PID_ex(){
             flash_write_page_from_buffer(63,3);
             flash_change=1;
             edit=!edit;
+            /*这里要更新PID*/
         }
         else{
             edit=!edit;

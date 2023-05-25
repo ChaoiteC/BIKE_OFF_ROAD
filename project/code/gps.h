@@ -4,8 +4,8 @@
 #include "zf_common_headfile.h"
 
 #define GPS_OFFSET 10 //GPS取平均次数 次数过多GPS可能漂移
-#define GPS_DATA_SECTION_START_INDEX 63 //GPS点位数据开始记录的扇区，倒数，前面是其他数据
-#define GPS_DATA_PAGE_START_INDEX     2 //GPS点位数据开始记录的页数，倒数，前面是其他数据
+#define GPS_DATA_SECTION_INDEX  63 //GPS点位数据开始记录的扇区，倒数，前面是其他数据
+#define GPS_DATA_PAGE_INDEX     2 //GPS点位数据开始记录的页数，倒数，前面是其他数据
 
 #define GPS_DATA_MAX  20 //GPS点位记录的最大量
 
@@ -20,7 +20,7 @@ enum POINT_TYPE{//点位类型
     SBD,//S弯
     FINISH//终点
 };
-typedef struct{
+typedef struct GPS{
     float latitude;//纬度
     float longitude;//经度
     uint8 point_type;//点位类型

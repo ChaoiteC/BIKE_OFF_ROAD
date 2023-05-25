@@ -85,7 +85,7 @@ void PID_expect(PID *pid,float e)
  * 参数：(pid结构体,反馈值)，计算结果放在pid结构体的output成员中
  * 输出：无
  */
-void PID_Calc(PID *pid,float feedback)
+void PID_calc(PID *pid,float feedback)
 {
     //更新数据
     pid->lastError=pid->error;//将旧error存起来
@@ -114,7 +114,7 @@ void PID_Calc(PID *pid,float feedback)
  * @param void
  * @return void
  */
-/*void PID_Vanquisher(){
+void PID_Vanquisher(){
     oled_clear();
     oled_show_string(0,0,"PID!*Vanquisher*!"       );
     oled_show_string(0,1,"Power by ChaoiteC"       );
@@ -132,10 +132,10 @@ void PID_Calc(PID *pid,float feedback)
             break;
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            PID_E=&MOTOR2_SUM;
+            /*PID_E=&MOTOR2_SUM;
             sector=63;
             page=2;
-            break;
+            break;*/
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
             return;
@@ -143,7 +143,6 @@ void PID_Calc(PID *pid,float feedback)
     }
     oled_clear();
 }
-*/
 
 void clear_integral(PID *pid)
 {

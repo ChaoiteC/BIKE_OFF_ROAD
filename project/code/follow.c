@@ -16,7 +16,7 @@
 #define FLASH_PAGE_NUMBER 1 //FLASH页数
 #define EXPECTED_DISTANCE_THRESHOLD 1.0 //GPS到点判定距离（单位：米）
 
-uint8 stop_flag=-1;//停车！  -1=未发车 1=终点 2=翻车 3=遥控
+uint8 stop_flag=0;//停车！  1=终点 2=翻车 3=遥控
 
 uint8 current_gps_point=0;//当前GPS正在前往的点位
 

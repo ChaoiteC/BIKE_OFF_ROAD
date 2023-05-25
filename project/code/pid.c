@@ -109,45 +109,6 @@ void PID_calc(PID *pid,float feedback)
     else if(pid->output < -pid->maxOutput)
         pid->output=-pid->maxOutput;
 }
-/* @fn PID_Vanquisher
- * @brief 强大、健壮的“PID征服者”堂堂登场！你掌控PID参数的最有力工具！
- * @param void
- * @return void
- */
-void PID_Vanquisher(){
-    oled_clear();
-    oled_show_string(0,0,"PID!*Vanquisher*!"       );
-    oled_show_string(0,1,"Power by ChaoiteC"       );
-    oled_show_string(0,4,"[UP]MOTOR 1"             );
-    oled_show_string(0,5,"[DN]MOTOR 2"             );
-    oled_show_string(0,7,"[RT]RE-TURN"             );
-    PID* PID_E;
-    uint8 sector,page;
-    while(1){
-        if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-            PID_E=&MOTOR1_SUM;
-            //从FLASH读出PID参数
-            sector=63;
-            page=3;
-            break;
-        }
-        else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            /*PID_E=&MOTOR2_SUM;
-            sector=63;
-            page=2;
-            break;*/
-        }
-        else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
-            return;
-        }
-    }
-    oled_clear();
-}
-
-void clear_integral(PID *pid)
-{
-    pid->integral = 0.0f;
-}
 
 /*
  void all_pid_init(void)

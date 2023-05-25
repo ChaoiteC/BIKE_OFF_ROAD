@@ -58,10 +58,5 @@ void MOTOR_Speed(int16 Duty)
 void MOTOR_PID()
 {
     PID_calc(&MOTOR1_SUM ,encoder_data_quaddec);
-    if(!stop_flag){
-        MOTOR_Speed((int16)MOTOR1_SUM.output);
-    }
-    else{
-        MOTOR_Speed(0);
-    }
+    MOTOR_Speed((int16)MOTOR1_SUM.output);
 }

@@ -298,16 +298,16 @@ void page_IMU_show(){
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
         oled_show_string(0,3,"WARNING: MPU NO DATA");
     }
+    oled_show_string(42,3,"MHY  FCOF"                );
     oled_show_string(0,5,"X>rol>"                    );
     oled_show_int(42,5,(int)imu.Roll,2);
+    oled_show_int(72,5,(int)FCOF_info.Roll,2);
     oled_show_string(0,6,"Y>pit>"                    );
     oled_show_int(42,6,(int)imu.Pitch,2);
+    oled_show_int(72,6,(int)FCOF_info.Pitch,2);
     oled_show_string(0,7,"Z>yaw>"                    );
     oled_show_int(42,7,(int)imu.Yaw,2);
-
-    oled_show_int(72,5,(int)FCOF.Roll,2);
-    oled_show_int(72,6,(int)FCOF.Pitch,2);
-    oled_show_int(72,7,(int)FCOF.Yaw,2);
+    oled_show_int(72,7,(int)FCOF_info.Yaw,2);
 }
 
 void page_IMU_ex(){

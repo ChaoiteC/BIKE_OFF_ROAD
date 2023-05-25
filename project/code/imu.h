@@ -23,5 +23,6 @@ void MPU6050_Init_Offset(void);//MPU6050初始化去偏移
 void IMU_Update(void);
 
 extern IMU_Info imu;
+extern float Deg_x;
 
 #endif /* IMU_H_ */

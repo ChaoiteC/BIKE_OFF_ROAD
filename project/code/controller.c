@@ -1,7 +1,9 @@
 #include "zf_common_headfile.h"
 
-/*_OUT_Motor Motor1 = {0};//前电机
-_OUT_Motor Motor2 = {0};//后电机*/
+
+//_OUT_Motor Motor1 = {0};//前电机
+//_OUT_Motor Motor2 = {0};//后电机
+
 
 /**********************************************************************************************/
 /* 名字：外环速度控制器
@@ -9,11 +11,11 @@ _OUT_Motor Motor2 = {0};//后电机*/
  * 参数：无
  * 输出：无
  */
-/*static void vel_controller(void)
+void vel_controller(void)
 {
   PID_expect(&MOTOR2_SUM.vel_encoder,0.0f);
   PID_Calc(&MOTOR2_SUM.vel_encoder,encoder_data_quaddec);
-}*/
+}
 
 /**********************************************************************************************/
 /* 名字：内环角度控制器
@@ -21,11 +23,11 @@ _OUT_Motor Motor2 = {0};//后电机*/
  * 参数：无
  * 输出：无
  */
-/*static void angle_controller(void)
+void angle_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_angle,MOTOR2_SUM.rol_angle.output);
   PID_Calc(&MOTOR2_SUM.rol_angle,imu.Roll);
-}*/
+}
 
 /**********************************************************************************************/
 /* 名字：内环角速度控制器
@@ -33,15 +35,11 @@ _OUT_Motor Motor2 = {0};//后电机*/
  * 参数：无
  * 输出：无
  */
-/*static void gyro_controller(void)
+void gyro_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_gyro,MOTOR2_SUM.rol_angle.output);
-  PID_Calc(&MOTOR2_SUM.rol_gyro,imu.Roll);
-
-  all.rol_gyro.expect = all.rol_angle.out;
-  all.rol_gyro.feedback = -(Mpu.deg_s.y);
-  pid_controller(&all.rol_gyro);
-}*/
+  PID_Calc(&MOTOR2_SUM.rol_gyro,Deg_x);
+}
 
 /**********************************************************************************************/
 /* 名字：三环串级PID控制器运行
@@ -49,12 +47,13 @@ _OUT_Motor Motor2 = {0};//后电机*/
  * 参数：无
  * 输出：无
  */
-/*void _controller_perform(void)
+void _controller_perform(void)
 {
   vel_controller();
   angle_controller();
   gyro_controller();
-}*/
+}
+
 /**********************************************************************************************/
 /* 名字：检测小车状态函数
  * 功能：检测小车是否倒下
@@ -72,7 +71,7 @@ _OUT_Motor Motor2 = {0};//后电机*/
   return detectionMark;
 }*/
 
-/**********************************************************************************************/
+/********************************************参考MOTOR_Speed(int16 Duty)*************************************************/
 /* 名字：pwmMotorOut
  * 功能：PWM输出
  * 参数：
@@ -80,10 +79,8 @@ _OUT_Motor Motor2 = {0};//后电机*/
  */
 /*static void pwmMotorOut(uint32 pwm1 , uint32 pwm2 )
 {
-    u32RangeLimit(pwm1,0,2000);                              //限制pwm1的占空比在0-2000之间
-    u32RangeLimit(pwm2,0,2000);                              //同上
-    pwm_set_duty(TIM3_PWM_MAP0_CH1_A6, pwm1);           //开启TIM3的1，2通道输入占空比的值pwm
-    pwm_set_duty(TIM3_PWM_MAP0_CH2_A7, pwm2);
+    MOTOR1_Speed(RangeLimit(pwm1,5000));                                  //开启TIM3的1，2通道输入占空比的值pwm
+    MOTOR2_Speed(RangeLimit(pwm2,5000));
 }*/
 
 /**********************************************************************************************/
@@ -94,7 +91,7 @@ _OUT_Motor Motor2 = {0};//后电机*/
  */
 
 /*
-static uint32 N20_motor_speed;
+static int16 Motor2_out;
 void _controller_output(void)
 {
   static uint8_t FalldownAndRestart = 0;
@@ -114,7 +111,6 @@ void _controller_output(void)
   else if( (acc_raw.z >= 2500 && acc_raw.z <= 5000) && f_abs(att.rol) <= 20.0f && FalldownAndRestart == 0)
   {
     N20_motor_speed = 1;
-    EnableAuxMotor();
     Motor1.out =  all.rol_gyro.out;
   }
 
@@ -122,10 +118,10 @@ void _controller_output(void)
   else  dirClockwise();
 
   //这里需要输入参数来控制小车的运动，用GPS的参数来控制小车的行进
-  TurnLeftOrRight(BluetoothParseMsg.Xrocker);
-  goForwardOrBackward(BluetoothParseMsg.Yrocker);
+  //TurnLeftOrRight(BluetoothParseMsg.Xrocker);
+  //goForwardOrBackward(BluetoothParseMsg.Yrocker);
 
-  pwmMotorOut( int_abs(Motor1.out) , N20_motor_speed);
+  pwmMotorOut( Motor1.out , N20_motor_speed);
 }
 */
 
@@ -208,17 +204,18 @@ void CarBackward(void)              //小车的后退
 */
 
 /*
-void EnableAuxMotor(void)           //使能电机
-{
-    void gpio_set_level(gpio_pin_enum pin,0);
-}
-*/
-
-/*
 void DisableAuxMotor(void)          //失能电机
 {
-    void gpio_set_level(gpio_pin_enum pin,0);
+    MOTOR1_Speed(0);
 }
 */
 
-
+/*中断来控制轮胎的运动*/
+void pit_handler_TIM3 (void)
+{
+    encoder_data_quaddec = encoder_get_count(ENCODER_QUADDEC);                  // 获取编码器计数
+    encoder_data_quaddec = kalman_filter(&Encoder_kal, encoder_data_quaddec);   // 对编码器经行滤波处理
+    encoder_clear_count(ENCODER_QUADDEC);
+    MOTOR1_PID();
+    system_delay_ms(5);
+}

@@ -16,7 +16,7 @@
 
 IMU_Info imu;
 
-int16_t  MPU6050_FIFO[6][Buf_SIZE];	//6个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据	
+int16_t  MPU6050_FIFO[6][Buf_SIZE];	//6个FIFO队列；0-2：陀螺仪数据；3-5：加速度计数据
 
 int16_t lastAx,lastAy,lastAz,lastGx,lastGy,lastGz;
 
@@ -42,6 +42,7 @@ static int16_t MPU6050_GetAvg(int16_t* buf)
 	return (int16_t)sum;
 }
 
+float Deg_x;
 //读取经过滤波的陀螺仪、加速度数据
 void MPU6050_readGyro_Acc(int16_t *gyro,int16_t *acc)
 {
@@ -78,7 +79,9 @@ void MPU6050_readGyro_Acc(int16_t *gyro,int16_t *acc)
 	ax = 	MPU6050_GetAvg(&MPU6050_FIFO[0][0]);
 	ay = 	MPU6050_GetAvg(&MPU6050_FIFO[1][0]);
 	az = 	MPU6050_GetAvg(&MPU6050_FIFO[2][0]);
-				
+
+	Deg_x=ax;
+
 	acc[0] = ax; //acc
 	acc[1] = ay;
 	acc[2] = az;

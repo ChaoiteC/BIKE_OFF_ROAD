@@ -46,9 +46,9 @@ const float  controller_parameter[3][5] =
 };
 
 PID MOTOR1_SUM;//后轮
-/*动量轮PID
+//动量轮PID
 ALL_PID MOTOR2_SUM;
- */
+
 
 
 
@@ -58,7 +58,7 @@ ALL_PID MOTOR2_SUM;
  * 参数：无
  * 输出：无
  */
-void PID_Init(PID *pid,float p,float i,float d,float maxI,float maxOut)
+void PID_init(PID *pid,float p,float i,float d,float maxI,float maxOut)
 {
 
     pid->kp=p;
@@ -114,7 +114,7 @@ void PID_Calc(PID *pid,float feedback)
  * @param void
  * @return void
  */
-void PID_Vanquisher(){
+/*void PID_Vanquisher(){
     oled_clear();
     oled_show_string(0,0,"PID!*Vanquisher*!"       );
     oled_show_string(0,1,"Power by ChaoiteC"       );
@@ -132,10 +132,10 @@ void PID_Vanquisher(){
             break;
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            /*PID_E=&MOTOR2_SUM;
+            PID_E=&MOTOR2_SUM;
             sector=63;
             page=2;
-            break;*/
+            break;
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
             return;
@@ -143,6 +143,7 @@ void PID_Vanquisher(){
     }
     oled_clear();
 }
+*/
 
 void clear_integral(PID *pid)
 {

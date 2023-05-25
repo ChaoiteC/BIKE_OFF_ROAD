@@ -101,7 +101,7 @@ void stop_follow(){//停车处理
             default:return;
         }
         while(1){
-            MOTOR_Speed(0);
+            MOTOR1_Speed(0);
         }
     }
 }

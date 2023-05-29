@@ -17,7 +17,5 @@ int main(void){
     //wait_to_strat();
     
     while(1){//发车主循环
-
-
     }
 }

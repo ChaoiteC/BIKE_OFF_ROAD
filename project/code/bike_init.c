@@ -69,6 +69,7 @@ void bike_init(void){
     bluetooth_ch9141_init();
     bluetooth_ch9141_send_string("Bluetooth OK.\r\n");
 
+
     //电机调试
     //初始化完成
     oled_clear();

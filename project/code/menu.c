@@ -379,7 +379,7 @@ void page_PID_show(){
     int8 i;
     oled_show_string(0,0,"PID CHANGE"              );
     oled_show_string(0,1,"./CP/PID"                );
-    for(i=0;i<5 || i<PID_NUMBER;i++){
+    for(i=0;i<5/* || i<PID_NUMBER*/;i++){
         oled_show_float(98,i+2,flash_union_buffer[point+i].float_type,2,2);
         switch(point+i){
             case 0:oled_show_string(0,i+2,"M1.P");break;

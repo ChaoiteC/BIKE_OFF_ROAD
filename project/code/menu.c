@@ -297,7 +297,7 @@ void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
-        oled_show_string(0,3,"WARNING: MPU NO DATA");
+        oled_show_string(0,2,"WARNING: MPU NO DATA");
     }
     oled_show_string(42,3,"MHY  FCOF"                );
     oled_show_string(0,5,"X>rol>"                    );

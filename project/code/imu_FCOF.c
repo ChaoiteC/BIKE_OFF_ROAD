@@ -12,8 +12,7 @@ float dt = 0.005;           //采样周期
 //  @param      gyro_m      陀螺仪数据
 //  @return     float       数据融合后的角度
 //----------------------------------------------------------------
-float angle_calc(float angle_m, float gyro_m)
-{
+float angle_calc(float angle_m, float gyro_m){
     float temp_angle;
     float gyro_now;
     float error_angle;

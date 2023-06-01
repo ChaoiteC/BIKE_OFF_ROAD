@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ¼´£¨CH32V307VCT6 ¿ªÔ´¿â£©ÊÇÒ»¸ö»ùÓÚ¹Ù·½ SDK ½Ó¿ÚµÄµÚÈı·½¿ªÔ´¿â
-* Copyright (c) 2022 SEEKFREE Öğ·É¿Æ¼¼
+* CH32V307VCT6 Opensourec Library å³ï¼ˆCH32V307VCT6 å¼€æºåº“ï¼‰æ˜¯ä¸€ä¸ªåŸºäºå®˜æ–¹ SDK æ¥å£çš„ç¬¬ä¸‰æ–¹å¼€æºåº“
+* Copyright (c) 2022 SEEKFREE é€é£ç§‘æŠ€
 *
-* ±¾ÎÄ¼şÊÇCH32V307VCT6 ¿ªÔ´¿âµÄÒ»²¿·Ö
+* æœ¬æ–‡ä»¶æ˜¯CH32V307VCT6 å¼€æºåº“çš„ä¸€éƒ¨åˆ†
 *
-* CH32V307VCT6 ¿ªÔ´¿â ÊÇÃâ·ÑÈí¼ş
-* Äú¿ÉÒÔ¸ù¾İ×ÔÓÉÈí¼ş»ù½ğ»á·¢²¼µÄ GPL£¨GNU General Public License£¬¼´ GNUÍ¨ÓÃ¹«¹²Ğí¿ÉÖ¤£©µÄÌõ¿î
-* ¼´ GPL µÄµÚ3°æ£¨¼´ GPL3.0£©»ò£¨ÄúÑ¡ÔñµÄ£©ÈÎºÎºóÀ´µÄ°æ±¾£¬ÖØĞÂ·¢²¼ºÍ/»òĞŞ¸ÄËü
+* CH32V307VCT6 å¼€æºåº“ æ˜¯å…è´¹è½¯ä»¶
+* æ‚¨å¯ä»¥æ ¹æ®è‡ªç”±è½¯ä»¶åŸºé‡‘ä¼šå‘å¸ƒçš„ GPLï¼ˆGNU General Public Licenseï¼Œå³ GNUé€šç”¨å…¬å…±è®¸å¯è¯ï¼‰çš„æ¡æ¬¾
+* å³ GPL çš„ç¬¬3ç‰ˆï¼ˆå³ GPL3.0ï¼‰æˆ–ï¼ˆæ‚¨é€‰æ‹©çš„ï¼‰ä»»ä½•åæ¥çš„ç‰ˆæœ¬ï¼Œé‡æ–°å‘å¸ƒå’Œ/æˆ–ä¿®æ”¹å®ƒ
 *
-* ±¾¿ªÔ´¿âµÄ·¢²¼ÊÇÏ£ÍûËüÄÜ·¢»Ó×÷ÓÃ£¬µ«²¢Î´¶ÔÆä×÷ÈÎºÎµÄ±£Ö¤
-* ÉõÖÁÃ»ÓĞÒşº¬µÄÊÊÏúĞÔ»òÊÊºÏÌØ¶¨ÓÃÍ¾µÄ±£Ö¤
-* ¸ü¶àÏ¸½ÚÇë²Î¼û GPL
+* æœ¬å¼€æºåº“çš„å‘å¸ƒæ˜¯å¸Œæœ›å®ƒèƒ½å‘æŒ¥ä½œç”¨ï¼Œä½†å¹¶æœªå¯¹å…¶ä½œä»»ä½•çš„ä¿è¯
+* ç”šè‡³æ²¡æœ‰éšå«çš„é€‚é”€æ€§æˆ–é€‚åˆç‰¹å®šç”¨é€”çš„ä¿è¯
+* æ›´å¤šç»†èŠ‚è¯·å‚è§ GPL
 *
-* ÄúÓ¦¸ÃÔÚÊÕµ½±¾¿ªÔ´¿âµÄÍ¬Ê±ÊÕµ½Ò»·İ GPL µÄ¸±±¾
-* Èç¹ûÃ»ÓĞ£¬Çë²ÎÔÄ<https://www.gnu.org/licenses/>
+* æ‚¨åº”è¯¥åœ¨æ”¶åˆ°æœ¬å¼€æºåº“çš„åŒæ—¶æ”¶åˆ°ä¸€ä»½ GPL çš„å‰¯æœ¬
+* å¦‚æœæ²¡æœ‰ï¼Œè¯·å‚é˜…<https://www.gnu.org/licenses/>
 *
-* ¶îÍâ×¢Ã÷£º
-* ±¾¿ªÔ´¿âÊ¹ÓÃ GPL3.0 ¿ªÔ´Ğí¿ÉÖ¤Ğ­Òé ÒÔÉÏĞí¿ÉÉêÃ÷ÎªÒëÎÄ°æ±¾
-* Ğí¿ÉÉêÃ÷Ó¢ÎÄ°æÔÚ libraries/doc ÎÄ¼ş¼ĞÏÂµÄ GPL3_permission_statement.txt ÎÄ¼şÖĞ
-* Ğí¿ÉÖ¤¸±±¾ÔÚ libraries ÎÄ¼ş¼ĞÏÂ ¼´¸ÃÎÄ¼ş¼ĞÏÂµÄ LICENSE ÎÄ¼ş
-* »¶Ó­¸÷Î»Ê¹ÓÃ²¢´«²¥±¾³ÌĞò µ«ĞŞ¸ÄÄÚÈİÊ±±ØĞë±£ÁôÖğ·É¿Æ¼¼µÄ°æÈ¨ÉùÃ÷£¨¼´±¾ÉùÃ÷£©
+* é¢å¤–æ³¨æ˜ï¼š
+* æœ¬å¼€æºåº“ä½¿ç”¨ GPL3.0 å¼€æºè®¸å¯è¯åè®® ä»¥ä¸Šè®¸å¯ç”³æ˜ä¸ºè¯‘æ–‡ç‰ˆæœ¬
+* è®¸å¯ç”³æ˜è‹±æ–‡ç‰ˆåœ¨ libraries/doc æ–‡ä»¶å¤¹ä¸‹çš„ GPL3_permission_statement.txt æ–‡ä»¶ä¸­
+* è®¸å¯è¯å‰¯æœ¬åœ¨ libraries æ–‡ä»¶å¤¹ä¸‹ å³è¯¥æ–‡ä»¶å¤¹ä¸‹çš„ LICENSE æ–‡ä»¶
+* æ¬¢è¿å„ä½ä½¿ç”¨å¹¶ä¼ æ’­æœ¬ç¨‹åº ä½†ä¿®æ”¹å†…å®¹æ—¶å¿…é¡»ä¿ç•™é€é£ç§‘æŠ€çš„ç‰ˆæƒå£°æ˜ï¼ˆå³æœ¬å£°æ˜ï¼‰
 *
-* ÎÄ¼şÃû³Æ          zf_driver_encoder
-* ¹«Ë¾Ãû³Æ          ³É¶¼Öğ·É¿Æ¼¼ÓĞÏŞ¹«Ë¾
-* °æ±¾ĞÅÏ¢          ²é¿´ libraries/doc ÎÄ¼ş¼ĞÄÚ version ÎÄ¼ş °æ±¾ËµÃ÷
-* ¿ª·¢»·¾³          MounRiver Studio V1.8.1
-* ÊÊÓÃÆ½Ì¨          CH32V307VCT6
-* µêÆÌÁ´½Ó          https://seekfree.taobao.com/
+* æ–‡ä»¶åç§°          zf_driver_encoder
+* å…¬å¸åç§°          æˆéƒ½é€é£ç§‘æŠ€æœ‰é™å…¬å¸
+* ç‰ˆæœ¬ä¿¡æ¯          æŸ¥çœ‹ libraries/doc æ–‡ä»¶å¤¹å†… version æ–‡ä»¶ ç‰ˆæœ¬è¯´æ˜
+* å¼€å‘ç¯å¢ƒ          MounRiver Studio V1.8.1
+* é€‚ç”¨å¹³å°          CH32V307VCT6
+* åº—é“ºé“¾æ¥          https://seekfree.taobao.com/
 *
-* ĞŞ¸Ä¼ÇÂ¼
-* ÈÕÆÚ                                      ×÷Õß                             ±¸×¢
-* 2022-09-15        ´óW            first version
+* ä¿®æ”¹è®°å½•
+* æ—¥æœŸ                                      ä½œè€…                             å¤‡æ³¨
+* 2022-09-15        å¤§W            first version
 ********************************************************************************************************************/
 
 #include "zf_driver_gpio.h"
@@ -42,11 +42,11 @@ static volatile uint8 encoder_dir_pin[10] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
                                             0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êı¼ò½é     ¶¨Ê±Æ÷±àÂëÆ÷½âÂëÈ¡Öµ
-// ²ÎÊıËµÃ÷     timer_ch      ¶¨Ê±Æ÷Ã¶¾ÙÌå
-// ·µ»Ø²ÎÊı     void
-// ±¸×¢ĞÅÏ¢
-// Ê¹ÓÃÊ¾Àı    encoder_get_count(TIM2_ENCOEDER)  // »ñÈ¡¶¨Ê±Æ÷2µÄ²É¼¯µ½µÄ±àÂëÆ÷Êı¾İ
+// å‡½æ•°ç®€ä»‹     å®šæ—¶å™¨ç¼–ç å™¨è§£ç å–å€¼
+// å‚æ•°è¯´æ˜     timer_ch      å®šæ—¶å™¨æšä¸¾ä½“
+// è¿”å›å‚æ•°     void
+// å¤‡æ³¨ä¿¡æ¯
+// ä½¿ç”¨ç¤ºä¾‹    encoder_get_count(TIM2_ENCOEDER)  // è·å–å®šæ—¶å™¨2çš„é‡‡é›†åˆ°çš„ç¼–ç å™¨æ•°æ®
 //-------------------------------------------------------------------------------------------------------------------
 int16 encoder_get_count(encoder_index_enum encoder_n)
 {
@@ -84,11 +84,11 @@ int16 encoder_get_count(encoder_index_enum encoder_n)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êı¼ò½é     ¶¨Ê±Æ÷µÄ¼ÆÊıÆ÷Çå¿Õ
-// ²ÎÊıËµÃ÷     timer_ch      ¶¨Ê±Æ÷Ã¶¾ÙÌå
-// ·µ»Ø²ÎÊı     void
-// ±¸×¢ĞÅÏ¢
-// Ê¹ÓÃÊ¾Àı    encoder_clear_count(TIM1_ENCOEDER)  //Çå³ı¶¨Ê±Æ÷1²É¼¯µ½µÄ±àÂëÆ÷Êı¾İ
+// å‡½æ•°ç®€ä»‹     å®šæ—¶å™¨çš„è®¡æ•°å™¨æ¸…ç©º
+// å‚æ•°è¯´æ˜     timer_ch      å®šæ—¶å™¨æšä¸¾ä½“
+// è¿”å›å‚æ•°     void
+// å¤‡æ³¨ä¿¡æ¯
+// ä½¿ç”¨ç¤ºä¾‹    encoder_clear_count(TIM1_ENCOEDER)  //æ¸…é™¤å®šæ—¶å™¨1é‡‡é›†åˆ°çš„ç¼–ç å™¨æ•°æ®
 //-------------------------------------------------------------------------------------------------------------------
 void encoder_clear_count(encoder_index_enum encoder_n)
 {
@@ -107,34 +107,34 @@ void encoder_clear_count(encoder_index_enum encoder_n)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êı¼ò½é     ±àÂëÆ÷½âÂë³õÊ¼»¯
-// ²ÎÊıËµÃ÷     timer_ch      ¶¨Ê±Æ÷Ã¶¾ÙÌå
-// ²ÎÊıËµÃ÷     phaseA      Í¨µÀAÒÔ¼°Òı½Å
-// ²ÎÊıËµÃ÷     phaseB      Í¨µÀBÒÔ¼°Òı½Å
-// ·µ»Ø²ÎÊı     void
-// ±¸×¢ĞÅÏ¢    ÍÆ¼öÊ¹ÓÃÕı½»½âÂë±àÂëÆ÷¡£
-// Ê¹ÓÃÊ¾Àı    encoder_init_quad(TIM1_ENCOEDER, TIM1_CH1_ENCOEDER_E9, TIM1_CH2_ENCOEDER_E11)
-//          // Ê¹ÓÃ¶¨Ê±Æ÷1 ×öÕı½»±àÂëÆ÷½âÂë£¬ Í¨µÀ1Òı½ÅºÅE9£¬Í¨µÀ2Òı½ÅºÅE11
+// å‡½æ•°ç®€ä»‹     ç¼–ç å™¨è§£ç åˆå§‹åŒ–
+// å‚æ•°è¯´æ˜     timer_ch      å®šæ—¶å™¨æšä¸¾ä½“
+// å‚æ•°è¯´æ˜     phaseA      é€šé“Aä»¥åŠå¼•è„š
+// å‚æ•°è¯´æ˜     phaseB      é€šé“Bä»¥åŠå¼•è„š
+// è¿”å›å‚æ•°     void
+// å¤‡æ³¨ä¿¡æ¯    æ¨èä½¿ç”¨æ­£äº¤è§£ç ç¼–ç å™¨ã€‚
+// ä½¿ç”¨ç¤ºä¾‹    encoder_init_quad(TIM1_ENCOEDER, TIM1_CH1_ENCOEDER_E9, TIM1_CH2_ENCOEDER_E11)
+//          // ä½¿ç”¨å®šæ—¶å™¨1 åšæ­£äº¤ç¼–ç å™¨è§£ç ï¼Œ é€šé“1å¼•è„šå·E9ï¼Œé€šé“2å¼•è„šå·E11
 //-------------------------------------------------------------------------------------------------------------------
 void encoder_quad_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pin, encoder_channel_enum ch2_pin)
 {
     uint32 register_temp = 0;
     TIM_TypeDef *tim_index;
 
-    // Èç¹û³ÌĞòÔÚÊä³öÁË¶ÏÑÔĞÅÏ¢ ²¢ÇÒÌáÊ¾³ö´íÎ»ÖÃÔÚÕâÀï
-    // ¾ÍÈ¥²é¿´ÄãÔÚÊ²Ã´µØ·½µ÷ÓÃÕâ¸öº¯Êı ¼ì²éÄãµÄ´«Èë²ÎÊı
-    // ÕâÀïÊÇ¼ì²éÊÇ·ñÓĞÖØ¸´Ê¹ÓÃ¶¨Ê±Æ÷
-    // ±ÈÈç³õÊ¼»¯ÁË TIM1_PWM È»ºóÓÖ³õÊ¼»¯³É TIM1_ENCODER ÕâÖÖÓÃ·¨ÊÇ²»ÔÊĞíµÄ
+    // å¦‚æœç¨‹åºåœ¨è¾“å‡ºäº†æ–­è¨€ä¿¡æ¯ å¹¶ä¸”æç¤ºå‡ºé”™ä½ç½®åœ¨è¿™é‡Œ
+    // å°±å»æŸ¥çœ‹ä½ åœ¨ä»€ä¹ˆåœ°æ–¹è°ƒç”¨è¿™ä¸ªå‡½æ•° æ£€æŸ¥ä½ çš„ä¼ å…¥å‚æ•°
+    // è¿™é‡Œæ˜¯æ£€æŸ¥æ˜¯å¦æœ‰é‡å¤ä½¿ç”¨å®šæ—¶å™¨
+    // æ¯”å¦‚åˆå§‹åŒ–äº† TIM1_PWM ç„¶ååˆåˆå§‹åŒ–æˆ TIM1_ENCODER è¿™ç§ç”¨æ³•æ˜¯ä¸å…è®¸çš„
     zf_assert(timer_funciton_check((timer_index_enum)encoder_n, TIMER_FUNCTION_ENCODER));
-    zf_assert((ch1_pin >> 12) == (encoder_n));                                  // ch1_pin Óë ch2_pin ±ØĞëÓë encoder_n Æ¥Åä
-    zf_assert((ch2_pin >> 12) == (encoder_n));                                  // ch1_pin Óë ch2_pin ±ØĞëÓë encoder_n Æ¥Åä
+    zf_assert((ch1_pin >> 12) == (encoder_n));                                  // ch1_pin ä¸ ch2_pin å¿…é¡»ä¸ encoder_n åŒ¹é…
+    zf_assert((ch2_pin >> 12) == (encoder_n));                                  // ch1_pin ä¸ ch2_pin å¿…é¡»ä¸ encoder_n åŒ¹é…
 
-    timer_clock_enable(encoder_n);                                              // ¶¨Ê±Æ÷Ê±ÖÓÊ¹ÄÜ
+    timer_clock_enable(encoder_n);                                              // å®šæ—¶å™¨æ—¶é’Ÿä½¿èƒ½
 
-    gpio_init((gpio_pin_enum)(ch1_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // ³õÊ¼»¯Òı½Å
-    gpio_init((gpio_pin_enum)(ch2_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // ³õÊ¼»¯Òı½Å
+    gpio_init((gpio_pin_enum)(ch1_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // åˆå§‹åŒ–å¼•è„š
+    gpio_init((gpio_pin_enum)(ch2_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // åˆå§‹åŒ–å¼•è„š
 
-    //encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // ½«·½ÏòÒı½ÅºÅ´æÈëÊı×éÖĞ
+    //encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // å°†æ–¹å‘å¼•è„šå·å­˜å…¥æ•°ç»„ä¸­
 
     switch(encoder_n)
     {
@@ -149,7 +149,7 @@ void encoder_quad_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pi
         default: register_temp = 1;
     }
 
-    // ¿ªÆô¸´ÓÃ¹¦ÄÜ
+    // å¼€å¯å¤ç”¨åŠŸèƒ½
     if((ch1_pin >> 8) == 0x03)      GPIO_PinRemapConfig(GPIO_FullRemap_TIM1,        ENABLE);
     else if((ch1_pin >> 8) == 0x11) GPIO_PinRemapConfig(GPIO_PartialRemap1_TIM2,    ENABLE);
     else if((ch1_pin >> 8) == 0x22) GPIO_PinRemapConfig(GPIO_PartialRemap_TIM3,     ENABLE);
@@ -162,25 +162,25 @@ void encoder_quad_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pi
 
     if(!register_temp)
     {
-        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);                // Ê¹ÄÜAFIO¸´ÓÃ¹¦ÄÜÄ£¿éÊ±ÖÓ
+        RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);                // ä½¿èƒ½AFIOå¤ç”¨åŠŸèƒ½æ¨¡å—æ—¶é’Ÿ
         TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure = {0};
         TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-        TIM_TimeBaseStructure.TIM_Prescaler = 0;                            // Ô¤·ÖÆµÆ÷
-        TIM_TimeBaseStructure.TIM_Period = 0xFFFF;                          // Éè¶¨¼ÆÊıÆ÷×Ô¶¯ÖØ×°Öµ
-        TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;             // Ñ¡ÔñÊ±ÖÓ·ÖÆµ£º²»·ÖÆµ
-        TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;         // TIMÏòÉÏ¼ÆÊı
-        TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                    // ÖØ¸´¼ÆÊıÆ÷
-        TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                // ³õÊ¼»¯½á¹¹Ìå
-        TIM_ITRxExternalClockConfig(tim_index, TIM_TS_TI2FP2);              // ÅäÖÃÍâ²¿´¥·¢£¬·ñÔò²»»á¼ÆÊı
-        TIM_Cmd(tim_index, ENABLE);                                         // ¶¨Ê±Æ÷Ê¹ÄÜ
+        TIM_TimeBaseStructure.TIM_Prescaler = 0;                            // é¢„åˆ†é¢‘å™¨
+        TIM_TimeBaseStructure.TIM_Period = 0xFFFF;                          // è®¾å®šè®¡æ•°å™¨è‡ªåŠ¨é‡è£…å€¼
+        TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;             // é€‰æ‹©æ—¶é’Ÿåˆ†é¢‘ï¼šä¸åˆ†é¢‘
+        TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;         // TIMå‘ä¸Šè®¡æ•°
+        TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                    // é‡å¤è®¡æ•°å™¨
+        TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                // åˆå§‹åŒ–ç»“æ„ä½“
+        TIM_ITRxExternalClockConfig(tim_index, TIM_TS_TI2FP2);              // é…ç½®å¤–éƒ¨è§¦å‘ï¼Œå¦åˆ™ä¸ä¼šè®¡æ•°
+        TIM_Cmd(tim_index, ENABLE);                                         // å®šæ—¶å™¨ä½¿èƒ½
 
         TIM_EncoderInterfaceConfig(
                 tim_index,
                 TIM_EncoderMode_TI2 ,
                 TIM_ICPolarity_Rising,
-                TIM_ICPolarity_Rising);                                     // Ê¹ÓÃ±àÂëÆ÷Ä£Ê½, T2¼ÆÊı ,T1ÅĞ¶Ï·½Ïò, ÉÏÉıÑØ¼ÆÊı
+                TIM_ICPolarity_Rising);                                     // ä½¿ç”¨ç¼–ç å™¨æ¨¡å¼, T2è®¡æ•° ,T1åˆ¤æ–­æ–¹å‘, ä¸Šå‡æ²¿è®¡æ•°
 
-        TIM_Cmd(tim_index, ENABLE);                                         // ¶¨Ê±Æ÷Ê¹ÄÜ
+        TIM_Cmd(tim_index, ENABLE);                                         // å®šæ—¶å™¨ä½¿èƒ½
 
     }
 
@@ -188,34 +188,34 @@ void encoder_quad_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pi
 
 
 //-------------------------------------------------------------------------------------------------------------------
-// º¯Êı¼ò½é     ±àÂëÆ÷½âÂë³õÊ¼»¯
-// ²ÎÊıËµÃ÷     timer_ch        ¶¨Ê±Æ÷Ã¶¾ÙÌå
-// ²ÎÊıËµÃ÷     phaseA          Í¨µÀAÒÔ¼°Òı½Å
-// ²ÎÊıËµÃ÷     phaseB          Í¨µÀBÒÔ¼°Òı½Å
-// ·µ»Ø²ÎÊı     void
-//          ÍÆ¼öÊ¹ÓÃÕı½»½âÂë±àÂëÆ÷¡£
-// Ê¹ÓÃÊ¾Àı      encoder_init_dir(TIM1_ENCOEDER, TIM1_CH1_ENCOEDER_E9, TIM1_CH2_ENCOEDER_E11)
-//                              // Ê¹ÓÃ¶¨Ê±Æ÷1 ×ö´ø·½ÏòµÄ±àÂëÆ÷½âÂë£¬ Í¨µÀ1·½ÏòĞÅºÅÒı½ÅE9£¬Í¨µÀ2Âö³åĞÅºÅÒı½ÅE11
+// å‡½æ•°ç®€ä»‹     ç¼–ç å™¨è§£ç åˆå§‹åŒ–
+// å‚æ•°è¯´æ˜     timer_ch        å®šæ—¶å™¨æšä¸¾ä½“
+// å‚æ•°è¯´æ˜     phaseA          é€šé“Aä»¥åŠå¼•è„š
+// å‚æ•°è¯´æ˜     phaseB          é€šé“Bä»¥åŠå¼•è„š
+// è¿”å›å‚æ•°     void
+//          æ¨èä½¿ç”¨æ­£äº¤è§£ç ç¼–ç å™¨ã€‚
+// ä½¿ç”¨ç¤ºä¾‹      encoder_init_dir(TIM1_ENCOEDER, TIM1_CH1_ENCOEDER_E9, TIM1_CH2_ENCOEDER_E11)
+//                              // ä½¿ç”¨å®šæ—¶å™¨1 åšå¸¦æ–¹å‘çš„ç¼–ç å™¨è§£ç ï¼Œ é€šé“1æ–¹å‘ä¿¡å·å¼•è„šE9ï¼Œé€šé“2è„‰å†²ä¿¡å·å¼•è„šE11
 //-------------------------------------------------------------------------------------------------------------------
 void encoder_dir_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pin, encoder_channel_enum ch2_pin)
 {
     uint32 register_temp = 0;
     TIM_TypeDef *tim_index;
 
-    // Èç¹û³ÌĞòÔÚÊä³öÁË¶ÏÑÔĞÅÏ¢ ²¢ÇÒÌáÊ¾³ö´íÎ»ÖÃÔÚÕâÀï
-    // ¾ÍÈ¥²é¿´ÄãÔÚÊ²Ã´µØ·½µ÷ÓÃÕâ¸öº¯Êı ¼ì²éÄãµÄ´«Èë²ÎÊı
-    // ÕâÀïÊÇ¼ì²éÊÇ·ñÓĞÖØ¸´Ê¹ÓÃ¶¨Ê±Æ÷
-    // ±ÈÈç³õÊ¼»¯ÁË TIM1_PWM È»ºóÓÖ³õÊ¼»¯³É TIM1_ENCODER ÕâÖÖÓÃ·¨ÊÇ²»ÔÊĞíµÄ
+    // å¦‚æœç¨‹åºåœ¨è¾“å‡ºäº†æ–­è¨€ä¿¡æ¯ å¹¶ä¸”æç¤ºå‡ºé”™ä½ç½®åœ¨è¿™é‡Œ
+    // å°±å»æŸ¥çœ‹ä½ åœ¨ä»€ä¹ˆåœ°æ–¹è°ƒç”¨è¿™ä¸ªå‡½æ•° æ£€æŸ¥ä½ çš„ä¼ å…¥å‚æ•°
+    // è¿™é‡Œæ˜¯æ£€æŸ¥æ˜¯å¦æœ‰é‡å¤ä½¿ç”¨å®šæ—¶å™¨
+    // æ¯”å¦‚åˆå§‹åŒ–äº† TIM1_PWM ç„¶ååˆåˆå§‹åŒ–æˆ TIM1_ENCODER è¿™ç§ç”¨æ³•æ˜¯ä¸å…è®¸çš„
     zf_assert(timer_funciton_check((timer_index_enum)encoder_n, TIMER_FUNCTION_ENCODER));
-    zf_assert((ch1_pin & (encoder_n << 12)) == (encoder_n << 12));              // ch1_pin Óë ch2_pin ±ØĞëÓë encoder_n Æ¥Åä
-    zf_assert((ch2_pin & (encoder_n << 12)) == (encoder_n << 12));              // ch1_pin Óë ch2_pin ±ØĞëÓë encoder_n Æ¥Åä
+    zf_assert((ch1_pin & (encoder_n << 12)) == (encoder_n << 12));              // ch1_pin ä¸ ch2_pin å¿…é¡»ä¸ encoder_n åŒ¹é…
+    zf_assert((ch2_pin & (encoder_n << 12)) == (encoder_n << 12));              // ch1_pin ä¸ ch2_pin å¿…é¡»ä¸ encoder_n åŒ¹é…
 
-    timer_clock_enable(encoder_n);                                              // ¶¨Ê±Æ÷Ê±ÖÓÊ¹ÄÜ
+    timer_clock_enable(encoder_n);                                              // å®šæ—¶å™¨æ—¶é’Ÿä½¿èƒ½
 
-    gpio_init((gpio_pin_enum)(ch1_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // ³õÊ¼»¯Òı½Å
-    gpio_init((gpio_pin_enum)(ch2_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // ³õÊ¼»¯Òı½Å
+    gpio_init((gpio_pin_enum)(ch1_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // åˆå§‹åŒ–å¼•è„š
+    gpio_init((gpio_pin_enum)(ch2_pin & 0xFF), GPI, 0, GPI_PULL_UP);            // åˆå§‹åŒ–å¼•è„š
 
-    encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // ½«·½ÏòÒı½ÅºÅ´æÈëÊı×éÖĞ
+    encoder_dir_pin[encoder_n] = (ch1_pin &0xFF);                               // å°†æ–¹å‘å¼•è„šå·å­˜å…¥æ•°ç»„ä¸­
 
     switch(encoder_n)
     {
@@ -230,9 +230,9 @@ void encoder_dir_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pin
         default: register_temp = 1;
     }
 
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);                // Ê¹ÄÜAFIO¸´ÓÃ¹¦ÄÜÄ£¿éÊ±ÖÓ
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);                // ä½¿èƒ½AFIOå¤ç”¨åŠŸèƒ½æ¨¡å—æ—¶é’Ÿ
 
-    // ¿ªÆô¸´ÓÃ¹¦ÄÜ
+    // å¼€å¯å¤ç”¨åŠŸèƒ½
     if((ch1_pin >> 8) == 0x03)      GPIO_PinRemapConfig(GPIO_FullRemap_TIM1,        ENABLE);
     else if((ch1_pin >> 8) == 0x11) GPIO_PinRemapConfig(GPIO_PartialRemap1_TIM2,    ENABLE);
     else if((ch1_pin >> 8) == 0x22) GPIO_PinRemapConfig(GPIO_PartialRemap_TIM3,     ENABLE);
@@ -248,14 +248,14 @@ void encoder_dir_init(encoder_index_enum encoder_n, encoder_channel_enum ch1_pin
 
         TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure = {0};
         TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-        TIM_TimeBaseStructure.TIM_Prescaler = 0;                            // Ô¤·ÖÆµÆ÷
-        TIM_TimeBaseStructure.TIM_Period = 0xFFFF;                          // Éè¶¨¼ÆÊıÆ÷×Ô¶¯ÖØ×°Öµ
-        TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;             // Ñ¡ÔñÊ±ÖÓ·ÖÆµ£º²»·ÖÆµ
-        TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;         // TIMÏòÉÏ¼ÆÊı
-        TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                    // ÖØ¸´¼ÆÊıÆ÷
-        TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                // ³õÊ¼»¯½á¹¹Ìå
-        TIM_ITRxExternalClockConfig(tim_index, TIM_TS_TI2FP2);              // ÅäÖÃÍâ²¿´¥·¢£¬·ñÔò²»»á¼ÆÊı
-        TIM_Cmd(tim_index, ENABLE);                                         // ¶¨Ê±Æ÷Ê¹ÄÜ
+        TIM_TimeBaseStructure.TIM_Prescaler = 0;                            // é¢„åˆ†é¢‘å™¨
+        TIM_TimeBaseStructure.TIM_Period = 0xFFFF;                          // è®¾å®šè®¡æ•°å™¨è‡ªåŠ¨é‡è£…å€¼
+        TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;             // é€‰æ‹©æ—¶é’Ÿåˆ†é¢‘ï¼šä¸åˆ†é¢‘
+        TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;         // TIMå‘ä¸Šè®¡æ•°
+        TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;                    // é‡å¤è®¡æ•°å™¨
+        TIM_TimeBaseInit(tim_index, &TIM_TimeBaseStructure);                // åˆå§‹åŒ–ç»“æ„ä½“
+        TIM_ITRxExternalClockConfig(tim_index, TIM_TS_TI2FP2);              // é…ç½®å¤–éƒ¨è§¦å‘ï¼Œå¦åˆ™ä¸ä¼šè®¡æ•°
+        TIM_Cmd(tim_index, ENABLE);                                         // å®šæ—¶å™¨ä½¿èƒ½
     }
 }
 

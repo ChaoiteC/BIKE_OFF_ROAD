@@ -3,7 +3,9 @@
   (あいむ あらいぶ なう いぇ
   すぷりんぐたいむ おぶ らいふ)
   鳴り止まなくてなにが悪い
-  青春でなにが悪い*/
+  青春でなにが悪い
+  
+  这个文件及它的的头文件用于完成车辆各个软硬件的初始化。*/
 
 #include "zf_common_headfile.h"
 
@@ -21,11 +23,14 @@ void bike_init(void){
     //PID初始化
     oled_clear();
     oled_show_string(0, 0, "PID loading...");
-    flash_read_page_to_buffer(63,3);
-    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
-    flash_read_page_to_buffer(63,2);
-    //PID_init(&MOTOR2_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+    if(flash_check(63,3)){
+        flash_read_page_to_buffer(63,3);
+        PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+    }
+    else{//无数据
+        
 
+    }
 
     //GPS初始化
     oled_clear();

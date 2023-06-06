@@ -5,7 +5,9 @@
   So I'll sin more and destroy my thoughts, 
   make a mess of my hand.
   I swear on the darkest night I'll end it all.
-  And testify....*/
+  And testify....
+  
+  这个文件及它的头文件用于提供发车前的通用人机交互页面。有的功能有自己的人机交互界面。*/
 
 #include "zf_common_headfile.h"
 #define PID_NUMBER 3

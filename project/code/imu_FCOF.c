@@ -1,3 +1,5 @@
+/*这个文件及它的头文件是惯性导航系统姿态解算的一阶互补滤波版本。*/
+
 #include "zf_common_headfile.h"
 
 FCOF FCOF_info;

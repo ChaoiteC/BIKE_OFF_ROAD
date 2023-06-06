@@ -8,7 +8,9 @@
   Слышу голос,и спешу на зов скорее,
   По дороге,на которой нет следа.
   От чистого истока в Прекрасное Далёко,
-  в Прекрасное Далёко я начинаю путь.*/
+  в Прекрасное Далёко я начинаю путь.
+  
+  这个文件及它的头文件用于行车过程中的导航，即接收传感器的数据、决定车整体的动作与应该去往哪里。*/
 
 
 #include "zf_common_headfile.h"
@@ -21,7 +23,7 @@ uint8 stop_flag=0;//停车！  1=终点 2=翻车 3=遥控
 uint8 current_gps_point=0;//当前GPS正在前往的点位
 
 /* @fn ready_start
- * @brief 开车前的最后准备
+ * @brief 准备开车
  * @param void
  * @return void
  */
@@ -57,7 +59,7 @@ void ready_start(){
 
 }
 
-void gps_follow(){
+void gps_read(){
     if(gps_tau1201_flag){//这段用于GPS数据处理
         gps_tau1201_flag=0;
         if(!gps_tau1201.state){
@@ -75,13 +77,13 @@ void gps_follow(){
     }
 }
 
-void mpu_follow(){
+void overturn_check(){
     if((imu.Roll >= 30) || (imu.Roll <= -30) || (imu.Pitch >= 30) || (imu.Pitch <= -30)){//翻车
         stop_flag=2;
     }
 }
 
-void bluetooth_follow(){
+void bluetooth_check(){
     uint8 data_buffer[32];
     if(bluetooth_ch9141_read_buff(data_buffer,32)){
         if(!strcmp((const char *)data_buffer,"stop")){
@@ -90,7 +92,7 @@ void bluetooth_follow(){
     }
 }
 
-void stop_follow(){//停车处理
+void stop_do(){//停车处理
     if(stop_flag){
         oled_clear();
         oled_show_chinese(0, 0, 16,(const uint8 *)STOP,2);

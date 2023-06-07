@@ -501,5 +501,8 @@ void pit_hanlder_TIM6(void){//MPU6050的中断处理
 // 返回参数     void
 //-------------------------------------------------------------------------------------------------------------------
 void pit_hanlder_TIM7(void){//GPS的中断处理
-    gps_read();
+    if(gps_tau1201_flag){//等待GPS信号
+        gps_tau1201_flag=0;
+        gps_read();
+    }
 }

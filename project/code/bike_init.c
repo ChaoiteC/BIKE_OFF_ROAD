@@ -36,7 +36,8 @@ void bike_init(void){
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
-    
+    pit_ms_init(TIM7_PIT,100);//定时器中断获取GPS数据
+
     //MPU6050初始化
     oled_show_string(0, 0, "MPU6050 loading...");
     if(mpu6050_init()){//自检失败

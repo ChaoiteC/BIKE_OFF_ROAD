@@ -263,10 +263,7 @@ void page_TET_ex(){
 void page_GPS_show(){
     oled_show_string(0,0,"GPS_TAU1201"             );
     oled_show_string(0,1,"./TET/GPS"               );
-    if(gps_tau1201_flag){//GPS数据处理完成
-        gps_tau1201_flag=0;
-        gps_show_if();
-    }
+    gps_show_if();
 }
 
 void page_GPS_ex(){

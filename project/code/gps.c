@@ -58,7 +58,6 @@ void gps_line_write(int line,float latitude,float longitude,uint8 point_type){
  * @param void
  * @return 0 mean yes, 1 mean error
  */
-
 int gps_check_flash(void){
     int i;
     flash_buffer_clear();
@@ -163,8 +162,6 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
         oled_show_string(0,0,"GPS GET POINT NOW");
         oled_show_int(0,1,i,2);
         oled_show_string(0,3,"WAITING GPS...");
-        while(!gps_tau1201_flag);//等待GPS信号
-        gps_tau1201_flag=0;
         if(!gps_tau1201.state){
             oled_show_string(0,3,"GPS FAIL LOCATE");                //定位失败
         }
@@ -243,5 +240,20 @@ int gps_show_if(void){
         oled_show_string(0, 6, "STL>");
         oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
         return 0;
+    }
+}
+
+void gps_read(){
+    if(!gps_tau1201.state){
+        return;//定位失败
+    }
+    else{
+        gps_distance=get_two_points_distance(gps_tau1201.latitude,gps_tau1201.longitude,gps_point[current_gps_point].latitude,gps_point[current_gps_point].longitude);
+        if(gps_distance<=EXPECTED_DISTANCE_THRESHOLD){//到点
+            if(gps_point[current_gps_point++].point_type==FINISH){//进入下一点位，如果已达终点
+                stop_flag=1;
+            }
+        }
+        gps_azimuth=get_two_points_azimuth(gps_tau1201.latitude,gps_tau1201.longitude,gps_point[current_gps_point].latitude,gps_point[current_gps_point].longitude);//测量方位角
     }
 }

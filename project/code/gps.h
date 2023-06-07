@@ -32,5 +32,6 @@ int gps_check_flash(void);
 int gps_get_point();
 void gps_average_pointing();
 int gps_show_if();
+void gps_read();
 
 #endif /* GPS_H_ */

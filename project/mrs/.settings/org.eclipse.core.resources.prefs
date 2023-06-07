@@ -2,7 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=1fa8e161a7caea12249bc1fc786d45276b76587e
 eclipse.preferences.version=1
-encoding//code/GNSS_INS.c=UTF-8
 encoding//code/Mahony.c=UTF-8
 encoding//code/Mahony.h=GBK
 encoding//code/bike_init.c=UTF-8
@@ -11,7 +10,6 @@ encoding//code/chinese_font.h=GBK
 encoding//code/controller.c=UTF-8
 encoding//code/encoder_text.c=UTF-8
 encoding//code/encoder_text.h=UTF-8
-encoding//code/follow.c=UTF-8
 encoding//code/gps.c=UTF-8
 encoding//code/gps.h=UTF-8
 encoding//code/imu.c=UTF-8

@@ -31,7 +31,6 @@ uint8 current_gps_point=0;//当前GPS正在前往的点位
  */
 void start_check(){
     //将参数从FLASH全部重新读出
-    int i,sector,page;
     oled_clear();
     oled_show_string(0,0, "Reading FLASH...");
     gps_check_flash();

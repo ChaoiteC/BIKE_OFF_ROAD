@@ -338,7 +338,7 @@ void TIM7_IRQHandler(void)//GPS的中断在这里处理
     if(TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET)
     {
        TIM_ClearITPendingBit(TIM7, TIM_IT_Update );
-       extern void pit_hanlder_TIM6 (void);
+       extern void pit_hanlder_TIM7 (void);
        pit_hanlder_TIM7();
     }
 }

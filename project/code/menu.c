@@ -10,7 +10,7 @@
   这个文件及它的头文件用于提供发车前的通用人机交互页面。有的功能有自己的人机交互界面。*/
 
 #include "zf_common_headfile.h"
-#define PID_NUMBER 3
+#define FLASH_NUMBER 14
 
 uint8 now_page=0;                               //当前页面
 uint8 gogogo=0;                                 //1=正式发车
@@ -378,7 +378,7 @@ void page_PID_show(){
     int8 i;
     oled_show_string(0,0,"PID CHANGE"              );
     oled_show_string(0,1,"./CP/PID"                );
-    for(i=0;i<5/* || i<PID_NUMBER*/;i++){
+    for(i=0;i<5 || i<FLASH_NUMBER;i++){
         oled_show_float(98,i+2,flash_union_buffer[point+i].float_type,2,2);
         switch(point+i){
             case 0:oled_show_string(0,i+2,"M1.P");break;
@@ -407,7 +407,7 @@ void page_PID_ex(){
         }
         else{
             if(--point<0){
-                point=PID_NUMBER;
+                point=FLASH_NUMBER;
             }
         }
     }
@@ -416,7 +416,7 @@ void page_PID_ex(){
             flash_union_buffer[point].float_type-=0.01;
         }
         else{
-            if(++point>PID_NUMBER){
+            if(++point>FLASH_NUMBER){
                 point=0;
             }
         }

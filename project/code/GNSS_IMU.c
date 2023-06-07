@@ -2,7 +2,7 @@
 
 #include "zf_common_headfile.h"
 
-//一阶互补
+/*//一阶互补
 
 // a=tau / (tau + loop time)
 // newAngle = angle measured with atan2 using the accelerometer
@@ -73,4 +73,4 @@ float kalmanCalculate(float newAngle, float newRate, int looptime)
     P_11 -= K_1 * P_01;
 
     return x_angle;
-}
+}*/

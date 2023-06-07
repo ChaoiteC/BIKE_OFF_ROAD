@@ -17,7 +17,7 @@ void bike_init(void){
 
     //键盘初始化
     oled_show_string(0, 0, "Keyboard loading...");
-    key_init(500);
+    key_init(400);
 
 
     //PID初始化
@@ -25,8 +25,7 @@ void bike_init(void){
     oled_show_string(0, 0, "PID loading...");
     flash_buffer_clear();
     if(flash_check(63,3)){
-        flash_read_page_to_buffer(63,3);
-        PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+        flash_data_update();
     }
     else{//无数据填入缺省值
         flash_union_buffer[0].float_type=1.0;//MT1 PID

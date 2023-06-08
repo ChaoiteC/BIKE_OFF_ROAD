@@ -40,7 +40,7 @@ void angle_controller(void)
 void gyro_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_gyro,MOTOR2_SUM.rol_angle.output);
-  PID_Calc(&MOTOR2_SUM.rol_gyro,imu.Roll);
+  PID_Calc(&MOTOR2_SUM.rol_gyro,imu963ra_gyro_x);
 }
 
 /**********************************************************************************************/
@@ -51,9 +51,21 @@ void gyro_controller(void)
  */
 void _controller_perform(void)
 {
-  vel_controller();
-  angle_controller();
-  gyro_controller();
+    int cnt1=0,cnt2=0,cnt3=0;
+    if(cnt3==50){      //速度环100ms执行一次
+        vel_controller();
+        cnt3=0;
+    }
+    if(cnt2== 5)      //角度环10ms执行一次
+    {
+        angle_controller();//角度环
+        cnt2=0;
+    }
+    if(cnt1==1)
+    {
+        gyro_controller(); //角速度环2ms执行一次
+        cnt1=0;
+    }
 }
 
 

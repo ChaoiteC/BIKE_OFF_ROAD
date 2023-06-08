@@ -14,6 +14,7 @@ encoding//code/gps.c=UTF-8
 encoding//code/gps.h=UTF-8
 encoding//code/imu.c=UTF-8
 encoding//code/imu.h=UTF-8
+encoding//code/imu_FCOF.c=UTF-8
 encoding//code/imu_FCOF.h=UTF-8
 encoding//code/menu.c=UTF-8
 encoding//code/menu.h=UTF-8

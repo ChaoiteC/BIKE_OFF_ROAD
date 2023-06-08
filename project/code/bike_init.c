@@ -52,19 +52,19 @@ void bike_init(void){
     gps_init();
     pit_ms_init(TIM7_PIT,100);//定时器中断获取GPS数据
 
-    //MPU6050初始化
-    oled_show_string(0, 0, "MPU6050 loading...");
-    if(mpu6050_init()){//自检失败
+    //IMU963RA初始化
+    oled_show_string(0, 0, "IMU963RA loading...");
+    if(imu963ra_init()){//自检失败
         system_delay_ms(3000);
     }
     else{
-        pit_ms_init(TIM6_PIT,5);//定时器中断获取MPU6050数据
+        pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
         oled_clear();
-        oled_show_chinese(0, 0, 16,(const uint8 *)MPU_offset1,5);
-        oled_show_chinese(0, 4, 16,(const uint8 *)MPU_offset2,4);
-        oled_show_string(0, 7, "MPU6050 loading...");
+        oled_show_chinese(0, 0, 16,(const uint8 *)IMU_offset1,5);
+        oled_show_chinese(0, 4, 16,(const uint8 *)IMU_offset2,4);
+        oled_show_string(0, 7, "IMU963RA loading...");
         system_delay_ms(1000);
-        MPU6050_Init_Offset();//MPU6050去偏移
+        IMU963RA_Init_Offset();//IMU963RA去偏移
     }
     
     //舵机初始化

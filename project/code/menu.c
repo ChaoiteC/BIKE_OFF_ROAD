@@ -5,10 +5,12 @@
   So I'll sin more and destroy my thoughts, 
   make a mess of my hand.
   I swear on the darkest night I'll end it all.
-  And testify....*/
+  And testify....
+  
+  这个文件及它的头文件用于提供发车前的通用人机交互页面。有的功能有自己的人机交互界面。*/
 
 #include "zf_common_headfile.h"
-#define PID_NUMBER 3
+#define FLASH_NUMBER 14
 
 uint8 now_page=0;                               //当前页面
 uint8 gogogo=0;                                 //1=正式发车
@@ -261,10 +263,7 @@ void page_TET_ex(){
 void page_GPS_show(){
     oled_show_string(0,0,"GPS_TAU1201"             );
     oled_show_string(0,1,"./TET/GPS"               );
-    if(gps_tau1201_flag){//GPS数据处理完成
-        gps_tau1201_flag=0;
-        gps_show_if();
-    }
+    gps_show_if();
 }
 
 void page_GPS_ex(){
@@ -297,7 +296,7 @@ void page_IMU_show(){
     oled_show_string(0,0,"IMU_Mahony"              );
     oled_show_string(0,1,"./TET/IMU"               );
     if(mpu6050_acc_x==mpu6050_acc_y && mpu6050_acc_y==mpu6050_acc_z){
-        oled_show_string(0,3,"WARNING: MPU NO DATA");
+        oled_show_string(0,2,"WARNING: MPU NO DATA");
     }
     oled_show_string(42,3,"MHY  FCOF"                );
     oled_show_string(0,5,"X>rol>"                    );
@@ -379,9 +378,9 @@ void page_PID_show(){
     int8 i;
     oled_show_string(0,0,"PID CHANGE"              );
     oled_show_string(0,1,"./CP/PID"                );
-    for(i=0;i<5/* || i<PID_NUMBER*/;i++){
-        oled_show_float(98,i+2,flash_union_buffer[point+i].float_type,2,2);
-        switch(point+i){
+    for(i=0;i<5&&point+i<FLASH_NUMBER;i++){
+        oled_show_float(84,i+2,flash_union_buffer[point+i].float_type,2,2);
+        switch(point+i){//显示在数值左边的注释。不能超过12个字符，虽然大部分情况也不会超过。
             case 0:oled_show_string(0,i+2,"M1.P");break;
             case 1:oled_show_string(0,i+2,"M1.I");break;
             case 2:oled_show_string(0,i+2,"M1.D");break;
@@ -389,15 +388,13 @@ void page_PID_show(){
             case 4:oled_show_string(0,i+2,"M1.MO");break;
         }
     }
-
-
     if(edit){
         oled_show_string(0,7,"     [+/-/CF/RT]");
-        oled_show_string(86,2,">>"     );
+        oled_show_string(72,2,">>"     );
     }
     else{
         oled_show_string(0,7,"-[UP/DOWN/CF/RT]");
-        oled_show_string(86,2,"->"     );
+        oled_show_string(72,2,"->"     );
     }
 }
 
@@ -408,8 +405,13 @@ void page_PID_ex(){
         }
         else{
             if(--point<0){
-                point=PID_NUMBER;
+                point=FLASH_NUMBER-1;
             }
+        }
+    }
+    else if(KEY_LONG_PRESS==key_get_state(KEY_UP)){
+        if(edit){
+            flash_union_buffer[point].float_type+=0.0005;//0.0005是一个经验得出的值，这样比较舒适，因为每次判定长按都会增加。
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
@@ -417,9 +419,14 @@ void page_PID_ex(){
             flash_union_buffer[point].float_type-=0.01;
         }
         else{
-            if(++point>PID_NUMBER){
+            if(++point>=FLASH_NUMBER){
                 point=0;
             }
+        }
+    }
+    else if(KEY_LONG_PRESS==key_get_state(KEY_DOWN)){
+        if(edit){
+            flash_union_buffer[point].float_type-=0.0005;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
@@ -437,7 +444,7 @@ void page_PID_ex(){
             flash_write_page_from_buffer(63,3);
             flash_change=1;
             edit=!edit;
-            /*这里要更新PID*/
+            flash_data_update();
         }
         else{
             edit=!edit;
@@ -445,6 +452,14 @@ void page_PID_ex(){
     }
 
 }
+
+//FLASH在这里赋值各个变量
+void flash_data_update(){
+    flash_read_page_to_buffer(63,3);
+    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+
+}
+
 
 /*//页面显示模板
 void page_xx_show(){

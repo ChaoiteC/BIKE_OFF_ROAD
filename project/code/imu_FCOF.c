@@ -1,3 +1,5 @@
+/*这个文件及它的头文件是惯性导航系统姿态解算的一阶互补滤波版本。*/
+
 #include "zf_common_headfile.h"
 
 FCOF FCOF_info;
@@ -12,8 +14,7 @@ float dt = 0.005;           //采样周期
 //  @param      gyro_m      陀螺仪数据
 //  @return     float       数据融合后的角度
 //----------------------------------------------------------------
-float angle_calc(float angle_m, float gyro_m)
-{
+float angle_calc(float angle_m, float gyro_m){
     float temp_angle;
     float gyro_now;
     float error_angle;

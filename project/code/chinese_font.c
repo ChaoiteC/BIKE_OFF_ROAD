@@ -1,3 +1,5 @@
+/*这个文件及它的头文件用于储存屏幕要用到的中文字模以供调用。*/
+
 #include "zf_common_typedef.h"
 
 const uint8 IDP[][16]={//防灾科技学院汉字字模

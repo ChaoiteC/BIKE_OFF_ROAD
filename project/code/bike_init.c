@@ -3,7 +3,9 @@
   (あいむ あらいぶ なう いぇ
   すぷりんぐたいむ おぶ らいふ)
   鳴り止まなくてなにが悪い
-  青春でなにが悪い*/
+  青春でなにが悪い
+  
+  这个文件及它的的头文件用于完成车辆各个软硬件的初始化。*/
 
 #include "zf_common_headfile.h"
 
@@ -15,23 +17,41 @@ void bike_init(void){
 
     //键盘初始化
     oled_show_string(0, 0, "Keyboard loading...");
-    key_init(500);
+    key_init(400);
 
 
     //PID初始化
     oled_clear();
     oled_show_string(0, 0, "PID loading...");
-    flash_read_page_to_buffer(63,3);
-    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
-    flash_read_page_to_buffer(63,2);
-    //PID_init(&MOTOR2_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
-
+    flash_buffer_clear();
+    if(flash_check(63,3)){
+        flash_data_update();
+    }
+    else{//无数据填入缺省值
+        flash_union_buffer[0].float_type=1.0;//MT1 PID
+        flash_union_buffer[1].float_type=0.0;
+        flash_union_buffer[2].float_type=5.0;
+        flash_union_buffer[3].float_type=20.0;
+        flash_union_buffer[4].float_type=20.0;
+        flash_union_buffer[5].float_type=1.0;//MT2 PID
+        flash_union_buffer[6].float_type=0.0;
+        flash_union_buffer[7].float_type=5.0;
+        flash_union_buffer[8].float_type=20.0;
+        flash_union_buffer[9].float_type=20.0;
+        flash_union_buffer[10].float_type=1.0;//MT3 PID
+        flash_union_buffer[11].float_type=0.0;
+        flash_union_buffer[12].float_type=5.0;
+        flash_union_buffer[13].float_type=20.0;
+        flash_union_buffer[14].float_type=20.0;
+        flash_write_page_from_buffer(63,3);
+    }
 
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");
     gps_init();
-    
+    pit_ms_init(TIM7_PIT,100);//定时器中断获取GPS数据
+
     //MPU6050初始化
     oled_show_string(0, 0, "MPU6050 loading...");
     if(mpu6050_init()){//自检失败

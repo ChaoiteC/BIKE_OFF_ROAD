@@ -32,5 +32,6 @@ void page_FLS_show();
 void page_FLS_ex();
 void page_PID_show();
 void page_PID_ex();
+void flash_data_update();
 
 #endif /* MENU_H_ */

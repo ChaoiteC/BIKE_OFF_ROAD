@@ -33,6 +33,7 @@ encoding//zf_common/zf_common_typedef.h=UTF-8
 encoding//zf_device/zf_device_bluetooth_ch9141.c=UTF-8
 encoding//zf_device/zf_device_gps_tau1201.c=UTF-8
 encoding//zf_device/zf_device_gps_tau1201.h=UTF-8
+encoding//zf_device/zf_device_icm20602.c=UTF-8
 encoding//zf_device/zf_device_imu660ra.c=UTF-8
 encoding//zf_device/zf_device_imu660ra.h=UTF-8
 encoding//zf_device/zf_device_imu963ra.c=UTF-8

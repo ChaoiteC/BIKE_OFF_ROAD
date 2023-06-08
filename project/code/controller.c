@@ -1,6 +1,8 @@
 #include "zf_common_headfile.h"
 
+float zhongzhi=0;
 
+int cnt1,cnt2,cnt3;
 //_OUT_Motor Motor1 = {0};//前电机
 //_OUT_Motor Motor2 = {0};//后电机
 
@@ -14,7 +16,7 @@
 void vel_controller(void)
 {
   PID_expect(&MOTOR2_SUM.vel_encoder,0.0f);
-  PID_Calc(&MOTOR2_SUM.vel_encoder,encoder_data_quaddec);
+  PID_Calc(&MOTOR2_SUM.vel_encoder,/*这里需要对编码器和速度经行一个转换*/encoder_data_quaddec);
 }
 
 /**********************************************************************************************/
@@ -26,7 +28,7 @@ void vel_controller(void)
 void angle_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_angle,MOTOR2_SUM.rol_angle.output);
-  PID_Calc(&MOTOR2_SUM.rol_angle,imu.Roll);
+  PID_Calc(&MOTOR2_SUM.rol_angle,imu.Roll+zhongzhi);
 }
 
 /**********************************************************************************************/
@@ -38,7 +40,7 @@ void angle_controller(void)
 void gyro_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_gyro,MOTOR2_SUM.rol_angle.output);
-  PID_Calc(&MOTOR2_SUM.rol_gyro,Deg_x);
+  PID_Calc(&MOTOR2_SUM.rol_gyro,imu.Roll);
 }
 
 /**********************************************************************************************/
@@ -53,6 +55,35 @@ void _controller_perform(void)
   angle_controller();
   gyro_controller();
 }
+
+
+
+/*float Cascade_Pid_Ctrl(float zhongzhi)
+{
+    static int16_t Pid_t;
+    cnt1++;
+    cnt2++;
+    cnt3++;
+//    Pid_t = Pid_t+2;        //2ms执行一次
+    if(cnt3==50){      //速度环100ms执行一次
+        Pid_t = 0;
+        vel_controller();
+        cnt3=0;
+    }
+
+    if(cnt2== 5)      //角度环10ms执行一次
+    {
+        PidLocCtrl(&angle_pid,vel_pid.out - Angle_X_Final + zhongzhi);//角度环
+        cnt2=0;
+    }
+    if(cnt1==1)
+    {
+    PidLocCtrl(&acc_pid,angle_pid.out-Gyro_x);  //角速度环2ms执行一次
+    cnt1=0;
+    }
+
+    return acc_pid.out;  //acc_pid
+}*/
 
 /**********************************************************************************************/
 /* 名字：检测小车状态函数

@@ -19,7 +19,7 @@ typedef struct IMU
 
 } IMU_Info;
 
-void MPU6050_Init_Offset(void);//MPU6050初始化去偏移
+void IMU963RA_Init_Offset(void);//MPU6050初始化去偏移
 void IMU_Update(void);
 
 extern IMU_Info imu;

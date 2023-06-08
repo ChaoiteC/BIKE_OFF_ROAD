@@ -4,8 +4,8 @@
 
 FCOF FCOF_info;
 
-float acc_ratio = 4.08;      //加速度计比例
-float gyro_ratio = 1.6;    //陀螺仪比例
+float acc_ratio = 0.98;      //加速度计比例
+float gyro_ratio = 0.02;    //陀螺仪比例
 float dt = 0.005;           //采样周期
 
 //----------------------------------------------------------------
@@ -36,7 +36,7 @@ float angle_calc(float angle_m, float gyro_m){
 }
 
 void FCOF_update(void){
-    FCOF_info.Pitch=angle_calc(mpu6050_acc_y, mpu6050_gyro_y);
-    FCOF_info.Roll=angle_calc(mpu6050_acc_x, mpu6050_gyro_x);
-    FCOF_info.Yaw=angle_calc(mpu6050_acc_z, mpu6050_gyro_z);
+    FCOF_info.Pitch=angle_calc(imu963ra_acc_y, imu963ra_gyro_y);
+    FCOF_info.Roll=angle_calc(imu963ra_acc_x, imu963ra_gyro_x);
+    FCOF_info.Yaw=angle_calc(imu963ra_acc_z, imu963ra_gyro_z);
 }

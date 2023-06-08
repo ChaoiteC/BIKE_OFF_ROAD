@@ -25,4 +25,6 @@ void IMU_Update(void);
 extern IMU_Info imu;
 extern float Deg_x;
 
+extern int16_t lastGx,lastAx;
+
 #endif /* IMU_H_ */

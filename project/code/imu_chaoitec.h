@@ -10,14 +10,14 @@ typedef struct IMU_JS{
 
     float aAx;//加速度计算得到的角度
     float aAy;
-    float aAz;
+    //float aAz;
     float gGx;//陀螺仪计算得到的角速度
     float gGy;
-    float gGz;
+    //float gGz;
 
     float lastRol;//上次的解算角度
     float lastPit;
-    float lastYaw;
+    //float lastYaw;
 
 }IMU_JS;
 

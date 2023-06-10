@@ -59,12 +59,6 @@ void bike_init(void){
     }
     else{
         pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
-        oled_clear();
-        oled_show_chinese(0, 0, 16,(const uint8 *)IMU_offset1,5);
-        oled_show_chinese(0, 4, 16,(const uint8 *)IMU_offset2,4);
-        oled_show_string(0, 7, "IMU963RA loading...");
-        system_delay_ms(1000);
-        IMU963RA_Init_Offset();//IMU963RA去偏移
     }
     
     //舵机初始化

@@ -305,11 +305,11 @@ void page_IMU_show(){
     }
     oled_show_string(42,3,"FCOF_DATA"                );
     oled_show_string(0,5,"X>rol>"                    );
-    oled_show_float(42,5,IMU_Data.Rol,2,2);
+    oled_show_int(42,5,(int)IMU_Data.Rol,2);
     oled_show_string(0,6,"Y>pit>"                    );
-    oled_show_float(42,6,IMU_Data.Pit,2,2);
-    oled_show_string(0,7,"Z>yaw>"                    );
-    oled_show_float(42,7,IMU_Data.Yaw,2,2);
+    oled_show_int(42,6,(int)IMU_Data.Pit,2);
+    //oled_show_string(0,7,"Z>yaw>"                    );
+    //oled_show_int(42,7,(int)IMU_Data.Yaw,2);
 }
 
 void page_IMU_ex(){

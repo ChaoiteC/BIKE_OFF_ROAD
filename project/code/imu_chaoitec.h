@@ -6,7 +6,7 @@
 typedef struct IMU_JS{
 	float Rol;//解算所得角度
 	float Pit;
-	float Yaw;
+	//float Yaw;
 
     float aAx;//加速度计算得到的角度
     float aAy;
@@ -22,6 +22,7 @@ typedef struct IMU_JS{
 }IMU_JS;
 
 extern IMU_JS IMU_Data;
+
 void IMU_update();
 
 #endif /* IMU_CHAOITEC_H_ */

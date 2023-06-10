@@ -3,9 +3,6 @@
 
 #include "zf_common_headfile.h"
 
-
-#define EXPECTED_DISTANCE_THRESHOLD 1.0 //GPS到点判定距离（单位：米）
-
 void start_check();
 void overturn_check();
 void bluetooth_check();

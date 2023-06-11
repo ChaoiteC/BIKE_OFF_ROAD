@@ -260,5 +260,7 @@ void pit_handler_TIM3 (void)
     encoder_data_quaddec = kalman_filter(&Encoder_kal, encoder_data_quaddec);   // 对编码器经行滤波处理
     encoder_clear_count(ENCODER_QUADDEC);
     MOTOR1_PID();
+    _controller_perform();
+    MOTOR2_Speed(MOTOR2_SUM.rol_gyro.output);
     system_delay_ms(5);
 }

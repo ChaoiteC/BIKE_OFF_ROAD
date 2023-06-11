@@ -28,7 +28,7 @@ void vel_controller(void)
 void angle_controller(void)
 {
   PID_expect(&MOTOR2_SUM.rol_angle,MOTOR2_SUM.rol_angle.output);
-  PID_Calc(&MOTOR2_SUM.rol_angle,imu.Roll+zhongzhi);
+  PID_Calc(&MOTOR2_SUM.rol_angle,IMU_Data.Rol+zhongzhi);
 }
 
 /**********************************************************************************************/

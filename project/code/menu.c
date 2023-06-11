@@ -298,21 +298,18 @@ void page_AGM_ex(){
 }
 
 void page_IMU_show(){
-    oled_show_string(0,0,"IMU_Mahony"              );
+    oled_show_string(0,0,"IMU_FOCF"              );
     oled_show_string(0,1,"./TET/IMU"               );
     if(imu963ra_acc_x==imu963ra_acc_y && imu963ra_acc_y==imu963ra_acc_z){
         oled_show_string(0,2,"WARNING: AGM NO DATA");
     }
-    oled_show_string(42,3,"MHY  FCOF"                );
-    oled_show_string(0,5,"X>rol>"                    );
-    oled_show_int(42,5,(int)imu.Roll,2);
-    oled_show_int(72,5,(int)FCOF_info.Roll,2);
-    oled_show_string(0,6,"Y>pit>"                    );
-    oled_show_int(42,6,(int)imu.Pitch,2);
-    oled_show_int(72,6,(int)FCOF_info.Pitch,2);
-    oled_show_string(0,7,"Z>yaw>"                    );
-    oled_show_int(42,7,(int)imu.Yaw,2);
-    oled_show_int(72,7,(int)FCOF_info.Yaw,2);
+    oled_show_string(0,4,"X>rol>"                    );
+    oled_show_int(42,4,(int)IMU_Data.Rol,2);
+    oled_show_string(0,5,"Y>pit>"                    );
+    oled_show_int(42,5,(int)IMU_Data.Pit,2);
+    //oled_show_string(0,7,"Z>yaw>"                    );
+    //oled_show_int(42,7,(int)IMU_Data.Yaw,2);
+    oled_show_string(0,7,"-[UP/DOMN/CF/RT]"            );
 }
 
 void page_IMU_ex(){

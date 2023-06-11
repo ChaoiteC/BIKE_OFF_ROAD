@@ -17,8 +17,7 @@
 
 #define FLASH_PAGE_NUMBER 1 //FLASH页数
 
-float gps_distance;//到下一点的距离
-float gps_azimuth;//到下一点位的测量方位角
+
 
 uint8 stop_flag=0;//停车信号 9=等待发车 1=终点 2=翻车 3=遥控
 
@@ -48,7 +47,7 @@ void start_check(){
 
 
 void overturn_check(){
-    if((imu.Roll >= 30) || (imu.Roll <= -30) || (imu.Pitch >= 30) || (imu.Pitch <= -30)){//翻车
+    if((IMU_Data.Rol >= 30) || (IMU_Data.Rol <= -30) || (IMU_Data.Pit >= 30) || (IMU_Data.Pit <= -30)){//翻车
         stop_flag=2;
     }
 }

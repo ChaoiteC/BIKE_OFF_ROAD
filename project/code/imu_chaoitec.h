@@ -3,7 +3,7 @@
 
 #include "zf_common_headfile.h"
 
-typedef struct IMU_JS{
+typedef struct IMU{
 	float Rol;//解算所得角度
 	float Pit;
 	//float Yaw;
@@ -19,9 +19,9 @@ typedef struct IMU_JS{
     float lastPit;
     //float lastYaw;
 
-}IMU_JS;
+}IMU_FCOF;
 
-extern IMU_JS IMU_Data;
+extern IMU_FCOF IMU_Data;
 
 void IMU_update();
 

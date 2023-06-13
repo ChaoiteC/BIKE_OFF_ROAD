@@ -17,7 +17,7 @@
 #define Kg 0.05  //陀螺仪数据权重
 #define dt 0.005 //采样间隔（单位：秒）
 
-IMU_JS IMU_Data;
+IMU_FCOF IMU_Data;
 
 
 float FCOF(float acc_m,float gyro_m,float* last_a){

@@ -9,12 +9,14 @@
 #include "zf_common_headfile.h"
 
 int gps_point_number=0;//GPS点位数量
+float gps_distance;//到下一点的距离
+float gps_azimuth;//到下一点位的测量方位角
 
 
 GPS_POINT gps_point[GPS_POINT_DATA_MAX];
 
 /* @fn point_flash_input
- * @brief 向FLASH中写入点位数据
+ * @brief 向FLASH缓冲区中写入点位数据
  * @param gps_data
  * @param flash_number
  * @return void
@@ -27,7 +29,7 @@ void point_flash_input(GPS_POINT* gps_data,uint8 flash_number){
 }
 
 /* @fn point_flash_output
- * @brief 从FLASH中读出点位数据
+ * @brief 从FLASH缓冲区中读出点位数据到gps_data的对应行
  * @param gps_data
  * @param flash_number
  * @return void
@@ -206,7 +208,7 @@ void gps_show_point(void){
             case 6:oled_show_string(36,6,"FINISH"            );
         }
         system_delay_ms(100);
-        if(gps_point[i].point_type==FINISH){
+        if(gps_point[i].point_type==FINISH || i<GPS_POINT_DATA_MAX){
             return;
         }
     }
@@ -222,7 +224,6 @@ int gps_show_if(void){
         oled_show_string(0,4, "FAIL LOCATE");                //定位失败
         oled_show_string(0,6,"State lasts <2min."      );
         oled_show_string(0,7,"Indoor?Wiring bad?"      );
-        return 1;
     }
     else{
         oled_show_string(0, 7, "TIM>");                      //时间
@@ -239,13 +240,20 @@ int gps_show_if(void){
         oled_show_float(32,5,gps_tau1201.direction,4,6);     //方向
         oled_show_string(0, 6, "STL>");
         oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
+    }
+    if(gps_tau1201.satellite_used>=4){//4颗卫星及以上判定成功定位
         return 0;
+    }
+    else{
+        return 1;
     }
 }
 
-float gps_distance;//到下一点的距离
-float gps_azimuth;//到下一点位的测量方位角
-
+/* @fn gps_read
+ * @brief 定时器处理GPS数据
+ * @param void
+ * @return void
+ */
 void gps_read(){
     if(!gps_tau1201.state){
         return;//定位失败
@@ -261,10 +269,8 @@ void gps_read(){
     }
 }
 
+/*下面是GPS的卡尔曼滤波过程。*//*
 
-
-/*下面是GPS的卡尔曼滤波过程。*/
-/*
 double get_var(const double x_data[], const int x_size);//求方差函数
 void gps_kalman();//滤波位gps
 //gps_kalman所需参数
@@ -479,6 +485,5 @@ double get_var(const double x_data[], const int x_size)
 
 
 */
-
 
 

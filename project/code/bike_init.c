@@ -24,10 +24,7 @@ void bike_init(void){
     oled_clear();
     oled_show_string(0, 0, "PID loading...");
     flash_buffer_clear();
-    if(flash_check(63,3)){
-        flash_data_update();
-    }
-    else{//无数据填入缺省值
+    if(!flash_check(63,3)){//无数据填入缺省值
         flash_union_buffer[0].float_type=1.0;//MT1 PID
         flash_union_buffer[1].float_type=0.0;
         flash_union_buffer[2].float_type=5.0;
@@ -45,7 +42,7 @@ void bike_init(void){
         flash_union_buffer[14].float_type=20.0;
         flash_write_page_from_buffer(63,3);
     }
-
+    flash_data_update();
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");

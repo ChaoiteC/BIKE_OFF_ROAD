@@ -75,7 +75,6 @@ void MOTOR1_PID()
  */
 void MOTOR2_Speed(int16 Duty)
 {
-
     if(Duty>=0)
     {
         //正向转动

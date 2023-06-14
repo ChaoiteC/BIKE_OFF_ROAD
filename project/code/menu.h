@@ -30,8 +30,8 @@ void page_ECD_show();
 void page_ECD_ex();
 void page_FLS_show();
 void page_FLS_ex();
-void page_PID_show();
-void page_PID_ex();
-void flash_data_update();
+void page_FLS_show();
+void page_FLS_ex();
+
 
 #endif /* MENU_H_ */

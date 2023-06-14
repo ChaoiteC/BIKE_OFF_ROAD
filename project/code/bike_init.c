@@ -9,6 +9,7 @@
 
 #include "zf_common_headfile.h"
 
+//单车各部分初始化
 void bike_init(void){
     //OLED初始化
     oled_set_dir(OLED_CROSSWISE);
@@ -18,7 +19,6 @@ void bike_init(void){
     //键盘初始化
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(400);
-
 
     //PID初始化
     oled_clear();
@@ -43,6 +43,7 @@ void bike_init(void){
         flash_write_page_from_buffer(63,3);
     }
     flash_data_update();
+
     //GPS初始化
     oled_clear();
     oled_show_string(0, 0, "GPS loading...");
@@ -52,7 +53,7 @@ void bike_init(void){
     //IMU963RA初始化
     oled_show_string(0, 0, "IMU963RA loading...");
     if(imu963ra_init()){//自检失败
-        system_delay_ms(3000);
+        system_delay_ms(5000);
     }
     else{
         pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
@@ -62,7 +63,6 @@ void bike_init(void){
     oled_clear();
     oled_show_string(0, 0, "Servo loading...");
     Servo_Init(servo_motor_duty);
-    
 
     //编码器初始化
     oled_clear();
@@ -80,8 +80,13 @@ void bike_init(void){
     bluetooth_ch9141_init();
     bluetooth_ch9141_send_string("Bluetooth OK.\r\n");
 
-
-    //电机调试
     //初始化完成
     oled_clear();
+}
+
+//FLASH在这里赋值各个变量
+void flash_data_update(){
+    flash_read_page_to_buffer(63,3);
+    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+
 }

@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ����CH32V307VCT6 ��Դ�⣩��һ�����ڹٷ� SDK �ӿڵĵ�������Դ��
-* Copyright (c) 2022 SEEKFREE ��ɿƼ�
+* CH32V307VCT6 Opensourec Library 即（CH32V307VCT6 开源库）是一个基于官方 SDK 接口的第三方开源库
+* Copyright (c) 2022 SEEKFREE 逐飞科技
 *
-* ���ļ���CH32V307VCT6 ��Դ���һ����
+* 本文件是CH32V307VCT6 开源库的一部分
 *
-* CH32V307VCT6 ��Դ�� ���������
-* �����Ը���������������ᷢ���� GPL��GNU General Public License���� GNUͨ�ù�������֤��������
-* �� GPL �ĵ�3�棨�� GPL3.0������ѡ��ģ��κκ����İ汾�����·�����/���޸���
+* CH32V307VCT6 开源库 是免费软件
+* 您可以根据自由软件基金会发布的 GPL（GNU General Public License，即 GNU通用公共许可证）的条款
+* 即 GPL 的第3版（即 GPL3.0）或（您选择的）任何后来的版本，重新发布和/或修改它
 *
-* ����Դ��ķ�����ϣ�����ܷ������ã�����δ�������κεı�֤
-* ����û�������������Ի��ʺ��ض���;�ı�֤
-* ����ϸ����μ� GPL
+* 本开源库的发布是希望它能发挥作用，但并未对其作任何的保证
+* 甚至没有隐含的适销性或适合特定用途的保证
+* 更多细节请参见 GPL
 *
-* ��Ӧ�����յ�����Դ���ͬʱ�յ�һ�� GPL �ĸ���
-* ���û�У������<https://www.gnu.org/licenses/>
+* 您应该在收到本开源库的同时收到一份 GPL 的副本
+* 如果没有，请参阅<https://www.gnu.org/licenses/>
 *
-* ����ע����
-* ����Դ��ʹ�� GPL3.0 ��Դ����֤Э�� ������������Ϊ���İ汾
-* ��������Ӣ�İ��� libraries/doc �ļ����µ� GPL3_permission_statement.txt �ļ���
-* ����֤������ libraries �ļ����� �����ļ����µ� LICENSE �ļ�
-* ��ӭ��λʹ�ò����������� ���޸�����ʱ���뱣����ɿƼ��İ�Ȩ����������������
+* 额外注明：
+* 本开源库使用 GPL3.0 开源许可证协议 以上许可申明为译文版本
+* 许可申明英文版在 libraries/doc 文件夹下的 GPL3_permission_statement.txt 文件中
+* 许可证副本在 libraries 文件夹下 即该文件夹下的 LICENSE 文件
+* 欢迎各位使用并传播本程序 但修改内容时必须保留逐飞科技的版权声明（即本声明）
 *
-* �ļ�����          zf_common_interrupt
-* ��˾����          �ɶ���ɿƼ����޹�˾
-* �汾��Ϣ          �鿴 libraries/doc �ļ����� version �ļ� �汾˵��
-* ��������          MounRiver Studio V1.8.1
-* ����ƽ̨          CH32V307VCT6
-* ��������          https://seekfree.taobao.com/
+* 文件名称          zf_common_interrupt
+* 公司名称          成都逐飞科技有限公司
+* 版本信息          查看 libraries/doc 文件夹内 version 文件 版本说明
+* 开发环境          MounRiver Studio V1.8.1
+* 适用平台          CH32V307VCT6
+* 店铺链接          https://seekfree.taobao.com/
 *
-* �޸ļ�¼
-* ����                                      ����                             ��ע
-* 2022-09-15        ��W            first version
+* 修改记录
+* 日期                                      作者                             备注
+* 2022-09-15        大W            first version
 ********************************************************************************************************************/
 
 
@@ -40,10 +40,10 @@ static uint32 interrupt_nest_count = 0;
 
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������      ָ���ж�ʹ��
-// ����˵��     irqn            ָ���жϺ� �ɲ鿴 isr.c ��Ӧ�жϷ������ı�ע
-// ���ز���     void
-// ʹ��ʾ��     interrupt_enable(UART1_IRQn);
+// 函数简介      指定中断使能
+// 参数说明     irqn            指定中断号 可查看 isr.c 对应中断服务函数的标注
+// 返回参数     void
+// 使用示例     interrupt_enable(UART1_IRQn);
 //-------------------------------------------------------------------------------------------------------------------
 void interrupt_enable (IRQn_Type irqn)
 {
@@ -51,10 +51,10 @@ void interrupt_enable (IRQn_Type irqn)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������      ָ���ж�����
-// ����˵��     irqn            ָ���жϺ� �ɲ鿴 isr.c ��Ӧ�жϷ������ı�ע
-// ���ز���     void
-// ʹ��ʾ��     interrupt_disable(UART1_IRQn);
+// 函数简介      指定中断屏蔽
+// 参数说明     irqn            指定中断号 可查看 isr.c 对应中断服务函数的标注
+// 返回参数     void
+// 使用示例     interrupt_disable(UART1_IRQn);
 //-------------------------------------------------------------------------------------------------------------------
 void interrupt_disable (IRQn_Type irqn)
 {
@@ -62,13 +62,13 @@ void interrupt_disable (IRQn_Type irqn)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������      ָ���ж��������ȼ�
-// ����˵��     irqn            ָ���жϺ� �ɲ鿴 isr.c ��Ӧ�жϷ������ı�ע
-// ����˵��     priority        bit7-bit5Ϊ��ռ���ȼ���bit4-bit0Ϊ�����ȼ���ֵԽ�����ȼ�Խ��
-// ���ز���     void
-// ʹ��ʾ��     interrupt_enable(UART1_IRQn, (1<<5) | 2);
-//                              ��ռ���ȼ�����Ϊ1,�����ȼ�����Ϊ2
-//                              ��ֹ����ch32v30x_misc����ĺ���
+// 函数简介      指定中断设置优先级
+// 参数说明     irqn            指定中断号 可查看 isr.c 对应中断服务函数的标注
+// 参数说明     priority        bit7-bit5为抢占优先级，bit4-bit0为次优先级，值越低优先级越高
+// 返回参数     void
+// 使用示例     interrupt_enable(UART1_IRQn, (1<<5) | 2);
+//                              抢占优先级设置为1,次优先级设置为2
+//                              禁止调用ch32v30x_misc里面的函数
 //-------------------------------------------------------------------------------------------------------------------
 void interrupt_set_priority (IRQn_Type irqn, uint8 priority)
 {
@@ -76,7 +76,7 @@ void interrupt_set_priority (IRQn_Type irqn, uint8 priority)
 }
 
 ////-------------------------------------------------------------------------------------------------------------------
-//// @brief       �ж����ʼ�� clock_init �ڲ�����
+//// @brief       中断组初始化 clock_init 内部调用
 //// @param       void
 //// @return      void
 //// Sample usage:                interrupt_init();
@@ -88,10 +88,10 @@ void interrupt_set_priority (IRQn_Type irqn, uint8 priority)
 //}
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������      ȫ���ж�ʹ��
-// ����˵��     void            ��ԭ��Ƕ�ײ� ������� 0 ��ֱ�����Ƕ�ײ����������ж�
-// ���ز���     void
-// ʹ��ʾ��     interrupt_global_enable();
+// 函数简介      全局中断使能
+// 参数说明     void            还原的嵌套层 如果传入 0 则直接清空嵌套层数开启总中断
+// 返回参数     void
+// 使用示例     interrupt_global_enable();
 //-------------------------------------------------------------------------------------------------------------------
 void interrupt_global_enable (uint32 primask)
 {
@@ -106,10 +106,10 @@ void interrupt_global_enable (uint32 primask)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������      ȫ���ж�����
-// ����˵��     void
-// ���ز���     void
-// ʹ��ʾ��     interrupt_disable_all();
+// 函数简介      全局中断屏蔽
+// 参数说明     void
+// 返回参数     void
+// 使用示例     interrupt_disable_all();
 //-------------------------------------------------------------------------------------------------------------------
 uint32 interrupt_global_disable (void)
 {
@@ -123,13 +123,13 @@ uint32 interrupt_global_disable (void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     �жϳ�ʼ��
-// ����˵��     void
-// ���ز���     void
-// ʹ��ʾ��     interrupt_init();
-// ��ע��Ϣ     ����  clock_init �ڲ�����
+// 函数简介     中断初始化
+// 参数说明     void
+// 返回参数     void
+// 使用示例     interrupt_init();
+// 备注信息     会在  clock_init 内部调用
 //-------------------------------------------------------------------------------------------------------------------
 void interrupt_init (void)
 {
-    interrupt_global_enable(0);  //ʹ��ȫ���ж�
+    interrupt_global_enable(0);  //使能全局中断
 }

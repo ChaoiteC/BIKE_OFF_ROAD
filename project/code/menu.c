@@ -13,7 +13,7 @@
 #define FLASH_NUMBER 14
 
 uint8 now_page=0;                               //当前页面
-uint8 gogogo=0;                                 //1=正式发车
+uint8 release=0;                                 //1=放行
 
 int8 point=0;                                   //指示器
 uint8 edit=0;
@@ -22,8 +22,7 @@ uint8 flash_change=1;//为什么FLASH读写需要那么久(′へ`、 )
 
 enum PAGE{
     MASTER,
-    //START,
-        GET_POINT,
+      GET_POINT,
       TET,
         GPS,
         AGM,
@@ -31,13 +30,12 @@ enum PAGE{
         BLE,
         SEV,
         ECD,
-    //CP,
-        PID_SUM,
+      FLS,
 }NOW_PAGE;
 
 void menu(void){//人机交互页面
     first_page();
-    while(!gogogo){
+    while(!release){
         oled_clear();
         if(last_page!=now_page){
             point=0;
@@ -55,7 +53,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_show();break;
             case SEV      :page_SEV_show();break;
             case ECD      :page_ECD_show();break;
-            case PID_SUM      :page_PID_show();break;
+            case FLS      :page_FLS_show();break;
             default       :page_error();
         }
         key_scanner();
@@ -70,7 +68,7 @@ void menu(void){//人机交互页面
             case BLE      :page_BLE_ex();break;
             case SEV      :page_SEV_ex();break;
             case ECD      :page_ECD_ex();break;
-            case PID_SUM  :page_PID_ex();break;
+            case FLS      :page_FLS_ex();break;
             default       :page_error();
         }
     }
@@ -154,7 +152,7 @@ void page_MASTER_ex(){
         switch(point){
             case 0:now_page=GET_POINT;break;
             case 1:now_page=TET;break;
-            case 2:now_page=PID_SUM;break;
+            case 2:now_page=FLS;break;
         }
     }
 }
@@ -193,7 +191,7 @@ void page_GET_POINT_ex(){
                     now_page=GET_POINT;
                 }
                 else{
-                    gogogo=1;
+                    release=1;
                 }
             }break;
             case 1:{//重新录入点位
@@ -203,7 +201,7 @@ void page_GET_POINT_ex(){
                     now_page=GET_POINT;
                 }
                 else{
-                    gogogo=1;
+                    release=1;
                 }
                 break;
             }
@@ -372,14 +370,14 @@ void page_ECD_ex(){
 }
 
 
-void page_PID_show(){
+void page_FLS_show(){
     if(flash_change){
         flash_read_page_to_buffer(63,3);
         flash_change=0;
     }
     int8 i;
-    oled_show_string(0,0,"PID CHANGE"              );
-    oled_show_string(0,1,"./CP/PID"                );
+    oled_show_string(0,0,"FLASH EDITER"         );
+    oled_show_string(0,1,"./FLS"                );
     for(i=0;i<5&&point+i<FLASH_NUMBER;i++){
         oled_show_float(84,i+2,flash_union_buffer[point+i].float_type,2,2);
         switch(point+i){//显示在数值左边的注释。不能超过12个字符，虽然大部分情况也不会超过。
@@ -400,7 +398,7 @@ void page_PID_show(){
     }
 }
 
-void page_PID_ex(){
+void page_FLS_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
             flash_union_buffer[point].float_type+=0.01;
@@ -454,14 +452,6 @@ void page_PID_ex(){
     }
 
 }
-
-//FLASH在这里赋值各个变量
-void flash_data_update(){
-    flash_read_page_to_buffer(63,3);
-    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
-
-}
-
 
 /*//页面显示模板
 void page_xx_show(){

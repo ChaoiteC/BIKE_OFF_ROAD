@@ -19,7 +19,6 @@
 
 IMU_FCOF IMU_Data;
 
-
 float FCOF(float acc_m,float gyro_m,float* last_a){
     float temp_a;
     temp_a=Ka*acc_m+Kg*(*last_a+gyro_m*dt);//角速度对采样间隔积分加上上次解算角度即为从陀螺仪中推出的角度

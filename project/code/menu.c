@@ -195,7 +195,7 @@ void page_GET_POINT_ex(){
                 }
             }break;
             case 1:{//重新录入点位
-                if(gps_get_point()){
+                if(gps_get_point_UI()){
                     gps_point_error();
                     system_delay_ms(3000);
                     now_page=GET_POINT;

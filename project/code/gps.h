@@ -20,15 +20,14 @@ extern int gps_point_number;
 }GPS_LOCATE;*/
 
 enum POINT_TYPE{//点位类型
-    FIRST,//起点
     STR,//直道
     UPHELL,//爬坡
     TAR,//掉头
     RTT,//绕柱
     SBD,//S弯
-    FINISH//终点
+    POINT_TYPE_FINISH//终点
 };
-typedef struct GPS_P{
+typedef struct GPS_P{//一单位点位数据
     float latitude;//纬度
     float longitude;//经度
     uint8 point_type;//点位类型
@@ -40,7 +39,7 @@ extern float gps_distance;//到下一点的距离
 extern float gps_azimuth;//到下一点位的测量方位角
 
 int gps_check_flash(void);
-int gps_get_point();
+int gps_get_point_UI();
 void gps_average_pointing();
 int gps_show_if();
 void gps_read();

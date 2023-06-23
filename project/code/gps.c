@@ -11,16 +11,16 @@
 int gps_point_number=0;//GPS点位数量
 float gps_distance;//到下一点的距离
 float gps_azimuth;//到下一点位的测量方位角
+float gps_error_azimuth;//测量方位角与车行进航向角误差，正值向左偏航
 
-
-GPS_POINT gps_point[GPS_POINT_DATA_MAX];
+GPS_POINT gps_point[GPS_POINT_DATA_MAX];//GPS点位数列
 
 /* @fn point_flash_input
  * @brief 向FLASH缓冲区中写入点位数据
- * @param gps_data
- * @param flash_number
+ * @param gps_data 单个点位
+ * @param flash_number FLASH缓冲区行数
  * @return void
- * notice FLASH数据需要另行I/O
+ * @notice FLASH数据需要另行I/O
  */
 void point_flash_input(GPS_POINT* gps_data,uint8 flash_number){
     flash_union_buffer[0+3*flash_number].float_type=gps_data->latitude;
@@ -30,10 +30,10 @@ void point_flash_input(GPS_POINT* gps_data,uint8 flash_number){
 
 /* @fn point_flash_output
  * @brief 从FLASH缓冲区中读出点位数据到gps_data的对应行
- * @param gps_data
- * @param flash_number
+ * @param gps_data 单个点位
+ * @param flash_number FLASH缓冲区行数
  * @return void
- * notice FLASH数据需要另行I/O
+ * @notice FLASH数据需要另行I/O
  */
 void point_flash_output(GPS_POINT* gps_data,uint8 flash_number){
     gps_data->latitude=flash_union_buffer[0+3*flash_number].float_type;
@@ -66,7 +66,7 @@ int gps_check_flash(void){
     flash_read_page_to_buffer(GPS_POINT_DATA_SECTION_INDEX,GPS_POINT_DATA_PAGE_INDEX);
     for(i=0;i<gps_point_number;i++){
         point_flash_output(&gps_point[i],i);
-        if(gps_point[i].point_type==FINISH){
+        if(gps_point[i].point_type==POINT_TYPE_FINISH){
             return 0;
         }
     }
@@ -85,24 +85,24 @@ void gps_display_point_type(uint8_t point_type) {
     oled_show_string(0,5,"[DOWN]"                    );
     oled_show_string(0,7,"[COF]  [RVK]"              );
     switch(point_type){
-        case 1:oled_show_string(36,4,"STR---"            );break;
-        case 2:oled_show_string(36,4,"UPHELL"            );break;
-        case 3:oled_show_string(36,4,"-TAR--"            );break;
-        case 4:oled_show_string(36,4,"--RTT-"            );break;
-        case 5:oled_show_string(36,4,"---SBD"            );break;
-        case 6:oled_show_string(36,4,"FINISH"            );
+        case STR   :oled_show_string(36,4,"STR---"            );break;
+        case UPHELL:oled_show_string(36,4,"UPHELL"            );break;
+        case TAR   :oled_show_string(36,4,"-TAR--"            );break;
+        case RTT   :oled_show_string(36,4,"--RTT-"            );break;
+        case SBD   :oled_show_string(36,4,"---SBD"            );break;
+        case POINT_TYPE_FINISH:oled_show_string(36,4,"FINISH" );
     }
 }
 
 
 
-/* @fn gps_get_point
+/* @fn gps_get_point_UI
  * @brief GPS取点的专门用户交互页面
  * @param void
  * @return 0 mean yes, 1 mean error
  * @notice 我超写那么紧密耦合鬼看得懂
  */
-int gps_get_point(void){
+int gps_get_point_UI(void){
     int i=0,section=GPS_POINT_DATA_SECTION_INDEX,page=GPS_POINT_DATA_PAGE_INDEX;
     float latitude,longitude;
     uint8 point_type=1;
@@ -111,13 +111,13 @@ int gps_get_point(void){
         key_scanner();
         system_delay_ms(50);
         if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
-            if(--point_type<1){
-                point_type=6;
+            if(--point_type<STR){
+                point_type=POINT_TYPE_FINISH;
             }
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
-            if(++point_type>6){
-                point_type=1;
+            if(++point_type>POINT_TYPE_FINISH){
+                point_type=STR;
             }
         }
         else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
@@ -131,7 +131,7 @@ int gps_get_point(void){
         else if(KEY_SHORT_PRESS==key_get_state(KEY_CF)){
             gps_average_pointing(&latitude,&longitude);
             gps_line_write(i++,latitude,longitude,point_type);
-            if(point_type==FINISH){
+            if(point_type==POINT_TYPE_FINISH){
                 break;
             }
             else if(i>=GPS_POINT_DATA_MAX){
@@ -208,7 +208,7 @@ void gps_show_point(void){
             case 6:oled_show_string(36,6,"FINISH"            );
         }
         system_delay_ms(100);
-        if(gps_point[i].point_type==FINISH || i<GPS_POINT_DATA_MAX){
+        if(gps_point[i].point_type==POINT_TYPE_FINISH || i<GPS_POINT_DATA_MAX){
             return;
         }
     }
@@ -261,11 +261,18 @@ void gps_read(){
     else{
         gps_distance=get_two_points_distance(gps_tau1201.latitude,gps_tau1201.longitude,gps_point[current_gps_point].latitude,gps_point[current_gps_point].longitude);
         if(gps_distance<=EXPECTED_DISTANCE_THRESHOLD){//到点
-            if(gps_point[current_gps_point++].point_type==FINISH){//进入下一点位，如果已达终点
+            if(gps_point[current_gps_point++].point_type==POINT_TYPE_FINISH){//进入下一点位，如果已达终点
                 stop_flag=1;
             }
         }
         gps_azimuth=get_two_points_azimuth(gps_tau1201.latitude,gps_tau1201.longitude,gps_point[current_gps_point].latitude,gps_point[current_gps_point].longitude);//测量方位角
+        gps_error_azimuth=gps_tau1201.direction-gps_azimuth;//航向误差计算
+        if(gps_error_azimuth<-180.0){
+            gps_error_azimuth+=360.0;
+        }
+        else if(gps_error_azimuth>180.0){
+            gps_error_azimuth-=360.0;
+        }
     }
 }
 

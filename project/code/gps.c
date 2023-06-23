@@ -105,7 +105,7 @@ void gps_display_point_type(uint8_t point_type) {
 int gps_get_point_UI(void){
     int i=0,section=GPS_POINT_DATA_SECTION_INDEX,page=GPS_POINT_DATA_PAGE_INDEX;
     float latitude,longitude;
-    uint8 point_type=1;
+    int8 point_type=0;
     while(i<GPS_POINT_DATA_MAX){
         gps_display_point_type(point_type);
         key_scanner();
@@ -165,7 +165,8 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
         oled_show_int(0,1,i,2);
         oled_show_string(0,3,"WAITING GPS...");
         if(!gps_tau1201.state){
-            oled_show_string(0,3,"GPS FAIL LOCATE");                //定位失败
+            oled_show_string(0,5,"GPS FAIL LOCATE");                //定位失败
+            system_delay_ms(50);
         }
         else{
             oled_show_string(0,3, "               ");
@@ -178,6 +179,7 @@ void gps_average_pointing(int8* average_latitude,int8* average_longitude){
             latitude_total+=gps_tau1201.latitude;
             longitude_total+=gps_tau1201.longitude;
             i++;
+            system_delay_ms(1000);
         }
     }
     *average_latitude=latitude_total/GPS_OFFSET;
@@ -239,8 +241,9 @@ int gps_show_if(void){
         oled_show_string(0, 5, "360>");
         oled_show_float(32,5,gps_tau1201.direction,4,6);     //方向
         oled_show_string(0, 6, "STL>");
-        oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
+        
     }
+    oled_show_int(32,6,gps_tau1201.satellite_used,2);    //卫星连接数量
     if(gps_tau1201.satellite_used>=4){//4颗卫星及以上判定成功定位
         return 0;
     }
@@ -255,6 +258,9 @@ int gps_show_if(void){
  * @return void
  */
 void gps_read(){
+    if(gps_data_parse()){
+        return;
+    }
     if(!gps_tau1201.state){
         return;//定位失败
     }

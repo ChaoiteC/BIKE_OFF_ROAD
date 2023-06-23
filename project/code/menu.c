@@ -105,6 +105,7 @@ void gps_point_error(void){
     oled_show_string(0,4,"1.FLASH No data" );
     oled_show_string(0,5,"2.Data overflow" );
     oled_show_string(0,7,"NOW BACK TO <GP>");
+    system_delay_ms(3000);
 }
 
 //启动页面
@@ -187,7 +188,6 @@ void page_GET_POINT_ex(){
             case 0:{//使用既有点位
                 if(gps_check_flash()){
                     gps_point_error();
-                    system_delay_ms(3000);
                     now_page=GET_POINT;
                 }
                 else{
@@ -197,7 +197,6 @@ void page_GET_POINT_ex(){
             case 1:{//重新录入点位
                 if(gps_get_point_UI()){
                     gps_point_error();
-                    system_delay_ms(3000);
                     now_page=GET_POINT;
                 }
                 else{

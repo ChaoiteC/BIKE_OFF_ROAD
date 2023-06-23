@@ -262,5 +262,5 @@ void pit_handler_TIM3 (void)
     MOTOR1_PID();
     _controller_perform();
     MOTOR2_Speed(MOTOR2_SUM.rol_gyro.output);
-    system_delay_ms(5);
+    //system_delay_ms(5);
 }

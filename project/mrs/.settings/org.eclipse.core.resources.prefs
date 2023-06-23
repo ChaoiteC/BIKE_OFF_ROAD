@@ -43,6 +43,7 @@ encoding//zf_device/zf_device_oled.c=UTF-8
 encoding//zf_device/zf_device_oled.h=UTF-8
 encoding//zf_device/zf_device_tft180.c=UTF-8
 encoding//zf_device/zf_device_tft180.h=UTF-8
+encoding//zf_driver/zf_driver_delay.c=GBK
 encoding//zf_driver/zf_driver_flash.c=UTF-8
 encoding//zf_driver/zf_driver_flash.h=UTF-8
 encoding//zf_driver/zf_driver_gpio.c=UTF-8

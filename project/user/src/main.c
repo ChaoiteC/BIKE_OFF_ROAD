@@ -14,8 +14,11 @@ int main(void){
     debug_init();                                                               // 初始化默认 Debug UART
     bike_init();
     menu();//进入人机交互页面
-    //wait_to_strat();
+    wait_to_strat();
     
     while(1){//发车主循环
+        overturn_check();
+        bluetooth_check();
+        stop_do();
     }
 }

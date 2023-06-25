@@ -27,10 +27,6 @@ uint8 current_gps_point=0;//当前GPS正在前往的点位
  * @return void
  */
 void start_check(){
-    //将GPS参数从FLASH全部重新读出
-    oled_clear();
-    oled_show_string(0,0,"Reading FLASH...");
-    gps_check_flash();
     //确认GPS状态
     oled_clear();
     oled_show_string(0,0,"Loading GPS...");
@@ -39,8 +35,7 @@ void start_check(){
             break;
         }
     }
-    //启动动量轮
-
+    
 }
 
 //翻车确认

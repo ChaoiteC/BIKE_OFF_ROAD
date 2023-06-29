@@ -144,9 +144,10 @@
 #include "imu_chaoitec.h"
 #include "bike_init.h"
 #include "motor.h"
-#include "encoder_text.h"
+#include "encoder.h"
 #include "imu_other.h"
 #include "conduct.h"
+#include "balance.h"
 //===================================================�û��Զ����ļ�===================================================
 
 #endif

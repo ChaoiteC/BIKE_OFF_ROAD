@@ -1,10 +1,3 @@
-/*
- * motor.h
- *
- *  Created on: 2023年4月9日
- *      Author: 86152
- */
-
 #ifndef  MOTOR_H_
 #define  MOTOR_H_
 
@@ -18,12 +11,8 @@
 
 #define  MOTOR_FREQ          17000                         //电机频率
 
-
-void MOTOR_Init();
-void MOTOR1_Speed(int16 Duty);
-void MOTOR1_PID();
+void MOTOR_init();
+void MOTOR1_speed_output(int16 Duty);
 void MOTOR2_Speed(int16 Duty);
-
-
 
 #endif /* MOTOR_H_ */

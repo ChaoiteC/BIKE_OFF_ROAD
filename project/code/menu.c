@@ -29,7 +29,7 @@ enum PAGE{
         IMU,
         BLE,
         SEV,
-        ECD,
+        BLC,
       FLS,
 }NOW_PAGE;
 
@@ -52,7 +52,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_show();break;
             case BLE      :page_BLE_show();break;
             case SEV      :page_SEV_show();break;
-            case ECD      :page_ECD_show();break;
+            case BLC      :page_BLC_show();break;
             case FLS      :page_FLS_show();break;
             default       :page_error();
         }
@@ -67,7 +67,7 @@ void menu(void){//人机交互页面
             case IMU      :page_IMU_ex();break;
             case BLE      :page_BLE_ex();break;
             case SEV      :page_SEV_ex();break;
-            case ECD      :page_ECD_ex();break;
+            case BLC      :page_BLC_ex();break;
             case FLS      :page_FLS_ex();break;
             default       :page_error();
         }
@@ -213,13 +213,13 @@ void page_TET_show(){
     oled_show_string(0,1,"./TET"                   );
     if(point<=3){
         oled_show_string(0,3,"  GPS_TAU1201"           );
-        oled_show_string(0,4,"  imu963ra"               );
-        oled_show_string(0,5,"  IMU_Mahony"            );
+        oled_show_string(0,4,"  IMU963RA"              );
+        oled_show_string(0,5,"  IMU_FCOF"              );
         oled_show_string(0,6,"  BLUETOOTH"             );
     }
     else{
         oled_show_string(0,3,"  SERVO"                 );
-        oled_show_string(0,4,"  ENCODER"               );
+        oled_show_string(0,4,"  BALANCE"               );
     }
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"            );
     if(point<=3){
@@ -252,7 +252,7 @@ void page_TET_ex(){
             case 2:now_page=IMU;break;
             case 3:now_page=BLE;break;
             case 4:now_page=SEV;break;
-            case 5:now_page=ECD;break;
+            case 5:now_page=BLC;break;
         }
     }
 }
@@ -349,20 +349,21 @@ void page_SEV_ex(){
 }
 
 
-void page_ECD_show(){
-    oled_show_string(0, 0, "ENCODER");
-    oled_show_string(0,1,"./TET/ECD"                );
-    oled_show_float (0,3,encoder_data_quaddec,4,4);
-    oled_show_string(0,4, "PID_OUTPUT");
-    oled_show_float (0,5,MOTOR1_SUM.output,4,4);
-    oled_show_float (0,6,MOTOR1_SUM.integral,4,4);
-    oled_show_float (0,7,MOTOR1_SUM.expect,4,4);
+void page_BLC_show(){
+    oled_show_string(0, 0, "BALANCE");
+    oled_show_string(0,1,"./TET/BLC"                );
+    oled_show_string(0,4,"ACC.output"                );
+    oled_show_string(0,5,"ACC.error"                );
+    oled_show_string(0,6,"IMU.Rol"                );
+    oled_show_float (64,4,balance_acc.output,6,2);
+    oled_show_float (64,5,balance_acc.error,6,2);
+    oled_show_float (64,6,imu963ra_acc_x,6,2);
 
 
 
 }
 
-void page_ECD_ex(){
+void page_BLC_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){
         now_page=TET;
     }
@@ -378,7 +379,7 @@ void page_FLS_show(){
     oled_show_string(0,0,"FLASH EDITER"         );
     oled_show_string(0,1,"./FLS"                );
     for(i=0;i<5&&point+i<FLASH_NUMBER;i++){
-        oled_show_float(84,i+2,flash_union_buffer[point+i].float_type,2,2);
+        oled_show_float(84,i+2,flash_union_buffer[point+i].float_type,5,2);
         switch(point+i){//显示在数值左边的注释。不能超过12个字符，虽然大部分情况也不会超过。
             case 0:oled_show_string(0,i+2,"M1.P");break;
             case 1:oled_show_string(0,i+2,"M1.I");break;
@@ -400,7 +401,7 @@ void page_FLS_show(){
 void page_FLS_ex(){
     if(KEY_SHORT_PRESS==key_get_state(KEY_UP)){
         if(edit){
-            flash_union_buffer[point].float_type+=0.01;
+            flash_union_buffer[point].float_type+=0.1;
         }
         else{
             if(--point<0){
@@ -410,12 +411,12 @@ void page_FLS_ex(){
     }
     else if(KEY_LONG_PRESS==key_get_state(KEY_UP)){
         if(edit){
-            flash_union_buffer[point].float_type+=0.0005;//0.0005是一个经验得出的值，这样比较舒适，因为每次判定长按都会增加。
+            flash_union_buffer[point].float_type+=0.005;//0.0005是一个经验得出的值，这样比较舒适，因为每次判定长按都会增加。
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_DOWN)){
         if(edit){
-            flash_union_buffer[point].float_type-=0.01;
+            flash_union_buffer[point].float_type-=0.1;
         }
         else{
             if(++point>=FLASH_NUMBER){
@@ -425,7 +426,7 @@ void page_FLS_ex(){
     }
     else if(KEY_LONG_PRESS==key_get_state(KEY_DOWN)){
         if(edit){
-            flash_union_buffer[point].float_type-=0.0005;
+            flash_union_buffer[point].float_type-=0.005;
         }
     }
     else if(KEY_SHORT_PRESS==key_get_state(KEY_RT)){

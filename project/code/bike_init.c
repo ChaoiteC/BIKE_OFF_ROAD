@@ -25,21 +25,21 @@ void bike_init(void){
     oled_show_string(0, 0, "PID loading...");
     flash_buffer_clear();
     if(!flash_check(63,3)){//无数据填入缺省值
-        flash_union_buffer[0].float_type=1.0;//MT1 PID
-        flash_union_buffer[1].float_type=0.0;
-        flash_union_buffer[2].float_type=5.0;
-        flash_union_buffer[3].float_type=20.0;
-        flash_union_buffer[4].float_type=20.0;
-        flash_union_buffer[5].float_type=1.0;//MT2 PID
+        flash_union_buffer[0].float_type=-40.0;//b_acc PID
+        flash_union_buffer[1].float_type=-0.005;
+        flash_union_buffer[2].float_type=-5.0;
+        flash_union_buffer[3].float_type=10000.0;
+        flash_union_buffer[4].float_type=10000.0;
+        flash_union_buffer[5].float_type=11.1;//b_ang PID
         flash_union_buffer[6].float_type=0.0;
-        flash_union_buffer[7].float_type=5.0;
-        flash_union_buffer[8].float_type=20.0;
-        flash_union_buffer[9].float_type=20.0;
-        flash_union_buffer[10].float_type=1.0;//MT3 PID
+        flash_union_buffer[7].float_type=0.0;
+        flash_union_buffer[8].float_type=10000.0;
+        flash_union_buffer[9].float_type=10000.0;
+        flash_union_buffer[10].float_type=0.0;//b_vel PID
         flash_union_buffer[11].float_type=0.0;
-        flash_union_buffer[12].float_type=5.0;
-        flash_union_buffer[13].float_type=20.0;
-        flash_union_buffer[14].float_type=20.0;
+        flash_union_buffer[12].float_type=0.0;
+        flash_union_buffer[13].float_type=10000.0;
+        flash_union_buffer[14].float_type=10000.0;
         flash_write_page_from_buffer(63,3);
     }
     flash_data_update();
@@ -64,15 +64,10 @@ void bike_init(void){
     oled_show_string(0, 0, "Servo loading...");
     Servo_Init(servo_motor_duty);
 
-    //编码器初始化
+    //平衡初始化
     oled_clear();
-    oled_show_string(0, 0, "Encoder loading...");
-    Encoder_text_init();//编码器初始化，打开中断
-
-    //电机初始化
-    oled_clear();
-    oled_show_string(0, 0, "MOTOR loading...");
-    MOTOR_Init();
+    oled_show_string(0, 0, "Balance loading...");
+    balance_init();
 
     //蓝牙初始化
     oled_clear();
@@ -87,6 +82,10 @@ void bike_init(void){
 //FLASH在这里赋值各个变量
 void flash_data_update(){
     flash_read_page_to_buffer(63,3);
-    PID_init(&MOTOR1_SUM,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
-
+    PID_set(&balance_acc,flash_union_buffer[0].float_type,flash_union_buffer[1].float_type,flash_union_buffer[2].float_type,flash_union_buffer[3].float_type,flash_union_buffer[4].float_type);
+    PID_expect(&balance_acc,0);
+    PID_set(&balance_ang,flash_union_buffer[6].float_type,flash_union_buffer[7].float_type,flash_union_buffer[8].float_type,flash_union_buffer[9].float_type,flash_union_buffer[10].float_type);
+    PID_expect(&balance_ang,0);
+    PID_set(&balance_vel,flash_union_buffer[11].float_type,flash_union_buffer[12].float_type,flash_union_buffer[13].float_type,flash_union_buffer[14].float_type,flash_union_buffer[15].float_type);
+    PID_expect(&balance_vel,0);
 }

@@ -27,6 +27,7 @@ void bike_init(void){
     }
     else{
         pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
+        IMU_offset();
     }
     
     //PID初始化

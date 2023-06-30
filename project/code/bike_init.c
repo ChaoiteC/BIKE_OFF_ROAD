@@ -37,10 +37,10 @@ void bike_init(void){
     if(!flash_check(63,3)){//无数据填入缺省值
         flash_union_buffer[0].float_type=-40.0;//b_acc PID
         flash_union_buffer[1].float_type=-0.005;
-        flash_union_buffer[2].float_type=-5.0;
+        flash_union_buffer[2].float_type=-0.0;
         flash_union_buffer[3].float_type=10000.0;
         flash_union_buffer[4].float_type=10000.0;
-        flash_union_buffer[5].float_type=11.1;//b_ang PID
+        flash_union_buffer[5].float_type=0.0;//b_ang PID
         flash_union_buffer[6].float_type=0.0;
         flash_union_buffer[7].float_type=0.0;
         flash_union_buffer[8].float_type=10000.0;

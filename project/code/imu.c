@@ -59,8 +59,8 @@ void IMU_update(){
 //陀螺仪去零漂
 void IMU_offset(){
     oled_clear();
-    oled_show_chinese(0,0,16,(const uint8)IMU_OFFSET_1,5);
-    oled_show_chinese(0,6,16,(const uint8)IMU_OFFSET_2,8);
+    oled_show_chinese(0,0,16,(const uint8 *)IMU_OFFSET_1,5);
+    oled_show_chinese(0,6,16,(const uint8 *)IMU_OFFSET_2,8);
     oled_show_string(0,3,"Count:   /200");
     for(int i=0;i<OFFSET_COUNT;i++){
         oled_show_int(64,3,i,3);

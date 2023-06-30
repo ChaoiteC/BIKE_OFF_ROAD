@@ -301,11 +301,11 @@ void page_IMU_show(){
         oled_show_string(0,2,"WARNING: AGM NO DATA");
     }
     oled_show_string(0,4,"X>rol>"                    );
-    oled_show_int(42,4,(int)IMU_Data.Rol,2);
+    oled_show_int(42,4,(int)IMU_Data.Rol,4);
     oled_show_string(0,5,"Y>pit>"                    );
-    oled_show_int(42,5,(int)IMU_Data.Pit,2);
-    //oled_show_string(0,7,"Z>yaw>"                    );
-    //oled_show_int(42,7,(int)IMU_Data.Yaw,2);
+    oled_show_int(42,5,(int)IMU_Data.Pit,4);
+    oled_show_string(0,6,"Z>yaw>"                    );
+    oled_show_int(42,6,(int)IMU_Data.Yaw,4);
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"            );
 }
 
@@ -352,12 +352,19 @@ void page_SEV_ex(){
 void page_BLC_show(){
     oled_show_string(0, 0, "BALANCE");
     oled_show_string(0,1,"./TET/BLC"                );
-    oled_show_string(0,4,"ACC.output"                );
-    oled_show_string(0,5,"ACC.error"                );
-    oled_show_string(0,6,"IMU.Rol"                );
-    oled_show_float (64,4,balance_acc.output,6,2);
-    oled_show_float (64,5,balance_acc.error,6,2);
-    oled_show_float (64,6,imu963ra_acc_x,6,2);
+    oled_show_string(0,4,"    ACC  ANG  VEL"        );
+    oled_show_string(0,5,"OUT"                      );
+    oled_show_string(0,6,"ERR"                      );
+    oled_show_string(0,7,"RAW"                      );
+    oled_show_int(24,4,balance_acc.output,4);
+    oled_show_int(24,5,balance_acc.error,4);
+    oled_show_int(24,6,imu963ra_acc_x,4);
+    oled_show_int(54,4,balance_ang.output,4);
+    oled_show_int(54,5,balance_ang.error,4);
+    oled_show_int(54,6,IMU_Data.Rol,4);
+    oled_show_int(84,4,balance_vel.output,4);
+    oled_show_int(84,5,balance_vel.error,4);
+    oled_show_int(84,6,encoder_data_quaddec,4);
 
 
 
@@ -381,11 +388,21 @@ void page_FLS_show(){
     for(i=0;i<5&&point+i<FLASH_NUMBER;i++){
         oled_show_float(84,i+2,flash_union_buffer[point+i].float_type,5,2);
         switch(point+i){//显示在数值左边的注释。不能超过12个字符，虽然大部分情况也不会超过。
-            case 0:oled_show_string(0,i+2,"M1.P");break;
-            case 1:oled_show_string(0,i+2,"M1.I");break;
-            case 2:oled_show_string(0,i+2,"M1.D");break;
-            case 3:oled_show_string(0,i+2,"M1.MI");break;
-            case 4:oled_show_string(0,i+2,"M1.MO");break;
+            case  0:oled_show_string(0,i+2,"B_acc.P");break;
+            case  1:oled_show_string(0,i+2,"B_acc.I");break;
+            case  2:oled_show_string(0,i+2,"B_acc.D");break;
+            case  3:oled_show_string(0,i+2,"B_acc.MI");break;
+            case  4:oled_show_string(0,i+2,"B_acc.MO");break;
+            case  5:oled_show_string(0,i+2,"B_ang.P");break;
+            case  6:oled_show_string(0,i+2,"B_ang.I");break;
+            case  7:oled_show_string(0,i+2,"B_ang.D");break;
+            case  8:oled_show_string(0,i+2,"B_ang.MI");break;
+            case  9:oled_show_string(0,i+2,"B_ang.MO");break;
+            case 10:oled_show_string(0,i+2,"B_vel.P");break;
+            case 11:oled_show_string(0,i+2,"B_vel.I");break;
+            case 12:oled_show_string(0,i+2,"B_vel.D");break;
+            case 13:oled_show_string(0,i+2,"B_vel.MI");break;
+            case 14:oled_show_string(0,i+2,"B_vel.MO");break;
         }
     }
     if(edit){

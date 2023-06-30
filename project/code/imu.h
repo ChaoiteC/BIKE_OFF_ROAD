@@ -6,7 +6,7 @@
 typedef struct IMU{
 	float Rol;//解算所得角度
 	float Pit;
-	//float Yaw;
+	float Yaw;
 
     float aAx;//加速度计算得到的角度
     float aAy;
@@ -19,10 +19,15 @@ typedef struct IMU{
     float lastPit;
     //float lastYaw;
 
+    int oGx;//陀螺仪零漂值
+    int oGy;
+    int oGz;
 }IMU_FCOF;
 
 extern IMU_FCOF IMU_Data;
 
 void IMU_update();
+void IMU_offset();
+void IMU_get_data();
 
 #endif /* IMU_CHAOITEC_H_ */

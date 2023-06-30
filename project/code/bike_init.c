@@ -20,6 +20,15 @@ void bike_init(void){
     oled_show_string(0, 0, "Keyboard loading...");
     key_init(400);
 
+    //IMU963RA初始化
+    oled_show_string(0, 0, "IMU963RA loading...");
+    if(imu963ra_init()){//自检失败
+        system_delay_ms(5000);
+    }
+    else{
+        pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
+    }
+    
     //PID初始化
     oled_clear();
     oled_show_string(0, 0, "PID loading...");
@@ -50,15 +59,6 @@ void bike_init(void){
     gps_init();
     pit_ms_init(TIM7_PIT,100);//定时器中断获取GPS数据
 
-    //IMU963RA初始化
-    oled_show_string(0, 0, "IMU963RA loading...");
-    if(imu963ra_init()){//自检失败
-        system_delay_ms(5000);
-    }
-    else{
-        pit_ms_init(TIM6_PIT,5);//定时器中断获取IMU963RA数据
-    }
-    
     //舵机初始化
     oled_clear();
     oled_show_string(0, 0, "Servo loading...");

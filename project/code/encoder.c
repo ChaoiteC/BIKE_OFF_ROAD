@@ -1,3 +1,4 @@
+/*这个文件及它的头文件用于完成编码器各个操作。*/
 #include "zf_common_headfile.h"
 
 kalman_param Encoder_kal;

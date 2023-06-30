@@ -7,17 +7,11 @@
 #define GPS_POINT_DATA_SECTION_INDEX  63 //GPS点位数据开始记录的扇区，倒数，前面是其他数据
 #define GPS_POINT_DATA_PAGE_INDEX     2 //GPS点位数据开始记录的页数，倒数，前面是其他数据
 
-#define EXPECTED_DISTANCE_THRESHOLD 1.0 //GPS到点判定距离（单位：米）
+#define EXPECTED_DISTANCE_THRESHOLD 2.0 //GPS到点判定距离（单位：米）
 
 #define GPS_POINT_DATA_MAX  20 //GPS点位记录的最大量
 
 extern int gps_point_number;
-
-/*typedef struct GPS_L{
-    float latitude_z;//测量纬度
-    float longitude_z;//测量经度
-
-}GPS_LOCATE;*/
 
 enum POINT_TYPE{//点位类型
     STR,//直道

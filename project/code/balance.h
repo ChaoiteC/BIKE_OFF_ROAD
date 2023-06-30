@@ -3,9 +3,9 @@
 
 #include "zf_common_headfile.h"
 
-extern PID balance_acc;//瑙掗�熷害鐜�
-extern PID balance_ang;//瑙掑害鐜�
-extern PID balance_vel;//閫熷害鐜�
+extern PID balance_acc;//角速度环
+extern PID balance_ang;//角度环
+extern PID balance_vel;//速度环
 
 void balance_init();
 void balance_heartbeat();

@@ -16,8 +16,6 @@ int main(void){
     start_check();
     
     while(1){//发车主循环
-        overturn_check();
-        bluetooth_check();
-        stop_do();
+    
     }
 }

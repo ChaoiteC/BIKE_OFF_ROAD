@@ -8,6 +8,6 @@ extern PID balance_ang;//瑙掑害鐜�
 extern PID balance_vel;//閫熷害鐜�
 
 void balance_init();
-void balance_tick();
+void balance_heartbeat();
 
 #endif /* BALANCE_H_ */

@@ -141,11 +141,10 @@
 #include "chinese_font.h"
 #include "servo.h"
 #include "menu.h"
-#include "imu_chaoitec.h"
+#include "imu.h"
 #include "bike_init.h"
 #include "motor.h"
 #include "encoder.h"
-#include "imu_other.h"
 #include "conduct.h"
 #include "balance.h"
 //===================================================�û��Զ����ļ�===================================================

@@ -18,8 +18,7 @@ void balance_init(){
 }
 
 //心跳平衡
-void balance_tick(){
-    //oled_show_string(0, 0, "TICK");
+void balance_heartbeat(){
     b_tick++;
     if(b_tick==25){
         PID_calc(&balance_vel,encoder_data_quaddec);

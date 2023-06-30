@@ -493,7 +493,7 @@ void pit_handler_TIM3 (void)
     encoder_data_quaddec = encoder_get_count(ENCODER_QUADDEC);                  // 获取编码器计数
     encoder_data_quaddec = kalman_filter(&Encoder_kal, encoder_data_quaddec);   // 对编码器经行滤波处理
     encoder_clear_count(ENCODER_QUADDEC);
-    balance_tick();
+    balance_heartbeat();
 }
 
 

@@ -21,7 +21,7 @@ void MOTOR_init(){
  * 输出：无
  */
 void MOTOR1_speed_output(int16 duty){
-    if(duty>9000){
+    if(duty>9000){//限幅
         duty=9000;
     }
     else if(duty<-9000){
@@ -29,12 +29,12 @@ void MOTOR1_speed_output(int16 duty){
     }
     if(duty>=0){
         //正向转动
-        gpio_set_level(MOTOR1_IO, GPIO_HIGH);                                          // DIR输出高电平
+        gpio_set_level(MOTOR1_IO, GPIO_HIGH);//DIR输出高电平
         pwm_set_duty(MOTOR1_PWM, duty);
     }
     else{
         //反向转动
-        gpio_set_level(MOTOR1_IO, GPIO_LOW);                                         // DIR输出低电平
+        gpio_set_level(MOTOR1_IO, GPIO_LOW);//DIR输出低电平
         pwm_set_duty(MOTOR1_PWM, -duty);
     }
 }

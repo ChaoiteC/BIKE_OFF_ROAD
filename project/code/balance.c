@@ -17,7 +17,7 @@ void balance_init(){
     MOTOR_init();//电机初始化
 }
 
-//平衡心跳
+//心跳平衡
 void balance_tick(){
     //oled_show_string(0, 0, "TICK");
     b_tick++;
@@ -25,7 +25,7 @@ void balance_tick(){
         PID_calc(&balance_vel,encoder_data_quaddec);
         b_tick=0;
     }
-    if(b_tick==5){
+    if(b_tick%5==0){
         PID_calc(&balance_ang,balance_vel.output+IMU_Data.Rol+cenBalComp);
     }
     PID_calc(&balance_acc,balance_ang.output+imu963ra_acc_x);

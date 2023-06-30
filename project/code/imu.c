@@ -63,7 +63,7 @@ void IMU_offset(){
     oled_show_chinese(0,6,16,(const uint8 *)IMU_OFFSET_2,8);
     oled_show_string(0,3,"Count:   /200");
     for(int i=0;i<OFFSET_COUNT;i++){
-        oled_show_int(64,3,i,3);
+        oled_show_int(36,3,i,3);
         system_delay_ms(5);
         if(imu963ra_gyro_x==imu963ra_gyro_y){
             i--;

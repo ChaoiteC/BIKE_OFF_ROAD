@@ -356,15 +356,15 @@ void page_BLC_show(){
     oled_show_string(0,5,"OUT"                      );
     oled_show_string(0,6,"ERR"                      );
     oled_show_string(0,7,"RAW"                      );
-    oled_show_int(24,4,balance_acc.output,4);
-    oled_show_int(24,5,balance_acc.error,4);
-    oled_show_int(24,6,imu963ra_acc_x,4);
-    oled_show_int(54,4,balance_ang.output,4);
-    oled_show_int(54,5,balance_ang.error,4);
-    oled_show_int(54,6,IMU_Data.Rol,4);
-    oled_show_int(84,4,balance_vel.output,4);
-    oled_show_int(84,5,balance_vel.error,4);
-    oled_show_int(84,6,encoder_data_quaddec,4);
+    oled_show_int(24,5,balance_acc.output,4);
+    oled_show_int(24,6,balance_acc.error,4);
+    oled_show_int(24,7,imu963ra_acc_x,4);
+    oled_show_int(54,5,balance_ang.output,4);
+    oled_show_int(54,6,balance_ang.error,4);
+    oled_show_int(54,7,IMU_Data.Rol,4);
+    oled_show_int(84,5,balance_vel.output,4);
+    oled_show_int(84,6,balance_vel.error,4);
+    oled_show_int(84,7,encoder_data_quaddec,4);
 
 
 

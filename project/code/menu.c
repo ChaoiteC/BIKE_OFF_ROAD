@@ -333,6 +333,7 @@ void page_BLE_ex(){
 void page_SEV_show(){
     oled_show_string(0,0,"SERVO"                   );
     oled_show_string(0,1,"./TET/SEV"               );
+    oled_show_int(84,7,encoder_data_quaddec,4);
   //oled_show_string(0,2,""                        );
   //oled_show_string(0,3,""                        );
   //oled_show_string(0,4,""                        );

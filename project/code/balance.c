@@ -1,6 +1,6 @@
 #include "zf_common_headfile.h"
 
-#define MOTOR1_GAIN_FACTOR 1 //动量轮输出经验增益系数
+#define MOTOR1_GAIN_FACTOR 0.6//动量轮输出经验增益系数
 
 PID balance_acc;//角速度环
 PID balance_ang;//角度环
@@ -13,8 +13,17 @@ float cenBalComp=0;//离心抗衡补偿
 
 //平衡初始化
 void balance_init(){
-    encoder_init();//编码器初始化，打开中断
     MOTOR_init();//电机初始化
+    oled_show_string(0, 7, "(+)");
+    MOTOR1_speed_output(2000);
+    system_delay_ms(2000);
+    oled_show_string(0, 7, "(-)");
+    MOTOR1_speed_output(-2000);
+    system_delay_ms(2000);
+    oled_show_string(0, 7, "(0)");
+    MOTOR1_speed_output(0);
+    system_delay_ms(2000);
+    encoder_init();//编码器初始化，打开中断
 }
 
 //心跳平衡

@@ -58,9 +58,9 @@ void bluetooth_check(){
 //停车处理
 void stop_do(){
     if(stop_flag){
-        PID_set(&balance_acc,0,0,0,0,0);
-        PID_set(&balance_ang,0,0,0,0,0);
-        PID_set(&balance_vel,0,0,0,0,0);
+        //PID_set(&balance_acc,0,0,0,0,0);
+        //PID_set(&balance_ang,0,0,0,0,0);
+        //PID_set(&balance_vel,0,0,0,0,0);
         oled_clear();
         oled_show_chinese(0, 0, 16,(const uint8 *)STOP,2);
         switch(stop_flag){

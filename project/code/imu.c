@@ -13,8 +13,8 @@
 #include "zf_common_headfile.h"
 #include <math.h>
 
-#define Ka 0.95  //加速度解算权重
-#define Kg 0.05  //陀螺仪解算权重
+#define Ka 0.90  //加速度解算权重
+#define Kg 0.10  //陀螺仪解算权重
 #define dt 0.005 //采样间隔（单位：秒）
 
 #define ANGLE_APPROX_COEFF 0 //航向角逼近系数
@@ -61,7 +61,7 @@ void IMU_offset(){
     oled_clear();
     oled_show_chinese(0,0,16,(const uint8 *)IMU_OFFSET_1,5);
     oled_show_chinese(0,6,16,(const uint8 *)IMU_OFFSET_2,8);
-    oled_show_string(0,3,"Count:   /200");
+    oled_show_string(0,3,"Count:    /200");
     for(int i=0;i<OFFSET_COUNT;i++){
         oled_show_int(36,3,i,3);
         system_delay_ms(5);

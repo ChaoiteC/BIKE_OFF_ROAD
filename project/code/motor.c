@@ -2,6 +2,7 @@
 
 #include "zf_common_headfile.h"
 
+#define MOMENTUM_WHEEL_MAX_AMPLITUDE 6000 //动量轮最大输出幅度
 /* 名字：MOTOR_init
  * 功能：各电机初始化
  * 参数：无
@@ -21,11 +22,11 @@ void MOTOR_init(){
  * 输出：无
  */
 void MOTOR1_speed_output(int16 duty){
-    if(duty>9000){//限幅
-        duty=9000;
+    if(duty>MOMENTUM_WHEEL_MAX_AMPLITUDE){//限幅
+        duty=MOMENTUM_WHEEL_MAX_AMPLITUDE;
     }
-    else if(duty<-9000){
-        duty=-9000;
+    else if(duty<-MOMENTUM_WHEEL_MAX_AMPLITUDE){
+        duty=-MOMENTUM_WHEEL_MAX_AMPLITUDE;
     }
     if(duty>=0){
         //正向转动

@@ -35,17 +35,17 @@ void bike_init(void){
     oled_show_string(0, 0, "PID loading...");
     flash_buffer_clear();
     if(!flash_check(63,3)){//无数据填入缺省值
-        flash_union_buffer[0].float_type=-40.0;//b_acc PID
-        flash_union_buffer[1].float_type=-0.005;
-        flash_union_buffer[2].float_type=-0.0;
+        flash_union_buffer[0].float_type=-150.0;//b_acc PID
+        flash_union_buffer[1].float_type=-0.05;
+        flash_union_buffer[2].float_type=-100.0;
         flash_union_buffer[3].float_type=10000.0;
         flash_union_buffer[4].float_type=10000.0;
-        flash_union_buffer[5].float_type=0.0;//b_ang PID
-        flash_union_buffer[6].float_type=0.0;
-        flash_union_buffer[7].float_type=0.0;
-        flash_union_buffer[8].float_type=10000.0;
+        flash_union_buffer[5].float_type=-150.0;//b_ang PID
+        flash_union_buffer[6].float_type=-20.0;
+        flash_union_buffer[7].float_type=-100.0;
+        flash_union_buffer[8].float_type=3000.0;
         flash_union_buffer[9].float_type=10000.0;
-        flash_union_buffer[10].float_type=0.0;//b_vel PID
+        flash_union_buffer[10].float_type=-000.0;//b_vel PID
         flash_union_buffer[11].float_type=0.0;
         flash_union_buffer[12].float_type=0.0;
         flash_union_buffer[13].float_type=10000.0;

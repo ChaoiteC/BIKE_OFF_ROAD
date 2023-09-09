@@ -34,7 +34,7 @@ void balance_heartbeat(){
         b_tick=0;
     }
     if(b_tick%5==0){
-        PID_calc(&balance_ang,balance_vel.output+IMU_Data.Rol+cenBalComp);
+        PID_calc(&balance_ang,balance_vel.output+IMU_Data.Roll+cenBalComp);
     }
     PID_calc(&balance_acc,balance_ang.output+imu963ra_acc_x);
     MOTOR1_speed_output((int16)(balance_acc.output*MOTOR1_GAIN_FACTOR));

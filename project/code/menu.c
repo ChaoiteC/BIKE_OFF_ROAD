@@ -301,9 +301,9 @@ void page_IMU_show(){
         oled_show_string(0,2,"WARNING: AGM NO DATA");
     }
     oled_show_string(0,4,"X>rol>"                    );
-    oled_show_int(42,4,(int)IMU_Data.Rol,4);
+    oled_show_int(42,4,(int)IMU_Data.Roll,4);
     oled_show_string(0,5,"Y>pit>"                    );
-    oled_show_int(42,5,(int)IMU_Data.Pit,4);
+    oled_show_int(42,5,(int)IMU_Data.Pitch,4);
     oled_show_string(0,6,"Z>yaw>"                    );
     oled_show_int(42,6,(int)IMU_Data.Yaw,4);
     oled_show_string(0,7,"-[UP/DOMN/CF/RT]"            );
@@ -362,7 +362,7 @@ void page_BLC_show(){
     oled_show_int(24,7,imu963ra_acc_x,4);
     oled_show_int(54,5,balance_ang.output,4);
     oled_show_int(54,6,balance_ang.error,4);
-    oled_show_int(54,7,IMU_Data.Rol,4);
+    oled_show_int(54,7,IMU_Data.Roll,4);
     oled_show_int(84,5,balance_vel.output,4);
     oled_show_int(84,6,balance_vel.error,4);
     oled_show_int(84,7,encoder_data_quaddec,4);

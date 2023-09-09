@@ -40,7 +40,7 @@ void start_check(){
 
 //翻车确认
 void overturn_check(){
-    if((IMU_Data.Rol >= 30) || (IMU_Data.Rol <= -30) || (IMU_Data.Pit >= 30) || (IMU_Data.Pit <= -30)){//翻车
+    if((IMU_Data.Roll >= 30) || (IMU_Data.Roll <= -30) || (IMU_Data.Pitch >= 30) || (IMU_Data.Pitch <= -30)){//翻车
         stop_flag=2;
     }
 }

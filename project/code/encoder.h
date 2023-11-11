@@ -8,9 +8,7 @@
 #define ENCODER_QUADDEC_A               (TIM1_ENCOEDER_MAP3_CH1_E9)             // A 相对应的引脚
 #define ENCODER_QUADDEC_B               (TIM1_ENCOEDER_MAP3_CH2_E11)            // B 相对应的引脚
 
-typedef struct
-{
-
+typedef struct{
     float LastP;
     float Now_P;
     float out;
@@ -19,9 +17,7 @@ typedef struct
     float R;
 }kalman_param;
 
-
 void encoder_init();
-
 void Encoder_kal_init(kalman_param *Encoder_kal);
 
 int kalman_filter(kalman_param *Encoder_kal, int input);

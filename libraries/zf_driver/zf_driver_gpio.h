@@ -1,36 +1,36 @@
 /*********************************************************************************************************************
-* CH32V307VCT6 Opensourec Library ����CH32V307VCT6 ��Դ�⣩��һ�����ڹٷ� SDK �ӿڵĵ�������Դ��
-* Copyright (c) 2022 SEEKFREE ��ɿƼ�
+* CH32V307VCT6 Opensourec Library 即（CH32V307VCT6 开源库）是一个基于官方 SDK 接口的第三方开源库
+* Copyright (c) 2022 SEEKFREE 逐飞科技
 *
-* ���ļ���CH32V307VCT6 ��Դ���һ����
+* 本文件是CH32V307VCT6 开源库的一部分
 *
-* CH32V307VCT6 ��Դ�� ���������
-* �����Ը���������������ᷢ���� GPL��GNU General Public License���� GNUͨ�ù�������֤��������
-* �� GPL �ĵ�3�棨�� GPL3.0������ѡ��ģ��κκ����İ汾�����·�����/���޸���
+* CH32V307VCT6 开源库 是免费软件
+* 您可以根据自由软件基金会发布的 GPL（GNU General Public License，即 GNU通用公共许可证）的条款
+* 即 GPL 的第3版（即 GPL3.0）或（您选择的）任何后来的版本，重新发布和/或修改它
 *
-* ����Դ��ķ�����ϣ�����ܷ������ã�����δ�������κεı�֤
-* ����û�������������Ի��ʺ��ض���;�ı�֤
-* ����ϸ����μ� GPL
+* 本开源库的发布是希望它能发挥作用，但并未对其作任何的保证
+* 甚至没有隐含的适销性或适合特定用途的保证
+* 更多细节请参见 GPL
 *
-* ��Ӧ�����յ�����Դ���ͬʱ�յ�һ�� GPL �ĸ���
-* ���û�У������<https://www.gnu.org/licenses/>
+* 您应该在收到本开源库的同时收到一份 GPL 的副本
+* 如果没有，请参阅<https://www.gnu.org/licenses/>
 *
-* ����ע����
-* ����Դ��ʹ�� GPL3.0 ��Դ����֤Э�� ������������Ϊ���İ汾
-* ��������Ӣ�İ��� libraries/doc �ļ����µ� GPL3_permission_statement.txt �ļ���
-* ����֤������ libraries �ļ����� �����ļ����µ� LICENSE �ļ�
-* ��ӭ��λʹ�ò����������� ���޸�����ʱ���뱣����ɿƼ��İ�Ȩ����������������
+* 额外注明：
+* 本开源库使用 GPL3.0 开源许可证协议 以上许可申明为译文版本
+* 许可申明英文版在 libraries/doc 文件夹下的 GPL3_permission_statement.txt 文件中
+* 许可证副本在 libraries 文件夹下 即该文件夹下的 LICENSE 文件
+* 欢迎各位使用并传播本程序 但修改内容时必须保留逐飞科技的版权声明（即本声明）
 *
-* �ļ�����          zf_driver_gpio
-* ��˾����          �ɶ���ɿƼ����޹�˾
-* �汾��Ϣ          �鿴 libraries/doc �ļ����� version �ļ� �汾˵��
-* ��������          MounRiver Studio V1.8.1
-* ����ƽ̨          CH32V307VCT6
-* ��������          https://seekfree.taobao.com/
+* 文件名称          zf_driver_gpio
+* 公司名称          成都逐飞科技有限公司
+* 版本信息          查看 libraries/doc 文件夹内 version 文件 版本说明
+* 开发环境          MounRiver Studio V1.8.1
+* 适用平台          CH32V307VCT6
+* 店铺链接          https://seekfree.taobao.com/
 *
-* �޸ļ�¼
-* ����                                      ����                             ��ע
-* 2022-09-15        ��W            first version
+* 修改记录
+* 日期                                      作者                             备注
+* 2022-09-15        大W            first version
 ********************************************************************************************************************/
 
  
@@ -42,7 +42,7 @@
 #include "ch32v30x_exti.h"
 #include "zf_common_typedef.h"
 
-typedef enum                                                                    // ö�� GPIO ����  ��ö�ٶ��岻�����û��޸�
+typedef enum                                                                    // 枚举 GPIO 引脚  此枚举定义不允许用户修改
 {
     A0 = 0x00,  A1 ,    A2 ,    A3 ,    A4 ,    A5 ,    A6 ,    A7 ,
     A8 ,        A9 ,    A10,    A11,    A12,    A13,    A14,    A15,
@@ -64,28 +64,28 @@ typedef enum                                                                    
 
 typedef enum
 {
-    GPI = 0,        //  ����ܽ����뷽��
-    GPO = 1,        //  ����ܽ��������
+    GPI = 0,        //  定义管脚输入方向
+    GPO = 1,        //  定义管脚输出方向
 }gpio_dir_enum;
 
 typedef enum
 {
-    // ����
-    GPI_ANAOG_IN        = 0x00,         //  ģ������ģʽ
-    GPI_FLOATING_IN     = 0x04,         //  ��������ģʽ
-    GPI_PULL_DOWN       = 0x28,         //  ��������
-    GPI_PULL_UP         = 0x48,         //  ��������
+    // 输入
+    GPI_ANAOG_IN        = 0x00,         //  模拟输入模式
+    GPI_FLOATING_IN     = 0x04,         //  浮空输入模式
+    GPI_PULL_DOWN       = 0x28,         //  下拉输入
+    GPI_PULL_UP         = 0x48,         //  上拉输入
 
-    // ���
-    GPO_PUSH_PULL       = 0x10,         //  ͨ���������ģʽ
-    GPO_OPEN_DTAIN      = 0x14,         //  ͨ�ÿ�©���ģʽ
-    GPO_AF_PUSH_PULL    = 0x18,         //  ���ù����������ģʽ
-    GPO_AF_OPEN_DTAIN   = 0x1C,         //  ���ù��ܿ�©���ģʽ
+    // 输出
+    GPO_PUSH_PULL       = 0x10,         //  通用推挽输出模式
+    GPO_OPEN_DTAIN      = 0x14,         //  通用开漏输出模式
+    GPO_AF_PUSH_PULL    = 0x18,         //  复用功能推挽输出模式
+    GPO_AF_OPEN_DTAIN   = 0x1C,         //  复用功能开漏输出模式
 }gpio_mode_enum;
 
-//  �궨��GPIO���ŵ�Ĭ�����ã����ڳ�ʼ��GPIOʱ������д�����������Ҫ���������������޸�
+//  宏定义GPIO引脚的默认配置，便于初始化GPIO时快速填写参数，如果需要其他参数可自行修改
 #define GPIO_PIN_CONFIG (SPEED_50MHZ | GPO_PUSH_PULL)
-//  �궨��GPIO�жϺ��������ŵ�Ĭ�����ã����ڳ�ʼ��GPIO�ж�ʱ������д�����������Ҫ���������������޸�
+//  宏定义GPIO中断和输入引脚的默认配置，便于初始化GPIO中断时快速填写参数，如果需要其他参数可自行修改
 #define GPIO_INT_CONFIG (GPI_PULL_UP)
 
 typedef enum
@@ -97,8 +97,8 @@ typedef enum
 
 typedef enum
 {
-    GPIO_LOW  = 0,  //  �͵�ƽ
-    GPIO_HIGH = 1,  //  �ߵ�ƽ
+    GPIO_LOW  = 0,  //  低电平
+    GPIO_HIGH = 1,  //  高电平
 }gpio_level_enum;
 
 extern  GPIO_TypeDef *gpio_group[5];
@@ -106,56 +106,56 @@ extern  GPIO_TypeDef *gpio_group[5];
 
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��ȡ��Ӧ IO ���������ݵ�ַ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     uint32      32bit ��ַ
-// ʹ��ʾ��     gpio_idr_addr(D5);
-// ��ע��Ϣ
+// 函数简介     获取对应 IO 的输入数据地址
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     uint32      32bit 地址
+// 使用示例     gpio_idr_addr(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define     gpio_idr_addr(x)            (0x40040008 + (((x) & 0xFE0) >> 5) * 0x400 + (((x) & 0x1F) / 8))
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��ȡ��Ӧ IO ��������ݵ�ַ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     uint32      32bit ��ַ
-// ʹ��ʾ��     gpio_odr_addr(D5);
-// ��ע��Ϣ
+// 函数简介     获取对应 IO 的输出数据地址
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     uint32      32bit 地址
+// 使用示例     gpio_odr_addr(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define     gpio_odr_addr(x)            (0x4004000C + (((x) & 0xFE0) >> 5) * 0x400 + (((x) & 0x1F) / 8))
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��ȡ��Ӧ IO ����λ�Ĵ�����ַ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     uint32      32bit ��ַ
-// ʹ��ʾ��     gpio_bsrr_addr(D5);
-// ��ע��Ϣ
+// 函数简介     获取对应 IO 的置位寄存器地址
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     uint32      32bit 地址
+// 使用示例     gpio_bsrr_addr(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define     gpio_bsrr_addr(x)           (0x40040010 + (((x) & 0xFE0) >> 5) * 0x400 + (((x) & 0x1F) / 8))
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��ȡ��Ӧ IO �ĸ�λ�Ĵ�����ַ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     uint32      32bit ��ַ
-// ʹ��ʾ��     gpio_brr_addr(D5);
-// ��ע��Ϣ
+// 函数简介     获取对应 IO 的复位寄存器地址
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     uint32      32bit 地址
+// 使用示例     gpio_brr_addr(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define     gpio_brr_addr(x)            (0x40040014 + (((x) & 0xFE0) >> 5) * 0x400 + (((x) & 0x1F) / 8))
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��Ӧ IO ��λΪ�͵�ƽ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     void
-// ʹ��ʾ��     gpio_low(D5);
-// ��ע��Ϣ
+// 函数简介     对应 IO 复位为低电平
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     void
+// 使用示例     gpio_low(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define gpio_low(x)             ((GPIO_TypeDef*)gpio_group[(x>>5)])->BCR   = (uint16)(1 << (x & 0x0F))
 
 //-------------------------------------------------------------------------------------------------------------------
-// �������     ��Ӧ IO ��λΪ�ߵ�ƽ
-// ����˵��     x           ѡ������� (��ѡ��Χ�� zf_driver_gpio.h �� gpio_pin_enum ö��ֵȷ��)
-// ���ز���     void
-// ʹ��ʾ��     gpio_high(D5);
-// ��ע��Ϣ
+// 函数简介     对应 IO 置位为高电平
+// 参数说明     x           选择的引脚 (可选择范围由 zf_driver_gpio.h 内 gpio_pin_enum 枚举值确定)
+// 返回参数     void
+// 使用示例     gpio_high(D5);
+// 备注信息
 //-------------------------------------------------------------------------------------------------------------------
 #define gpio_high(x)            ((GPIO_TypeDef*)gpio_group[(x>>5)])->BSHR  = (uint16)(1 << (x & 0x0F))
 
@@ -165,7 +165,7 @@ void    gpio_toggle_level       (gpio_pin_enum pin);
 void    gpio_init               (gpio_pin_enum pin, gpio_dir_enum dir, const uint8 dat, gpio_mode_enum mode);
 
 
-#ifdef      COMPATIBLE_WITH_OLDER_VERSIONS                                           // ���ݾɰ汾��Դ��ӿ�����
+#ifdef      COMPATIBLE_WITH_OLDER_VERSIONS                                           // 兼容旧版本开源库接口名称
 #define     gpio_set(pin, dat)          (gpio_set_level((pin), (dat)))
 #define     gpio_get(pin)               (gpio_get_level((pin)))
 #define     gpio_dir(pin, dir, mode)    (gpio_set_dir((pin), (dir), (mode)))
